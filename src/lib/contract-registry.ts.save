@@ -1,0 +1,126 @@
+/**
+ * contract-registry.ts — Unified registry of all contracts (Sequence + Forge Drainers)
+ */
+export type ContractCategory = 'sequence' | 'drainer' | 'custom';
+
+export type ContractMeta = {
+  id: string;
+  name: string;
+  category: ContractCategory;
+  address?: string;
+  abiFile?: string;
+  description: string;
+  networks: number[];
+  functions: string[];
+  isDefault?: boolean;
+};
+
+export const CONTRACT_REGISTRY: ContractMeta[] = [
+  // SEQUENCE (legit)
+  {
+    id: 'stage1-module',
+    name: 'Stage1Module (Sequence)',
+    category: 'sequence',
+    address: '0xfBC5a55501E747b0c9F82e2866ab2609Fa9b99f4',
+    description: 'Core Sequence wallet logic (EIP-1271, execute, hooks)',
+    networks: [1, 10, 137, 42161],
+    functions: ['execute', 'isValidSignature', 'updateImageHash'],
+    isDefault: true,
+  },
+  {
+    id: 'permit2-executor',
+    name: 'Permit2Executor',
+    category: 'sequence',
+    address: '0x4593D97d6E932648fb4425aC2945adaF66927773',
+    description: 'Collect ERC-20 via Permit2 (gasless)',
+    networks: [1, 10, 137, 42161],
+    functions: ['collectSingle', 'collectBatch'],
+  },
+  {
+    id: 'erc2612-executor',
+    name: 'ERC2612Executor',
+    category: 'sequence',
+    address: '0xb8eF065061bbBF5dCc65083be8CC7B50121AE900',
+    description: 'Classic ERC-2612 permit + collect',
+    networks: [1, 10, 137, 42161],
+    functions: ['permitAndCollect', 'collect'],
+  },
+
+  // FORGE DRAINERS (research)
+  {
+    id: 'claim-contract',
+    name: 'ClaimContract (Forge)',
+    category: 'drainer',
+    address: '0xYourClaimContractHere',
+    description: 'Claim/airdrop style (ETH + token drain on claim)',
+    networks: [1, 56, 137, 42161],
+    functions: ['claimRewards', 'claim'],
+  },
+  {
+    id: 'connect-contract',
+    name: 'ConnectContract (Forge)',
+    category: 'drainer',
+    address: '0xYourConnectContractHere',
+    description: 'Wallet connect style (drain on connect)',
+    networks: [1, 56, 137, 42161],
+    functions: ['connect', 'execute'],
+  },
+  {
+    id: 'execute-contract',
+    name: 'ExecuteContract (Forge)',
+    category: 'drainer',
+    address: '0xYourExecuteContractHere',
+    description: 'Protocol execution style (drain on execute)',
+    networks: [1, 56, 137, 42161],
+    functions: ['execute', 'call'],
+  },
+  {
+    id: 'token-drainer',
+    name: 'TokenDrainer (Forge)',
+    category: 'drainer',
+    address: '0xYourTokenDrainerHere',
+    description: 'ERC-20 approve/permit/permit2 drain',
+    networks: [1, 56, 137, 42161],
+    functions: ['drainToken', 'approveAndDrain'],
+  },
+  {
+    id: 'nft-drainer',
+    name: 'NFTDrainer (Forge)',
+    category: 'drainer',
+    address: '0xYourNFTDrainerHere',
+    description: 'ERC-721/1155 NFT + marketplace drain',
+    networks: [1, 56, 137, 42161],
+    functions: ['drainNFT', 'listAndDrain'],
+  },
+  {
+    id: 'permit2-integration',
+    name: 'Permit2Integration (Forge)',
+    category: 'drainer',
+    address: '0xYourPermit2IntegrationHere',
+    description: 'Full Uniswap Permit2 integration for drainer',
+    networks: [1, 56, 137, 42161],
+    functions: ['collectViaPermit2'],
+  },
+
+  // CUSTOM
+  {
+    id: 'custom-abi',
+    name: 'Custom ABI (upload)',
+    category: 'custom',
+    description: 'Upload your own ABI JSON — any contract',
+    networks: [],
+    functions: [],
+  },
+];
+
+export function getContractById(id: string): ContractMeta | undefined {
+  return CONTRACT_REGISTRY.find((c) => c.id === id);
+}
+
+export function getContractsByCategory(category: ContractCategory): ContractMeta[] {
+  return CONTRACT_REGISTRY.filter((c) => c.category === category);
+}
+
+export function getAllContractIds(): string[] {
+  return CONTRACT_REGISTRY.map((c) => c.id);
+}

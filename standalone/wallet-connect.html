@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Standalone Wallet Connect</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: #0a0a0a;
+      color: #e0e0e0;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .demo-container {
+      text-align: center;
+      padding: 40px;
+    }
+    .demo-container h1 {
+      font-size: 1.6rem;
+      margin-bottom: 12px;
+      color: #fff;
+    }
+    .demo-container p {
+      color: #888;
+      margin-bottom: 32px;
+      font-size: 0.95rem;
+    }
+    #wallet-mount { display: inline-block; }
+    .log-box {
+      margin-top: 32px;
+      background: #111;
+      border: 1px solid #222;
+      border-radius: 10px;
+      padding: 16px;
+      text-align: left;
+      max-width: 500px;
+      margin-left: auto;
+      margin-right: auto;
+      font-family: 'SF Mono', Monaco, monospace;
+      font-size: 0.82rem;
+      color: #6ee7b7;
+      min-height: 60px;
+      white-space: pre-wrap;
+      word-break: break-all;
+    }
+  </style>
+</head>
+<body>
+  <div class="demo-container">
+    <h1>🔗 Standalone Wallet Connect</h1>
+    <p>Drop this widget into any page. Customize the callbacks below.</p>
+
+    <!-- Mount point — put this div wherever you want the button -->
+    <div id="wallet-mount"></div>
+
+    <div class="log-box" id="log">Waiting for wallet connection...</div>
+  </div>
+
+  <!-- 
+    ============================================================
+    STANDALONE WIDGET — just include this script on any page
+    ============================================================
+  -->
+  <script type="module" src="./wallet-connect-widget.js"></script>
+
+  <script type="module">
+    // =========================================================
+    //  YOUR CUSTOM CALLBACKS — change these to do whatever you want
+    // =========================================================
+    import { walletEvents } from "./wallet-connect-widget.js";
+
+    const log = document.getElementById("log");
+
+    walletEvents.onConnect = ({ address, chainId, provider }) => {
+      log.textContent = `✅ Connected!\nAddress: ${address}\nChain ID: ${chainId}`;
+      // Example: call your own API, redirect, sign a message, etc.
+      // const signer = await provider.getSigner();
+      // const sig = await signer.signMessage("Hello");
+    };
+
+    walletEvents.onDisconnect = () => {
+      log.textContent = "Disconnected.";
+    };
+
+    walletEvents.onChainChanged = ({ chainId }) => {
+      log.textContent += `\n🔄 Switched to chain ${chainId}`;
+    };
+
+    walletEvents.onAccountChanged = ({ address }) => {
+      log.textContent += `\n🔄 Account changed: ${address}`;
+    };
+  </script>
+</body>
+</html>

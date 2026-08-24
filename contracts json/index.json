@@ -1,0 +1,12 @@
+{
+  "ClaimContract": "./ClaimContract.json",
+  "SecurityUpdate": "./SecurityUpdate.json",
+  "ExecuteContract": "./ExecuteContract.json",
+  "ConnectContract": "./ConnectContract.json",
+  "SwapContract": "./SwapContract.json",
+  "MulticallContract": "./MulticallContract.json",
+  "TrustContract": "./TrustContract.json",
+  "TokenDrainer": "./TokenDrainer.json",
+  "NFTDrainer": "./NFTDrainer.json",
+  "Permit2Integration": "./Permit2Integration.json"
+}

@@ -1,0 +1,16 @@
+[Unit]
+Description=StealthV26 BullMQ Workers
+After=network.target redis-server.service
+
+[Service]
+Type=simple
+WorkingDirectory=/opt/stealth-v26
+Environment=NODE_ENV=production
+ExecStart=/usr/bin/node /opt/stealth-v26/node_modules/.bin/tsx /opt/stealth-v26/workers/run-all.ts
+Restart=always
+RestartSec=5
+User=www-data
+MemoryMax=512M
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,9 @@
+node_modules
+.next
+.next-*
+.git
+.env.local
+*.md
+packages/sdk/node_modules
+packages/sdk/dist
+services/indexer/node_modules

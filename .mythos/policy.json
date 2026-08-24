@@ -1,0 +1,9 @@
+{
+  "version": 1,
+  "block": [],
+  "confirm": [],
+  "limits": {
+    "allowDeletes": true,
+    "maxActionContentBytes": 200000
+  }
+}

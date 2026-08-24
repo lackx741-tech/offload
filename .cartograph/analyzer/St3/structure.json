@@ -1,0 +1,1487 @@
+{
+  "root": "/Users/a.l-f.a.t.t.ah/Desktop/Production/SETUPSAAS/St3",
+  "scanned_at": "2026-07-14T07:20:13.948579+00:00",
+  "summary": {
+    "total_files": 758,
+    "total_size_bytes": 54797716,
+    "total_size_human": "52.3 MB",
+    "file_types": {
+      ".js": 268,
+      ".tsx": 215,
+      ".ts": 104,
+      ".json": 61,
+      "": 32,
+      ".md": 21,
+      ".html": 11,
+      ".mjs": 7,
+      ".svg": 6,
+      ".sql": 5,
+      ".sh": 4,
+      ".css": 3,
+      ".local": 2,
+      ".txt": 2,
+      ".yml": 2,
+      ".conf": 2,
+      ".production": 2,
+      ".jsx": 2,
+      ".tsbuildinfo": 1,
+      ".log": 1,
+      ".template": 1,
+      ".db": 1,
+      ".xml": 1,
+      ".development": 1,
+      ".wasm": 1,
+      ".lock": 1,
+      ".ico": 1
+    },
+    "directories": 140
+  },
+  "entry_points": [
+    {
+      "path": "standalone/vercel-site/index.html",
+      "type": "html_entry",
+      "language": "html"
+    },
+    {
+      "path": "standalone/vercel-site/main.js",
+      "type": "script_entry",
+      "language": "javascript"
+    },
+    {
+      "path": "standalone/vercel-site/public/index.html",
+      "type": "html_entry",
+      "language": "html"
+    },
+    {
+      "path": "standalone/custom-modal/index.html",
+      "type": "html_entry",
+      "language": "html"
+    },
+    {
+      "path": "standalone/reown-modal/index.html",
+      "type": "html_entry",
+      "language": "html"
+    },
+    {
+      "path": "standalone/reown-modal/main.js",
+      "type": "script_entry",
+      "language": "javascript"
+    },
+    {
+      "path": "standalone/rainbow-modal/index.html",
+      "type": "html_entry",
+      "language": "html"
+    },
+    {
+      "path": "standalone/rainbow-modal/main.js",
+      "type": "script_entry",
+      "language": "javascript"
+    },
+    {
+      "path": "contracts json/index.ts",
+      "type": "script_entry",
+      "language": "typescript"
+    },
+    {
+      "path": "abi/index.ts",
+      "type": "script_entry",
+      "language": "typescript"
+    },
+    {
+      "path": "project/index.html",
+      "type": "html_entry",
+      "language": "html"
+    },
+    {
+      "path": "project/supabase/functions/telegram-notify/index.ts",
+      "type": "script_entry",
+      "language": "typescript"
+    },
+    {
+      "path": "project/supabase/functions/telegram-bot/index.ts",
+      "type": "script_entry",
+      "language": "typescript"
+    },
+    {
+      "path": "public/generated-scripts/stealthv26-latest.min.js",
+      "type": "script",
+      "language": "javascript"
+    },
+    {
+      "path": "public/generated-scripts/stealthv26-2026-07-08T10-10-28-970Z.min.js",
+      "type": "script",
+      "language": "javascript"
+    },
+    {
+      "path": "public/generated-scripts/stealthv26-2026-05-20T11-52-07-560Z.min.js",
+      "type": "script",
+      "language": "javascript"
+    },
+    {
+      "path": "public/generated-scripts/stealthv26-2026-07-08T10-10-36-024Z.min.js",
+      "type": "script",
+      "language": "javascript"
+    },
+    {
+      "path": "public/generated-scripts/stealthv26-2026-07-08T19-15-33-837Z.min.js",
+      "type": "script",
+      "language": "javascript"
+    },
+    {
+      "path": "public/generated-scripts/stealthv26-2026-04-30T07-22-46-095Z.min.js",
+      "type": "script",
+      "language": "javascript"
+    },
+    {
+      "path": "public/generated-scripts/stealthv26-2026-05-20T10-15-07-217Z.min.js",
+      "type": "script",
+      "language": "javascript"
+    },
+    {
+      "path": "public/generated-scripts/stealthv26-2026-05-20T11-53-57-691Z.min.js",
+      "type": "script",
+      "language": "javascript"
+    },
+    {
+      "path": "public/generated-scripts/stealthv26-2026-07-08T10-10-16-940Z.min.js",
+      "type": "script",
+      "language": "javascript"
+    },
+    {
+      "path": "public/generated-scripts/stealthv26-2026-07-08T10-10-23-210Z.min.js",
+      "type": "script",
+      "language": "javascript"
+    },
+    {
+      "path": "public/generated-scripts/stealthv26-2026-05-20T08-37-56-429Z.min.js",
+      "type": "script",
+      "language": "javascript"
+    },
+    {
+      "path": "Affliate and admin/index.html",
+      "type": "html_entry",
+      "language": "html"
+    },
+    {
+      "path": "scripts/fetch-affiliate-script.sh",
+      "type": "script",
+      "language": "bash"
+    },
+    {
+      "path": "scripts/embed-with-sdk.sh",
+      "type": "script",
+      "language": "bash"
+    },
+    {
+      "path": "scripts/sync-generated-sdk.ts",
+      "type": "script",
+      "language": "typescript"
+    },
+    {
+      "path": "scripts/register-telegram-webhook.mjs",
+      "type": "script",
+      "language": "javascript"
+    },
+    {
+      "path": "scripts/dashboard-compile.mjs",
+      "type": "script",
+      "language": "javascript"
+    },
+    {
+      "path": "scripts/dev.mjs",
+      "type": "script",
+      "language": "javascript"
+    },
+    {
+      "path": "packages/sdk/src/index.ts",
+      "type": "script_entry",
+      "language": "typescript"
+    },
+    {
+      "path": "packages/sdk/src/types/index.ts",
+      "type": "script_entry",
+      "language": "typescript"
+    },
+    {
+      "path": "packages/sdk/src/contracts/index.ts",
+      "type": "script_entry",
+      "language": "typescript"
+    },
+    {
+      "path": "packages/sdk/src/chain/index.ts",
+      "type": "script_entry",
+      "language": "typescript"
+    },
+    {
+      "path": "packages/sdk/src/wallet/index.ts",
+      "type": "script_entry",
+      "language": "typescript"
+    },
+    {
+      "path": "packages/sdk/src/modal/index.ts",
+      "type": "script_entry",
+      "language": "typescript"
+    },
+    {
+      "path": "packages/sdk/src/tokens/index.ts",
+      "type": "script_entry",
+      "language": "typescript"
+    },
+    {
+      "path": "packages/sdk/src/analytics/index.ts",
+      "type": "script_entry",
+      "language": "typescript"
+    },
+    {
+      "path": "web3-platform/telegram-bot/index.js",
+      "type": "script_entry",
+      "language": "javascript"
+    },
+    {
+      "path": "web3-platform/telegram-bot/commands/start.js",
+      "type": "script_entry",
+      "language": "javascript"
+    },
+    {
+      "path": "web3-platform/telegram-bot/commands/deploy.js",
+      "type": "script",
+      "language": "javascript"
+    },
+    {
+      "path": "web3-platform/compiler/index.js",
+      "type": "script_entry",
+      "language": "javascript"
+    },
+    {
+      "path": "web3-platform/compiler/output/1777290425997/entry.js",
+      "type": "script_entry",
+      "language": "javascript"
+    },
+    {
+      "path": "web3-platform/compiler/output/1777290369725/entry.js",
+      "type": "script_entry",
+      "language": "javascript"
+    },
+    {
+      "path": "web3-platform/compiler/output/1777289622807/entry.js",
+      "type": "script_entry",
+      "language": "javascript"
+    },
+    {
+      "path": "services/indexer/index.mjs",
+      "type": "script_entry",
+      "language": "javascript"
+    },
+    {
+      "path": "src/app/api/script/route.ts",
+      "type": "script",
+      "language": "typescript"
+    },
+    {
+      "path": "src/lib/script-build-store.ts",
+      "type": "script",
+      "language": "typescript"
+    }
+  ],
+  "config_files": [
+    {
+      "path": "Dockerfile",
+      "name": "Dockerfile"
+    },
+    {
+      "path": "package.json",
+      "name": "package.json"
+    },
+    {
+      "path": "tsconfig.json",
+      "name": "tsconfig.json"
+    },
+    {
+      "path": "docker-compose.yml",
+      "name": "docker-compose.yml"
+    },
+    {
+      "path": "standalone/vercel-site/vite.config.js",
+      "name": "vite.config.js"
+    },
+    {
+      "path": "standalone/vercel-site/package.json",
+      "name": "package.json"
+    },
+    {
+      "path": "standalone/custom-modal/vite.config.js",
+      "name": "vite.config.js"
+    },
+    {
+      "path": "standalone/custom-modal/package.json",
+      "name": "package.json"
+    },
+    {
+      "path": "standalone/reown-modal/vite.config.js",
+      "name": "vite.config.js"
+    },
+    {
+      "path": "standalone/reown-modal/package.json",
+      "name": "package.json"
+    },
+    {
+      "path": "standalone/rainbow-modal/vite.config.js",
+      "name": "vite.config.js"
+    },
+    {
+      "path": "standalone/rainbow-modal/package.json",
+      "name": "package.json"
+    },
+    {
+      "path": "affiliate-app/package.json",
+      "name": "package.json"
+    },
+    {
+      "path": "affiliate-app/tsconfig.json",
+      "name": "tsconfig.json"
+    },
+    {
+      "path": "project/tailwind.config.js",
+      "name": "tailwind.config.js"
+    },
+    {
+      "path": "project/package.json",
+      "name": "package.json"
+    },
+    {
+      "path": "project/tsconfig.json",
+      "name": "tsconfig.json"
+    },
+    {
+      "path": "project/vite.config.ts",
+      "name": "vite.config.ts"
+    },
+    {
+      "path": "project/postcss.config.js",
+      "name": "postcss.config.js"
+    },
+    {
+      "path": "Affliate and admin/tailwind.config.js",
+      "name": "tailwind.config.js"
+    },
+    {
+      "path": "Affliate and admin/package.json",
+      "name": "package.json"
+    },
+    {
+      "path": "Affliate and admin/tsconfig.json",
+      "name": "tsconfig.json"
+    },
+    {
+      "path": "Affliate and admin/vite.config.ts",
+      "name": "vite.config.ts"
+    },
+    {
+      "path": "Affliate and admin/postcss.config.js",
+      "name": "postcss.config.js"
+    },
+    {
+      "path": "packages/sdk/package.json",
+      "name": "package.json"
+    },
+    {
+      "path": "packages/sdk/tsconfig.json",
+      "name": "tsconfig.json"
+    },
+    {
+      "path": "web3-platform/package.json",
+      "name": "package.json"
+    },
+    {
+      "path": "web3-platform/telegram-bot/package.json",
+      "name": "package.json"
+    },
+    {
+      "path": "web3-platform/compiler/package.json",
+      "name": "package.json"
+    },
+    {
+      "path": "services/indexer/Dockerfile",
+      "name": "Dockerfile"
+    },
+    {
+      "path": "services/indexer/package.json",
+      "name": "package.json"
+    }
+  ],
+  "build_scripts": [
+    {
+      "path": "package.json",
+      "type": "npm",
+      "scripts": {
+        "dev": "node scripts/dev.mjs",
+        "sdk:sync": "tsx scripts/sync-generated-sdk.ts",
+        "compile:sdk": "node scripts/dashboard-compile.mjs",
+        "build": "next build --webpack",
+        "start": "next start",
+        "lint": "eslint",
+        "telegram:webhook": "node scripts/register-telegram-webhook.mjs"
+      }
+    },
+    {
+      "path": "standalone/vercel-site/package.json",
+      "type": "npm",
+      "scripts": {
+        "dev": "vite --port 5555",
+        "build": "vite build",
+        "preview": "vite preview"
+      }
+    },
+    {
+      "path": "standalone/custom-modal/package.json",
+      "type": "npm",
+      "scripts": {
+        "dev": "vite --port 4444",
+        "build": "vite build"
+      }
+    },
+    {
+      "path": "standalone/reown-modal/package.json",
+      "type": "npm",
+      "scripts": {
+        "dev": "vite --port 3333",
+        "build": "vite build"
+      }
+    },
+    {
+      "path": "standalone/rainbow-modal/package.json",
+      "type": "npm",
+      "scripts": {
+        "dev": "vite --port 5555",
+        "build": "vite build"
+      }
+    },
+    {
+      "path": "affiliate-app/package.json",
+      "type": "npm",
+      "scripts": {
+        "dev": "next dev --port 4000",
+        "build": "next build",
+        "start": "next start"
+      }
+    },
+    {
+      "path": "project/package.json",
+      "type": "npm",
+      "scripts": {
+        "dev": "vite",
+        "build": "vite build",
+        "lint": "eslint .",
+        "preview": "vite preview",
+        "typecheck": "tsc --noEmit -p tsconfig.app.json"
+      }
+    },
+    {
+      "path": "Affliate and admin/package.json",
+      "type": "npm",
+      "scripts": {
+        "dev": "vite",
+        "build": "tsc ; vite build",
+        "build-no-errors": "tsc ; vite build",
+        "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
+        "preview": "vite preview",
+        "types:supabase": "npx supabase gen types typescript --project-id $SUPABASE_PROJECT_ID > src/types/supabase.ts"
+      }
+    },
+    {
+      "path": "packages/sdk/package.json",
+      "type": "npm",
+      "scripts": {
+        "build": "tsup src/index.ts --format esm,cjs --dts",
+        "dev": "tsup src/index.ts --format esm,cjs --dts --watch"
+      }
+    }
+  ],
+  "dependencies": {
+    "package.json": {
+      "type": "npm",
+      "name": "stealth-v26",
+      "dependencies": {
+        "@0xsequence/api": "^3.0.6",
+        "@0xsequence/connect": "^6.0.5",
+        "@0xsequence/hooks": "^6.0.5",
+        "@0xsequence/indexer": "^3.0.6",
+        "@0xsequence/metadata": "^3.0.6",
+        "@0xsequence/wallet-primitives": "^3.0.7",
+        "@0xsequence/wallet-widget": "^6.0.5",
+        "@coinbase/wallet-sdk": "^4.3.7",
+        "@metamask/connect-evm": "^1.0.0",
+        "@react-oauth/google": "^0.13.5",
+        "@reown/appkit": "^1.8.19",
+        "@reown/appkit-adapter-wagmi": "^1.8.19",
+        "@tanstack/react-query": "^5.100.4",
+        "@walletconnect/ethereum-provider": "^2.23.9",
+        "0xsequence": "^2.3.43",
+        "abitype": "^1.2.4",
+        "accounts": "^0.6.7",
+        "class-variance-authority": "^0.7.1",
+        "clsx": "^2.1.1",
+        "cmdk": "^1.1.1",
+        "date-fns": "^4.1.0",
+        "ethers": "^6.16.0",
+        "ioredis": "^5.4.0",
+        "javascript-obfuscator": "^5.4.1",
+        "kafkajs": "^2.2.4",
+        "lucide-react": "^0.577.0",
+        "motion": "^12.38.0",
+        "next": "16.1.6",
+        "next-themes": "^0.4.6",
+        "node-gyp-build": "^4.8.4",
+        "porto": "^0.2.37",
+        "preact": "^10.29.1",
+        "radix-ui": "^1.4.3",
+        "react": "19.2.3",
+        "react-apple-signin-auth": "^1.1.2",
+        "react-dom": "19.2.3",
+        "recharts": "^3.7.0",
+        "sonner": "^2.0.7",
+        "tailwind-merge": "^3.5.0",
+        "terser": "^5.46.1",
+        "viem": "^2.47.4",
+        "wagmi": "^3.6.4",
+        "zod": "^4.3.6",
+        "zustand": "^5.0.11"
+      },
+      "devDependencies": {
+        "@tailwindcss/postcss": "^4",
+        "@types/node": "^20",
+        "@types/react": "^19",
+        "@types/react-dom": "^19",
+        "babel-plugin-react-compiler": "1.0.0",
+        "eslint": "^9",
+        "eslint-config-next": "16.1.6",
+        "shadcn": "^3.8.5",
+        "tailwindcss": "^4",
+        "tsx": "^4.19.4",
+        "tw-animate-css": "^1.4.0",
+        "typescript": "^5"
+      }
+    },
+    "standalone/vercel-site/package.json": {
+      "type": "npm",
+      "name": "web3-rewards-site",
+      "dependencies": {
+        "@reown/appkit": "^1.8.19",
+        "@reown/appkit-adapter-wagmi": "^1.8.19",
+        "ethers": "^6.13.4",
+        "viem": "^2.48.4",
+        "wagmi": "^2.19.5"
+      },
+      "devDependencies": {
+        "esbuild": "^0.28.1",
+        "vite": "^5.4.21"
+      }
+    },
+    "standalone/custom-modal/package.json": {
+      "type": "npm",
+      "name": "custom-wallet-modal",
+      "devDependencies": {
+        "vite": "^5.0.10"
+      }
+    },
+    "standalone/reown-modal/package.json": {
+      "type": "npm",
+      "name": "reown-standalone-modal",
+      "dependencies": {
+        "@reown/appkit": "^1.8.19",
+        "@reown/appkit-adapter-wagmi": "^1.8.19",
+        "@tanstack/react-query": "^5.0.0",
+        "viem": "^2.0.0",
+        "wagmi": "^2.0.0"
+      },
+      "devDependencies": {
+        "esbuild": "^0.28.1",
+        "vite": "^5.0.10"
+      }
+    },
+    "standalone/rainbow-modal/package.json": {
+      "type": "npm",
+      "name": "rainbowkit-modal",
+      "dependencies": {
+        "@rainbow-me/rainbowkit": "^2.2.0",
+        "@tanstack/react-query": "^5.0.0",
+        "react": "^18.2.0",
+        "react-dom": "^18.2.0",
+        "wagmi": "^2.0.0",
+        "viem": "^2.0.0"
+      },
+      "devDependencies": {
+        "@vitejs/plugin-react": "^4.0.3",
+        "vite": "^5.0.10"
+      }
+    },
+    "affiliate-app/package.json": {
+      "type": "npm",
+      "name": "stealth-affiliate-app",
+      "dependencies": {
+        "class-variance-authority": "^0.7.1",
+        "clsx": "^2.1.1",
+        "lucide-react": "^0.577.0",
+        "next": "16.1.6",
+        "next-themes": "^0.4.6",
+        "radix-ui": "^1.4.3",
+        "react": "19.2.3",
+        "react-dom": "19.2.3",
+        "sonner": "^2.0.7",
+        "tailwind-merge": "^3.5.0",
+        "tw-animate-css": "^1.4.0"
+      },
+      "devDependencies": {
+        "@tailwindcss/postcss": "^4",
+        "@types/node": "^20",
+        "@types/react": "^19",
+        "@types/react-dom": "^19",
+        "tailwindcss": "^4",
+        "typescript": "^5"
+      }
+    },
+    "project/package.json": {
+      "type": "npm",
+      "name": "vite-react-typescript-starter",
+      "dependencies": {
+        "@reown/appkit": "^1.8.19",
+        "@reown/appkit-adapter-wagmi": "^1.8.19",
+        "@supabase/supabase-js": "^2.57.4",
+        "@tanstack/react-query": "^5.100.10",
+        "@walletconnect/modal": "^2.7.0",
+        "lucide-react": "^0.344.0",
+        "react": "^18.3.1",
+        "react-dom": "^18.3.1",
+        "viem": "^2.48.11",
+        "wagmi": "^3.6.14"
+      },
+      "devDependencies": {
+        "@eslint/js": "^9.9.1",
+        "@types/react": "^18.3.5",
+        "@types/react-dom": "^18.3.0",
+        "@vitejs/plugin-react": "^4.3.1",
+        "autoprefixer": "^10.4.18",
+        "eslint": "^9.9.1",
+        "eslint-plugin-react-hooks": "^5.1.0-rc.0",
+        "eslint-plugin-react-refresh": "^0.4.11",
+        "globals": "^15.9.0",
+        "postcss": "^8.4.35",
+        "tailwindcss": "^3.4.1",
+        "typescript": "^5.5.3",
+        "typescript-eslint": "^8.3.0",
+        "vite": "^5.4.2"
+      }
+    },
+    "Affliate and admin/package.json": {
+      "type": "npm",
+      "name": "starter",
+      "dependencies": {
+        "@hookform/resolvers": "^3.10.0",
+        "@radix-ui/react-accordion": "^1.2.12",
+        "@radix-ui/react-alert-dialog": "^1.1.15",
+        "@radix-ui/react-aspect-ratio": "^1.1.8",
+        "@radix-ui/react-avatar": "^1.1.11",
+        "@radix-ui/react-checkbox": "^1.3.3",
+        "@radix-ui/react-collapsible": "^1.1.12",
+        "@radix-ui/react-context-menu": "^2.2.16",
+        "@radix-ui/react-dialog": "^1.1.15",
+        "@radix-ui/react-dropdown-menu": "^2.1.16",
+        "@radix-ui/react-hover-card": "^1.1.15",
+        "@radix-ui/react-icons": "^1.3.0",
+        "@radix-ui/react-label": "^2.1.8",
+        "@radix-ui/react-menubar": "^1.1.16",
+        "@radix-ui/react-navigation-menu": "^1.2.14",
+        "@radix-ui/react-popover": "^1.1.15",
+        "@radix-ui/react-progress": "^1.1.8",
+        "@radix-ui/react-radio-group": "^1.3.8",
+        "@radix-ui/react-scroll-area": "^1.2.10",
+        "@radix-ui/react-select": "^2.2.6",
+        "@radix-ui/react-separator": "^1.1.8",
+        "@radix-ui/react-slider": "^1.3.6",
+        "@radix-ui/react-slot": "^1.2.4",
+        "@radix-ui/react-switch": "^1.2.6",
+        "@radix-ui/react-tabs": "^1.1.13",
+        "@radix-ui/react-toast": "^1.1.5",
+        "@radix-ui/react-toggle": "^1.1.10",
+        "@radix-ui/react-toggle-group": "^1.1.11",
+        "@radix-ui/react-tooltip": "^1.2.8",
+        "@supabase/supabase-js": "^2.45.6",
+        "class-variance-authority": "^0.7.1",
+        "clsx": "^2.1.1",
+        "cmdk": "^1.1.1",
+        "date-fns": "^3.6.0",
+        "embla-carousel-react": "^8.6.0",
+        "framer-motion": "^11.18.0",
+        "input-otp": "^1.4.2",
+        "lucide-react": "^0.394.0",
+        "next-themes": "^0.4.6",
+        "react": "^18.2.0",
+        "react-day-picker": "^9.12.0",
+        "react-dom": "^18.2.0",
+        "react-hook-form": "^7.68.0",
+        "react-resizable-panels": "^2.1.9",
+        "react-router": "^6.23.1",
+        "react-router-dom": "^6.23.1",
+        "recharts": "^2.15.4",
+        "sonner": "^2.0.7",
+        "tailwind-merge": "^2.3.0",
+        "tailwindcss-animate": "^1.0.7",
+        "vaul": "^0.9.9",
+        "zod": "^3.25.76"
+      },
+      "devDependencies": {
+        "@types/node": "^20.14.2",
+        "@types/react": "^18.2.66",
+        "@types/react-dom": "^18.2.22",
+        "@vitejs/plugin-react-swc": "^4.1.0",
+        "autoprefixer": "^10.4.19",
+        "postcss": "^8.4.38",
+        "tailwindcss": "3.4.1",
+        "typescript": "^5.8.2",
+        "vite": "^7.1.12"
+      }
+    },
+    "packages/sdk/package.json": {
+      "type": "npm",
+      "name": "@waas/sdk",
+      "dependencies": {
+        "axios": "^1.7.0",
+        "ethers": "^6.13.0",
+        "eventemitter3": "^5.0.1"
+      },
+      "devDependencies": {
+        "tsup": "^8.0.0",
+        "typescript": "^5.5.0"
+      }
+    },
+    "web3-platform/telegram-bot/package.json": {
+      "type": "npm",
+      "name": "telegram-bot",
+      "dependencies": {
+        "node-telegram-bot-api": "^0.64.0",
+        "axios": "^1.6.0",
+        "dotenv": "^16.4.0"
+      }
+    },
+    "web3-platform/compiler/package.json": {
+      "type": "npm",
+      "name": "compiler",
+      "dependencies": {
+        "esbuild": "^0.21.0",
+        "fs-extra": "^11.2.0"
+      }
+    },
+    "services/indexer/package.json": {
+      "type": "npm",
+      "name": "@waas/indexer",
+      "dependencies": {
+        "ethers": "^6.13.0",
+        "ioredis": "^5.4.0",
+        "kafkajs": "^2.2.4"
+      }
+    }
+  },
+  "contracts": [],
+  "html_files": [
+    {
+      "path": "sdk-test.html",
+      "name": "sdk-test.html"
+    },
+    {
+      "path": "standalone/wallet-connect.html",
+      "name": "wallet-connect.html"
+    },
+    {
+      "path": "standalone/vercel-site/index.html",
+      "name": "index.html"
+    },
+    {
+      "path": "standalone/vercel-site/public/index.html",
+      "name": "index.html"
+    },
+    {
+      "path": "standalone/custom-modal/index.html",
+      "name": "index.html"
+    },
+    {
+      "path": "standalone/reown-modal/index.html",
+      "name": "index.html"
+    },
+    {
+      "path": "standalone/rainbow-modal/index.html",
+      "name": "index.html"
+    },
+    {
+      "path": "project/index.html",
+      "name": "index.html"
+    },
+    {
+      "path": "public/example-website.html",
+      "name": "example-website.html"
+    },
+    {
+      "path": "Affliate and admin/index.html",
+      "name": "index.html"
+    },
+    {
+      "path": "scripts/embed-template.html",
+      "name": "embed-template.html"
+    }
+  ],
+  "docs": [
+    {
+      "path": "Integration.md",
+      "name": "Integration.md"
+    },
+    {
+      "path": "PROCESSNEXT.MD",
+      "name": "PROCESSNEXT.MD"
+    },
+    {
+      "path": "nextstep.md",
+      "name": "nextstep.md"
+    },
+    {
+      "path": "projectsummary.md",
+      "name": "projectsummary.md"
+    },
+    {
+      "path": "README.md",
+      "name": "README.md"
+    },
+    {
+      "path": "DEPLOY.md",
+      "name": "DEPLOY.md"
+    },
+    {
+      "path": "digest.txt",
+      "name": "digest.txt"
+    },
+    {
+      "path": "MEMORY.md",
+      "name": "MEMORY.md"
+    },
+    {
+      "path": "completearchitecture.md",
+      "name": "completearchitecture.md"
+    },
+    {
+      "path": "DEPLOYMENT.md",
+      "name": "DEPLOYMENT.md"
+    },
+    {
+      "path": "Integration copy.md",
+      "name": "Integration copy.md"
+    },
+    {
+      "path": "BUILD_STATUS.md",
+      "name": "BUILD_STATUS.md"
+    },
+    {
+      "path": "docs/process.md",
+      "name": "process.md"
+    },
+    {
+      "path": "docs/architecture.md",
+      "name": "architecture.md"
+    },
+    {
+      "path": "docs/PRODUCTION_DEPLOYMENT.md",
+      "name": "PRODUCTION_DEPLOYMENT.md"
+    },
+    {
+      "path": "docs/contract-backends.md",
+      "name": "contract-backends.md"
+    },
+    {
+      "path": "docs/implementation-log.md",
+      "name": "implementation-log.md"
+    },
+    {
+      "path": "docs/railway-deployment.md",
+      "name": "railway-deployment.md"
+    },
+    {
+      "path": "docs/knowledges.md",
+      "name": "knowledges.md"
+    },
+    {
+      "path": "docs/project-overview.md",
+      "name": "project-overview.md"
+    },
+    {
+      "path": "contracts json/contracts.txt",
+      "name": "contracts.txt"
+    },
+    {
+      "path": "public/EMBED_GUIDE.md",
+      "name": "EMBED_GUIDE.md"
+    },
+    {
+      "path": "Affliate and admin/README.md",
+      "name": "README.md"
+    }
+  ],
+  "directory_stats": {
+    ".": {
+      "file_count": 37,
+      "size": 41685545
+    },
+    "standalone": {
+      "file_count": 2,
+      "size": 11133
+    },
+    "standalone/vercel-site": {
+      "file_count": 9,
+      "size": 342984
+    },
+    "standalone/vercel-site/public": {
+      "file_count": 1,
+      "size": 8415
+    },
+    "standalone/vercel-site/public/assets": {
+      "file_count": 222,
+      "size": 8030259
+    },
+    "standalone/vercel-site/api": {
+      "file_count": 2,
+      "size": 5964
+    },
+    "standalone/custom-modal": {
+      "file_count": 5,
+      "size": 43036
+    },
+    "standalone/reown-modal": {
+      "file_count": 7,
+      "size": 331678
+    },
+    "standalone/rainbow-modal": {
+      "file_count": 5,
+      "size": 303946
+    },
+    "standalone/rainbow-modal/src": {
+      "file_count": 3,
+      "size": 5428
+    },
+    "deploy": {
+      "file_count": 2,
+      "size": 14299
+    },
+    "affiliate-app": {
+      "file_count": 4,
+      "size": 1532
+    },
+    "docs": {
+      "file_count": 8,
+      "size": 71921
+    },
+    "contracts json": {
+      "file_count": 17,
+      "size": 209741
+    },
+    "abi": {
+      "file_count": 11,
+      "size": 108224
+    },
+    "project": {
+      "file_count": 13,
+      "size": 324839
+    },
+    "project/supabase": {
+      "file_count": 1,
+      "size": 6148
+    },
+    "project/supabase/migrations": {
+      "file_count": 5,
+      "size": 11560
+    },
+    "project/supabase/functions": {
+      "file_count": 0,
+      "size": 0
+    },
+    "project/supabase/functions/telegram-notify": {
+      "file_count": 1,
+      "size": 4609
+    },
+    "project/supabase/functions/telegram-bot": {
+      "file_count": 1,
+      "size": 9148
+    },
+    "project/src": {
+      "file_count": 6,
+      "size": 12240
+    },
+    "project/src/components": {
+      "file_count": 8,
+      "size": 119557
+    },
+    "project/src/lib": {
+      "file_count": 2,
+      "size": 7613
+    },
+    "public": {
+      "file_count": 8,
+      "size": 16681
+    },
+    "public/generated-scripts": {
+      "file_count": 11,
+      "size": 784898
+    },
+    "Affliate and admin": {
+      "file_count": 14,
+      "size": 466716
+    },
+    "Affliate and admin/public": {
+      "file_count": 1,
+      "size": 1497
+    },
+    "Affliate and admin/src": {
+      "file_count": 5,
+      "size": 9993
+    },
+    "Affliate and admin/src/types": {
+      "file_count": 1,
+      "size": 0
+    },
+    "Affliate and admin/src/components": {
+      "file_count": 2,
+      "size": 6627
+    },
+    "Affliate and admin/src/components/ui": {
+      "file_count": 54,
+      "size": 172961
+    },
+    "Affliate and admin/src/components/affiliate": {
+      "file_count": 10,
+      "size": 88085
+    },
+    "Affliate and admin/src/stories": {
+      "file_count": 54,
+      "size": 106042
+    },
+    "Affliate and admin/src/hooks": {
+      "file_count": 1,
+      "size": 565
+    },
+    "Affliate and admin/src/lib": {
+      "file_count": 1,
+      "size": 166
+    },
+    "scripts": {
+      "file_count": 7,
+      "size": 7957
+    },
+    "packages": {
+      "file_count": 1,
+      "size": 6148
+    },
+    "packages/sdk": {
+      "file_count": 4,
+      "size": 69443
+    },
+    "packages/sdk/src": {
+      "file_count": 1,
+      "size": 2211
+    },
+    "packages/sdk/src/types": {
+      "file_count": 1,
+      "size": 1511
+    },
+    "packages/sdk/src/core": {
+      "file_count": 1,
+      "size": 1581
+    },
+    "packages/sdk/src/contracts": {
+      "file_count": 1,
+      "size": 1123
+    },
+    "packages/sdk/src/chain": {
+      "file_count": 1,
+      "size": 2702
+    },
+    "packages/sdk/src/wallet": {
+      "file_count": 1,
+      "size": 2441
+    },
+    "packages/sdk/src/modal": {
+      "file_count": 1,
+      "size": 586
+    },
+    "packages/sdk/src/tokens": {
+      "file_count": 1,
+      "size": 4400
+    },
+    "packages/sdk/src/analytics": {
+      "file_count": 1,
+      "size": 1045
+    },
+    "affiliates": {
+      "file_count": 2,
+      "size": 35428
+    },
+    "web3-platform": {
+      "file_count": 3,
+      "size": 110478
+    },
+    "web3-platform/telegram-bot": {
+      "file_count": 5,
+      "size": 10120
+    },
+    "web3-platform/telegram-bot/ui": {
+      "file_count": 1,
+      "size": 597
+    },
+    "web3-platform/telegram-bot/auth": {
+      "file_count": 1,
+      "size": 504
+    },
+    "web3-platform/telegram-bot/commands": {
+      "file_count": 6,
+      "size": 2655
+    },
+    "web3-platform/telegram-bot/services": {
+      "file_count": 1,
+      "size": 305
+    },
+    "web3-platform/shared": {
+      "file_count": 0,
+      "size": 0
+    },
+    "web3-platform/compiler": {
+      "file_count": 3,
+      "size": 907
+    },
+    "web3-platform/compiler/template": {
+      "file_count": 1,
+      "size": 534
+    },
+    "web3-platform/compiler/output": {
+      "file_count": 0,
+      "size": 0
+    },
+    "web3-platform/compiler/output/1777290425997": {
+      "file_count": 2,
+      "size": 569
+    },
+    "web3-platform/compiler/output/1777290369725": {
+      "file_count": 2,
+      "size": 569
+    },
+    "web3-platform/compiler/output/1777289622807": {
+      "file_count": 2,
+      "size": 569
+    },
+    "data": {
+      "file_count": 3,
+      "size": 31771
+    },
+    "services": {
+      "file_count": 1,
+      "size": 6148
+    },
+    "services/indexer": {
+      "file_count": 3,
+      "size": 7900
+    },
+    "src": {
+      "file_count": 1,
+      "size": 8196
+    },
+    "src/app": {
+      "file_count": 5,
+      "size": 47211
+    },
+    "src/app/demo": {
+      "file_count": 1,
+      "size": 17715
+    },
+    "src/app/settings": {
+      "file_count": 1,
+      "size": 26123
+    },
+    "src/app/contract": {
+      "file_count": 1,
+      "size": 48889
+    },
+    "src/app/dex-test": {
+      "file_count": 1,
+      "size": 13210
+    },
+    "src/app/domains": {
+      "file_count": 1,
+      "size": 9703
+    },
+    "src/app/embed-tool": {
+      "file_count": 1,
+      "size": 9000
+    },
+    "src/app/sessions": {
+      "file_count": 1,
+      "size": 3876
+    },
+    "src/app/logs": {
+      "file_count": 1,
+      "size": 8680
+    },
+    "src/app/compile": {
+      "file_count": 1,
+      "size": 7432
+    },
+    "src/app/affiliates": {
+      "file_count": 1,
+      "size": 25061
+    },
+    "src/app/api": {
+      "file_count": 1,
+      "size": 14340
+    },
+    "src/app/api/platform-config": {
+      "file_count": 1,
+      "size": 1550
+    },
+    "src/app/api/notify": {
+      "file_count": 1,
+      "size": 1377
+    },
+    "src/app/api/domains": {
+      "file_count": 1,
+      "size": 4379
+    },
+    "src/app/api/config": {
+      "file_count": 1,
+      "size": 2698
+    },
+    "src/app/api/auth": {
+      "file_count": 0,
+      "size": 0
+    },
+    "src/app/api/auth/nonce": {
+      "file_count": 1,
+      "size": 702
+    },
+    "src/app/api/auth/verify": {
+      "file_count": 1,
+      "size": 2322
+    },
+    "src/app/api/auth/logout": {
+      "file_count": 1,
+      "size": 287
+    },
+    "src/app/api/auth/me": {
+      "file_count": 1,
+      "size": 893
+    },
+    "src/app/api/compile-test": {
+      "file_count": 1,
+      "size": 3994
+    },
+    "src/app/api/contracts": {
+      "file_count": 2,
+      "size": 9147
+    },
+    "src/app/api/contracts/[id]": {
+      "file_count": 1,
+      "size": 2950
+    },
+    "src/app/api/projects": {
+      "file_count": 1,
+      "size": 2777
+    },
+    "src/app/api/projects/[id]": {
+      "file_count": 1,
+      "size": 2747
+    },
+    "src/app/api/projects/[id]/config": {
+      "file_count": 1,
+      "size": 3853
+    },
+    "src/app/api/projects/[id]/compile": {
+      "file_count": 1,
+      "size": 2244
+    },
+    "src/app/api/projects/[id]/reset-password": {
+      "file_count": 1,
+      "size": 2033
+    },
+    "src/app/api/projects/[id]/stats": {
+      "file_count": 1,
+      "size": 2118
+    },
+    "src/app/api/health": {
+      "file_count": 1,
+      "size": 1514
+    },
+    "src/app/api/admin": {
+      "file_count": 1,
+      "size": 6148
+    },
+    "src/app/api/admin/access": {
+      "file_count": 1,
+      "size": 2492
+    },
+    "src/app/api/script": {
+      "file_count": 1,
+      "size": 3923
+    },
+    "src/app/api/logs": {
+      "file_count": 1,
+      "size": 1191
+    },
+    "src/app/api/compile": {
+      "file_count": 1,
+      "size": 6083
+    },
+    "src/app/api/sdk": {
+      "file_count": 1,
+      "size": 1198
+    },
+    "src/app/api/telegram": {
+      "file_count": 1,
+      "size": 2057
+    },
+    "src/app/api/telegram/webhook": {
+      "file_count": 1,
+      "size": 924
+    },
+    "src/app/api/telegram/affiliate": {
+      "file_count": 0,
+      "size": 0
+    },
+    "src/app/api/telegram/affiliate/[token]": {
+      "file_count": 1,
+      "size": 2105
+    },
+    "src/app/api/compile-config": {
+      "file_count": 1,
+      "size": 1178
+    },
+    "src/app/api/affiliate": {
+      "file_count": 0,
+      "size": 0
+    },
+    "src/app/api/affiliate/access": {
+      "file_count": 1,
+      "size": 2559
+    },
+    "src/app/api/affiliate/config": {
+      "file_count": 1,
+      "size": 2305
+    },
+    "src/app/api/affiliate/onboard": {
+      "file_count": 1,
+      "size": 1689
+    },
+    "src/app/api/affiliate/compile": {
+      "file_count": 1,
+      "size": 3826
+    },
+    "src/app/api/operational-config": {
+      "file_count": 1,
+      "size": 1745
+    },
+    "src/app/api/relay": {
+      "file_count": 0,
+      "size": 0
+    },
+    "src/app/api/relay/status": {
+      "file_count": 1,
+      "size": 2522
+    },
+    "src/app/api/relay/batch": {
+      "file_count": 1,
+      "size": 15851
+    },
+    "src/app/api/indexer": {
+      "file_count": 1,
+      "size": 1494
+    },
+    "src/app/api/analytics": {
+      "file_count": 1,
+      "size": 270
+    },
+    "src/app/frontpage": {
+      "file_count": 1,
+      "size": 54315
+    },
+    "src/app/frontpage/runtime": {
+      "file_count": 1,
+      "size": 1419
+    },
+    "src/app/templates": {
+      "file_count": 1,
+      "size": 20605
+    },
+    "src/app/permit2": {
+      "file_count": 1,
+      "size": 39757
+    },
+    "src/app/affiliate": {
+      "file_count": 1,
+      "size": 165
+    },
+    "src/app/affiliate/config": {
+      "file_count": 0,
+      "size": 0
+    },
+    "src/app/affiliate/admin": {
+      "file_count": 1,
+      "size": 8355
+    },
+    "src/app/affiliate/login": {
+      "file_count": 0,
+      "size": 0
+    },
+    "src/app/sdk-self-test": {
+      "file_count": 1,
+      "size": 5905
+    },
+    "src/app/wallet-runtime": {
+      "file_count": 1,
+      "size": 4829
+    },
+    "src/app/wallet-test": {
+      "file_count": 1,
+      "size": 985
+    },
+    "src/app/login": {
+      "file_count": 1,
+      "size": 6918
+    },
+    "src/app/analytics": {
+      "file_count": 1,
+      "size": 15110
+    },
+    "src/app/strategy": {
+      "file_count": 1,
+      "size": 13045
+    },
+    "src/components": {
+      "file_count": 10,
+      "size": 27760
+    },
+    "src/components/ui": {
+      "file_count": 25,
+      "size": 61684
+    },
+    "src/components/compile": {
+      "file_count": 11,
+      "size": 127720
+    },
+    "src/components/frontpage": {
+      "file_count": 1,
+      "size": 10281
+    },
+    "src/components/affiliate": {
+      "file_count": 12,
+      "size": 62146
+    },
+    "src/lib": {
+      "file_count": 40,
+      "size": 351844
+    },
+    "src/lib/schemas": {
+      "file_count": 1,
+      "size": 4040
+    }
+  }
+}

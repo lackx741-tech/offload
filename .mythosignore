@@ -1,0 +1,13 @@
+# .mythosignore — Paths excluded from mythos scanning
+# One pattern per line. Supports exact names and simple *.ext ignores.
+# Regenerate defaults: mythos init --force
+
+node_modules
+.git
+dist
+build
+.next
+coverage
+*.lock
+package-lock.json
+MEMORY.md

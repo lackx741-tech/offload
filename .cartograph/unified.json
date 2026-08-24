@@ -1,0 +1,31 @@
+{
+  "version": 1,
+  "name": "St3",
+  "path": "/Users/a.l-f.a.t.t.ah/Desktop/Production/SETUPSAAS/St3",
+  "updatedAt": "2026-07-14T07:20:14.036Z",
+  "engines": {
+    "cartograph": {
+      "ok": true
+    },
+    "analyzer": {
+      "ok": true,
+      "outputDir": "/Users/a.l-f.a.t.t.ah/Desktop/Production/SETUPSAAS/St3/.cartograph/analyzer/St3",
+      "hasSetup": true,
+      "hasMap": true
+    },
+    "gitingest": {
+      "ok": false
+    }
+  },
+  "artifacts": {
+    "mapping": "/Users/a.l-f.a.t.t.ah/Desktop/Production/SETUPSAAS/St3/.cartograph/mapping.json",
+    "analyzer": "/Users/a.l-f.a.t.t.ah/Desktop/Production/SETUPSAAS/St3/.cartograph/analyzer",
+    "digest": "/Users/a.l-f.a.t.t.ah/Desktop/Production/SETUPSAAS/St3/.cartograph/DIGEST.txt"
+  },
+  "nextSteps": [
+    "Review setup and deploy in Cartograph UI: cartograph ui",
+    "Read SETUP_INSTRUCTIONS.md for install/run steps",
+    "Interactive browse: cartograph explore",
+    "Launch locally: cartograph go"
+  ]
+}

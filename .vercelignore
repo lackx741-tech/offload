@@ -1,0 +1,23 @@
+node_modules
+.next
+.next-3000
+.next-3001
+.git
+.cartograph
+.claude
+.vscode
+.abacusai
+.mythos
+tsconfig.tsbuildinfo
+standalone
+project
+Affliate and admin
+affiliate-app
+web3-platform
+packages
+services
+deploy
+test-dapp-site
+test-dapp-site-build.tar.gz
+*.log
+.DS_Store

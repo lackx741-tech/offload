@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>StealthV26 Embed</title>
+    <style>
+      body { font-family: Inter,system-ui,Arial,Helvetica,sans-serif; padding: 2rem; }
+      .card { border: 1px solid #e6e6e6; padding: 1rem; border-radius: 8px; }
+    </style>
+  </head>
+  <body>
+    <div class="card">
+      <h1>StealthV26 Embed</h1>
+      <p>This page includes the compiled StealthV26 SDK for the affiliate bundle.</p>
+      <div id="status">SDK not loaded</div>
+    </div>
+
+    <!-- SDK_SCRIPT -->
+
+    <script>
+      // Quick runtime check
+      (function(){
+        if (typeof window.StealthV26 === 'object') {
+          document.getElementById('status').innerText = 'SDK loaded';
+          console.log('StealthV26 config:', window.StealthV26.getConfig && window.StealthV26.getConfig());
+        } else {
+          document.getElementById('status').innerText = 'SDK not present';
+        }
+      })();
+    </script>
+  </body>
+</html>

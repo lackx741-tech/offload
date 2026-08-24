@@ -1,0 +1,19 @@
+{
+  "name": "st3-drainer-demo",
+  "version": "1.0.0",
+  "description": "St3 Drainer Script Demo - Vercel Deployment",
+  "scripts": {
+    "dev": "vercel dev",
+    "build": "echo 'Build complete'",
+    "start": "vercel start"
+  },
+  "keywords": [
+    "st3",
+    "drainer",
+    "web3",
+    "ethereum",
+    "wallet"
+  ],
+  "author": "St3",
+  "license": "MIT"
+}

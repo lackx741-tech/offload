@@ -1,0 +1,8 @@
+{
+  "name": "compiler",
+  "type": "module",
+  "dependencies": {
+    "esbuild": "^0.21.0",
+    "fs-extra": "^11.2.0"
+  }
+}

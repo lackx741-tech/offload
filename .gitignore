@@ -1,0 +1,16 @@
+node_modules/
+.next/
+.next-*/
+dist/
+build/
+.cache/
+.DS_Store
+*.log
+.env
+.env.local
+.env.production
+.env*.local
+.env.*.bak
+.env.local.bak.*
+.vercel
+.vercel.old.*

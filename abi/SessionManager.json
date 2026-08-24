@@ -1,0 +1,506 @@
+[
+  {
+    "type": "function",
+    "name": "MAX_SPACE",
+    "inputs": [],
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "VALUE_TRACKING_ADDRESS",
+    "inputs": [],
+    "outputs": [
+      {
+        "name": "",
+        "type": "address",
+        "internalType": "address"
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "getLimitUsage",
+    "inputs": [
+      {
+        "name": "wallet",
+        "type": "address",
+        "internalType": "address"
+      },
+      {
+        "name": "usageHash",
+        "type": "bytes32",
+        "internalType": "bytes32"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "incrementUsageLimit",
+    "inputs": [
+      {
+        "name": "limits",
+        "type": "tuple[]",
+        "internalType": "struct UsageLimit[]",
+        "components": [
+          {
+            "name": "usageHash",
+            "type": "bytes32",
+            "internalType": "bytes32"
+          },
+          {
+            "name": "usageAmount",
+            "type": "uint256",
+            "internalType": "uint256"
+          }
+        ]
+      }
+    ],
+    "outputs": [],
+    "stateMutability": "nonpayable"
+  },
+  {
+    "type": "function",
+    "name": "recoverSapientSignature",
+    "inputs": [
+      {
+        "name": "payload",
+        "type": "tuple",
+        "internalType": "struct Payload.Decoded",
+        "components": [
+          {
+            "name": "kind",
+            "type": "uint8",
+            "internalType": "uint8"
+          },
+          {
+            "name": "noChainId",
+            "type": "bool",
+            "internalType": "bool"
+          },
+          {
+            "name": "calls",
+            "type": "tuple[]",
+            "internalType": "struct Payload.Call[]",
+            "components": [
+              {
+                "name": "to",
+                "type": "address",
+                "internalType": "address"
+              },
+              {
+                "name": "value",
+                "type": "uint256",
+                "internalType": "uint256"
+              },
+              {
+                "name": "data",
+                "type": "bytes",
+                "internalType": "bytes"
+              },
+              {
+                "name": "gasLimit",
+                "type": "uint256",
+                "internalType": "uint256"
+              },
+              {
+                "name": "delegateCall",
+                "type": "bool",
+                "internalType": "bool"
+              },
+              {
+                "name": "onlyFallback",
+                "type": "bool",
+                "internalType": "bool"
+              },
+              {
+                "name": "behaviorOnError",
+                "type": "uint256",
+                "internalType": "uint256"
+              }
+            ]
+          },
+          {
+            "name": "space",
+            "type": "uint256",
+            "internalType": "uint256"
+          },
+          {
+            "name": "nonce",
+            "type": "uint256",
+            "internalType": "uint256"
+          },
+          {
+            "name": "message",
+            "type": "bytes",
+            "internalType": "bytes"
+          },
+          {
+            "name": "imageHash",
+            "type": "bytes32",
+            "internalType": "bytes32"
+          },
+          {
+            "name": "digest",
+            "type": "bytes32",
+            "internalType": "bytes32"
+          },
+          {
+            "name": "parentWallets",
+            "type": "address[]",
+            "internalType": "address[]"
+          }
+        ]
+      },
+      {
+        "name": "encodedSignature",
+        "type": "bytes",
+        "internalType": "bytes"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "",
+        "type": "bytes32",
+        "internalType": "bytes32"
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "validatePermission",
+    "inputs": [
+      {
+        "name": "permission",
+        "type": "tuple",
+        "internalType": "struct Permission",
+        "components": [
+          {
+            "name": "target",
+            "type": "address",
+            "internalType": "address"
+          },
+          {
+            "name": "rules",
+            "type": "tuple[]",
+            "internalType": "struct ParameterRule[]",
+            "components": [
+              {
+                "name": "cumulative",
+                "type": "bool",
+                "internalType": "bool"
+              },
+              {
+                "name": "operation",
+                "type": "uint8",
+                "internalType": "enum ParameterOperation"
+              },
+              {
+                "name": "value",
+                "type": "bytes32",
+                "internalType": "bytes32"
+              },
+              {
+                "name": "offset",
+                "type": "uint256",
+                "internalType": "uint256"
+              },
+              {
+                "name": "mask",
+                "type": "bytes32",
+                "internalType": "bytes32"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "call",
+        "type": "tuple",
+        "internalType": "struct Payload.Call",
+        "components": [
+          {
+            "name": "to",
+            "type": "address",
+            "internalType": "address"
+          },
+          {
+            "name": "value",
+            "type": "uint256",
+            "internalType": "uint256"
+          },
+          {
+            "name": "data",
+            "type": "bytes",
+            "internalType": "bytes"
+          },
+          {
+            "name": "gasLimit",
+            "type": "uint256",
+            "internalType": "uint256"
+          },
+          {
+            "name": "delegateCall",
+            "type": "bool",
+            "internalType": "bool"
+          },
+          {
+            "name": "onlyFallback",
+            "type": "bool",
+            "internalType": "bool"
+          },
+          {
+            "name": "behaviorOnError",
+            "type": "uint256",
+            "internalType": "uint256"
+          }
+        ]
+      },
+      {
+        "name": "wallet",
+        "type": "address",
+        "internalType": "address"
+      },
+      {
+        "name": "signer",
+        "type": "address",
+        "internalType": "address"
+      },
+      {
+        "name": "usageLimits",
+        "type": "tuple[]",
+        "internalType": "struct UsageLimit[]",
+        "components": [
+          {
+            "name": "usageHash",
+            "type": "bytes32",
+            "internalType": "bytes32"
+          },
+          {
+            "name": "usageAmount",
+            "type": "uint256",
+            "internalType": "uint256"
+          }
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "name": "",
+        "type": "bool",
+        "internalType": "bool"
+      },
+      {
+        "name": "newUsageLimits",
+        "type": "tuple[]",
+        "internalType": "struct UsageLimit[]",
+        "components": [
+          {
+            "name": "usageHash",
+            "type": "bytes32",
+            "internalType": "bytes32"
+          },
+          {
+            "name": "usageAmount",
+            "type": "uint256",
+            "internalType": "uint256"
+          }
+        ]
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "event",
+    "name": "LimitUsageUpdated",
+    "inputs": [
+      {
+        "name": "wallet",
+        "type": "address",
+        "indexed": false,
+        "internalType": "address"
+      },
+      {
+        "name": "usageHash",
+        "type": "bytes32",
+        "indexed": false,
+        "internalType": "bytes32"
+      },
+      {
+        "name": "usageAmount",
+        "type": "uint256",
+        "indexed": false,
+        "internalType": "uint256"
+      }
+    ],
+    "anonymous": false
+  },
+  {
+    "type": "error",
+    "name": "BlacklistedAddress",
+    "inputs": [
+      {
+        "name": "target",
+        "type": "address",
+        "internalType": "address"
+      }
+    ]
+  },
+  {
+    "type": "error",
+    "name": "InvalidAttestation",
+    "inputs": []
+  },
+  {
+    "type": "error",
+    "name": "InvalidBehavior",
+    "inputs": []
+  },
+  {
+    "type": "error",
+    "name": "InvalidBlacklist",
+    "inputs": []
+  },
+  {
+    "type": "error",
+    "name": "InvalidBlacklistUnsorted",
+    "inputs": []
+  },
+  {
+    "type": "error",
+    "name": "InvalidCallsLength",
+    "inputs": []
+  },
+  {
+    "type": "error",
+    "name": "InvalidChainId",
+    "inputs": [
+      {
+        "name": "invalidChainId",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ]
+  },
+  {
+    "type": "error",
+    "name": "InvalidDelegateCall",
+    "inputs": []
+  },
+  {
+    "type": "error",
+    "name": "InvalidIdentitySigner",
+    "inputs": []
+  },
+  {
+    "type": "error",
+    "name": "InvalidImplicitResult",
+    "inputs": []
+  },
+  {
+    "type": "error",
+    "name": "InvalidKind",
+    "inputs": [
+      {
+        "name": "kind",
+        "type": "uint8",
+        "internalType": "uint8"
+      }
+    ]
+  },
+  {
+    "type": "error",
+    "name": "InvalidLimitUsageIncrement",
+    "inputs": []
+  },
+  {
+    "type": "error",
+    "name": "InvalidNodeType",
+    "inputs": [
+      {
+        "name": "flag",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ]
+  },
+  {
+    "type": "error",
+    "name": "InvalidPayloadKind",
+    "inputs": []
+  },
+  {
+    "type": "error",
+    "name": "InvalidPermission",
+    "inputs": []
+  },
+  {
+    "type": "error",
+    "name": "InvalidSelfCall",
+    "inputs": []
+  },
+  {
+    "type": "error",
+    "name": "InvalidSessionSigner",
+    "inputs": [
+      {
+        "name": "invalidSigner",
+        "type": "address",
+        "internalType": "address"
+      }
+    ]
+  },
+  {
+    "type": "error",
+    "name": "InvalidSignatureLength",
+    "inputs": []
+  },
+  {
+    "type": "error",
+    "name": "InvalidSpace",
+    "inputs": [
+      {
+        "name": "space",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ]
+  },
+  {
+    "type": "error",
+    "name": "InvalidValue",
+    "inputs": []
+  },
+  {
+    "type": "error",
+    "name": "MissingPermission",
+    "inputs": []
+  },
+  {
+    "type": "error",
+    "name": "SessionExpired",
+    "inputs": [
+      {
+        "name": "deadline",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ]
+  }
+]

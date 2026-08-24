@@ -1,0 +1,9 @@
+{
+  "name": "web3-platform",
+  "private": true,
+  "type": "module",
+  "workspaces": [
+    "compiler",
+    "telegram-bot"
+  ]
+}

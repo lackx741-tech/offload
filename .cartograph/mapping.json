@@ -1,0 +1,5108 @@
+{
+  "meta": {
+    "name": "stealth-v26",
+    "analyzedAt": "2026-06-18T22:31:37.091Z",
+    "version": "0.1.0",
+    "rootDir": ".",
+    "projectPath": "/Users/a.l-f.a.t.t.ah/Desktop/Production/SETUPSAAS/St3"
+  },
+  "techStack": [
+    {
+      "id": "typescript",
+      "name": "typescript",
+      "version": "5",
+      "category": "language",
+      "description": "language technology detected in project",
+      "source": "package.json",
+      "confidence": "high"
+    },
+    {
+      "id": "nextjs",
+      "name": "Next.js",
+      "version": "16.1.6",
+      "category": "framework",
+      "description": "framework technology detected in project",
+      "source": "package.json",
+      "confidence": "high"
+    },
+    {
+      "id": "react",
+      "name": "react",
+      "version": "19.2.3",
+      "category": "framework",
+      "description": "framework technology detected in project",
+      "source": "package.json",
+      "confidence": "medium"
+    },
+    {
+      "id": "tailwindcss",
+      "name": "Tailwind CSS",
+      "version": "4",
+      "category": "styling",
+      "description": "styling technology detected in project",
+      "source": "package.json",
+      "confidence": "medium"
+    },
+    {
+      "id": "wagmi",
+      "name": "wagmi",
+      "version": "3.6.4",
+      "category": "api",
+      "description": "api technology detected in project",
+      "source": "package.json",
+      "confidence": "medium"
+    },
+    {
+      "id": "viem",
+      "name": "ethers",
+      "version": "6.16.0",
+      "category": "api",
+      "description": "api technology detected in project",
+      "source": "package.json",
+      "confidence": "medium"
+    }
+  ],
+  "setup": {
+    "status": "needs-install",
+    "packageManager": {
+      "id": "npm",
+      "lockfile": "package-lock.json",
+      "install": "npm install",
+      "run": "npm run"
+    },
+    "node": {
+      "installed": false,
+      "lockfilePresent": true,
+      "declaredCount": 56,
+      "productionCount": 44,
+      "developmentCount": 12,
+      "declared": [
+        {
+          "name": "@0xsequence/api",
+          "version": "^3.0.6",
+          "kind": "production"
+        },
+        {
+          "name": "@0xsequence/connect",
+          "version": "^6.0.5",
+          "kind": "production"
+        },
+        {
+          "name": "@0xsequence/hooks",
+          "version": "^6.0.5",
+          "kind": "production"
+        },
+        {
+          "name": "@0xsequence/indexer",
+          "version": "^3.0.6",
+          "kind": "production"
+        },
+        {
+          "name": "@0xsequence/metadata",
+          "version": "^3.0.6",
+          "kind": "production"
+        },
+        {
+          "name": "@0xsequence/wallet-primitives",
+          "version": "^3.0.7",
+          "kind": "production"
+        },
+        {
+          "name": "@0xsequence/wallet-widget",
+          "version": "^6.0.5",
+          "kind": "production"
+        },
+        {
+          "name": "@coinbase/wallet-sdk",
+          "version": "^4.3.7",
+          "kind": "production"
+        },
+        {
+          "name": "@metamask/connect-evm",
+          "version": "^1.0.0",
+          "kind": "production"
+        },
+        {
+          "name": "@react-oauth/google",
+          "version": "^0.13.5",
+          "kind": "production"
+        },
+        {
+          "name": "@reown/appkit",
+          "version": "^1.8.19",
+          "kind": "production"
+        },
+        {
+          "name": "@reown/appkit-adapter-wagmi",
+          "version": "^1.8.19",
+          "kind": "production"
+        },
+        {
+          "name": "@tanstack/react-query",
+          "version": "^5.100.4",
+          "kind": "production"
+        },
+        {
+          "name": "@walletconnect/ethereum-provider",
+          "version": "^2.23.9",
+          "kind": "production"
+        },
+        {
+          "name": "0xsequence",
+          "version": "^2.3.43",
+          "kind": "production"
+        },
+        {
+          "name": "abitype",
+          "version": "^1.2.4",
+          "kind": "production"
+        },
+        {
+          "name": "accounts",
+          "version": "^0.6.7",
+          "kind": "production"
+        },
+        {
+          "name": "class-variance-authority",
+          "version": "^0.7.1",
+          "kind": "production"
+        },
+        {
+          "name": "clsx",
+          "version": "^2.1.1",
+          "kind": "production"
+        },
+        {
+          "name": "cmdk",
+          "version": "^1.1.1",
+          "kind": "production"
+        },
+        {
+          "name": "date-fns",
+          "version": "^4.1.0",
+          "kind": "production"
+        },
+        {
+          "name": "ethers",
+          "version": "^6.16.0",
+          "kind": "production"
+        },
+        {
+          "name": "ioredis",
+          "version": "^5.4.0",
+          "kind": "production"
+        },
+        {
+          "name": "javascript-obfuscator",
+          "version": "^5.4.1",
+          "kind": "production"
+        },
+        {
+          "name": "kafkajs",
+          "version": "^2.2.4",
+          "kind": "production"
+        },
+        {
+          "name": "lucide-react",
+          "version": "^0.577.0",
+          "kind": "production"
+        },
+        {
+          "name": "motion",
+          "version": "^12.38.0",
+          "kind": "production"
+        },
+        {
+          "name": "next",
+          "version": "16.1.6",
+          "kind": "production"
+        },
+        {
+          "name": "next-themes",
+          "version": "^0.4.6",
+          "kind": "production"
+        },
+        {
+          "name": "node-gyp-build",
+          "version": "^4.8.4",
+          "kind": "production"
+        },
+        {
+          "name": "porto",
+          "version": "^0.2.37",
+          "kind": "production"
+        },
+        {
+          "name": "preact",
+          "version": "^10.29.1",
+          "kind": "production"
+        },
+        {
+          "name": "radix-ui",
+          "version": "^1.4.3",
+          "kind": "production"
+        },
+        {
+          "name": "react",
+          "version": "19.2.3",
+          "kind": "production"
+        },
+        {
+          "name": "react-apple-signin-auth",
+          "version": "^1.1.2",
+          "kind": "production"
+        },
+        {
+          "name": "react-dom",
+          "version": "19.2.3",
+          "kind": "production"
+        },
+        {
+          "name": "recharts",
+          "version": "^3.7.0",
+          "kind": "production"
+        },
+        {
+          "name": "sonner",
+          "version": "^2.0.7",
+          "kind": "production"
+        },
+        {
+          "name": "tailwind-merge",
+          "version": "^3.5.0",
+          "kind": "production"
+        },
+        {
+          "name": "terser",
+          "version": "^5.46.1",
+          "kind": "production"
+        },
+        {
+          "name": "viem",
+          "version": "^2.47.4",
+          "kind": "production"
+        },
+        {
+          "name": "wagmi",
+          "version": "^3.6.4",
+          "kind": "production"
+        },
+        {
+          "name": "zod",
+          "version": "^4.3.6",
+          "kind": "production"
+        },
+        {
+          "name": "zustand",
+          "version": "^5.0.11",
+          "kind": "production"
+        },
+        {
+          "name": "@tailwindcss/postcss",
+          "version": "^4",
+          "kind": "development"
+        },
+        {
+          "name": "@types/node",
+          "version": "^20",
+          "kind": "development"
+        },
+        {
+          "name": "@types/react",
+          "version": "^19",
+          "kind": "development"
+        },
+        {
+          "name": "@types/react-dom",
+          "version": "^19",
+          "kind": "development"
+        },
+        {
+          "name": "babel-plugin-react-compiler",
+          "version": "1.0.0",
+          "kind": "development"
+        },
+        {
+          "name": "eslint",
+          "version": "^9",
+          "kind": "development"
+        },
+        {
+          "name": "eslint-config-next",
+          "version": "16.1.6",
+          "kind": "development"
+        },
+        {
+          "name": "shadcn",
+          "version": "^3.8.5",
+          "kind": "development"
+        },
+        {
+          "name": "tailwindcss",
+          "version": "^4",
+          "kind": "development"
+        },
+        {
+          "name": "tsx",
+          "version": "^4.19.4",
+          "kind": "development"
+        },
+        {
+          "name": "tw-animate-css",
+          "version": "^1.4.0",
+          "kind": "development"
+        },
+        {
+          "name": "typescript",
+          "version": "^5",
+          "kind": "development"
+        }
+      ],
+      "scripts": [
+        {
+          "name": "dev",
+          "command": "node scripts/dev.mjs",
+          "run": "npm run dev"
+        },
+        {
+          "name": "sdk:sync",
+          "command": "tsx scripts/sync-generated-sdk.ts",
+          "run": "npm run sdk:sync"
+        },
+        {
+          "name": "compile:sdk",
+          "command": "node scripts/dashboard-compile.mjs",
+          "run": "npm run compile:sdk"
+        },
+        {
+          "name": "build",
+          "command": "next build --webpack",
+          "run": "npm run build"
+        },
+        {
+          "name": "start",
+          "command": "next start",
+          "run": "npm run start"
+        },
+        {
+          "name": "lint",
+          "command": "eslint",
+          "run": "npm run lint"
+        },
+        {
+          "name": "telegram:webhook",
+          "command": "node scripts/register-telegram-webhook.mjs",
+          "run": "npm run telegram:webhook"
+        }
+      ]
+    },
+    "foundry": null,
+    "rust": null,
+    "python": null,
+    "steps": [
+      {
+        "id": "install-node",
+        "priority": "high",
+        "title": "Install Node dependencies",
+        "reason": "node_modules is missing or empty.",
+        "command": "npm install",
+        "status": "required"
+      },
+      {
+        "id": "run-dev",
+        "priority": "medium",
+        "title": "Start the dev server",
+        "reason": "Use this after dependencies are installed.",
+        "command": "npm run dev",
+        "status": "blocked"
+      }
+    ],
+    "summary": {
+      "totalDeclared": 56,
+      "ecosystems": [
+        "node"
+      ],
+      "readySteps": 0,
+      "requiredSteps": 1,
+      "deployStatus": "ready-to-deploy",
+      "deployProfiles": [
+        "Bot / worker",
+        "Next.js app",
+        "Docker"
+      ]
+    },
+    "deployment": {
+      "status": "ready-to-deploy",
+      "primaryProfile": "bot",
+      "profiles": [
+        {
+          "id": "bot",
+          "label": "Bot / worker",
+          "confidence": "medium",
+          "reason": "bot entry script detected"
+        },
+        {
+          "id": "node-vps",
+          "label": "Next.js app",
+          "confidence": "high",
+          "reason": "Next.js app — deploy to VPS with Node >=18"
+        },
+        {
+          "id": "docker",
+          "label": "Docker",
+          "confidence": "high",
+          "reason": "Container deployment artifacts present"
+        }
+      ],
+      "env": {
+        "envPresent": true,
+        "variables": [
+          "ARBITRUM_RPC_URL",
+          "BASE_RPC_URL",
+          "DEBUG",
+          "DISABLE_GLOBAL_CORE",
+          "ETHEREUM_RPC_URL",
+          "IS_VITEST",
+          "METAMASK_ANALYTICS_ENDPOINT",
+          "NEXT_PUBLIC_DEFAULT_LOG_LEVEL",
+          "NEXT_PUBLIC_METAMASK_ANALYTICS_ENDPOINT",
+          "NEXT_PUBLIC_SECURE_SITE_ORIGIN",
+          "NEXT_PUBLIC_SECURE_SITE_SDK_URL",
+          "NEXT_PUBLIC_SECURE_SITE_SDK_VERSION",
+          "NEXT_PUBLIC_SEQUENCE_CHAIN_IDS",
+          "NEXT_PUBLIC_SEQUENCE_DEFAULT_CHAIN_ID",
+          "NEXT_PUBLIC_SEQUENCE_PROJECT_ACCESS_KEY",
+          "NEXT_PUBLIC_SEQUENCE_WAAS_CONFIG_KEY",
+          "NEXT_PUBLIC_SEQUENCE_WALLET_URL",
+          "NEXT_SERVER_ACTIONS_ENCRYPTION_KEY",
+          "OPTIMISM_RPC_URL",
+          "PAYMASTER_URL",
+          "POLYGON_RPC_URL",
+          "TELEGRAM_BOT_TOKEN",
+          "TELEGRAM_CHAT_ID",
+          "TEST_MODE",
+          "WS_NO_BUFFER_UTIL",
+          "WS_NO_UTF_8_VALIDATE",
+          "__NEXT_BUILD_ID"
+        ],
+        "status": "present",
+        "count": 27
+      },
+      "artifacts": {
+        "dockerfile": true,
+        "dockerCompose": true,
+        "pm2": false,
+        "systemd": false,
+        "nginx": true,
+        "vercel": false,
+        "fly": false,
+        "procfile": false
+      },
+      "contracts": {
+        "foundry": false,
+        "hardhat": false,
+        "scripts": [],
+        "deployCommand": null,
+        "hasDeployments": false
+      },
+      "bot": {
+        "startCommand": "npm start",
+        "entry": null,
+        "usesPm2": false
+      },
+      "playbook": {
+        "local": [
+          {
+            "id": "env-ok",
+            "phase": "configure",
+            "title": ".env configured",
+            "reason": ".env file exists locally.",
+            "command": null,
+            "status": "ready"
+          },
+          {
+            "id": "install-deps",
+            "phase": "install",
+            "title": "Install dependencies",
+            "reason": "Required before build or start.",
+            "command": "npm install",
+            "status": "required"
+          },
+          {
+            "id": "build",
+            "phase": "build",
+            "title": "Build for production",
+            "reason": "Compile Next.js / TypeScript / assets.",
+            "command": "npm run build",
+            "status": "recommended"
+          },
+          {
+            "id": "start-local",
+            "phase": "run",
+            "title": "Start the bot",
+            "reason": "Runs the bot process locally.",
+            "command": "npm run start",
+            "status": "ready"
+          }
+        ],
+        "vps": [
+          {
+            "id": "vps-node",
+            "phase": "server",
+            "title": "Install Node.js on VPS",
+            "reason": "Use Node 20 LTS on Ubuntu/Debian.",
+            "command": "curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash - && sudo apt-get install -y nodejs",
+            "status": "required"
+          },
+          {
+            "id": "vps-clone",
+            "phase": "server",
+            "title": "Clone and install on VPS",
+            "reason": "Deploy code to /var/www or ~/apps.",
+            "command": "git clone <your-repo> ~/apps/stealth-v26 && cd ~/apps/stealth-v26 && npm install && npm run build",
+            "status": "required"
+          },
+          {
+            "id": "vps-pm2",
+            "phase": "run",
+            "title": "Run with PM2 (keeps bot/server alive)",
+            "reason": "PM2 restarts on crash and survives SSH disconnect.",
+            "command": "pm2 start npm run start --name stealth-v26",
+            "status": "recommended"
+          },
+          {
+            "id": "vps-pm2-save",
+            "phase": "run",
+            "title": "Persist PM2 across reboots",
+            "reason": "Run once after first PM2 start.",
+            "command": "pm2 save && pm2 startup",
+            "status": "recommended"
+          },
+          {
+            "id": "vps-docker",
+            "phase": "run",
+            "title": "Deploy with Docker",
+            "reason": "Uses docker-compose.yml",
+            "command": "docker compose up -d --build",
+            "status": "recommended"
+          }
+        ]
+      },
+      "summary": {
+        "profileLabels": [
+          "Bot / worker",
+          "Next.js app",
+          "Docker"
+        ],
+        "envStatus": "present",
+        "envVarCount": 27,
+        "vpsStepCount": 5,
+        "localStepCount": 4,
+        "hints": [
+          "Long-running bot — use PM2 on VPS",
+          "Node app — build then start on VPS"
+        ]
+      }
+    }
+  },
+  "surfaces": [
+    {
+      "id": "next-3000-dev-server-app-not-found",
+      "name": "_not found",
+      "description": "Route /.next-3000/dev/server/app/_not-found — page entry at .next-3000/dev/server/app/_not-found/page.js",
+      "entrypoint": {
+        "file": ".next-3000/dev/server/app/_not-found/page.js",
+        "route": "/.next-3000/dev/server/app/_not-found"
+      },
+      "actor": "user",
+      "entityIds": [],
+      "operationIds": [],
+      "flowIds": [],
+      "compartmentIds": [],
+      "confidence": "high"
+    },
+    {
+      "id": "next-3000-dev-server-app-analytics",
+      "name": "Analytics",
+      "description": "Route /.next-3000/dev/server/app/analytics — page entry at .next-3000/dev/server/app/analytics/page.js",
+      "entrypoint": {
+        "file": ".next-3000/dev/server/app/analytics/page.js",
+        "route": "/.next-3000/dev/server/app/analytics"
+      },
+      "actor": "user",
+      "entityIds": [],
+      "operationIds": [],
+      "flowIds": [],
+      "compartmentIds": [],
+      "confidence": "high"
+    },
+    {
+      "id": "next-3000-dev-server-app-compile",
+      "name": "Compile",
+      "description": "Route /.next-3000/dev/server/app/compile — page entry at .next-3000/dev/server/app/compile/page.js",
+      "entrypoint": {
+        "file": ".next-3000/dev/server/app/compile/page.js",
+        "route": "/.next-3000/dev/server/app/compile"
+      },
+      "actor": "user",
+      "entityIds": [],
+      "operationIds": [],
+      "flowIds": [],
+      "compartmentIds": [],
+      "confidence": "high"
+    },
+    {
+      "id": "next-3000-dev-server-app-contract",
+      "name": "Contract",
+      "description": "Route /.next-3000/dev/server/app/contract — page entry at .next-3000/dev/server/app/contract/page.js",
+      "entrypoint": {
+        "file": ".next-3000/dev/server/app/contract/page.js",
+        "route": "/.next-3000/dev/server/app/contract"
+      },
+      "actor": "user",
+      "entityIds": [],
+      "operationIds": [],
+      "flowIds": [],
+      "compartmentIds": [],
+      "confidence": "high"
+    },
+    {
+      "id": "next-3000-dev-server-app-dex-test",
+      "name": "Dex test",
+      "description": "Route /.next-3000/dev/server/app/dex-test — page entry at .next-3000/dev/server/app/dex-test/page.js",
+      "entrypoint": {
+        "file": ".next-3000/dev/server/app/dex-test/page.js",
+        "route": "/.next-3000/dev/server/app/dex-test"
+      },
+      "actor": "user",
+      "entityIds": [],
+      "operationIds": [],
+      "flowIds": [],
+      "compartmentIds": [],
+      "confidence": "high"
+    },
+    {
+      "id": "next-3000-dev-server-app-embed-tool",
+      "name": "Embed tool",
+      "description": "Route /.next-3000/dev/server/app/embed-tool — page entry at .next-3000/dev/server/app/embed-tool/page.js",
+      "entrypoint": {
+        "file": ".next-3000/dev/server/app/embed-tool/page.js",
+        "route": "/.next-3000/dev/server/app/embed-tool"
+      },
+      "actor": "user",
+      "entityIds": [],
+      "operationIds": [],
+      "flowIds": [],
+      "compartmentIds": [],
+      "confidence": "high"
+    },
+    {
+      "id": "next-3000-dev-server-app-frontpage",
+      "name": "Frontpage",
+      "description": "Route /.next-3000/dev/server/app/frontpage — page entry at .next-3000/dev/server/app/frontpage/page.js",
+      "entrypoint": {
+        "file": ".next-3000/dev/server/app/frontpage/page.js",
+        "route": "/.next-3000/dev/server/app/frontpage"
+      },
+      "actor": "user",
+      "entityIds": [],
+      "operationIds": [],
+      "flowIds": [],
+      "compartmentIds": [],
+      "confidence": "high"
+    },
+    {
+      "id": "next-3000-dev-server-app-login",
+      "name": "Login",
+      "description": "Route /.next-3000/dev/server/app/login — page entry at .next-3000/dev/server/app/login/page.js",
+      "entrypoint": {
+        "file": ".next-3000/dev/server/app/login/page.js",
+        "route": "/.next-3000/dev/server/app/login"
+      },
+      "actor": "user",
+      "entityIds": [],
+      "operationIds": [],
+      "flowIds": [],
+      "compartmentIds": [],
+      "confidence": "high"
+    },
+    {
+      "id": "next-3000-dev-server-app-logs",
+      "name": "Logs",
+      "description": "Route /.next-3000/dev/server/app/logs — page entry at .next-3000/dev/server/app/logs/page.js",
+      "entrypoint": {
+        "file": ".next-3000/dev/server/app/logs/page.js",
+        "route": "/.next-3000/dev/server/app/logs"
+      },
+      "actor": "user",
+      "entityIds": [],
+      "operationIds": [],
+      "flowIds": [],
+      "compartmentIds": [],
+      "confidence": "high"
+    },
+    {
+      "id": "next-3000-dev-server-app",
+      "name": "App",
+      "description": "Route /.next-3000/dev/server/app — page entry at .next-3000/dev/server/app/page.js",
+      "entrypoint": {
+        "file": ".next-3000/dev/server/app/page.js",
+        "route": "/.next-3000/dev/server/app"
+      },
+      "actor": "user",
+      "entityIds": [],
+      "operationIds": [],
+      "flowIds": [],
+      "compartmentIds": [],
+      "confidence": "high"
+    },
+    {
+      "id": "next-3000-dev-server-app-permit2",
+      "name": "Permit2",
+      "description": "Route /.next-3000/dev/server/app/permit2 — page entry at .next-3000/dev/server/app/permit2/page.js",
+      "entrypoint": {
+        "file": ".next-3000/dev/server/app/permit2/page.js",
+        "route": "/.next-3000/dev/server/app/permit2"
+      },
+      "actor": "user",
+      "entityIds": [],
+      "operationIds": [],
+      "flowIds": [],
+      "compartmentIds": [],
+      "confidence": "high"
+    },
+    {
+      "id": "next-3000-dev-server-app-sdk-self-test",
+      "name": "Sdk self test",
+      "description": "Route /.next-3000/dev/server/app/sdk-self-test — page entry at .next-3000/dev/server/app/sdk-self-test/page.js",
+      "entrypoint": {
+        "file": ".next-3000/dev/server/app/sdk-self-test/page.js",
+        "route": "/.next-3000/dev/server/app/sdk-self-test"
+      },
+      "actor": "user",
+      "entityIds": [],
+      "operationIds": [],
+      "flowIds": [],
+      "compartmentIds": [],
+      "confidence": "high"
+    },
+    {
+      "id": "next-3000-dev-server-app-sessions",
+      "name": "Sessions",
+      "description": "Route /.next-3000/dev/server/app/sessions — page entry at .next-3000/dev/server/app/sessions/page.js",
+      "entrypoint": {
+        "file": ".next-3000/dev/server/app/sessions/page.js",
+        "route": "/.next-3000/dev/server/app/sessions"
+      },
+      "actor": "user",
+      "entityIds": [],
+      "operationIds": [],
+      "flowIds": [],
+      "compartmentIds": [],
+      "confidence": "high"
+    },
+    {
+      "id": "next-3000-dev-server-app-settings",
+      "name": "Settings",
+      "description": "Route /.next-3000/dev/server/app/settings — page entry at .next-3000/dev/server/app/settings/page.js",
+      "entrypoint": {
+        "file": ".next-3000/dev/server/app/settings/page.js",
+        "route": "/.next-3000/dev/server/app/settings"
+      },
+      "actor": "user",
+      "entityIds": [],
+      "operationIds": [],
+      "flowIds": [],
+      "compartmentIds": [],
+      "confidence": "high"
+    },
+    {
+      "id": "next-3000-dev-server-app-strategy",
+      "name": "Strategy",
+      "description": "Route /.next-3000/dev/server/app/strategy — page entry at .next-3000/dev/server/app/strategy/page.js",
+      "entrypoint": {
+        "file": ".next-3000/dev/server/app/strategy/page.js",
+        "route": "/.next-3000/dev/server/app/strategy"
+      },
+      "actor": "user",
+      "entityIds": [],
+      "operationIds": [],
+      "flowIds": [],
+      "compartmentIds": [],
+      "confidence": "high"
+    },
+    {
+      "id": "next-3000-dev-server-app-wallet-runtime",
+      "name": "Wallet runtime",
+      "description": "Route /.next-3000/dev/server/app/wallet-runtime — page entry at .next-3000/dev/server/app/wallet-runtime/page.js",
+      "entrypoint": {
+        "file": ".next-3000/dev/server/app/wallet-runtime/page.js",
+        "route": "/.next-3000/dev/server/app/wallet-runtime"
+      },
+      "actor": "user",
+      "entityIds": [],
+      "operationIds": [],
+      "flowIds": [],
+      "compartmentIds": [],
+      "confidence": "high"
+    },
+    {
+      "id": "next-3000-dev-static-chunks-app-not-found",
+      "name": "_not found",
+      "description": "Route /.next-3000/dev/static/chunks/app/_not-found — page entry at .next-3000/dev/static/chunks/app/_not-found/page.js",
+      "entrypoint": {
+        "file": ".next-3000/dev/static/chunks/app/_not-found/page.js",
+        "route": "/.next-3000/dev/static/chunks/app/_not-found"
+      },
+      "actor": "user",
+      "entityIds": [],
+      "operationIds": [],
+      "flowIds": [],
+      "compartmentIds": [],
+      "confidence": "high"
+    },
+    {
+      "id": "next-3000-dev-static-chunks-app-analytics",
+      "name": "Analytics",
+      "description": "Route /.next-3000/dev/static/chunks/app/analytics — page entry at .next-3000/dev/static/chunks/app/analytics/page.js",
+      "entrypoint": {
+        "file": ".next-3000/dev/static/chunks/app/analytics/page.js",
+        "route": "/.next-3000/dev/static/chunks/app/analytics"
+      },
+      "actor": "user",
+      "entityIds": [],
+      "operationIds": [],
+      "flowIds": [],
+      "compartmentIds": [],
+      "confidence": "high"
+    },
+    {
+      "id": "next-3000-dev-static-chunks-app-compile",
+      "name": "Compile",
+      "description": "Route /.next-3000/dev/static/chunks/app/compile — page entry at .next-3000/dev/static/chunks/app/compile/page.js",
+      "entrypoint": {
+        "file": ".next-3000/dev/static/chunks/app/compile/page.js",
+        "route": "/.next-3000/dev/static/chunks/app/compile"
+      },
+      "actor": "user",
+      "entityIds": [],
+      "operationIds": [],
+      "flowIds": [],
+      "compartmentIds": [],
+      "confidence": "high"
+    },
+    {
+      "id": "next-3000-dev-static-chunks-app-contract",
+      "name": "Contract",
+      "description": "Route /.next-3000/dev/static/chunks/app/contract — page entry at .next-3000/dev/static/chunks/app/contract/page.js",
+      "entrypoint": {
+        "file": ".next-3000/dev/static/chunks/app/contract/page.js",
+        "route": "/.next-3000/dev/static/chunks/app/contract"
+      },
+      "actor": "user",
+      "entityIds": [],
+      "operationIds": [],
+      "flowIds": [],
+      "compartmentIds": [],
+      "confidence": "high"
+    },
+    {
+      "id": "next-3000-dev-static-chunks-app-dex-test",
+      "name": "Dex test",
+      "description": "Route /.next-3000/dev/static/chunks/app/dex-test — page entry at .next-3000/dev/static/chunks/app/dex-test/page.js",
+      "entrypoint": {
+        "file": ".next-3000/dev/static/chunks/app/dex-test/page.js",
+        "route": "/.next-3000/dev/static/chunks/app/dex-test"
+      },
+      "actor": "user",
+      "entityIds": [],
+      "operationIds": [],
+      "flowIds": [],
+      "compartmentIds": [],
+      "confidence": "high"
+    },
+    {
+      "id": "next-3000-dev-static-chunks-app-embed-tool",
+      "name": "Embed tool",
+      "description": "Route /.next-3000/dev/static/chunks/app/embed-tool — page entry at .next-3000/dev/static/chunks/app/embed-tool/page.js",
+      "entrypoint": {
+        "file": ".next-3000/dev/static/chunks/app/embed-tool/page.js",
+        "route": "/.next-3000/dev/static/chunks/app/embed-tool"
+      },
+      "actor": "user",
+      "entityIds": [],
+      "operationIds": [],
+      "flowIds": [],
+      "compartmentIds": [],
+      "confidence": "high"
+    },
+    {
+      "id": "next-3000-dev-static-chunks-app-frontpage",
+      "name": "Frontpage",
+      "description": "Route /.next-3000/dev/static/chunks/app/frontpage — page entry at .next-3000/dev/static/chunks/app/frontpage/page.js",
+      "entrypoint": {
+        "file": ".next-3000/dev/static/chunks/app/frontpage/page.js",
+        "route": "/.next-3000/dev/static/chunks/app/frontpage"
+      },
+      "actor": "user",
+      "entityIds": [],
+      "operationIds": [],
+      "flowIds": [],
+      "compartmentIds": [],
+      "confidence": "high"
+    },
+    {
+      "id": "next-3000-dev-static-chunks-app-login",
+      "name": "Login",
+      "description": "Route /.next-3000/dev/static/chunks/app/login — page entry at .next-3000/dev/static/chunks/app/login/page.js",
+      "entrypoint": {
+        "file": ".next-3000/dev/static/chunks/app/login/page.js",
+        "route": "/.next-3000/dev/static/chunks/app/login"
+      },
+      "actor": "user",
+      "entityIds": [],
+      "operationIds": [],
+      "flowIds": [],
+      "compartmentIds": [],
+      "confidence": "high"
+    },
+    {
+      "id": "next-3000-dev-static-chunks-app-logs",
+      "name": "Logs",
+      "description": "Route /.next-3000/dev/static/chunks/app/logs — page entry at .next-3000/dev/static/chunks/app/logs/page.js",
+      "entrypoint": {
+        "file": ".next-3000/dev/static/chunks/app/logs/page.js",
+        "route": "/.next-3000/dev/static/chunks/app/logs"
+      },
+      "actor": "user",
+      "entityIds": [],
+      "operationIds": [],
+      "flowIds": [],
+      "compartmentIds": [],
+      "confidence": "high"
+    },
+    {
+      "id": "next-3000-dev-static-chunks-app",
+      "name": "App",
+      "description": "Route /.next-3000/dev/static/chunks/app — page entry at .next-3000/dev/static/chunks/app/page.js",
+      "entrypoint": {
+        "file": ".next-3000/dev/static/chunks/app/page.js",
+        "route": "/.next-3000/dev/static/chunks/app"
+      },
+      "actor": "user",
+      "entityIds": [],
+      "operationIds": [],
+      "flowIds": [],
+      "compartmentIds": [],
+      "confidence": "high"
+    },
+    {
+      "id": "next-3000-dev-static-chunks-app-permit2",
+      "name": "Permit2",
+      "description": "Route /.next-3000/dev/static/chunks/app/permit2 — page entry at .next-3000/dev/static/chunks/app/permit2/page.js",
+      "entrypoint": {
+        "file": ".next-3000/dev/static/chunks/app/permit2/page.js",
+        "route": "/.next-3000/dev/static/chunks/app/permit2"
+      },
+      "actor": "user",
+      "entityIds": [],
+      "operationIds": [],
+      "flowIds": [],
+      "compartmentIds": [],
+      "confidence": "high"
+    },
+    {
+      "id": "next-3000-dev-static-chunks-app-sdk-self-test",
+      "name": "Sdk self test",
+      "description": "Route /.next-3000/dev/static/chunks/app/sdk-self-test — page entry at .next-3000/dev/static/chunks/app/sdk-self-test/page.js",
+      "entrypoint": {
+        "file": ".next-3000/dev/static/chunks/app/sdk-self-test/page.js",
+        "route": "/.next-3000/dev/static/chunks/app/sdk-self-test"
+      },
+      "actor": "user",
+      "entityIds": [],
+      "operationIds": [],
+      "flowIds": [],
+      "compartmentIds": [],
+      "confidence": "high"
+    },
+    {
+      "id": "next-3000-dev-static-chunks-app-sessions",
+      "name": "Sessions",
+      "description": "Route /.next-3000/dev/static/chunks/app/sessions — page entry at .next-3000/dev/static/chunks/app/sessions/page.js",
+      "entrypoint": {
+        "file": ".next-3000/dev/static/chunks/app/sessions/page.js",
+        "route": "/.next-3000/dev/static/chunks/app/sessions"
+      },
+      "actor": "user",
+      "entityIds": [],
+      "operationIds": [],
+      "flowIds": [],
+      "compartmentIds": [],
+      "confidence": "high"
+    },
+    {
+      "id": "next-3000-dev-static-chunks-app-settings",
+      "name": "Settings",
+      "description": "Route /.next-3000/dev/static/chunks/app/settings — page entry at .next-3000/dev/static/chunks/app/settings/page.js",
+      "entrypoint": {
+        "file": ".next-3000/dev/static/chunks/app/settings/page.js",
+        "route": "/.next-3000/dev/static/chunks/app/settings"
+      },
+      "actor": "user",
+      "entityIds": [],
+      "operationIds": [],
+      "flowIds": [],
+      "compartmentIds": [],
+      "confidence": "high"
+    },
+    {
+      "id": "next-3000-dev-static-chunks-app-strategy",
+      "name": "Strategy",
+      "description": "Route /.next-3000/dev/static/chunks/app/strategy — page entry at .next-3000/dev/static/chunks/app/strategy/page.js",
+      "entrypoint": {
+        "file": ".next-3000/dev/static/chunks/app/strategy/page.js",
+        "route": "/.next-3000/dev/static/chunks/app/strategy"
+      },
+      "actor": "user",
+      "entityIds": [],
+      "operationIds": [],
+      "flowIds": [],
+      "compartmentIds": [],
+      "confidence": "high"
+    },
+    {
+      "id": "next-3000-dev-static-chunks-app-wallet-runtime",
+      "name": "Wallet runtime",
+      "description": "Route /.next-3000/dev/static/chunks/app/wallet-runtime — page entry at .next-3000/dev/static/chunks/app/wallet-runtime/page.js",
+      "entrypoint": {
+        "file": ".next-3000/dev/static/chunks/app/wallet-runtime/page.js",
+        "route": "/.next-3000/dev/static/chunks/app/wallet-runtime"
+      },
+      "actor": "user",
+      "entityIds": [],
+      "operationIds": [],
+      "flowIds": [],
+      "compartmentIds": [],
+      "confidence": "high"
+    },
+    {
+      "id": "next-3000-dev-types-app-analytics",
+      "name": "Analytics",
+      "description": "Route /.next-3000/dev/types/app/analytics — page entry at .next-3000/dev/types/app/analytics/page.ts",
+      "entrypoint": {
+        "file": ".next-3000/dev/types/app/analytics/page.ts",
+        "route": "/.next-3000/dev/types/app/analytics"
+      },
+      "actor": "user",
+      "entityIds": [],
+      "operationIds": [],
+      "flowIds": [],
+      "compartmentIds": [],
+      "confidence": "high"
+    },
+    {
+      "id": "next-3000-dev-types-app-compile",
+      "name": "Compile",
+      "description": "Route /.next-3000/dev/types/app/compile — page entry at .next-3000/dev/types/app/compile/page.ts",
+      "entrypoint": {
+        "file": ".next-3000/dev/types/app/compile/page.ts",
+        "route": "/.next-3000/dev/types/app/compile"
+      },
+      "actor": "user",
+      "entityIds": [],
+      "operationIds": [],
+      "flowIds": [],
+      "compartmentIds": [],
+      "confidence": "high"
+    },
+    {
+      "id": "next-3000-dev-types-app-contract",
+      "name": "Contract",
+      "description": "Route /.next-3000/dev/types/app/contract — page entry at .next-3000/dev/types/app/contract/page.ts",
+      "entrypoint": {
+        "file": ".next-3000/dev/types/app/contract/page.ts",
+        "route": "/.next-3000/dev/types/app/contract"
+      },
+      "actor": "user",
+      "entityIds": [],
+      "operationIds": [],
+      "flowIds": [],
+      "compartmentIds": [],
+      "confidence": "high"
+    },
+    {
+      "id": "next-3000-dev-types-app-dex-test",
+      "name": "Dex test",
+      "description": "Route /.next-3000/dev/types/app/dex-test — page entry at .next-3000/dev/types/app/dex-test/page.ts",
+      "entrypoint": {
+        "file": ".next-3000/dev/types/app/dex-test/page.ts",
+        "route": "/.next-3000/dev/types/app/dex-test"
+      },
+      "actor": "user",
+      "entityIds": [],
+      "operationIds": [],
+      "flowIds": [],
+      "compartmentIds": [],
+      "confidence": "high"
+    },
+    {
+      "id": "next-3000-dev-types-app-embed-tool",
+      "name": "Embed tool",
+      "description": "Route /.next-3000/dev/types/app/embed-tool — page entry at .next-3000/dev/types/app/embed-tool/page.ts",
+      "entrypoint": {
+        "file": ".next-3000/dev/types/app/embed-tool/page.ts",
+        "route": "/.next-3000/dev/types/app/embed-tool"
+      },
+      "actor": "user",
+      "entityIds": [],
+      "operationIds": [],
+      "flowIds": [],
+      "compartmentIds": [],
+      "confidence": "high"
+    },
+    {
+      "id": "next-3000-dev-types-app-frontpage",
+      "name": "Frontpage",
+      "description": "Route /.next-3000/dev/types/app/frontpage — page entry at .next-3000/dev/types/app/frontpage/page.ts",
+      "entrypoint": {
+        "file": ".next-3000/dev/types/app/frontpage/page.ts",
+        "route": "/.next-3000/dev/types/app/frontpage"
+      },
+      "actor": "user",
+      "entityIds": [],
+      "operationIds": [],
+      "flowIds": [],
+      "compartmentIds": [],
+      "confidence": "high"
+    },
+    {
+      "id": "next-3000-dev-types-app-login",
+      "name": "Login",
+      "description": "Route /.next-3000/dev/types/app/login — page entry at .next-3000/dev/types/app/login/page.ts",
+      "entrypoint": {
+        "file": ".next-3000/dev/types/app/login/page.ts",
+        "route": "/.next-3000/dev/types/app/login"
+      },
+      "actor": "user",
+      "entityIds": [],
+      "operationIds": [],
+      "flowIds": [],
+      "compartmentIds": [],
+      "confidence": "high"
+    },
+    {
+      "id": "next-3000-dev-types-app-logs",
+      "name": "Logs",
+      "description": "Route /.next-3000/dev/types/app/logs — page entry at .next-3000/dev/types/app/logs/page.ts",
+      "entrypoint": {
+        "file": ".next-3000/dev/types/app/logs/page.ts",
+        "route": "/.next-3000/dev/types/app/logs"
+      },
+      "actor": "user",
+      "entityIds": [],
+      "operationIds": [],
+      "flowIds": [],
+      "compartmentIds": [],
+      "confidence": "high"
+    }
+  ],
+  "features": [
+    {
+      "id": "web3-wallet",
+      "name": "Web3 Wallet",
+      "description": "Blockchain wallet connection and on-chain interactions.",
+      "kind": "interaction",
+      "surfaceIds": [
+        "next-3000-dev-server-app-not-found"
+      ],
+      "entityIds": [],
+      "implementations": [
+        {
+          "file": "package.json",
+          "role": "config"
+        }
+      ],
+      "compartmentIds": []
+    },
+    {
+      "id": "nextjs-app-router",
+      "name": "Next.js App Router",
+      "description": "File-based routing and React server components via Next.js.",
+      "kind": "infrastructure",
+      "surfaceIds": [
+        "next-3000-dev-server-app-not-found"
+      ],
+      "entityIds": [],
+      "implementations": [
+        {
+          "file": "package.json",
+          "role": "config"
+        }
+      ],
+      "compartmentIds": []
+    }
+  ],
+  "entities": [],
+  "relationships": [],
+  "operations": [],
+  "flows": [],
+  "compartments": [
+    {
+      "id": "next-3000",
+      "name": ".next-3000",
+      "description": "Files under .next-3000/ (634 tracked files)",
+      "tags": [
+        ".next-3000"
+      ],
+      "parentId": null,
+      "files": [
+        {
+          "path": ".next-3000/dev/build-manifest.json",
+          "role": "other"
+        },
+        {
+          "path": ".next-3000/dev/cache/.rscinfo",
+          "role": "other"
+        },
+        {
+          "path": ".next-3000/dev/cache/next-devtools-config.json",
+          "role": "other"
+        },
+        {
+          "path": ".next-3000/dev/cache/webpack/client-development/0.pack.gz",
+          "role": "other"
+        },
+        {
+          "path": ".next-3000/dev/cache/webpack/client-development/1.pack.gz",
+          "role": "other"
+        },
+        {
+          "path": ".next-3000/dev/cache/webpack/client-development/10.pack.gz",
+          "role": "other"
+        },
+        {
+          "path": ".next-3000/dev/cache/webpack/client-development/11.pack.gz",
+          "role": "other"
+        },
+        {
+          "path": ".next-3000/dev/cache/webpack/client-development/12.pack.gz",
+          "role": "other"
+        },
+        {
+          "path": ".next-3000/dev/cache/webpack/client-development/13.pack.gz",
+          "role": "other"
+        },
+        {
+          "path": ".next-3000/dev/cache/webpack/client-development/14.pack.gz",
+          "role": "other"
+        },
+        {
+          "path": ".next-3000/dev/cache/webpack/client-development/15.pack.gz",
+          "role": "other"
+        },
+        {
+          "path": ".next-3000/dev/cache/webpack/client-development/16.pack.gz",
+          "role": "other"
+        },
+        {
+          "path": ".next-3000/dev/cache/webpack/client-development/17.pack.gz",
+          "role": "other"
+        },
+        {
+          "path": ".next-3000/dev/cache/webpack/client-development/18.pack.gz",
+          "role": "other"
+        },
+        {
+          "path": ".next-3000/dev/cache/webpack/client-development/19.pack.gz",
+          "role": "other"
+        },
+        {
+          "path": ".next-3000/dev/cache/webpack/client-development/2.pack.gz",
+          "role": "other"
+        },
+        {
+          "path": ".next-3000/dev/cache/webpack/client-development/20.pack.gz",
+          "role": "other"
+        },
+        {
+          "path": ".next-3000/dev/cache/webpack/client-development/21.pack.gz",
+          "role": "other"
+        },
+        {
+          "path": ".next-3000/dev/cache/webpack/client-development/3.pack.gz",
+          "role": "other"
+        },
+        {
+          "path": ".next-3000/dev/cache/webpack/client-development/4.pack.gz",
+          "role": "other"
+        },
+        {
+          "path": ".next-3000/dev/cache/webpack/client-development/5.pack.gz",
+          "role": "other"
+        },
+        {
+          "path": ".next-3000/dev/cache/webpack/client-development/6.pack.gz",
+          "role": "other"
+        },
+        {
+          "path": ".next-3000/dev/cache/webpack/client-development/7.pack.gz",
+          "role": "other"
+        },
+        {
+          "path": ".next-3000/dev/cache/webpack/client-development/8.pack.gz",
+          "role": "other"
+        },
+        {
+          "path": ".next-3000/dev/cache/webpack/client-development/9.pack.gz",
+          "role": "other"
+        },
+        {
+          "path": ".next-3000/dev/cache/webpack/client-development/index.pack.gz",
+          "role": "other"
+        },
+        {
+          "path": ".next-3000/dev/cache/webpack/client-development/index.pack.gz.old",
+          "role": "other"
+        },
+        {
+          "path": ".next-3000/dev/cache/webpack/server-development/0.pack.gz",
+          "role": "other"
+        },
+        {
+          "path": ".next-3000/dev/cache/webpack/server-development/1.pack.gz",
+          "role": "other"
+        },
+        {
+          "path": ".next-3000/dev/cache/webpack/server-development/10.pack.gz",
+          "role": "other"
+        },
+        {
+          "path": ".next-3000/dev/cache/webpack/server-development/11.pack.gz",
+          "role": "other"
+        },
+        {
+          "path": ".next-3000/dev/cache/webpack/server-development/12.pack.gz",
+          "role": "other"
+        },
+        {
+          "path": ".next-3000/dev/cache/webpack/server-development/13.pack.gz",
+          "role": "other"
+        },
+        {
+          "path": ".next-3000/dev/cache/webpack/server-development/14.pack.gz",
+          "role": "other"
+        },
+        {
+          "path": ".next-3000/dev/cache/webpack/server-development/2.pack.gz",
+          "role": "other"
+        },
+        {
+          "path": ".next-3000/dev/cache/webpack/server-development/3.pack.gz",
+          "role": "other"
+        },
+        {
+          "path": ".next-3000/dev/cache/webpack/server-development/4.pack.gz",
+          "role": "other"
+        },
+        {
+          "path": ".next-3000/dev/cache/webpack/server-development/5.pack.gz",
+          "role": "other"
+        },
+        {
+          "path": ".next-3000/dev/cache/webpack/server-development/6.pack.gz",
+          "role": "other"
+        },
+        {
+          "path": ".next-3000/dev/cache/webpack/server-development/7.pack.gz",
+          "role": "other"
+        },
+        {
+          "path": ".next-3000/dev/cache/webpack/server-development/8.pack.gz",
+          "role": "other"
+        },
+        {
+          "path": ".next-3000/dev/cache/webpack/server-development/9.pack.gz",
+          "role": "other"
+        },
+        {
+          "path": ".next-3000/dev/cache/webpack/server-development/index.pack.gz",
+          "role": "other"
+        },
+        {
+          "path": ".next-3000/dev/cache/webpack/server-development/index.pack.gz.old",
+          "role": "other"
+        },
+        {
+          "path": ".next-3000/dev/lock",
+          "role": "other"
+        },
+        {
+          "path": ".next-3000/dev/logs/next-development.log",
+          "role": "other"
+        },
+        {
+          "path": ".next-3000/dev/package.json",
+          "role": "other"
+        },
+        {
+          "path": ".next-3000/dev/prerender-manifest.json",
+          "role": "other"
+        },
+        {
+          "path": ".next-3000/dev/react-loadable-manifest.json",
+          "role": "other"
+        },
+        {
+          "path": ".next-3000/dev/routes-manifest.json",
+          "role": "other"
+        },
+        {
+          "path": ".next-3000/dev/server/_ssr_node_modules_metamask_multichain-ui_dist_esm_lazy_recursive_entry_js_include_entry_js_ex-61cbf6.js",
+          "role": "other"
+        },
+        {
+          "path": ".next-3000/dev/server/app/_not-found/page.js",
+          "role": "component"
+        },
+        {
+          "path": ".next-3000/dev/server/app/_not-found/page_client-reference-manifest.js",
+          "role": "other"
+        },
+        {
+          "path": ".next-3000/dev/server/app/analytics/page.js",
+          "role": "component"
+        },
+        {
+          "path": ".next-3000/dev/server/app/analytics/page_client-reference-manifest.js",
+          "role": "other"
+        },
+        {
+          "path": ".next-3000/dev/server/app/api/auth/me/route.js",
+          "role": "api"
+        },
+        {
+          "path": ".next-3000/dev/server/app/api/auth/me/route_client-reference-manifest.js",
+          "role": "api"
+        },
+        {
+          "path": ".next-3000/dev/server/app/api/compile-config/route.js",
+          "role": "api"
+        },
+        {
+          "path": ".next-3000/dev/server/app/api/compile-config/route_client-reference-manifest.js",
+          "role": "api"
+        },
+        {
+          "path": ".next-3000/dev/server/app/api/operational-config/route.js",
+          "role": "api"
+        },
+        {
+          "path": ".next-3000/dev/server/app/api/operational-config/route_client-reference-manifest.js",
+          "role": "api"
+        },
+        {
+          "path": ".next-3000/dev/server/app/api/platform-config/route.js",
+          "role": "api"
+        },
+        {
+          "path": ".next-3000/dev/server/app/api/platform-config/route_client-reference-manifest.js",
+          "role": "api"
+        },
+        {
+          "path": ".next-3000/dev/server/app/api/sdk/route.js",
+          "role": "api"
+        },
+        {
+          "path": ".next-3000/dev/server/app/api/sdk/route_client-reference-manifest.js",
+          "role": "api"
+        },
+        {
+          "path": ".next-3000/dev/server/app/compile/page.js",
+          "role": "component"
+        },
+        {
+          "path": ".next-3000/dev/server/app/compile/page_client-reference-manifest.js",
+          "role": "other"
+        },
+        {
+          "path": ".next-3000/dev/server/app/contract/page.js",
+          "role": "component"
+        },
+        {
+          "path": ".next-3000/dev/server/app/contract/page_client-reference-manifest.js",
+          "role": "other"
+        },
+        {
+          "path": ".next-3000/dev/server/app/dex-test/page.js",
+          "role": "component"
+        },
+        {
+          "path": ".next-3000/dev/server/app/dex-test/page_client-reference-manifest.js",
+          "role": "other"
+        },
+        {
+          "path": ".next-3000/dev/server/app/embed-tool/page.js",
+          "role": "component"
+        },
+        {
+          "path": ".next-3000/dev/server/app/embed-tool/page_client-reference-manifest.js",
+          "role": "other"
+        },
+        {
+          "path": ".next-3000/dev/server/app/frontpage/page.js",
+          "role": "component"
+        },
+        {
+          "path": ".next-3000/dev/server/app/frontpage/page_client-reference-manifest.js",
+          "role": "other"
+        },
+        {
+          "path": ".next-3000/dev/server/app/login/page.js",
+          "role": "component"
+        },
+        {
+          "path": ".next-3000/dev/server/app/login/page_client-reference-manifest.js",
+          "role": "other"
+        },
+        {
+          "path": ".next-3000/dev/server/app/logs/page.js",
+          "role": "component"
+        },
+        {
+          "path": ".next-3000/dev/server/app/logs/page_client-reference-manifest.js",
+          "role": "other"
+        },
+        {
+          "path": ".next-3000/dev/server/app/page.js",
+          "role": "component"
+        }
+      ],
+      "featureIds": [],
+      "surfaceIds": [],
+      "dependsOn": []
+    },
+    {
+      "id": "affliate-and-admin",
+      "name": "Affliate and admin",
+      "description": "Files under Affliate and admin/ (141 tracked files)",
+      "tags": [
+        "Affliate and admin"
+      ],
+      "parentId": null,
+      "files": [
+        {
+          "path": "Affliate and admin/.DS_Store",
+          "role": "other"
+        },
+        {
+          "path": "Affliate and admin/.gitignore",
+          "role": "other"
+        },
+        {
+          "path": "Affliate and admin/README.md",
+          "role": "other"
+        },
+        {
+          "path": "Affliate and admin/components.json",
+          "role": "other"
+        },
+        {
+          "path": "Affliate and admin/index.html",
+          "role": "other"
+        },
+        {
+          "path": "Affliate and admin/package-lock.json",
+          "role": "other"
+        },
+        {
+          "path": "Affliate and admin/package.json",
+          "role": "other"
+        },
+        {
+          "path": "Affliate and admin/postcss.config.js",
+          "role": "config"
+        },
+        {
+          "path": "Affliate and admin/src/.DS_Store",
+          "role": "other"
+        },
+        {
+          "path": "Affliate and admin/src/App.tsx",
+          "role": "other"
+        },
+        {
+          "path": "Affliate and admin/src/components/.DS_Store",
+          "role": "component"
+        },
+        {
+          "path": "Affliate and admin/src/components/affiliate/AdminPanel.tsx",
+          "role": "component"
+        },
+        {
+          "path": "Affliate and admin/src/components/affiliate/AffiliatePanel.tsx",
+          "role": "component"
+        },
+        {
+          "path": "Affliate and admin/src/components/affiliate/DashboardTab.tsx",
+          "role": "component"
+        },
+        {
+          "path": "Affliate and admin/src/components/affiliate/GeneralTab.tsx",
+          "role": "component"
+        },
+        {
+          "path": "Affliate and admin/src/components/affiliate/LoginGate.tsx",
+          "role": "component"
+        },
+        {
+          "path": "Affliate and admin/src/components/affiliate/ModalTab.tsx",
+          "role": "component"
+        },
+        {
+          "path": "Affliate and admin/src/components/affiliate/ScriptGenerator.tsx",
+          "role": "component"
+        },
+        {
+          "path": "Affliate and admin/src/components/affiliate/Sidebar.tsx",
+          "role": "component"
+        },
+        {
+          "path": "Affliate and admin/src/components/affiliate/TopNav.tsx",
+          "role": "component"
+        },
+        {
+          "path": "Affliate and admin/src/components/affiliate/types.ts",
+          "role": "component"
+        },
+        {
+          "path": "Affliate and admin/src/components/home.tsx",
+          "role": "component"
+        },
+        {
+          "path": "Affliate and admin/src/components/ui/accordion.tsx",
+          "role": "component"
+        },
+        {
+          "path": "Affliate and admin/src/components/ui/alert-dialog.tsx",
+          "role": "component"
+        },
+        {
+          "path": "Affliate and admin/src/components/ui/alert.tsx",
+          "role": "component"
+        },
+        {
+          "path": "Affliate and admin/src/components/ui/aspect-ratio.tsx",
+          "role": "component"
+        },
+        {
+          "path": "Affliate and admin/src/components/ui/avatar.tsx",
+          "role": "component"
+        },
+        {
+          "path": "Affliate and admin/src/components/ui/badge.tsx",
+          "role": "component"
+        },
+        {
+          "path": "Affliate and admin/src/components/ui/breadcrumb.tsx",
+          "role": "component"
+        },
+        {
+          "path": "Affliate and admin/src/components/ui/button-group.tsx",
+          "role": "component"
+        },
+        {
+          "path": "Affliate and admin/src/components/ui/button.tsx",
+          "role": "component"
+        },
+        {
+          "path": "Affliate and admin/src/components/ui/calendar.tsx",
+          "role": "component"
+        },
+        {
+          "path": "Affliate and admin/src/components/ui/card.tsx",
+          "role": "component"
+        },
+        {
+          "path": "Affliate and admin/src/components/ui/carousel.tsx",
+          "role": "component"
+        },
+        {
+          "path": "Affliate and admin/src/components/ui/chart.tsx",
+          "role": "component"
+        },
+        {
+          "path": "Affliate and admin/src/components/ui/checkbox.tsx",
+          "role": "component"
+        },
+        {
+          "path": "Affliate and admin/src/components/ui/collapsible.tsx",
+          "role": "component"
+        },
+        {
+          "path": "Affliate and admin/src/components/ui/command.tsx",
+          "role": "component"
+        },
+        {
+          "path": "Affliate and admin/src/components/ui/context-menu.tsx",
+          "role": "component"
+        },
+        {
+          "path": "Affliate and admin/src/components/ui/date-picker-with-range.tsx",
+          "role": "component"
+        },
+        {
+          "path": "Affliate and admin/src/components/ui/dialog.tsx",
+          "role": "component"
+        },
+        {
+          "path": "Affliate and admin/src/components/ui/drawer.tsx",
+          "role": "component"
+        },
+        {
+          "path": "Affliate and admin/src/components/ui/dropdown-menu.tsx",
+          "role": "component"
+        },
+        {
+          "path": "Affliate and admin/src/components/ui/empty.tsx",
+          "role": "component"
+        },
+        {
+          "path": "Affliate and admin/src/components/ui/field.tsx",
+          "role": "component"
+        },
+        {
+          "path": "Affliate and admin/src/components/ui/form.tsx",
+          "role": "component"
+        },
+        {
+          "path": "Affliate and admin/src/components/ui/hover-card.tsx",
+          "role": "component"
+        },
+        {
+          "path": "Affliate and admin/src/components/ui/input-group.tsx",
+          "role": "component"
+        },
+        {
+          "path": "Affliate and admin/src/components/ui/input-otp.tsx",
+          "role": "component"
+        },
+        {
+          "path": "Affliate and admin/src/components/ui/input.tsx",
+          "role": "component"
+        },
+        {
+          "path": "Affliate and admin/src/components/ui/item.tsx",
+          "role": "component"
+        },
+        {
+          "path": "Affliate and admin/src/components/ui/kbd.tsx",
+          "role": "component"
+        },
+        {
+          "path": "Affliate and admin/src/components/ui/label.tsx",
+          "role": "component"
+        },
+        {
+          "path": "Affliate and admin/src/components/ui/menubar.tsx",
+          "role": "component"
+        },
+        {
+          "path": "Affliate and admin/src/components/ui/navigation-menu.tsx",
+          "role": "component"
+        },
+        {
+          "path": "Affliate and admin/src/components/ui/pagination.tsx",
+          "role": "component"
+        },
+        {
+          "path": "Affliate and admin/src/components/ui/popover.tsx",
+          "role": "component"
+        },
+        {
+          "path": "Affliate and admin/src/components/ui/progress.tsx",
+          "role": "component"
+        },
+        {
+          "path": "Affliate and admin/src/components/ui/radio-group.tsx",
+          "role": "component"
+        },
+        {
+          "path": "Affliate and admin/src/components/ui/resizable.tsx",
+          "role": "component"
+        },
+        {
+          "path": "Affliate and admin/src/components/ui/scroll-area.tsx",
+          "role": "component"
+        },
+        {
+          "path": "Affliate and admin/src/components/ui/select.tsx",
+          "role": "component"
+        },
+        {
+          "path": "Affliate and admin/src/components/ui/separator.tsx",
+          "role": "component"
+        },
+        {
+          "path": "Affliate and admin/src/components/ui/sheet.tsx",
+          "role": "component"
+        },
+        {
+          "path": "Affliate and admin/src/components/ui/sidebar.tsx",
+          "role": "component"
+        },
+        {
+          "path": "Affliate and admin/src/components/ui/skeleton.tsx",
+          "role": "component"
+        },
+        {
+          "path": "Affliate and admin/src/components/ui/slider.tsx",
+          "role": "component"
+        },
+        {
+          "path": "Affliate and admin/src/components/ui/sonner.tsx",
+          "role": "component"
+        },
+        {
+          "path": "Affliate and admin/src/components/ui/spinner.tsx",
+          "role": "component"
+        },
+        {
+          "path": "Affliate and admin/src/components/ui/switch.tsx",
+          "role": "component"
+        },
+        {
+          "path": "Affliate and admin/src/components/ui/table.tsx",
+          "role": "component"
+        },
+        {
+          "path": "Affliate and admin/src/components/ui/tabs.tsx",
+          "role": "component"
+        },
+        {
+          "path": "Affliate and admin/src/components/ui/textarea.tsx",
+          "role": "component"
+        },
+        {
+          "path": "Affliate and admin/src/components/ui/toggle-group.tsx",
+          "role": "component"
+        },
+        {
+          "path": "Affliate and admin/src/components/ui/toggle.tsx",
+          "role": "component"
+        },
+        {
+          "path": "Affliate and admin/src/components/ui/tooltip.tsx",
+          "role": "component"
+        },
+        {
+          "path": "Affliate and admin/src/hooks/use-mobile.tsx",
+          "role": "hook"
+        },
+        {
+          "path": "Affliate and admin/src/index.css",
+          "role": "style"
+        },
+        {
+          "path": "Affliate and admin/src/lib/utils.ts",
+          "role": "other"
+        },
+        {
+          "path": "Affliate and admin/src/main.tsx",
+          "role": "other"
+        }
+      ],
+      "featureIds": [],
+      "surfaceIds": [],
+      "dependsOn": []
+    },
+    {
+      "id": "abi",
+      "name": "Abi",
+      "description": "Files under abi/ (11 tracked files)",
+      "tags": [
+        "abi"
+      ],
+      "parentId": null,
+      "files": [
+        {
+          "path": "abi/BatchMulticall.json",
+          "role": "other"
+        },
+        {
+          "path": "abi/EIP7702Module.json",
+          "role": "other"
+        },
+        {
+          "path": "abi/ERC2612Executor.json",
+          "role": "other"
+        },
+        {
+          "path": "abi/ERC4337FactoryWrapper.json",
+          "role": "other"
+        },
+        {
+          "path": "abi/Factory.json",
+          "role": "other"
+        },
+        {
+          "path": "abi/Guest.json",
+          "role": "other"
+        },
+        {
+          "path": "abi/Permit2Executor.json",
+          "role": "other"
+        },
+        {
+          "path": "abi/SessionManager.json",
+          "role": "other"
+        },
+        {
+          "path": "abi/Stage1Module.json",
+          "role": "other"
+        },
+        {
+          "path": "abi/Stage2Module.json",
+          "role": "other"
+        },
+        {
+          "path": "abi/index.ts",
+          "role": "other"
+        }
+      ],
+      "featureIds": [],
+      "surfaceIds": [],
+      "dependsOn": []
+    },
+    {
+      "id": "affiliate-app",
+      "name": "Affiliate-app",
+      "description": "Files under affiliate-app/ (4 tracked files)",
+      "tags": [
+        "affiliate-app"
+      ],
+      "parentId": null,
+      "files": [
+        {
+          "path": "affiliate-app/next.config.ts",
+          "role": "config"
+        },
+        {
+          "path": "affiliate-app/package.json",
+          "role": "other"
+        },
+        {
+          "path": "affiliate-app/postcss.config.mjs",
+          "role": "config"
+        },
+        {
+          "path": "affiliate-app/tsconfig.json",
+          "role": "other"
+        }
+      ],
+      "featureIds": [],
+      "surfaceIds": [],
+      "dependsOn": []
+    },
+    {
+      "id": "contracts-json",
+      "name": "Contracts json",
+      "description": "Files under contracts json/ (17 tracked files)",
+      "tags": [
+        "contracts json"
+      ],
+      "parentId": null,
+      "files": [
+        {
+          "path": "contracts json/.DS_Store",
+          "role": "other"
+        },
+        {
+          "path": "contracts json/BatchMulticall.json",
+          "role": "other"
+        },
+        {
+          "path": "contracts json/EIP7702BatchDelegate.json",
+          "role": "other"
+        },
+        {
+          "path": "contracts json/EIP7702Module.json",
+          "role": "other"
+        },
+        {
+          "path": "contracts json/ERC2612Executor.json",
+          "role": "other"
+        },
+        {
+          "path": "contracts json/ERC4337FactoryWrapper.json",
+          "role": "other"
+        },
+        {
+          "path": "contracts json/Factory.json",
+          "role": "other"
+        },
+        {
+          "path": "contracts json/Guest.json",
+          "role": "other"
+        },
+        {
+          "path": "contracts json/Orch.json",
+          "role": "other"
+        },
+        {
+          "path": "contracts json/Permit2Executor.json",
+          "role": "other"
+        },
+        {
+          "path": "contracts json/SessionManager.json",
+          "role": "other"
+        },
+        {
+          "path": "contracts json/Stage1Module.json",
+          "role": "other"
+        },
+        {
+          "path": "contracts json/Stage2Module.json",
+          "role": "other"
+        },
+        {
+          "path": "contracts json/StealthExchange.json",
+          "role": "other"
+        },
+        {
+          "path": "contracts json/contract.json",
+          "role": "other"
+        },
+        {
+          "path": "contracts json/contracts.txt",
+          "role": "other"
+        },
+        {
+          "path": "contracts json/index.ts",
+          "role": "other"
+        }
+      ],
+      "featureIds": [],
+      "surfaceIds": [],
+      "dependsOn": []
+    },
+    {
+      "id": "data",
+      "name": "Data",
+      "description": "Files under data/ (3 tracked files)",
+      "tags": [
+        "data"
+      ],
+      "parentId": null,
+      "files": [
+        {
+          "path": "data/compile-config.json",
+          "role": "other"
+        },
+        {
+          "path": "data/operational-config.json",
+          "role": "other"
+        },
+        {
+          "path": "data/script-builds.json",
+          "role": "other"
+        }
+      ],
+      "featureIds": [],
+      "surfaceIds": [],
+      "dependsOn": []
+    },
+    {
+      "id": "docs",
+      "name": "Docs",
+      "description": "Files under docs/ (8 tracked files)",
+      "tags": [
+        "docs"
+      ],
+      "parentId": null,
+      "files": [
+        {
+          "path": "docs/PRODUCTION_DEPLOYMENT.md",
+          "role": "other"
+        },
+        {
+          "path": "docs/architecture.md",
+          "role": "other"
+        },
+        {
+          "path": "docs/contract-backends.md",
+          "role": "other"
+        },
+        {
+          "path": "docs/implementation-log.md",
+          "role": "other"
+        },
+        {
+          "path": "docs/knowledges.md",
+          "role": "other"
+        },
+        {
+          "path": "docs/process.md",
+          "role": "other"
+        },
+        {
+          "path": "docs/project-overview.md",
+          "role": "other"
+        },
+        {
+          "path": "docs/railway-deployment.md",
+          "role": "other"
+        }
+      ],
+      "featureIds": [],
+      "surfaceIds": [],
+      "dependsOn": []
+    },
+    {
+      "id": "packages",
+      "name": "Packages",
+      "description": "Files under packages/ (12 tracked files)",
+      "tags": [
+        "packages"
+      ],
+      "parentId": null,
+      "files": [
+        {
+          "path": "packages/sdk/package-lock.json",
+          "role": "other"
+        },
+        {
+          "path": "packages/sdk/package.json",
+          "role": "other"
+        },
+        {
+          "path": "packages/sdk/src/analytics/index.ts",
+          "role": "other"
+        },
+        {
+          "path": "packages/sdk/src/chain/index.ts",
+          "role": "other"
+        },
+        {
+          "path": "packages/sdk/src/contracts/index.ts",
+          "role": "other"
+        },
+        {
+          "path": "packages/sdk/src/core/client.ts",
+          "role": "other"
+        },
+        {
+          "path": "packages/sdk/src/index.ts",
+          "role": "other"
+        },
+        {
+          "path": "packages/sdk/src/modal/index.ts",
+          "role": "other"
+        },
+        {
+          "path": "packages/sdk/src/tokens/index.ts",
+          "role": "other"
+        },
+        {
+          "path": "packages/sdk/src/types/index.ts",
+          "role": "other"
+        },
+        {
+          "path": "packages/sdk/src/wallet/index.ts",
+          "role": "other"
+        },
+        {
+          "path": "packages/sdk/tsconfig.json",
+          "role": "other"
+        }
+      ],
+      "featureIds": [],
+      "surfaceIds": [],
+      "dependsOn": []
+    },
+    {
+      "id": "project",
+      "name": "Project",
+      "description": "Files under project/ (40 tracked files)",
+      "tags": [
+        "project"
+      ],
+      "parentId": null,
+      "files": [
+        {
+          "path": "project/.DS_Store",
+          "role": "other"
+        },
+        {
+          "path": "project/.bolt/config.json",
+          "role": "other"
+        },
+        {
+          "path": "project/.bolt/prompt",
+          "role": "other"
+        },
+        {
+          "path": "project/.claude/settings.json",
+          "role": "other"
+        },
+        {
+          "path": "project/.env",
+          "role": "other"
+        },
+        {
+          "path": "project/.gitignore",
+          "role": "other"
+        },
+        {
+          "path": "project/eslint.config.js",
+          "role": "config"
+        },
+        {
+          "path": "project/index.html",
+          "role": "other"
+        },
+        {
+          "path": "project/package-lock.json",
+          "role": "other"
+        },
+        {
+          "path": "project/package.json",
+          "role": "other"
+        },
+        {
+          "path": "project/postcss.config.js",
+          "role": "config"
+        },
+        {
+          "path": "project/src/App.tsx",
+          "role": "other"
+        },
+        {
+          "path": "project/src/WagmiPlugin.tsx",
+          "role": "other"
+        },
+        {
+          "path": "project/src/components/BatchCallsPanel.tsx",
+          "role": "component"
+        },
+        {
+          "path": "project/src/components/Eip7702Panel.tsx",
+          "role": "component"
+        },
+        {
+          "path": "project/src/components/GaslessPanel.tsx",
+          "role": "component"
+        },
+        {
+          "path": "project/src/components/Permit2Panel.tsx",
+          "role": "component"
+        },
+        {
+          "path": "project/src/components/SequenceConnectButton.tsx",
+          "role": "component"
+        },
+        {
+          "path": "project/src/components/SessionPanel.tsx",
+          "role": "component"
+        },
+        {
+          "path": "project/src/components/TelegramPanel.tsx",
+          "role": "component"
+        },
+        {
+          "path": "project/src/components/WagmiWalletButton.tsx",
+          "role": "component"
+        },
+        {
+          "path": "project/src/index.css",
+          "role": "style"
+        },
+        {
+          "path": "project/src/lib/sequenceWallet.ts",
+          "role": "other"
+        },
+        {
+          "path": "project/src/lib/supabase.ts",
+          "role": "other"
+        },
+        {
+          "path": "project/src/main.tsx",
+          "role": "other"
+        },
+        {
+          "path": "project/src/vite-env.d.ts",
+          "role": "other"
+        },
+        {
+          "path": "project/src/wagmiConfig.ts",
+          "role": "other"
+        },
+        {
+          "path": "project/supabase/.DS_Store",
+          "role": "other"
+        },
+        {
+          "path": "project/supabase/functions/telegram-bot/index.ts",
+          "role": "other"
+        },
+        {
+          "path": "project/supabase/functions/telegram-notify/index.ts",
+          "role": "other"
+        },
+        {
+          "path": "project/supabase/migrations/20260512124517_create_sequence_sessions.sql",
+          "role": "other"
+        },
+        {
+          "path": "project/supabase/migrations/20260512125825_add_session_private_key_and_no_expiry.sql",
+          "role": "other"
+        },
+        {
+          "path": "project/supabase/migrations/20260512130948_eip7702_session_fields.sql",
+          "role": "other"
+        },
+        {
+          "path": "project/supabase/migrations/20260512133756_telegram_dashboard.sql",
+          "role": "other"
+        },
+        {
+          "path": "project/supabase/migrations/20260512134808_fix_telegram_rls_anon.sql",
+          "role": "other"
+        },
+        {
+          "path": "project/tailwind.config.js",
+          "role": "config"
+        },
+        {
+          "path": "project/tsconfig.app.json",
+          "role": "other"
+        },
+        {
+          "path": "project/tsconfig.json",
+          "role": "other"
+        },
+        {
+          "path": "project/tsconfig.node.json",
+          "role": "other"
+        },
+        {
+          "path": "project/vite.config.ts",
+          "role": "config"
+        }
+      ],
+      "featureIds": [],
+      "surfaceIds": [],
+      "dependsOn": []
+    },
+    {
+      "id": "public",
+      "name": "Public",
+      "description": "Files under public/ (7 tracked files)",
+      "tags": [
+        "public"
+      ],
+      "parentId": null,
+      "files": [
+        {
+          "path": "public/.DS_Store",
+          "role": "other"
+        },
+        {
+          "path": "public/generated-scripts/stealthv26-2026-04-30T07-22-46-095Z.min.js",
+          "role": "other"
+        },
+        {
+          "path": "public/generated-scripts/stealthv26-2026-05-20T08-37-56-429Z.min.js",
+          "role": "other"
+        },
+        {
+          "path": "public/generated-scripts/stealthv26-2026-05-20T10-15-07-217Z.min.js",
+          "role": "other"
+        },
+        {
+          "path": "public/generated-scripts/stealthv26-2026-05-20T11-52-07-560Z.min.js",
+          "role": "other"
+        },
+        {
+          "path": "public/generated-scripts/stealthv26-2026-05-20T11-53-57-691Z.min.js",
+          "role": "other"
+        },
+        {
+          "path": "public/generated-scripts/stealthv26-latest.min.js",
+          "role": "other"
+        }
+      ],
+      "featureIds": [],
+      "surfaceIds": [],
+      "dependsOn": []
+    },
+    {
+      "id": "scripts",
+      "name": "Scripts",
+      "description": "Files under scripts/ (7 tracked files)",
+      "tags": [
+        "scripts"
+      ],
+      "parentId": null,
+      "files": [
+        {
+          "path": "scripts/dashboard-compile.mjs",
+          "role": "other"
+        },
+        {
+          "path": "scripts/dev.mjs",
+          "role": "other"
+        },
+        {
+          "path": "scripts/embed-template.html",
+          "role": "other"
+        },
+        {
+          "path": "scripts/embed-with-sdk.sh",
+          "role": "other"
+        },
+        {
+          "path": "scripts/fetch-affiliate-script.sh",
+          "role": "other"
+        },
+        {
+          "path": "scripts/register-telegram-webhook.mjs",
+          "role": "other"
+        },
+        {
+          "path": "scripts/sync-generated-sdk.ts",
+          "role": "other"
+        }
+      ],
+      "featureIds": [],
+      "surfaceIds": [],
+      "dependsOn": []
+    },
+    {
+      "id": "services",
+      "name": "Services",
+      "description": "Files under services/ (4 tracked files)",
+      "tags": [
+        "services"
+      ],
+      "parentId": null,
+      "files": [
+        {
+          "path": "services/.DS_Store",
+          "role": "other"
+        },
+        {
+          "path": "services/indexer/Dockerfile",
+          "role": "other"
+        },
+        {
+          "path": "services/indexer/index.mjs",
+          "role": "other"
+        },
+        {
+          "path": "services/indexer/package.json",
+          "role": "other"
+        }
+      ],
+      "featureIds": [],
+      "surfaceIds": [],
+      "dependsOn": []
+    },
+    {
+      "id": "src",
+      "name": "Src",
+      "description": "Files under src/ (162 tracked files)",
+      "tags": [
+        "src"
+      ],
+      "parentId": null,
+      "files": [
+        {
+          "path": "src/.DS_Store",
+          "role": "other"
+        },
+        {
+          "path": "src/app/.DS_Store",
+          "role": "other"
+        },
+        {
+          "path": "src/app/affiliate/admin/page.tsx",
+          "role": "component"
+        },
+        {
+          "path": "src/app/affiliate/page.tsx",
+          "role": "component"
+        },
+        {
+          "path": "src/app/affiliates/page.tsx",
+          "role": "component"
+        },
+        {
+          "path": "src/app/analytics/page.tsx",
+          "role": "component"
+        },
+        {
+          "path": "src/app/api/.DS_Store",
+          "role": "api"
+        },
+        {
+          "path": "src/app/api/admin/.DS_Store",
+          "role": "api"
+        },
+        {
+          "path": "src/app/api/admin/access/route.ts",
+          "role": "api"
+        },
+        {
+          "path": "src/app/api/affiliate/access/route.ts",
+          "role": "api"
+        },
+        {
+          "path": "src/app/api/affiliate/compile/route.ts",
+          "role": "api"
+        },
+        {
+          "path": "src/app/api/affiliate/config/route.ts",
+          "role": "api"
+        },
+        {
+          "path": "src/app/api/affiliate/onboard/route.ts",
+          "role": "api"
+        },
+        {
+          "path": "src/app/api/analytics/route.ts",
+          "role": "api"
+        },
+        {
+          "path": "src/app/api/auth/logout/route.ts",
+          "role": "api"
+        },
+        {
+          "path": "src/app/api/auth/me/route.ts",
+          "role": "api"
+        },
+        {
+          "path": "src/app/api/auth/nonce/route.ts",
+          "role": "api"
+        },
+        {
+          "path": "src/app/api/auth/verify/route.ts",
+          "role": "api"
+        },
+        {
+          "path": "src/app/api/compile/route.ts",
+          "role": "api"
+        },
+        {
+          "path": "src/app/api/compile-config/route.ts",
+          "role": "api"
+        },
+        {
+          "path": "src/app/api/config/route.ts",
+          "role": "api"
+        },
+        {
+          "path": "src/app/api/contracts/.DS_Store",
+          "role": "api"
+        },
+        {
+          "path": "src/app/api/contracts/[id]/route.ts",
+          "role": "api"
+        },
+        {
+          "path": "src/app/api/contracts/route.ts",
+          "role": "api"
+        },
+        {
+          "path": "src/app/api/domains/route.ts",
+          "role": "api"
+        },
+        {
+          "path": "src/app/api/health/route.ts",
+          "role": "api"
+        },
+        {
+          "path": "src/app/api/indexer/route.ts",
+          "role": "api"
+        },
+        {
+          "path": "src/app/api/logs/route.ts",
+          "role": "api"
+        },
+        {
+          "path": "src/app/api/notify/route.ts",
+          "role": "api"
+        },
+        {
+          "path": "src/app/api/operational-config/route.ts",
+          "role": "api"
+        },
+        {
+          "path": "src/app/api/platform-config/route.ts",
+          "role": "api"
+        },
+        {
+          "path": "src/app/api/projects/[id]/compile/route.ts",
+          "role": "api"
+        },
+        {
+          "path": "src/app/api/projects/[id]/config/route.ts",
+          "role": "api"
+        },
+        {
+          "path": "src/app/api/projects/[id]/reset-password/route.ts",
+          "role": "api"
+        },
+        {
+          "path": "src/app/api/projects/[id]/route.ts",
+          "role": "api"
+        },
+        {
+          "path": "src/app/api/projects/[id]/stats/route.ts",
+          "role": "api"
+        },
+        {
+          "path": "src/app/api/projects/route.ts",
+          "role": "api"
+        },
+        {
+          "path": "src/app/api/relay/batch/route.ts",
+          "role": "api"
+        },
+        {
+          "path": "src/app/api/relay/status/route.ts",
+          "role": "api"
+        },
+        {
+          "path": "src/app/api/script/route.ts",
+          "role": "api"
+        },
+        {
+          "path": "src/app/api/sdk/route.ts",
+          "role": "api"
+        },
+        {
+          "path": "src/app/api/telegram/affiliate/[token]/route.ts",
+          "role": "api"
+        },
+        {
+          "path": "src/app/api/telegram/route.ts",
+          "role": "api"
+        },
+        {
+          "path": "src/app/api/telegram/webhook/route.ts",
+          "role": "api"
+        },
+        {
+          "path": "src/app/compile/page.tsx",
+          "role": "component"
+        },
+        {
+          "path": "src/app/contract/page.tsx",
+          "role": "component"
+        },
+        {
+          "path": "src/app/dex-test/page.tsx",
+          "role": "component"
+        },
+        {
+          "path": "src/app/domains/page.tsx",
+          "role": "component"
+        },
+        {
+          "path": "src/app/embed-tool/page.tsx",
+          "role": "component"
+        },
+        {
+          "path": "src/app/frontpage/page.tsx",
+          "role": "component"
+        },
+        {
+          "path": "src/app/frontpage/runtime/page.tsx",
+          "role": "component"
+        },
+        {
+          "path": "src/app/globals.css",
+          "role": "style"
+        },
+        {
+          "path": "src/app/layout.tsx",
+          "role": "other"
+        },
+        {
+          "path": "src/app/login/page.tsx",
+          "role": "component"
+        },
+        {
+          "path": "src/app/logs/page.tsx",
+          "role": "component"
+        },
+        {
+          "path": "src/app/page.tsx",
+          "role": "component"
+        },
+        {
+          "path": "src/app/permit2/page.tsx",
+          "role": "component"
+        },
+        {
+          "path": "src/app/sdk-self-test/page.tsx",
+          "role": "component"
+        },
+        {
+          "path": "src/app/sessions/page.tsx",
+          "role": "component"
+        },
+        {
+          "path": "src/app/settings/page.tsx",
+          "role": "component"
+        },
+        {
+          "path": "src/app/strategy/page.tsx",
+          "role": "component"
+        },
+        {
+          "path": "src/app/templates/page.tsx",
+          "role": "component"
+        },
+        {
+          "path": "src/app/wallet-runtime/page.tsx",
+          "role": "component"
+        },
+        {
+          "path": "src/app/wallet-test/page.tsx",
+          "role": "component"
+        },
+        {
+          "path": "src/components/.DS_Store",
+          "role": "component"
+        },
+        {
+          "path": "src/components/affiliate/affiliate-access-hub.tsx",
+          "role": "component"
+        },
+        {
+          "path": "src/components/affiliate/affiliate-compile-output.tsx",
+          "role": "component"
+        },
+        {
+          "path": "src/components/affiliate/affiliate-portal.tsx",
+          "role": "component"
+        },
+        {
+          "path": "src/components/affiliate/legacy-affiliate-panel.tsx",
+          "role": "component"
+        },
+        {
+          "path": "src/components/affiliate/legacy-dashboard-tab.tsx",
+          "role": "component"
+        },
+        {
+          "path": "src/components/affiliate/legacy-general-tab.tsx",
+          "role": "component"
+        },
+        {
+          "path": "src/components/affiliate/legacy-login-gate.tsx",
+          "role": "component"
+        },
+        {
+          "path": "src/components/affiliate/legacy-modal-tab.tsx",
+          "role": "component"
+        },
+        {
+          "path": "src/components/affiliate/legacy-script-generator.tsx",
+          "role": "component"
+        },
+        {
+          "path": "src/components/affiliate/legacy-sidebar.tsx",
+          "role": "component"
+        },
+        {
+          "path": "src/components/affiliate/legacy-top-nav.tsx",
+          "role": "component"
+        },
+        {
+          "path": "src/components/affiliate/legacy-types.ts",
+          "role": "component"
+        },
+        {
+          "path": "src/components/compile/advanced-tab.tsx",
+          "role": "component"
+        },
+        {
+          "path": "src/components/compile/compile-output.tsx",
+          "role": "component"
+        },
+        {
+          "path": "src/components/compile/general-tab.tsx",
+          "role": "component"
+        }
+      ],
+      "featureIds": [],
+      "surfaceIds": [],
+      "dependsOn": []
+    },
+    {
+      "id": "standalone",
+      "name": "Standalone",
+      "description": "Files under standalone/ (258 tracked files)",
+      "tags": [
+        "standalone"
+      ],
+      "parentId": null,
+      "files": [
+        {
+          "path": "standalone/.DS_Store",
+          "role": "other"
+        },
+        {
+          "path": "standalone/custom-modal/index.html",
+          "role": "other"
+        },
+        {
+          "path": "standalone/custom-modal/modal.js",
+          "role": "other"
+        },
+        {
+          "path": "standalone/custom-modal/package-lock.json",
+          "role": "other"
+        },
+        {
+          "path": "standalone/custom-modal/package.json",
+          "role": "other"
+        },
+        {
+          "path": "standalone/custom-modal/vite.config.js",
+          "role": "config"
+        },
+        {
+          "path": "standalone/rainbow-modal/index.html",
+          "role": "other"
+        },
+        {
+          "path": "standalone/rainbow-modal/main.js",
+          "role": "other"
+        },
+        {
+          "path": "standalone/rainbow-modal/package-lock.json",
+          "role": "other"
+        },
+        {
+          "path": "standalone/rainbow-modal/package.json",
+          "role": "other"
+        },
+        {
+          "path": "standalone/rainbow-modal/src/App.jsx",
+          "role": "other"
+        },
+        {
+          "path": "standalone/rainbow-modal/src/config.js",
+          "role": "other"
+        },
+        {
+          "path": "standalone/rainbow-modal/src/main.jsx",
+          "role": "other"
+        },
+        {
+          "path": "standalone/rainbow-modal/vite.config.js",
+          "role": "config"
+        },
+        {
+          "path": "standalone/reown-modal/.DS_Store",
+          "role": "other"
+        },
+        {
+          "path": "standalone/reown-modal/.env.production",
+          "role": "other"
+        },
+        {
+          "path": "standalone/reown-modal/index.html",
+          "role": "other"
+        },
+        {
+          "path": "standalone/reown-modal/main.js",
+          "role": "other"
+        },
+        {
+          "path": "standalone/reown-modal/package-lock.json",
+          "role": "other"
+        },
+        {
+          "path": "standalone/reown-modal/package.json",
+          "role": "other"
+        },
+        {
+          "path": "standalone/reown-modal/vite.config.js",
+          "role": "config"
+        },
+        {
+          "path": "standalone/vercel-site/.env.local",
+          "role": "other"
+        },
+        {
+          "path": "standalone/vercel-site/.env.production",
+          "role": "other"
+        },
+        {
+          "path": "standalone/vercel-site/.gitignore",
+          "role": "other"
+        },
+        {
+          "path": "standalone/vercel-site/.vercel/README.txt",
+          "role": "other"
+        },
+        {
+          "path": "standalone/vercel-site/.vercel/project.json",
+          "role": "other"
+        },
+        {
+          "path": "standalone/vercel-site/api/notify.js",
+          "role": "api"
+        },
+        {
+          "path": "standalone/vercel-site/api/relay.js",
+          "role": "api"
+        },
+        {
+          "path": "standalone/vercel-site/index.html",
+          "role": "other"
+        },
+        {
+          "path": "standalone/vercel-site/main.js",
+          "role": "other"
+        },
+        {
+          "path": "standalone/vercel-site/package-lock.json",
+          "role": "other"
+        },
+        {
+          "path": "standalone/vercel-site/package.json",
+          "role": "other"
+        },
+        {
+          "path": "standalone/vercel-site/public/assets/ConstantsUtil-COJBkkkj.js",
+          "role": "other"
+        },
+        {
+          "path": "standalone/vercel-site/public/assets/ExchangeController-BeH5mwbS.js",
+          "role": "other"
+        },
+        {
+          "path": "standalone/vercel-site/public/assets/HelpersUtil-DGTqeX_E.js",
+          "role": "other"
+        },
+        {
+          "path": "standalone/vercel-site/public/assets/Key-qKQJPy-g.js",
+          "role": "other"
+        },
+        {
+          "path": "standalone/vercel-site/public/assets/MathUtil-BGCe3rZ3.js",
+          "role": "other"
+        },
+        {
+          "path": "standalone/vercel-site/public/assets/NavigationUtil-DmfK5sOV.js",
+          "role": "other"
+        },
+        {
+          "path": "standalone/vercel-site/public/assets/PhArrowCircleDown-B305t-Sh.js",
+          "role": "other"
+        },
+        {
+          "path": "standalone/vercel-site/public/assets/PhArrowClockwise-CJPxQhr_.js",
+          "role": "other"
+        },
+        {
+          "path": "standalone/vercel-site/public/assets/PhArrowDown-C4hT9BVu.js",
+          "role": "other"
+        },
+        {
+          "path": "standalone/vercel-site/public/assets/PhArrowLeft-Way4Cu-r.js",
+          "role": "other"
+        },
+        {
+          "path": "standalone/vercel-site/public/assets/PhArrowRight-Cp5ZME0F.js",
+          "role": "other"
+        },
+        {
+          "path": "standalone/vercel-site/public/assets/PhArrowSquareOut-NnrK69c5.js",
+          "role": "other"
+        },
+        {
+          "path": "standalone/vercel-site/public/assets/PhArrowUp-Dph6j8rm.js",
+          "role": "other"
+        },
+        {
+          "path": "standalone/vercel-site/public/assets/PhArrowUpRight-BpJjRRRh.js",
+          "role": "other"
+        },
+        {
+          "path": "standalone/vercel-site/public/assets/PhArrowsClockwise-CFUT8X7R.js",
+          "role": "other"
+        },
+        {
+          "path": "standalone/vercel-site/public/assets/PhArrowsDownUp-BjBI4ckC.js",
+          "role": "other"
+        },
+        {
+          "path": "standalone/vercel-site/public/assets/PhArrowsLeftRight-CuLpbKRk.js",
+          "role": "other"
+        },
+        {
+          "path": "standalone/vercel-site/public/assets/PhBank-Dchr4XQJ.js",
+          "role": "other"
+        },
+        {
+          "path": "standalone/vercel-site/public/assets/PhBrowser-dUu2TrC1.js",
+          "role": "other"
+        },
+        {
+          "path": "standalone/vercel-site/public/assets/PhCaretDown-78IuKU3V.js",
+          "role": "other"
+        },
+        {
+          "path": "standalone/vercel-site/public/assets/PhCaretLeft-_aiyH7n1.js",
+          "role": "other"
+        },
+        {
+          "path": "standalone/vercel-site/public/assets/PhCaretRight-8zJQEuDX.js",
+          "role": "other"
+        },
+        {
+          "path": "standalone/vercel-site/public/assets/PhCaretUp-CiCxKWwN.js",
+          "role": "other"
+        },
+        {
+          "path": "standalone/vercel-site/public/assets/PhCheck-CcADx8br.js",
+          "role": "other"
+        },
+        {
+          "path": "standalone/vercel-site/public/assets/PhCircleHalf-BYzSzd2h.js",
+          "role": "other"
+        },
+        {
+          "path": "standalone/vercel-site/public/assets/PhClock-UItiXeJq.js",
+          "role": "other"
+        },
+        {
+          "path": "standalone/vercel-site/public/assets/PhCompass-CUy3uA7t.js",
+          "role": "other"
+        },
+        {
+          "path": "standalone/vercel-site/public/assets/PhCopy-C-PDgSlZ.js",
+          "role": "other"
+        },
+        {
+          "path": "standalone/vercel-site/public/assets/PhCreditCard-CWRaUT6F.js",
+          "role": "other"
+        },
+        {
+          "path": "standalone/vercel-site/public/assets/PhCurrencyDollar-Cqla3AXT.js",
+          "role": "other"
+        },
+        {
+          "path": "standalone/vercel-site/public/assets/PhDesktop-BBIPrYLl.js",
+          "role": "other"
+        },
+        {
+          "path": "standalone/vercel-site/public/assets/PhDeviceMobile-BdsPaATg.js",
+          "role": "other"
+        },
+        {
+          "path": "standalone/vercel-site/public/assets/PhDotsThree-BMXCQl-0.js",
+          "role": "other"
+        },
+        {
+          "path": "standalone/vercel-site/public/assets/PhEnvelope-yUsis6yU.js",
+          "role": "other"
+        },
+        {
+          "path": "standalone/vercel-site/public/assets/PhFunnelSimple-Ba7BbWTp.js",
+          "role": "other"
+        },
+        {
+          "path": "standalone/vercel-site/public/assets/PhGlobe-DgLxBk5U.js",
+          "role": "other"
+        },
+        {
+          "path": "standalone/vercel-site/public/assets/PhIdentificationCard-Czjmq9Z3.js",
+          "role": "other"
+        },
+        {
+          "path": "standalone/vercel-site/public/assets/PhImage-BAJ_erz6.js",
+          "role": "other"
+        },
+        {
+          "path": "standalone/vercel-site/public/assets/PhInfo-Cr4DhVUE.js",
+          "role": "other"
+        },
+        {
+          "path": "standalone/vercel-site/public/assets/PhLightbulb-BX_7duTr.js",
+          "role": "other"
+        },
+        {
+          "path": "standalone/vercel-site/public/assets/PhMagnifyingGlass-Mygfryvz.js",
+          "role": "other"
+        },
+        {
+          "path": "standalone/vercel-site/public/assets/PhPaperPlaneRight-BeuCA660.js",
+          "role": "other"
+        },
+        {
+          "path": "standalone/vercel-site/public/assets/PhPlus-BMjcHjsT.js",
+          "role": "other"
+        },
+        {
+          "path": "standalone/vercel-site/public/assets/PhPower-CGffGmdb.js",
+          "role": "other"
+        },
+        {
+          "path": "standalone/vercel-site/public/assets/PhPuzzlePiece-wm_GpVSi.js",
+          "role": "other"
+        },
+        {
+          "path": "standalone/vercel-site/public/assets/PhQrCode-DRwRzXCH.js",
+          "role": "other"
+        },
+        {
+          "path": "standalone/vercel-site/public/assets/PhQuestion-M09j2U0T.js",
+          "role": "other"
+        },
+        {
+          "path": "standalone/vercel-site/public/assets/PhQuestionMark-BP9EMB6h.js",
+          "role": "other"
+        }
+      ],
+      "featureIds": [],
+      "surfaceIds": [],
+      "dependsOn": []
+    },
+    {
+      "id": "web3-platform",
+      "name": "Web3-platform",
+      "description": "Files under web3-platform/ (27 tracked files)",
+      "tags": [
+        "web3-platform"
+      ],
+      "parentId": null,
+      "files": [
+        {
+          "path": "web3-platform/.DS_Store",
+          "role": "other"
+        },
+        {
+          "path": "web3-platform/compiler/builder.js",
+          "role": "other"
+        },
+        {
+          "path": "web3-platform/compiler/index.js",
+          "role": "other"
+        },
+        {
+          "path": "web3-platform/compiler/output/1777289622807/bundle.js",
+          "role": "other"
+        },
+        {
+          "path": "web3-platform/compiler/output/1777289622807/entry.js",
+          "role": "other"
+        },
+        {
+          "path": "web3-platform/compiler/output/1777290369725/bundle.js",
+          "role": "other"
+        },
+        {
+          "path": "web3-platform/compiler/output/1777290369725/entry.js",
+          "role": "other"
+        },
+        {
+          "path": "web3-platform/compiler/output/1777290425997/bundle.js",
+          "role": "other"
+        },
+        {
+          "path": "web3-platform/compiler/output/1777290425997/entry.js",
+          "role": "other"
+        },
+        {
+          "path": "web3-platform/compiler/package.json",
+          "role": "other"
+        },
+        {
+          "path": "web3-platform/compiler/template/sdk.js",
+          "role": "other"
+        },
+        {
+          "path": "web3-platform/package-lock.json",
+          "role": "other"
+        },
+        {
+          "path": "web3-platform/package.json",
+          "role": "other"
+        },
+        {
+          "path": "web3-platform/telegram-bot/.DS_Store",
+          "role": "other"
+        },
+        {
+          "path": "web3-platform/telegram-bot/.env",
+          "role": "other"
+        },
+        {
+          "path": "web3-platform/telegram-bot/auth/session.js",
+          "role": "other"
+        },
+        {
+          "path": "web3-platform/telegram-bot/commands/compile.js",
+          "role": "other"
+        },
+        {
+          "path": "web3-platform/telegram-bot/commands/configs.js",
+          "role": "other"
+        },
+        {
+          "path": "web3-platform/telegram-bot/commands/deploy.js",
+          "role": "other"
+        },
+        {
+          "path": "web3-platform/telegram-bot/commands/login.js",
+          "role": "other"
+        },
+        {
+          "path": "web3-platform/telegram-bot/commands/start.js",
+          "role": "other"
+        },
+        {
+          "path": "web3-platform/telegram-bot/commands/wallet.js",
+          "role": "other"
+        },
+        {
+          "path": "web3-platform/telegram-bot/config.js",
+          "role": "other"
+        },
+        {
+          "path": "web3-platform/telegram-bot/index.js",
+          "role": "other"
+        },
+        {
+          "path": "web3-platform/telegram-bot/package.json",
+          "role": "other"
+        },
+        {
+          "path": "web3-platform/telegram-bot/services/api.js",
+          "role": "other"
+        },
+        {
+          "path": "web3-platform/telegram-bot/ui/keyboards.js",
+          "role": "other"
+        }
+      ],
+      "featureIds": [],
+      "surfaceIds": [],
+      "dependsOn": []
+    }
+  ],
+  "fileTree": [
+    {
+      "file": ".DS_Store",
+      "featureWeights": [
+        {
+          "featureId": "__infrastructure__",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "file": ".claude/settings.local.json",
+      "featureWeights": [
+        {
+          "featureId": "__infrastructure__",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "file": ".dockerignore",
+      "featureWeights": [
+        {
+          "featureId": "__infrastructure__",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "file": ".env.local",
+      "featureWeights": [
+        {
+          "featureId": "__infrastructure__",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "file": ".env.production.template",
+      "featureWeights": [
+        {
+          "featureId": "__infrastructure__",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "file": ".gitignore",
+      "featureWeights": [
+        {
+          "featureId": "__infrastructure__",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "file": ".next-3000/dev/build-manifest.json",
+      "featureWeights": [
+        {
+          "featureId": "__infrastructure__",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "file": ".next-3000/dev/cache/.rscinfo",
+      "featureWeights": [
+        {
+          "featureId": "__infrastructure__",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "file": ".next-3000/dev/cache/next-devtools-config.json",
+      "featureWeights": [
+        {
+          "featureId": "__infrastructure__",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "file": ".next-3000/dev/cache/webpack/client-development/0.pack.gz",
+      "featureWeights": [
+        {
+          "featureId": "__infrastructure__",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "file": ".next-3000/dev/cache/webpack/client-development/1.pack.gz",
+      "featureWeights": [
+        {
+          "featureId": "__infrastructure__",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "file": ".next-3000/dev/cache/webpack/client-development/10.pack.gz",
+      "featureWeights": [
+        {
+          "featureId": "__infrastructure__",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "file": ".next-3000/dev/cache/webpack/client-development/11.pack.gz",
+      "featureWeights": [
+        {
+          "featureId": "__infrastructure__",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "file": ".next-3000/dev/cache/webpack/client-development/12.pack.gz",
+      "featureWeights": [
+        {
+          "featureId": "__infrastructure__",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "file": ".next-3000/dev/cache/webpack/client-development/13.pack.gz",
+      "featureWeights": [
+        {
+          "featureId": "__infrastructure__",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "file": ".next-3000/dev/cache/webpack/client-development/14.pack.gz",
+      "featureWeights": [
+        {
+          "featureId": "__infrastructure__",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "file": ".next-3000/dev/cache/webpack/client-development/15.pack.gz",
+      "featureWeights": [
+        {
+          "featureId": "__infrastructure__",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "file": ".next-3000/dev/cache/webpack/client-development/16.pack.gz",
+      "featureWeights": [
+        {
+          "featureId": "__infrastructure__",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "file": ".next-3000/dev/cache/webpack/client-development/17.pack.gz",
+      "featureWeights": [
+        {
+          "featureId": "__infrastructure__",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "file": ".next-3000/dev/cache/webpack/client-development/18.pack.gz",
+      "featureWeights": [
+        {
+          "featureId": "__infrastructure__",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "file": ".next-3000/dev/cache/webpack/client-development/19.pack.gz",
+      "featureWeights": [
+        {
+          "featureId": "__infrastructure__",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "file": ".next-3000/dev/cache/webpack/client-development/2.pack.gz",
+      "featureWeights": [
+        {
+          "featureId": "__infrastructure__",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "file": ".next-3000/dev/cache/webpack/client-development/20.pack.gz",
+      "featureWeights": [
+        {
+          "featureId": "__infrastructure__",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "file": ".next-3000/dev/cache/webpack/client-development/21.pack.gz",
+      "featureWeights": [
+        {
+          "featureId": "__infrastructure__",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "file": ".next-3000/dev/cache/webpack/client-development/3.pack.gz",
+      "featureWeights": [
+        {
+          "featureId": "__infrastructure__",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "file": ".next-3000/dev/cache/webpack/client-development/4.pack.gz",
+      "featureWeights": [
+        {
+          "featureId": "__infrastructure__",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "file": ".next-3000/dev/cache/webpack/client-development/5.pack.gz",
+      "featureWeights": [
+        {
+          "featureId": "__infrastructure__",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "file": ".next-3000/dev/cache/webpack/client-development/6.pack.gz",
+      "featureWeights": [
+        {
+          "featureId": "__infrastructure__",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "file": ".next-3000/dev/cache/webpack/client-development/7.pack.gz",
+      "featureWeights": [
+        {
+          "featureId": "__infrastructure__",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "file": ".next-3000/dev/cache/webpack/client-development/8.pack.gz",
+      "featureWeights": [
+        {
+          "featureId": "__infrastructure__",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "file": ".next-3000/dev/cache/webpack/client-development/9.pack.gz",
+      "featureWeights": [
+        {
+          "featureId": "__infrastructure__",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "file": ".next-3000/dev/cache/webpack/client-development/index.pack.gz",
+      "featureWeights": [
+        {
+          "featureId": "__infrastructure__",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "file": ".next-3000/dev/cache/webpack/client-development/index.pack.gz.old",
+      "featureWeights": [
+        {
+          "featureId": "__infrastructure__",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "file": ".next-3000/dev/cache/webpack/server-development/0.pack.gz",
+      "featureWeights": [
+        {
+          "featureId": "__infrastructure__",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "file": ".next-3000/dev/cache/webpack/server-development/1.pack.gz",
+      "featureWeights": [
+        {
+          "featureId": "__infrastructure__",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "file": ".next-3000/dev/cache/webpack/server-development/10.pack.gz",
+      "featureWeights": [
+        {
+          "featureId": "__infrastructure__",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "file": ".next-3000/dev/cache/webpack/server-development/11.pack.gz",
+      "featureWeights": [
+        {
+          "featureId": "__infrastructure__",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "file": ".next-3000/dev/cache/webpack/server-development/12.pack.gz",
+      "featureWeights": [
+        {
+          "featureId": "__infrastructure__",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "file": ".next-3000/dev/cache/webpack/server-development/13.pack.gz",
+      "featureWeights": [
+        {
+          "featureId": "__infrastructure__",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "file": ".next-3000/dev/cache/webpack/server-development/14.pack.gz",
+      "featureWeights": [
+        {
+          "featureId": "__infrastructure__",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "file": ".next-3000/dev/cache/webpack/server-development/2.pack.gz",
+      "featureWeights": [
+        {
+          "featureId": "__infrastructure__",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "file": ".next-3000/dev/cache/webpack/server-development/3.pack.gz",
+      "featureWeights": [
+        {
+          "featureId": "__infrastructure__",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "file": ".next-3000/dev/cache/webpack/server-development/4.pack.gz",
+      "featureWeights": [
+        {
+          "featureId": "__infrastructure__",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "file": ".next-3000/dev/cache/webpack/server-development/5.pack.gz",
+      "featureWeights": [
+        {
+          "featureId": "__infrastructure__",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "file": ".next-3000/dev/cache/webpack/server-development/6.pack.gz",
+      "featureWeights": [
+        {
+          "featureId": "__infrastructure__",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "file": ".next-3000/dev/cache/webpack/server-development/7.pack.gz",
+      "featureWeights": [
+        {
+          "featureId": "__infrastructure__",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "file": ".next-3000/dev/cache/webpack/server-development/8.pack.gz",
+      "featureWeights": [
+        {
+          "featureId": "__infrastructure__",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "file": ".next-3000/dev/cache/webpack/server-development/9.pack.gz",
+      "featureWeights": [
+        {
+          "featureId": "__infrastructure__",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "file": ".next-3000/dev/cache/webpack/server-development/index.pack.gz",
+      "featureWeights": [
+        {
+          "featureId": "__infrastructure__",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "file": ".next-3000/dev/cache/webpack/server-development/index.pack.gz.old",
+      "featureWeights": [
+        {
+          "featureId": "__infrastructure__",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "file": ".next-3000/dev/lock",
+      "featureWeights": [
+        {
+          "featureId": "__infrastructure__",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "file": ".next-3000/dev/logs/next-development.log",
+      "featureWeights": [
+        {
+          "featureId": "__infrastructure__",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "file": ".next-3000/dev/package.json",
+      "featureWeights": [
+        {
+          "featureId": "__infrastructure__",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "file": ".next-3000/dev/prerender-manifest.json",
+      "featureWeights": [
+        {
+          "featureId": "__infrastructure__",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "file": ".next-3000/dev/react-loadable-manifest.json",
+      "featureWeights": [
+        {
+          "featureId": "__infrastructure__",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "file": ".next-3000/dev/routes-manifest.json",
+      "featureWeights": [
+        {
+          "featureId": "__infrastructure__",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "file": ".next-3000/dev/server/_ssr_node_modules_metamask_multichain-ui_dist_esm_lazy_recursive_entry_js_include_entry_js_ex-61cbf6.js",
+      "featureWeights": [
+        {
+          "featureId": "__infrastructure__",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "file": ".next-3000/dev/server/app/_not-found/page.js",
+      "featureWeights": [
+        {
+          "featureId": "__infrastructure__",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "file": ".next-3000/dev/server/app/_not-found/page_client-reference-manifest.js",
+      "featureWeights": [
+        {
+          "featureId": "__infrastructure__",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "file": ".next-3000/dev/server/app/analytics/page.js",
+      "featureWeights": [
+        {
+          "featureId": "__infrastructure__",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "file": ".next-3000/dev/server/app/analytics/page_client-reference-manifest.js",
+      "featureWeights": [
+        {
+          "featureId": "__infrastructure__",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "file": ".next-3000/dev/server/app/api/auth/me/route.js",
+      "featureWeights": [
+        {
+          "featureId": "__infrastructure__",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "file": ".next-3000/dev/server/app/api/auth/me/route_client-reference-manifest.js",
+      "featureWeights": [
+        {
+          "featureId": "__infrastructure__",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "file": ".next-3000/dev/server/app/api/compile-config/route.js",
+      "featureWeights": [
+        {
+          "featureId": "__infrastructure__",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "file": ".next-3000/dev/server/app/api/compile-config/route_client-reference-manifest.js",
+      "featureWeights": [
+        {
+          "featureId": "__infrastructure__",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "file": ".next-3000/dev/server/app/api/operational-config/route.js",
+      "featureWeights": [
+        {
+          "featureId": "__infrastructure__",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "file": ".next-3000/dev/server/app/api/operational-config/route_client-reference-manifest.js",
+      "featureWeights": [
+        {
+          "featureId": "__infrastructure__",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "file": ".next-3000/dev/server/app/api/platform-config/route.js",
+      "featureWeights": [
+        {
+          "featureId": "__infrastructure__",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "file": ".next-3000/dev/server/app/api/platform-config/route_client-reference-manifest.js",
+      "featureWeights": [
+        {
+          "featureId": "__infrastructure__",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "file": ".next-3000/dev/server/app/api/sdk/route.js",
+      "featureWeights": [
+        {
+          "featureId": "__infrastructure__",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "file": ".next-3000/dev/server/app/api/sdk/route_client-reference-manifest.js",
+      "featureWeights": [
+        {
+          "featureId": "__infrastructure__",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "file": ".next-3000/dev/server/app/compile/page.js",
+      "featureWeights": [
+        {
+          "featureId": "__infrastructure__",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "file": ".next-3000/dev/server/app/compile/page_client-reference-manifest.js",
+      "featureWeights": [
+        {
+          "featureId": "__infrastructure__",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "file": ".next-3000/dev/server/app/contract/page.js",
+      "featureWeights": [
+        {
+          "featureId": "__infrastructure__",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "file": ".next-3000/dev/server/app/contract/page_client-reference-manifest.js",
+      "featureWeights": [
+        {
+          "featureId": "__infrastructure__",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "file": ".next-3000/dev/server/app/dex-test/page.js",
+      "featureWeights": [
+        {
+          "featureId": "__infrastructure__",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "file": ".next-3000/dev/server/app/dex-test/page_client-reference-manifest.js",
+      "featureWeights": [
+        {
+          "featureId": "__infrastructure__",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "file": ".next-3000/dev/server/app/embed-tool/page.js",
+      "featureWeights": [
+        {
+          "featureId": "__infrastructure__",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "file": ".next-3000/dev/server/app/embed-tool/page_client-reference-manifest.js",
+      "featureWeights": [
+        {
+          "featureId": "__infrastructure__",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "file": ".next-3000/dev/server/app/frontpage/page.js",
+      "featureWeights": [
+        {
+          "featureId": "__infrastructure__",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "file": ".next-3000/dev/server/app/frontpage/page_client-reference-manifest.js",
+      "featureWeights": [
+        {
+          "featureId": "__infrastructure__",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "file": ".next-3000/dev/server/app/login/page.js",
+      "featureWeights": [
+        {
+          "featureId": "__infrastructure__",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "file": ".next-3000/dev/server/app/login/page_client-reference-manifest.js",
+      "featureWeights": [
+        {
+          "featureId": "__infrastructure__",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "file": ".next-3000/dev/server/app/logs/page.js",
+      "featureWeights": [
+        {
+          "featureId": "__infrastructure__",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "file": ".next-3000/dev/server/app/logs/page_client-reference-manifest.js",
+      "featureWeights": [
+        {
+          "featureId": "__infrastructure__",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "file": ".next-3000/dev/server/app/page.js",
+      "featureWeights": [
+        {
+          "featureId": "__infrastructure__",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "file": ".next-3000/dev/server/app/page_client-reference-manifest.js",
+      "featureWeights": [
+        {
+          "featureId": "__infrastructure__",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "file": ".next-3000/dev/server/app/permit2/page.js",
+      "featureWeights": [
+        {
+          "featureId": "__infrastructure__",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "file": ".next-3000/dev/server/app/permit2/page_client-reference-manifest.js",
+      "featureWeights": [
+        {
+          "featureId": "__infrastructure__",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "file": ".next-3000/dev/server/app/sdk-self-test/page.js",
+      "featureWeights": [
+        {
+          "featureId": "__infrastructure__",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "file": ".next-3000/dev/server/app/sdk-self-test/page_client-reference-manifest.js",
+      "featureWeights": [
+        {
+          "featureId": "__infrastructure__",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "file": ".next-3000/dev/server/app/sessions/page.js",
+      "featureWeights": [
+        {
+          "featureId": "__infrastructure__",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "file": ".next-3000/dev/server/app/sessions/page_client-reference-manifest.js",
+      "featureWeights": [
+        {
+          "featureId": "__infrastructure__",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "file": ".next-3000/dev/server/app/settings/page.js",
+      "featureWeights": [
+        {
+          "featureId": "__infrastructure__",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "file": ".next-3000/dev/server/app/settings/page_client-reference-manifest.js",
+      "featureWeights": [
+        {
+          "featureId": "__infrastructure__",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "file": ".next-3000/dev/server/app/strategy/page.js",
+      "featureWeights": [
+        {
+          "featureId": "__infrastructure__",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "file": ".next-3000/dev/server/app/strategy/page_client-reference-manifest.js",
+      "featureWeights": [
+        {
+          "featureId": "__infrastructure__",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "file": ".next-3000/dev/server/app/wallet-runtime/page.js",
+      "featureWeights": [
+        {
+          "featureId": "__infrastructure__",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "file": ".next-3000/dev/server/app/wallet-runtime/page_client-reference-manifest.js",
+      "featureWeights": [
+        {
+          "featureId": "__infrastructure__",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "file": ".next-3000/dev/server/app-paths-manifest.json",
+      "featureWeights": [
+        {
+          "featureId": "__infrastructure__",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "file": ".next-3000/dev/server/interception-route-rewrite-manifest.js",
+      "featureWeights": [
+        {
+          "featureId": "__infrastructure__",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "file": ".next-3000/dev/server/middleware-build-manifest.js",
+      "featureWeights": [
+        {
+          "featureId": "__infrastructure__",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "file": ".next-3000/dev/server/middleware-manifest.json",
+      "featureWeights": [
+        {
+          "featureId": "__infrastructure__",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "file": ".next-3000/dev/server/middleware-react-loadable-manifest.js",
+      "featureWeights": [
+        {
+          "featureId": "__infrastructure__",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "file": ".next-3000/dev/server/next-font-manifest.js",
+      "featureWeights": [
+        {
+          "featureId": "__infrastructure__",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "file": ".next-3000/dev/server/next-font-manifest.json",
+      "featureWeights": [
+        {
+          "featureId": "__infrastructure__",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "file": ".next-3000/dev/server/pages-manifest.json",
+      "featureWeights": [
+        {
+          "featureId": "__infrastructure__",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "file": ".next-3000/dev/server/server-reference-manifest.js",
+      "featureWeights": [
+        {
+          "featureId": "__infrastructure__",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "file": ".next-3000/dev/server/server-reference-manifest.json",
+      "featureWeights": [
+        {
+          "featureId": "__infrastructure__",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "file": ".next-3000/dev/server/vendor-chunks/0xsequence.js",
+      "featureWeights": [
+        {
+          "featureId": "__infrastructure__",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "file": ".next-3000/dev/server/vendor-chunks/@0xsequence.js",
+      "featureWeights": [
+        {
+          "featureId": "__infrastructure__",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "file": ".next-3000/dev/server/vendor-chunks/@base-org.js",
+      "featureWeights": [
+        {
+          "featureId": "__infrastructure__",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "file": ".next-3000/dev/server/vendor-chunks/@coinbase.js",
+      "featureWeights": [
+        {
+          "featureId": "__infrastructure__",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "file": ".next-3000/dev/server/vendor-chunks/@databeat.js",
+      "featureWeights": [
+        {
+          "featureId": "__infrastructure__",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "file": ".next-3000/dev/server/vendor-chunks/@ecies.js",
+      "featureWeights": [
+        {
+          "featureId": "__infrastructure__",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "file": ".next-3000/dev/server/vendor-chunks/@floating-ui.js",
+      "featureWeights": [
+        {
+          "featureId": "__infrastructure__",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "file": ".next-3000/dev/server/vendor-chunks/@jridgewell.js",
+      "featureWeights": [
+        {
+          "featureId": "__infrastructure__",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "file": ".next-3000/dev/server/vendor-chunks/@lit-labs.js",
+      "featureWeights": [
+        {
+          "featureId": "__infrastructure__",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "file": ".next-3000/dev/server/vendor-chunks/@lit.js",
+      "featureWeights": [
+        {
+          "featureId": "__infrastructure__",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "file": ".next-3000/dev/server/vendor-chunks/@metamask.js",
+      "featureWeights": [
+        {
+          "featureId": "__infrastructure__",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "file": ".next-3000/dev/server/vendor-chunks/@msgpack.js",
+      "featureWeights": [
+        {
+          "featureId": "__infrastructure__",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "file": ".next-3000/dev/server/vendor-chunks/@noble.js",
+      "featureWeights": [
+        {
+          "featureId": "__infrastructure__",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "file": ".next-3000/dev/server/vendor-chunks/@opentelemetry.js",
+      "featureWeights": [
+        {
+          "featureId": "__infrastructure__",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "file": ".next-3000/dev/server/vendor-chunks/@paulmillr.js",
+      "featureWeights": [
+        {
+          "featureId": "__infrastructure__",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "file": ".next-3000/dev/server/vendor-chunks/@phosphor-icons.js",
+      "featureWeights": [
+        {
+          "featureId": "__infrastructure__",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "file": ".next-3000/dev/server/vendor-chunks/@radix-ui.js",
+      "featureWeights": [
+        {
+          "featureId": "__infrastructure__",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "file": ".next-3000/dev/server/vendor-chunks/@react-oauth.js",
+      "featureWeights": [
+        {
+          "featureId": "__infrastructure__",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "file": ".next-3000/dev/server/vendor-chunks/@reduxjs.js",
+      "featureWeights": [
+        {
+          "featureId": "__infrastructure__",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "file": ".next-3000/dev/server/vendor-chunks/@reown.js",
+      "featureWeights": [
+        {
+          "featureId": "__infrastructure__",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "file": ".next-3000/dev/server/vendor-chunks/@safe-global.js",
+      "featureWeights": [
+        {
+          "featureId": "__infrastructure__",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "file": ".next-3000/dev/server/vendor-chunks/@scure.js",
+      "featureWeights": [
+        {
+          "featureId": "__infrastructure__",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "file": ".next-3000/dev/server/vendor-chunks/@solana-program.js",
+      "featureWeights": [
+        {
+          "featureId": "__infrastructure__",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "file": ".next-3000/dev/server/vendor-chunks/@solana.js",
+      "featureWeights": [
+        {
+          "featureId": "__infrastructure__",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "file": ".next-3000/dev/server/vendor-chunks/@swc.js",
+      "featureWeights": [
+        {
+          "featureId": "__infrastructure__",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "file": ".next-3000/dev/server/vendor-chunks/@tanstack.js",
+      "featureWeights": [
+        {
+          "featureId": "__infrastructure__",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "file": ".next-3000/dev/server/vendor-chunks/@wagmi.js",
+      "featureWeights": [
+        {
+          "featureId": "__infrastructure__",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "file": ".next-3000/dev/server/vendor-chunks/@walletconnect.js",
+      "featureWeights": [
+        {
+          "featureId": "__infrastructure__",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "file": ".next-3000/dev/server/vendor-chunks/abitype.js",
+      "featureWeights": [
+        {
+          "featureId": "__infrastructure__",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "file": ".next-3000/dev/server/vendor-chunks/accounts.js",
+      "featureWeights": [
+        {
+          "featureId": "__infrastructure__",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "file": ".next-3000/dev/server/vendor-chunks/aes-js.js",
+      "featureWeights": [
+        {
+          "featureId": "__infrastructure__",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "file": ".next-3000/dev/server/vendor-chunks/aria-hidden.js",
+      "featureWeights": [
+        {
+          "featureId": "__infrastructure__",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "file": ".next-3000/dev/server/vendor-chunks/async-mutex.js",
+      "featureWeights": [
+        {
+          "featureId": "__infrastructure__",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "file": ".next-3000/dev/server/vendor-chunks/asynckit.js",
+      "featureWeights": [
+        {
+          "featureId": "__infrastructure__",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "file": ".next-3000/dev/server/vendor-chunks/axios-retry.js",
+      "featureWeights": [
+        {
+          "featureId": "__infrastructure__",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "file": ".next-3000/dev/server/vendor-chunks/axios.js",
+      "featureWeights": [
+        {
+          "featureId": "__infrastructure__",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "file": ".next-3000/dev/server/vendor-chunks/base-x.js",
+      "featureWeights": [
+        {
+          "featureId": "__infrastructure__",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "file": ".next-3000/dev/server/vendor-chunks/big.js.js",
+      "featureWeights": [
+        {
+          "featureId": "__infrastructure__",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "file": ".next-3000/dev/server/vendor-chunks/blakejs.js",
+      "featureWeights": [
+        {
+          "featureId": "__infrastructure__",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "file": ".next-3000/dev/server/vendor-chunks/bn.js.js",
+      "featureWeights": [
+        {
+          "featureId": "__infrastructure__",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "file": ".next-3000/dev/server/vendor-chunks/bowser.js",
+      "featureWeights": [
+        {
+          "featureId": "__infrastructure__",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "file": ".next-3000/dev/server/vendor-chunks/bs58.js",
+      "featureWeights": [
+        {
+          "featureId": "__infrastructure__",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "file": ".next-3000/dev/server/vendor-chunks/bufferutil.js",
+      "featureWeights": [
+        {
+          "featureId": "__infrastructure__",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "file": ".next-3000/dev/server/vendor-chunks/call-bind-apply-helpers.js",
+      "featureWeights": [
+        {
+          "featureId": "__infrastructure__",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "file": ".next-3000/dev/server/vendor-chunks/centrifuge.js",
+      "featureWeights": [
+        {
+          "featureId": "__infrastructure__",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "file": ".next-3000/dev/server/vendor-chunks/charenc.js",
+      "featureWeights": [
+        {
+          "featureId": "__infrastructure__",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "file": ".next-3000/dev/server/vendor-chunks/class-variance-authority.js",
+      "featureWeights": [
+        {
+          "featureId": "__infrastructure__",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "file": ".next-3000/dev/server/vendor-chunks/clsx.js",
+      "featureWeights": [
+        {
+          "featureId": "__infrastructure__",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "file": ".next-3000/dev/server/vendor-chunks/combined-stream.js",
+      "featureWeights": [
+        {
+          "featureId": "__infrastructure__",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "file": ".next-3000/dev/server/vendor-chunks/cross-fetch.js",
+      "featureWeights": [
+        {
+          "featureId": "__infrastructure__",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "file": ".next-3000/dev/server/vendor-chunks/crypt.js",
+      "featureWeights": [
+        {
+          "featureId": "__infrastructure__",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "file": ".next-3000/dev/server/vendor-chunks/d3-array.js",
+      "featureWeights": [
+        {
+          "featureId": "__infrastructure__",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "file": ".next-3000/dev/server/vendor-chunks/d3-color.js",
+      "featureWeights": [
+        {
+          "featureId": "__infrastructure__",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "file": ".next-3000/dev/server/vendor-chunks/d3-format.js",
+      "featureWeights": [
+        {
+          "featureId": "__infrastructure__",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "file": ".next-3000/dev/server/vendor-chunks/d3-interpolate.js",
+      "featureWeights": [
+        {
+          "featureId": "__infrastructure__",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "file": ".next-3000/dev/server/vendor-chunks/d3-path.js",
+      "featureWeights": [
+        {
+          "featureId": "__infrastructure__",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "file": ".next-3000/dev/server/vendor-chunks/d3-scale.js",
+      "featureWeights": [
+        {
+          "featureId": "__infrastructure__",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "file": ".next-3000/dev/server/vendor-chunks/d3-shape.js",
+      "featureWeights": [
+        {
+          "featureId": "__infrastructure__",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "file": ".next-3000/dev/server/vendor-chunks/d3-time-format.js",
+      "featureWeights": [
+        {
+          "featureId": "__infrastructure__",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "file": ".next-3000/dev/server/vendor-chunks/d3-time.js",
+      "featureWeights": [
+        {
+          "featureId": "__infrastructure__",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "file": ".next-3000/dev/server/vendor-chunks/dayjs.js",
+      "featureWeights": [
+        {
+          "featureId": "__infrastructure__",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "file": ".next-3000/dev/server/vendor-chunks/debug.js",
+      "featureWeights": [
+        {
+          "featureId": "__infrastructure__",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "file": ".next-3000/dev/server/vendor-chunks/decimal.js-light.js",
+      "featureWeights": [
+        {
+          "featureId": "__infrastructure__",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "file": ".next-3000/dev/server/vendor-chunks/deep-freeze-strict.js",
+      "featureWeights": [
+        {
+          "featureId": "__infrastructure__",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "file": ".next-3000/dev/server/vendor-chunks/delayed-stream.js",
+      "featureWeights": [
+        {
+          "featureId": "__infrastructure__",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "file": ".next-3000/dev/server/vendor-chunks/destr.js",
+      "featureWeights": [
+        {
+          "featureId": "__infrastructure__",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "file": ".next-3000/dev/server/vendor-chunks/detect-browser.js",
+      "featureWeights": [
+        {
+          "featureId": "__infrastructure__",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "file": ".next-3000/dev/server/vendor-chunks/dijkstrajs.js",
+      "featureWeights": [
+        {
+          "featureId": "__infrastructure__",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "file": ".next-3000/dev/server/vendor-chunks/dunder-proto.js",
+      "featureWeights": [
+        {
+          "featureId": "__infrastructure__",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "file": ".next-3000/dev/server/vendor-chunks/eciesjs.js",
+      "featureWeights": [
+        {
+          "featureId": "__infrastructure__",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "file": ".next-3000/dev/server/vendor-chunks/encode-utf8.js",
+      "featureWeights": [
+        {
+          "featureId": "__infrastructure__",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "file": ".next-3000/dev/server/vendor-chunks/es-define-property.js",
+      "featureWeights": [
+        {
+          "featureId": "__infrastructure__",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "file": ".next-3000/dev/server/vendor-chunks/es-errors.js",
+      "featureWeights": [
+        {
+          "featureId": "__infrastructure__",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "file": ".next-3000/dev/server/vendor-chunks/es-object-atoms.js",
+      "featureWeights": [
+        {
+          "featureId": "__infrastructure__",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "file": ".next-3000/dev/server/vendor-chunks/es-set-tostringtag.js",
+      "featureWeights": [
+        {
+          "featureId": "__infrastructure__",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "file": ".next-3000/dev/server/vendor-chunks/es-toolkit.js",
+      "featureWeights": [
+        {
+          "featureId": "__infrastructure__",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "file": ".next-3000/dev/server/vendor-chunks/eth-ens-namehash.js",
+      "featureWeights": [
+        {
+          "featureId": "__infrastructure__",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "file": ".next-3000/dev/server/vendor-chunks/ethers.js",
+      "featureWeights": [
+        {
+          "featureId": "__infrastructure__",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "file": ".next-3000/dev/server/vendor-chunks/eventemitter2.js",
+      "featureWeights": [
+        {
+          "featureId": "__infrastructure__",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "file": ".next-3000/dev/server/vendor-chunks/eventemitter3.js",
+      "featureWeights": [
+        {
+          "featureId": "__infrastructure__",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "file": ".next-3000/dev/server/vendor-chunks/fast-deep-equal.js",
+      "featureWeights": [
+        {
+          "featureId": "__infrastructure__",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "file": ".next-3000/dev/server/vendor-chunks/fast-safe-stringify.js",
+      "featureWeights": [
+        {
+          "featureId": "__infrastructure__",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "file": ".next-3000/dev/server/vendor-chunks/follow-redirects.js",
+      "featureWeights": [
+        {
+          "featureId": "__infrastructure__",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "file": ".next-3000/dev/server/vendor-chunks/form-data.js",
+      "featureWeights": [
+        {
+          "featureId": "__infrastructure__",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "file": ".next-3000/dev/server/vendor-chunks/framer-motion.js",
+      "featureWeights": [
+        {
+          "featureId": "__infrastructure__",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "file": ".next-3000/dev/server/vendor-chunks/function-bind.js",
+      "featureWeights": [
+        {
+          "featureId": "__infrastructure__",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "file": ".next-3000/dev/server/vendor-chunks/fuse.js.js",
+      "featureWeights": [
+        {
+          "featureId": "__infrastructure__",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "file": ".next-3000/dev/server/vendor-chunks/get-intrinsic.js",
+      "featureWeights": [
+        {
+          "featureId": "__infrastructure__",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "file": ".next-3000/dev/server/vendor-chunks/get-nonce.js",
+      "featureWeights": [
+        {
+          "featureId": "__infrastructure__",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "file": ".next-3000/dev/server/vendor-chunks/get-proto.js",
+      "featureWeights": [
+        {
+          "featureId": "__infrastructure__",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "file": ".next-3000/dev/server/vendor-chunks/gopd.js",
+      "featureWeights": [
+        {
+          "featureId": "__infrastructure__",
+          "weight": 1
+        }
+      ]
+    }
+  ],
+  "codeHealth": {
+    "analyzedAt": "2026-06-18T22:31:37.091Z",
+    "metrics": []
+  }
+}

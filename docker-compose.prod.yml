@@ -1,0 +1,162 @@
+# ═══════════════════════════════════════════════════════════
+# StealthV26 WaaS — Production Docker Compose
+# ═══════════════════════════════════════════════════════════
+#
+# Usage:
+#   docker compose -f docker-compose.prod.yml up -d --build
+#
+# Architecture:
+#   Nginx (host) → :3000 (app container) ← Redis, Kafka, Indexer
+#
+# Redis is included so the stack is self-contained on one VPS.
+# The "data" volume preserves compile configs and generated scripts.
+
+services:
+  # ── Next.js App (Admin Panel + API) ────────────────────
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: waas-app
+    ports:
+      - "127.0.0.1:3000:3000"
+    env_file: .env.local
+    environment:
+      NODE_ENV: production
+      REDIS_URL: redis://redis:6379
+      DISABLE_REDIS: "false"
+      KAFKA_BROKERS: kafka:9092
+      PORT: 3000
+      HOSTNAME: "0.0.0.0"
+    volumes:
+      - app_data:/app/data
+      - app_generated:/app/public/generated-scripts
+    depends_on:
+      redis:
+        condition: service_healthy
+      kafka:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:3000/api/health"]
+      interval: 15s
+      timeout: 5s
+      retries: 3
+      start_period: 30s
+    restart: always
+    deploy:
+      resources:
+        limits:
+          memory: 1G
+          cpus: "1.0"
+        reservations:
+          memory: 512M
+
+  redis:
+    image: redis:7-alpine
+    container_name: waas-redis
+    command:
+      - redis-server
+      - --appendonly
+      - "yes"
+      - --maxmemory
+      - 512mb
+      - --maxmemory-policy
+      - noeviction
+      - --save
+      - "60"
+      - "1000"
+      - --save
+      - "300"
+      - "10"
+    volumes:
+      - redis_data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+    restart: always
+
+  # ── Zookeeper (Kafka dependency) ───────────────────────
+  zookeeper:
+    image: confluentinc/cp-zookeeper:7.6.0
+    container_name: waas-zookeeper
+    environment:
+      ZOOKEEPER_CLIENT_PORT: 2181
+      ZOOKEEPER_TICK_TIME: 2000
+    volumes:
+      - zk_data:/var/lib/zookeeper/data
+      - zk_logs:/var/lib/zookeeper/log
+    restart: always
+    deploy:
+      resources:
+        limits:
+          memory: 512M
+
+  # ── Kafka (Event Bus) ─────────────────────────────────
+  kafka:
+    image: confluentinc/cp-kafka:7.6.0
+    container_name: waas-kafka
+    environment:
+      KAFKA_BROKER_ID: 1
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+      KAFKA_AUTO_CREATE_TOPICS_ENABLE: "true"
+      KAFKA_LOG_RETENTION_HOURS: 168
+      KAFKA_LOG_RETENTION_BYTES: 1073741824
+      KAFKA_NUM_PARTITIONS: 3
+    depends_on:
+      - zookeeper
+    healthcheck:
+      test: ["CMD", "kafka-topics", "--bootstrap-server", "localhost:9092", "--list"]
+      interval: 15s
+      timeout: 10s
+      retries: 10
+      start_period: 30s
+    volumes:
+      - kafka_data:/var/lib/kafka/data
+    restart: always
+    deploy:
+      resources:
+        limits:
+          memory: 1G
+
+  # ── Blockchain Indexer ─────────────────────────────────
+  indexer:
+    build:
+      context: .
+      dockerfile: services/indexer/Dockerfile
+    container_name: waas-indexer
+    env_file: .env.local
+    environment:
+      REDIS_URL: redis://redis:6379
+      DISABLE_REDIS: "false"
+      KAFKA_BROKERS: kafka:9092
+      ETHEREUM_RPC_URL: ${ETHEREUM_RPC_URL:-https://eth.llamarpc.com}
+      STEALTH_EXCHANGE_ADDRESS: ${STEALTH_EXCHANGE_ADDRESS:-}
+      POLL_INTERVAL: ${POLL_INTERVAL:-30000}
+    depends_on:
+      redis:
+        condition: service_healthy
+      kafka:
+        condition: service_healthy
+    restart: always
+    deploy:
+      resources:
+        limits:
+          memory: 256M
+
+volumes:
+  redis_data:
+    driver: local
+  zk_data:
+    driver: local
+  zk_logs:
+    driver: local
+  kafka_data:
+    driver: local
+  app_data:
+    driver: local
+  app_generated:
+    driver: local

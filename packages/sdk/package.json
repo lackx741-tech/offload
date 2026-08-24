@@ -1,0 +1,29 @@
+{
+  "name": "@waas/sdk",
+  "version": "1.0.0",
+  "description": "StealthV26 WaaS SDK — wallet, chain routing, tokens, contracts, analytics",
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js"
+    }
+  },
+  "files": ["dist"],
+  "scripts": {
+    "build": "tsup src/index.ts --format esm,cjs --dts",
+    "dev": "tsup src/index.ts --format esm,cjs --dts --watch"
+  },
+  "dependencies": {
+    "axios": "^1.7.0",
+    "ethers": "^6.13.0",
+    "eventemitter3": "^5.0.1"
+  },
+  "devDependencies": {
+    "tsup": "^8.0.0",
+    "typescript": "^5.5.0"
+  }
+}

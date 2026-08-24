@@ -1,0 +1,22 @@
+{
+  "name": "rainbowkit-modal",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite --port 5555",
+    "build": "vite build"
+  },
+  "dependencies": {
+    "@rainbow-me/rainbowkit": "^2.2.0",
+    "@tanstack/react-query": "^5.0.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "wagmi": "^2.0.0",
+    "viem": "^2.0.0"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^4.0.3",
+    "vite": "^5.0.10"
+  }
+}
