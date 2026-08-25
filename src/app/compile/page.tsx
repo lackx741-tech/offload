@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { GeneralTab } from "@/components/compile/general-tab";
 import { WalletTab } from "@/components/compile/wallet-tab";
@@ -22,7 +21,6 @@ import type { FrontpageConfig } from "@/lib/frontpage-config";
 import { Code2, Settings2, Wallet, Layers, Cpu, Banknote, FileCode2, RefreshCw, Zap } from "lucide-react";
 
 export default function CompilePage() {
-  const router = useRouter();
   const {
     setGeneralConfig,
     setWalletConfig,
@@ -39,17 +37,8 @@ export default function CompilePage() {
   useEffect(() => {
     let active = true;
 
-    async function checkAuthAndLoadConfig() {
+    async function loadConfig() {
       try {
-        const authRes = await fetch("/api/auth/me", { cache: "no-store" });
-        const authData = (await authRes.json()) as { authenticated?: boolean };
-        if (!active) return;
-
-        if (!authData?.authenticated) {
-          router.replace("/login");
-          return;
-        }
-
         const res = await fetch("/api/compile-config", { cache: "no-store" });
         const data = (await res.json()) as { config?: CompileConfig };
         if (!res.ok || !data.config || !active) return;
@@ -67,13 +56,12 @@ export default function CompilePage() {
       }
     }
 
-    void checkAuthAndLoadConfig();
+    void loadConfig();
 
     return () => {
       active = false;
     };
   }, [
-    router,
     setAdvancedConfig,
     setGeneralConfig,
     setModalConfig,
@@ -111,7 +99,7 @@ export default function CompilePage() {
       <div className="space-y-6">
         <div>
           <h1 className="text-2xl font-bold tracking-tight">Compile Module</h1>
-          <p className="text-muted-foreground text-sm mt-1">Checking authentication...</p>
+          <p className="text-muted-foreground text-sm mt-1">Loading configuration...</p>
         </div>
       </div>
     );

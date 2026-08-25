@@ -1,19 +1,19 @@
 "use client";
-import { useAccount } from "wagmi";
-import { useOpenConnectModal } from "@0xsequence/connect";
-import { SequenceRootProvider } from "@/components/sequence-root-provider";
+import { useAccount, useConnect } from "wagmi";
 
-function WalletTestInner() {
-  const { setOpenConnectModal } = useOpenConnectModal();
+export default function WalletTest() {
   const { address, isConnected, chainId } = useAccount();
+  const { connectors, connect } = useConnect();
 
   return (
     <div style={{ padding: 32 }}>
-      <h2>WalletConnect + Reown V3 Test</h2>
-      <button onClick={() => setOpenConnectModal(true)} style={{ padding: 12, fontSize: 18 }}>
-        Open Wallet Modal
-      </button>
-      <div style={{ marginTop: 24 }}>
+      <h2>Wallet Connect Test</h2>
+      <div style={{ marginBottom: 24 }}>
+        <button onClick={() => connect({ connector: connectors[0] })} style={{ padding: 12, fontSize: 18 }}>
+          Connect Wallet
+        </button>
+      </div>
+      <div>
         {isConnected ? (
           <div>
             <div>Connected: <b>{address}</b></div>
@@ -24,13 +24,5 @@ function WalletTestInner() {
         )}
       </div>
     </div>
-  );
-}
-
-export default function WalletTest() {
-  return (
-    <SequenceRootProvider>
-      <WalletTestInner />
-    </SequenceRootProvider>
   );
 }
