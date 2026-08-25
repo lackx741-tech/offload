@@ -4,8 +4,11 @@
  * WalletProvider
  *
  * Provider stack:
- *   wagmi (MetaMask, WalletConnect, Coinbase Wallet, Safe, Injected)
+ *   wagmi (MetaMask, WalletConnect V2, Coinbase Wallet, Safe, Injected)
  *   → TanStack Query
+ *
+ * Default: Uses Reown AppKit (official successor to WalletConnect Modal V2)
+ * Alternative: RainbowKit available via env var (see rainbow-config.ts)
  */
 
 import { type ReactNode, useMemo } from "react";

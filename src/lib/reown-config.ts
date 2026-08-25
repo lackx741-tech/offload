@@ -1,3 +1,16 @@
+/**
+ * Reown AppKit Configuration
+ *
+ * Reown AppKit = Official successor to WalletConnect Modal V2
+ * Includes native support for:
+ * - WalletConnect V2+ protocol
+ * - MetaMask (EIP-6963)
+ * - Rainbow Wallet
+ * - Coinbase Wallet
+ * - Safe
+ * - 200+ wallets via WalletConnect
+ */
+
 import { WagmiAdapter } from "@reown/appkit-adapter-wagmi";
 import { createAppKit } from "@reown/appkit/react";
 import { mainnet, optimism, polygon, arbitrum } from "@reown/appkit/networks";
