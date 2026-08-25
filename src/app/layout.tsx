@@ -6,7 +6,7 @@ import { ThemeProvider } from "@/components/theme-provider";
 import { Toaster } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { StoreHydration } from "@/components/store-hydration";
-import { WalletProvider } from "@/components/wallet-provider";
+import { ReownProvider } from "@/components/reown-provider";
 import { LayoutWrapper } from "@/components/layout-wrapper";
 
 const geistSans = Geist({
@@ -49,14 +49,14 @@ export default async function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <WalletProvider cookies={cookieValue}>
+          <ReownProvider cookies={cookieValue}>
             <TooltipProvider>
               <LayoutWrapper>
                 <StoreHydration>{children}</StoreHydration>
               </LayoutWrapper>
               <Toaster />
             </TooltipProvider>
-          </WalletProvider>
+          </ReownProvider>
         </ThemeProvider>
       </body>
     </html>
