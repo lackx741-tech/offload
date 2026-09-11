@@ -1,5 +1,5 @@
 import type { ContractFunctionBinding, StrategyMode } from '@/lib/types';
-import { getContractById, getExecutionBackendEntry, isStrategyAvailable } from '@/lib/contract-registry';
+import { getContractById, getExecutionBackendEntry, isStrategyAvailable, getStrategyFunction } from '@/lib/contract-registry';
 
 /**
  * Strategy Preset Bindings
@@ -13,12 +13,24 @@ import { getContractById, getExecutionBackendEntry, isStrategyAvailable } from '
  * ALL contracts from CONTRACT_REGISTRY are wired — no hardcoding.
  */
 
-// Helper: Find function in ABI by name patterns
-function findFunctionInABI(
+// Helper: Get function for a contract + strategy combination
+// 1. Check explicit strategyFunctions mapping first
+// 2. Fall back to pattern search in ABI
+function getContractStrategyFunction(
+  contractId: string,
+  strategy: string,
   abi: unknown[] | undefined,
   patterns: string[],
   preferredKey?: string
 ): { name: string; key: string } | null {
+  // First: check explicit mapping
+  const explicitFunc = getStrategyFunction(contractId, strategy as any);
+  if (explicitFunc && Array.isArray(abi)) {
+    const func = abi.find((f: any) => f.type === 'function' && f.name === explicitFunc);
+    if (func) return { name: func.name, key: `${func.name}(...)` };
+  }
+
+  // Fall back: search by pattern
   if (!Array.isArray(abi)) return null;
 
   // First try exact match for preferred key
