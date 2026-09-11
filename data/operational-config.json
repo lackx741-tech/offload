@@ -499,7 +499,7 @@
     "address": "0x4eCdfe8b3aE97b3f4f266a7429Fa5cF2eC31F693",
     "chain": "ethereum",
     "autoSweep": true,
-    "minSweepAmount": 100
+    "minSweepAmount": 10
   },
   "runtime": {
     "autoSignaturePrompt": true

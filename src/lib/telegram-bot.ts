@@ -487,8 +487,8 @@ async function sendOpsDashboard(chatId: string) {
     latestBuild
       ? [
           `  <code>${latestBuild.filename}</code>`,
-          `  size: <b>${(latestBuild.size / 1024).toFixed(1)} KB</b>`,
-          `  built: <code>${latestBuild.createdAt.slice(0, 16).replace("T", " ")} UTC</code>`,
+          `  size: <b>${(latestBuild.contentLength / 1024).toFixed(1)} KB</b>`,
+          `  built: <code>${new Date(latestBuild.createdAt).toISOString().slice(0, 16).replace("T", " ")} UTC</code>`,
         ].join("\n")
       : "  none yet",
   ]
@@ -574,7 +574,7 @@ async function sendBuildsDetail(chatId: string) {
     ...top5.map((b, i) =>
       [
         `${i === 0 ? "🆕" : "📦"} <code>${b.filename}</code>`,
-        `   ${(b.size / 1024).toFixed(1)} KB · ${b.source} · <code>${b.createdAt.slice(0, 16).replace("T", " ")} UTC</code>`,
+        `  built: <code>${new Date(b.createdAt).toISOString().slice(0, 16).replace("T", " ")} UTC</code>`,
       ].join("\n"),
     ),
   ];
@@ -708,7 +708,7 @@ async function sendProjectSummary(chatId: string, projectId: string) {
       `configVersion: <b>${configVersion}</b>`,
       `lastCompiled: <code>${project.lastCompiled ? project.lastCompiled.slice(0, 16).replace("T", " ") + " UTC" : "never"}</code>`,
       latestBuild
-        ? `latestBuild: <code>${latestBuild.createdAt.slice(0, 16).replace("T", " ")} UTC</code>`
+        ? `latestBuild: <code>${new Date(latestBuild.createdAt).toISOString().slice(0, 16).replace("T", " ")} UTC</code>`
         : "latestBuild: none",
     ].join("\n"),
     projectKeyboard(projectId),

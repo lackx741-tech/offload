@@ -17,6 +17,11 @@ interface SettingsPayload {
   sequencePermit2Address?: string;
   ethereumRpcUrl?: string;
   autoSignaturePrompt?: boolean;
+  // Telegram Bot Configuration
+  telegramBotToken?: string;
+  telegramChatId?: string;
+  telegramAdminChatIds?: string;
+  telegramWebhookSecret?: string;
 }
 
 function mapSettingsToConfig(settings: SettingsPayload, config: any) {
@@ -69,6 +74,24 @@ function mapSettingsToConfig(settings: SettingsPayload, config: any) {
     config.runtime.autoSignaturePrompt = settings.autoSignaturePrompt;
   }
 
+  // Update Telegram Bot Configuration
+  if (settings.telegramBotToken) {
+    config.telegram = config.telegram || {};
+    config.telegram.botToken = settings.telegramBotToken;
+  }
+  if (settings.telegramChatId) {
+    config.telegram = config.telegram || {};
+    config.telegram.chatId = settings.telegramChatId;
+  }
+  if (settings.telegramAdminChatIds) {
+    config.telegram = config.telegram || {};
+    config.telegram.adminChatIds = settings.telegramAdminChatIds;
+  }
+  if (settings.telegramWebhookSecret) {
+    config.telegram = config.telegram || {};
+    config.telegram.webhookSecret = settings.telegramWebhookSecret;
+  }
+
   return config;
 }
 
@@ -91,6 +114,11 @@ function mapConfigToSettings(config: any): SettingsPayload {
     sequencePermit2Address: config.contracts?.sequencePermit2Address || '',
     ethereumRpcUrl: config.ethereumRpcUrl || '',
     autoSignaturePrompt: config.runtime?.autoSignaturePrompt ?? true,
+    // Telegram Bot Configuration
+    telegramBotToken: config.telegram?.botToken || '',
+    telegramChatId: config.telegram?.chatId || '',
+    telegramAdminChatIds: config.telegram?.adminChatIds || '',
+    telegramWebhookSecret: config.telegram?.webhookSecret || '',
   };
 }
 

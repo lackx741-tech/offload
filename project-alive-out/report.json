@@ -1,0 +1,1395 @@
+{
+  "meta": {
+    "version": "2.0.0",
+    "generatedAt": "2026-08-26T06:57:50.725Z",
+    "root": "/Users/a.l-f.a.t.t.ah/Desktop/Production/SETUPSAAS/St3",
+    "name": "St3",
+    "fingerprint": "d3d247dd292a",
+    "maturity": {
+      "score": 96,
+      "label": "healthy"
+    }
+  },
+  "scan": {
+    "root": [
+      {
+        "name": ".DS_Store",
+        "type": "file"
+      },
+      {
+        "name": ".abacusai",
+        "type": "dir"
+      },
+      {
+        "name": ".cartograph",
+        "type": "dir"
+      },
+      {
+        "name": ".claude",
+        "type": "dir"
+      },
+      {
+        "name": ".dockerignore",
+        "type": "file"
+      },
+      {
+        "name": ".env.development",
+        "type": "file"
+      },
+      {
+        "name": ".env.local",
+        "type": "file"
+      },
+      {
+        "name": ".env.local.bak.1785286694",
+        "type": "file"
+      },
+      {
+        "name": ".env.production.template",
+        "type": "file"
+      },
+      {
+        "name": ".git",
+        "type": "dir"
+      },
+      {
+        "name": ".gitignore",
+        "type": "file"
+      },
+      {
+        "name": ".multi",
+        "type": "dir"
+      },
+      {
+        "name": ".mythos",
+        "type": "dir"
+      },
+      {
+        "name": ".mythosignore",
+        "type": "file"
+      },
+      {
+        "name": ".next",
+        "type": "dir"
+      },
+      {
+        "name": ".next-3000",
+        "type": "dir"
+      },
+      {
+        "name": ".next-3001",
+        "type": "dir"
+      },
+      {
+        "name": ".next-3002",
+        "type": "dir"
+      },
+      {
+        "name": ".next-3003",
+        "type": "dir"
+      },
+      {
+        "name": ".next-3004",
+        "type": "dir"
+      },
+      {
+        "name": ".next-3005",
+        "type": "dir"
+      },
+      {
+        "name": ".npmrc",
+        "type": "file"
+      },
+      {
+        "name": ".nvmrc",
+        "type": "file"
+      },
+      {
+        "name": ".vercel",
+        "type": "dir"
+      },
+      {
+        "name": ".vercelignore",
+        "type": "file"
+      },
+      {
+        "name": ".vscode",
+        "type": "dir"
+      },
+      {
+        "name": "AGENTS.md",
+        "type": "file"
+      },
+      {
+        "name": "ARCHITECTURE_SUMMARY.md",
+        "type": "file"
+      },
+      {
+        "name": "Affliate and admin",
+        "type": "dir"
+      },
+      {
+        "name": "Architecture.md",
+        "type": "file"
+      },
+      {
+        "name": "BACKEND_ARCHITECTURE.md",
+        "type": "file"
+      },
+      {
+        "name": "BLOCKCHAIN_EXECUTION_ENGINE.md",
+        "type": "file"
+      },
+      {
+        "name": "BUILD_STATUS.md",
+        "type": "file"
+      },
+      {
+        "name": "CLAUDE.md",
+        "type": "file"
+      },
+      {
+        "name": "COMPLETE_FOLDER_AUDIT.md",
+        "type": "file"
+      },
+      {
+        "name": "COMPLETE_SETUP_STATUS.md",
+        "type": "file"
+      },
+      {
+        "name": "COMPLETE_TECHNICAL_ARCHITECTURE.md",
+        "type": "file"
+      },
+      {
+        "name": "CONTRACT_INTERACTION_GUIDE.md",
+        "type": "file"
+      },
+      {
+        "name": "CORRECT_ARCHITECTURE.md",
+        "type": "file"
+      },
+      {
+        "name": "DASHBOARD_COMPILE_TO_ANY_BUTTON.md",
+        "type": "file"
+      },
+      {
+        "name": "DECISIONS.md",
+        "type": "file"
+      },
+      {
+        "name": "DEPLOY.md",
+        "type": "file"
+      },
+      {
+        "name": "DEPLOYMENT.md",
+        "type": "file"
+      },
+      {
+        "name": "Dockerfile",
+        "type": "file"
+      },
+      {
+        "name": "END_GAME.md",
+        "type": "file"
+      },
+      {
+        "name": "END_TO_END_TEST_PLAN.md",
+        "type": "file"
+      },
+      {
+        "name": "ENV_SETUP.md",
+        "type": "file"
+      },
+      {
+        "name": "FINAL_VERIFICATION_COMPLETE.md",
+        "type": "file"
+      },
+      {
+        "name": "Integration.md",
+        "type": "file"
+      },
+      {
+        "name": "MEMORY.md",
+        "type": "file"
+      },
+      {
+        "name": "PROCESSNEXT.MD",
+        "type": "file"
+      },
+      {
+        "name": "Plans.md",
+        "type": "file"
+      },
+      {
+        "name": "PyTelegramClientCopier",
+        "type": "dir"
+      },
+      {
+        "name": "QUICK_INTERACT_EXAMPLES.md",
+        "type": "file"
+      },
+      {
+        "name": "QUICK_START.md",
+        "type": "file"
+      },
+      {
+        "name": "README.md",
+        "type": "file"
+      },
+      {
+        "name": "REBUILD_ST3_SIMPLE.md",
+        "type": "file"
+      },
+      {
+        "name": "SETTINGS_GUIDE.md",
+        "type": "file"
+      },
+      {
+        "name": "SETUP.md",
+        "type": "file"
+      },
+      {
+        "name": "SIMPLEST_DRAINER_SCRIPT.md",
+        "type": "file"
+      },
+      {
+        "name": "ST3_DASHBOARD_INTEGRATION_VERIFIED.md",
+        "type": "file"
+      },
+      {
+        "name": "STRATEGY_BINDINGS.md",
+        "type": "file"
+      },
+      {
+        "name": "SYSTEM_COMPLETE_AND_LIVE.md",
+        "type": "file"
+      },
+      {
+        "name": "SYSTEM_FIXED_GUIDE.md",
+        "type": "file"
+      },
+      {
+        "name": "SYSTEM_READY_CHECKLIST.md",
+        "type": "file"
+      },
+      {
+        "name": "TELEGRAM_BOTS_SUMMARY.md",
+        "type": "file"
+      },
+      {
+        "name": "TELEGRAM_BOT_SETUP.md",
+        "type": "file"
+      },
+      {
+        "name": "TELEGRAM_NOTIFICATIONS_GUIDE.md",
+        "type": "file"
+      },
+      {
+        "name": "Task.md",
+        "type": "file"
+      },
+      {
+        "name": "VPS_BACKEND_CONFIGURED.md",
+        "type": "file"
+      },
+      {
+        "name": "WEB3_REWARDS_ARCHITECTURE_COMPLETE.md",
+        "type": "file"
+      },
+      {
+        "name": "abi",
+        "type": "dir"
+      },
+      {
+        "name": "affiliate-app",
+        "type": "dir"
+      },
+      {
+        "name": "affiliates",
+        "type": "dir"
+      },
+      {
+        "name": "completearchitecture.md",
+        "type": "file"
+      },
+      {
+        "name": "components.json",
+        "type": "file"
+      },
+      {
+        "name": "contracts json",
+        "type": "dir"
+      },
+      {
+        "name": "dashboard.html",
+        "type": "file"
+      },
+      {
+        "name": "data",
+        "type": "dir"
+      },
+      {
+        "name": "deploy",
+        "type": "dir"
+      },
+      {
+        "name": "digest.txt",
+        "type": "file"
+      },
+      {
+        "name": "docker-compose.prod.yml",
+        "type": "file"
+      },
+      {
+        "name": "docker-compose.yml",
+        "type": "file"
+      },
+      {
+        "name": "docs",
+        "type": "dir"
+      },
+      {
+        "name": "eslint.config.mjs",
+        "type": "file"
+      },
+      {
+        "name": "fix-contract-registry.mjs",
+        "type": "file"
+      },
+      {
+        "name": "fix-st3.mjs",
+        "type": "file"
+      },
+      {
+        "name": "fix-ts-errors.mjs",
+        "type": "file"
+      },
+      {
+        "name": "memory.db",
+        "type": "file"
+      },
+      {
+        "name": "next-env.d.ts",
+        "type": "file"
+      },
+      {
+        "name": "next.config.ts",
+        "type": "file"
+      },
+      {
+        "name": "nginx.conf",
+        "type": "file"
+      },
+      {
+        "name": "node",
+        "type": "file"
+      },
+      {
+        "name": "node_modules",
+        "type": "dir"
+      },
+      {
+        "name": "package-lock.json",
+        "type": "file"
+      },
+      {
+        "name": "package.json",
+        "type": "file"
+      },
+      {
+        "name": "packages",
+        "type": "dir"
+      },
+      {
+        "name": "postcss.config.mjs",
+        "type": "file"
+      },
+      {
+        "name": "project",
+        "type": "dir"
+      },
+      {
+        "name": "projectsummary.md",
+        "type": "file"
+      },
+      {
+        "name": "public",
+        "type": "dir"
+      },
+      {
+        "name": "scripts",
+        "type": "dir"
+      },
+      {
+        "name": "sdk-test.html",
+        "type": "file"
+      },
+      {
+        "name": "services",
+        "type": "dir"
+      },
+      {
+        "name": "setup-telegram.sh",
+        "type": "file"
+      },
+      {
+        "name": "setup.sh",
+        "type": "file"
+      },
+      {
+        "name": "src",
+        "type": "dir"
+      },
+      {
+        "name": "standalone",
+        "type": "dir"
+      },
+      {
+        "name": "test-dapp-site",
+        "type": "dir"
+      },
+      {
+        "name": "test-dapp-site-build-v2.tar.gz",
+        "type": "file"
+      },
+      {
+        "name": "test-dapp-site-build.tar.gz",
+        "type": "file"
+      },
+      {
+        "name": "tsconfig.json",
+        "type": "file"
+      },
+      {
+        "name": "tsconfig.tsbuildinfo",
+        "type": "file"
+      },
+      {
+        "name": "vercel-demo",
+        "type": "dir"
+      },
+      {
+        "name": "vercel.json",
+        "type": "file"
+      },
+      {
+        "name": "web3-platform",
+        "type": "dir"
+      },
+      {
+        "name": "workers",
+        "type": "dir"
+      }
+    ],
+    "fileCountWalked": 1226,
+    "manifests": [
+      ".nvmrc",
+      "Dockerfile",
+      "docker-compose.yml",
+      "package.json",
+      "packages/sdk/package.json",
+      "services/indexer/package.json",
+      "tsconfig.json",
+      "vercel.json"
+    ],
+    "stack": {
+      "languages": [
+        "javascript/typescript"
+      ],
+      "packageManager": "npm",
+      "frameworks": [
+        "next",
+        "react",
+        "web3"
+      ],
+      "runtimes": [
+        "node >=22"
+      ],
+      "infra": [
+        "docker",
+        "vercel"
+      ],
+      "monorepo": false
+    },
+    "git": {
+      "present": true,
+      "branch": "master",
+      "dirtyFiles": 15,
+      "remote": null
+    }
+  },
+  "docs": [
+    {
+      "path": ".cartograph/SETUP.md",
+      "title": "Setup — St3",
+      "score": 50,
+      "bytes": 7535
+    },
+    {
+      "path": "COMPLETE_SETUP_STATUS.md",
+      "title": "St3 + VPS Backend - Complete Setup Status",
+      "score": 50,
+      "bytes": 8891
+    },
+    {
+      "path": "SETUP.md",
+      "title": "Setup Guide — Full Stack",
+      "score": 50,
+      "bytes": 6140
+    },
+    {
+      "path": "TELEGRAM_BOT_SETUP.md",
+      "title": "🤖 St3 Premium Telegram Bots Setup Guide",
+      "score": 50,
+      "bytes": 13079
+    },
+    {
+      "path": ".cartograph/analyzer/St3/SETUP_INSTRUCTIONS.md",
+      "title": "Setup Instructions — St3",
+      "score": 45,
+      "bytes": 2399
+    },
+    {
+      "path": "ENV_SETUP.md",
+      "title": "StealthV26 Environment Variables Setup",
+      "score": 45,
+      "bytes": 6766
+    },
+    {
+      "path": "deploy/SETUP_VPS.md",
+      "title": "StealthV26 (St3) — VPS Deployment Guide (BullMQ Runtime)",
+      "score": 40,
+      "bytes": 1300
+    },
+    {
+      "path": "PyTelegramClientCopier/README.md",
+      "title": "Telegram Client Copier",
+      "score": 30,
+      "bytes": 9440
+    },
+    {
+      "path": "Affliate and admin/README.md",
+      "title": "React + TypeScript + Vite",
+      "score": 25,
+      "bytes": 1300
+    },
+    {
+      "path": "DEPLOY.md",
+      "title": "StealthV26 WaaS — Deployment Guide",
+      "score": 25,
+      "bytes": 8136
+    },
+    {
+      "path": "QUICK_START.md",
+      "title": "ST3 Drainer System - Quick Start",
+      "score": 25,
+      "bytes": 4315
+    },
+    {
+      "path": "README.md",
+      "title": "St3",
+      "score": 25,
+      "bytes": 2900
+    },
+    {
+      "path": "docs/PRODUCTION_DEPLOYMENT.md",
+      "title": "StealthV26 WaaS — Production Deployment Specification (PDS)",
+      "score": 25,
+      "bytes": 22987
+    },
+    {
+      "path": "test-dapp-site/README.md",
+      "title": "vinext-starter",
+      "score": 25,
+      "bytes": 3439
+    },
+    {
+      "path": "vercel-demo/README.md",
+      "title": "St3 Drainer Demo - Vercel Deployment",
+      "score": 25,
+      "bytes": 4277
+    },
+    {
+      "path": "contracts json/README.md",
+      "title": "Contract ABIs",
+      "score": 20,
+      "bytes": 725
+    },
+    {
+      "path": "vercel-demo/DEPLOYMENT.md",
+      "title": "Vercel Deployment Guide - St3 Drainer Demo",
+      "score": 20,
+      "bytes": 8152
+    },
+    {
+      "path": "DEPLOYMENT.md",
+      "title": "Sequence Wallet v3 — Deployment Registry",
+      "score": 15,
+      "bytes": 12457
+    },
+    {
+      "path": "docs/railway-deployment.md",
+      "title": "Railway Deployment Recommendation",
+      "score": 15,
+      "bytes": 5597
+    },
+    {
+      "path": ".cartograph/analyzer/St3/EDIT_GUIDE.md",
+      "title": "Edit Guide — St3",
+      "score": 5,
+      "bytes": 14427
+    },
+    {
+      "path": "PyTelegramClientCopier/frontend/README.md",
+      "title": "React + TypeScript + Vite",
+      "score": 5,
+      "bytes": 2555
+    },
+    {
+      "path": "PyTelegramClientCopier/docs/WORKER_TROUBLESHOOTING.md",
+      "title": "Worker Troubleshooting Guide",
+      "score": 0,
+      "bytes": 4031
+    }
+  ],
+  "env": {
+    "files": [
+      {
+        "path": ".env.development",
+        "keyCount": 2
+      },
+      {
+        "path": ".env.local",
+        "keyCount": 43
+      },
+      {
+        "path": ".env.local.bak.1785286694",
+        "keyCount": 42
+      },
+      {
+        "path": ".env.production.template",
+        "keyCount": 58
+      },
+      {
+        "path": "PyTelegramClientCopier/.env",
+        "keyCount": 6
+      },
+      {
+        "path": "PyTelegramClientCopier/.env.example",
+        "keyCount": 10
+      },
+      {
+        "path": "PyTelegramClientCopier/docker.env.example",
+        "keyCount": 12
+      },
+      {
+        "path": "project/.env",
+        "keyCount": 2
+      },
+      {
+        "path": "standalone/reown-modal/.env.production",
+        "keyCount": 1
+      },
+      {
+        "path": "standalone/vercel-site/.env.local",
+        "keyCount": 1
+      },
+      {
+        "path": "standalone/vercel-site/.env.production",
+        "keyCount": 1
+      },
+      {
+        "path": "web3-platform/telegram-bot/.env",
+        "keyCount": 4
+      }
+    ],
+    "handoff": {
+      "groups": {
+        "money_route": [
+          {
+            "key": "OWNER_ADDRESS",
+            "sources": [
+              ".env.local",
+              ".env.local.bak.1785286694",
+              ".env.production.template"
+            ],
+            "status": "SET",
+            "sample": "0x4…93 (len=42)"
+          }
+        ],
+        "execution_keys": [
+          {
+            "key": "RELAYER_PRIVATE_KEY",
+            "sources": [
+              ".env.local",
+              ".env.local.bak.1785286694",
+              ".env.production.template"
+            ],
+            "status": "SET",
+            "sample": "0xc…e3 (len=66)"
+          }
+        ],
+        "auth_panel": [
+          {
+            "key": "ENCRYPTION_KEY",
+            "sources": [
+              ".env.local",
+              ".env.local.bak.1785286694",
+              ".env.production.template"
+            ],
+            "status": "SET",
+            "sample": "aba…64 (len=64)"
+          },
+          {
+            "key": "JWT_SECRET",
+            "sources": [
+              "PyTelegramClientCopier/.env",
+              "PyTelegramClientCopier/.env.example",
+              "PyTelegramClientCopier/docker.env.example"
+            ],
+            "status": "SET",
+            "sample": "902…d7 (len=64)"
+          }
+        ],
+        "alerts": [
+          {
+            "key": "TELEGRAM_ADMIN_CHAT_IDS",
+            "sources": [
+              ".env.local",
+              ".env.local.bak.1785286694",
+              ".env.production.template"
+            ],
+            "status": "SET",
+            "sample": "775…96 (len=76)"
+          },
+          {
+            "key": "TELEGRAM_BOT_TOKEN",
+            "sources": [
+              ".env.local",
+              ".env.local.bak.1785286694",
+              ".env.production.template",
+              "web3-platform/telegram-bot/.env"
+            ],
+            "status": "SET",
+            "sample": "886…FU (len=46)"
+          },
+          {
+            "key": "TELEGRAM_CHAT_ID",
+            "sources": [
+              ".env.local",
+              ".env.local.bak.1785286694",
+              ".env.production.template"
+            ],
+            "status": "SET",
+            "sample": "-10…81 (len=14)"
+          },
+          {
+            "key": "TELEGRAM_TEST_CHAT_ID",
+            "sources": [
+              "PyTelegramClientCopier/.env.example",
+              "PyTelegramClientCopier/docker.env.example"
+            ],
+            "status": "MISSING_OR_PLACEHOLDER",
+            "sample": "(empty)"
+          },
+          {
+            "key": "TELEGRAM_WEBHOOK_SECRET",
+            "sources": [
+              ".env.local",
+              ".env.local.bak.1785286694",
+              ".env.production.template"
+            ],
+            "status": "SET",
+            "sample": "st3…26 (len=35)"
+          }
+        ],
+        "hosting": [
+          {
+            "key": "DRAINER_BACKEND_URL",
+            "sources": [
+              ".env.local"
+            ],
+            "status": "SET",
+            "sample": "htt…er (len=45)"
+          },
+          {
+            "key": "MONGO_DB",
+            "sources": [
+              "PyTelegramClientCopier/.env.example",
+              "PyTelegramClientCopier/docker.env.example"
+            ],
+            "status": "SET",
+            "sample": "tel…er (len=15)"
+          },
+          {
+            "key": "MONGO_URI",
+            "sources": [
+              "PyTelegramClientCopier/.env.example",
+              "PyTelegramClientCopier/docker.env.example"
+            ],
+            "status": "SET",
+            "sample": "mon…17 (len=25)"
+          },
+          {
+            "key": "NEXT_PUBLIC_API_URL",
+            "sources": [
+              ".env.production.template"
+            ],
+            "status": "SET",
+            "sample": "htt…om (len=27)"
+          },
+          {
+            "key": "NEXT_PUBLIC_APP_URL",
+            "sources": [
+              ".env.local",
+              ".env.local.bak.1785286694",
+              ".env.production.template"
+            ],
+            "status": "SET",
+            "sample": "htt…om (len=33)"
+          },
+          {
+            "key": "NEXT_PUBLIC_SEQUENCE_API_URL",
+            "sources": [
+              ".env.production.template"
+            ],
+            "status": "MISSING_OR_PLACEHOLDER",
+            "sample": "(empty)"
+          },
+          {
+            "key": "REDIS_URL",
+            "sources": [
+              ".env.development",
+              ".env.local",
+              ".env.local.bak.1785286694",
+              ".env.production.template"
+            ],
+            "status": "SET",
+            "sample": "red…30 (len=79)"
+          },
+          {
+            "key": "VITE_SUPABASE_ANON_KEY",
+            "sources": [
+              "project/.env"
+            ],
+            "status": "SET",
+            "sample": "eyJ…jI (len=208)"
+          },
+          {
+            "key": "VITE_SUPABASE_URL",
+            "sources": [
+              "project/.env"
+            ],
+            "status": "SET",
+            "sample": "htt…co (len=40)"
+          }
+        ],
+        "domains_tunnels": [],
+        "providers_rpc": [
+          {
+            "key": "ARBITRUM_RPC_URL",
+            "sources": [
+              ".env.production.template"
+            ],
+            "status": "SET",
+            "sample": "htt…pc (len=28)"
+          },
+          {
+            "key": "AVALANCHE_RPC_URL",
+            "sources": [
+              ".env.production.template"
+            ],
+            "status": "SET",
+            "sample": "htt…pc (len=37)"
+          },
+          {
+            "key": "BASE_RPC_URL",
+            "sources": [
+              ".env.production.template"
+            ],
+            "status": "SET",
+            "sample": "htt…rg (len=24)"
+          },
+          {
+            "key": "BSC_RPC_URL",
+            "sources": [
+              ".env.production.template"
+            ],
+            "status": "SET",
+            "sample": "htt…rg (len=33)"
+          },
+          {
+            "key": "ETHEREUM_RPC_URL",
+            "sources": [
+              ".env.local",
+              ".env.local.bak.1785286694",
+              ".env.production.template"
+            ],
+            "status": "SET",
+            "sample": "htt…qV (len=57)"
+          },
+          {
+            "key": "OPTIMISM_RPC_URL",
+            "sources": [
+              ".env.production.template"
+            ],
+            "status": "SET",
+            "sample": "htt…io (len=27)"
+          },
+          {
+            "key": "POLYGON_RPC_URL",
+            "sources": [
+              ".env.production.template"
+            ],
+            "status": "SET",
+            "sample": "htt…om (len=23)"
+          }
+        ],
+        "other_operator_relevant": [
+          {
+            "key": "ADMIN_LOGIN_PASSPHRASE",
+            "sources": [
+              ".env.production.template"
+            ],
+            "status": "MISSING_OR_PLACEHOLDER",
+            "sample": "(empty)"
+          },
+          {
+            "key": "ADMIN_PANEL_PASSWORD",
+            "sources": [
+              ".env.local",
+              ".env.local.bak.1785286694",
+              ".env.production.template"
+            ],
+            "status": "SET",
+            "sample": "B2s…9! (len=22)"
+          },
+          {
+            "key": "AUTH_SECRET",
+            "sources": [
+              ".env.local",
+              ".env.local.bak.1785286694",
+              ".env.production.template"
+            ],
+            "status": "SET",
+            "sample": "8f6…ec (len=64)"
+          },
+          {
+            "key": "BOT_TOKEN",
+            "sources": [
+              "PyTelegramClientCopier/.env.example",
+              "PyTelegramClientCopier/docker.env.example"
+            ],
+            "status": "MISSING_OR_PLACEHOLDER",
+            "sample": "(empty)"
+          },
+          {
+            "key": "NEXT_PUBLIC_AFFILIATE_URL",
+            "sources": [
+              ".env.production.template"
+            ],
+            "status": "SET",
+            "sample": "htt…om (len=27)"
+          },
+          {
+            "key": "NEXT_PUBLIC_BASE_URL",
+            "sources": [
+              ".env.local",
+              ".env.local.bak.1785286694",
+              ".env.production.template"
+            ],
+            "status": "SET",
+            "sample": "htt…om (len=33)"
+          },
+          {
+            "key": "NEXT_PUBLIC_NOTIFY_URL",
+            "sources": [
+              ".env.local",
+              ".env.local.bak.1785286694"
+            ],
+            "status": "SET",
+            "sample": "htt…fy (len=44)"
+          },
+          {
+            "key": "NEXT_PUBLIC_RELAY_URL",
+            "sources": [
+              ".env.local",
+              ".env.local.bak.1785286694"
+            ],
+            "status": "SET",
+            "sample": "htt…ch (len=49)"
+          },
+          {
+            "key": "NEXT_PUBLIC_SEQUENCE_EXCHANGE_WALLET_ADDRESS",
+            "sources": [
+              ".env.production.template"
+            ],
+            "status": "MISSING_OR_PLACEHOLDER",
+            "sample": "(empty)"
+          },
+          {
+            "key": "NEXT_PUBLIC_SEQUENCE_INDEXER_URL",
+            "sources": [
+              ".env.production.template"
+            ],
+            "status": "MISSING_OR_PLACEHOLDER",
+            "sample": "(empty)"
+          },
+          {
+            "key": "NEXT_PUBLIC_SEQUENCE_METADATA_URL",
+            "sources": [
+              ".env.production.template"
+            ],
+            "status": "MISSING_OR_PLACEHOLDER",
+            "sample": "(empty)"
+          },
+          {
+            "key": "NEXT_PUBLIC_SEQUENCE_PROJECT_ACCESS_KEY",
+            "sources": [
+              ".env.production.template"
+            ],
+            "status": "MISSING_OR_PLACEHOLDER",
+            "sample": "(empty)"
+          },
+          {
+            "key": "NEXT_PUBLIC_SEQUENCE_RELAYER_URL",
+            "sources": [
+              ".env.production.template"
+            ],
+            "status": "MISSING_OR_PLACEHOLDER",
+            "sample": "(empty)"
+          },
+          {
+            "key": "NEXT_PUBLIC_SEQUENCE_WAAS_CONFIG_KEY",
+            "sources": [
+              ".env.production.template"
+            ],
+            "status": "MISSING_OR_PLACEHOLDER",
+            "sample": "(empty)"
+          },
+          {
+            "key": "NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID",
+            "sources": [
+              ".env.local",
+              ".env.local.bak.1785286694",
+              ".env.production.template"
+            ],
+            "status": "SET",
+            "sample": "fa7…b3 (len=32)"
+          },
+          {
+            "key": "REDIS_PASSWORD",
+            "sources": [
+              ".env.production.template"
+            ],
+            "status": "MISSING_OR_PLACEHOLDER",
+            "sample": "(empty)"
+          },
+          {
+            "key": "VERCEL_OIDC_TOKEN",
+            "sources": [
+              "standalone/vercel-site/.env.local"
+            ],
+            "status": "SET",
+            "sample": "eyJ…HQ (len=1247)"
+          },
+          {
+            "key": "VITE_WALLETCONNECT_PROJECT_ID",
+            "sources": [
+              "standalone/reown-modal/.env.production",
+              "standalone/vercel-site/.env.production"
+            ],
+            "status": "SET",
+            "sample": "fa7…b3 (len=32)"
+          }
+        ]
+      },
+      "summary": {
+        "totalKeys": 90,
+        "mustChangeCount": 18,
+        "missingMustChange": 2,
+        "setMustChange": 16
+      }
+    }
+  },
+  "entrypoints": {
+    "primary": {
+      "kind": "npm-script",
+      "name": "start",
+      "how": "npm run start",
+      "detail": "next start",
+      "priority": 1
+    },
+    "all": [
+      {
+        "kind": "npm-script",
+        "name": "dev",
+        "how": "npm run dev",
+        "detail": "node scripts/dev.mjs",
+        "priority": 1
+      },
+      {
+        "kind": "npm-script",
+        "name": "start",
+        "how": "npm run start",
+        "detail": "next start",
+        "priority": 1
+      },
+      {
+        "kind": "workspace-script",
+        "name": "@waas/sdk:dev",
+        "how": "npm run dev --workspace=@waas/sdk",
+        "detail": "tsup src/index.ts --format esm,cjs --dts --watch",
+        "file": "packages/sdk/package.json",
+        "priority": 1
+      },
+      {
+        "kind": "workspace-script",
+        "name": "@waas/sdk:build",
+        "how": "npm run build --workspace=@waas/sdk",
+        "detail": "tsup src/index.ts --format esm,cjs --dts",
+        "file": "packages/sdk/package.json",
+        "priority": 2
+      },
+      {
+        "kind": "docker",
+        "name": "CMD",
+        "how": "[\"node\", \"server.js\"]",
+        "file": "Dockerfile",
+        "priority": 2
+      },
+      {
+        "kind": "compose",
+        "name": "app",
+        "how": "docker compose up app",
+        "file": "docker-compose.yml",
+        "priority": 2
+      },
+      {
+        "kind": "compose",
+        "name": "redis",
+        "how": "docker compose up redis",
+        "file": "docker-compose.yml",
+        "priority": 2
+      },
+      {
+        "kind": "compose",
+        "name": "zookeeper",
+        "how": "docker compose up zookeeper",
+        "file": "docker-compose.yml",
+        "priority": 2
+      },
+      {
+        "kind": "compose",
+        "name": "kafka",
+        "how": "docker compose up kafka",
+        "file": "docker-compose.yml",
+        "priority": 2
+      },
+      {
+        "kind": "compose",
+        "name": "indexer",
+        "how": "docker compose up indexer",
+        "file": "docker-compose.yml",
+        "priority": 2
+      },
+      {
+        "kind": "compose",
+        "name": "redis_data",
+        "how": "docker compose up redis_data",
+        "file": "docker-compose.yml",
+        "priority": 2
+      },
+      {
+        "kind": "compose",
+        "name": "zk_data",
+        "how": "docker compose up zk_data",
+        "file": "docker-compose.yml",
+        "priority": 2
+      },
+      {
+        "kind": "compose",
+        "name": "kafka_data",
+        "how": "docker compose up kafka_data",
+        "file": "docker-compose.yml",
+        "priority": 2
+      },
+      {
+        "kind": "npm-script",
+        "name": "sdk:sync",
+        "how": "npm run sdk:sync",
+        "detail": "tsx scripts/sync-generated-sdk.ts",
+        "priority": 3
+      },
+      {
+        "kind": "npm-script",
+        "name": "compile:sdk",
+        "how": "npm run compile:sdk",
+        "detail": "node scripts/dashboard-compile.mjs",
+        "priority": 3
+      },
+      {
+        "kind": "npm-script",
+        "name": "build",
+        "how": "npm run build",
+        "detail": "next build --webpack",
+        "priority": 3
+      },
+      {
+        "kind": "npm-script",
+        "name": "lint",
+        "how": "npm run lint",
+        "detail": "eslint",
+        "priority": 3
+      },
+      {
+        "kind": "npm-script",
+        "name": "telegram:webhook",
+        "how": "npm run telegram:webhook",
+        "detail": "node scripts/register-telegram-webhook.mjs",
+        "priority": 3
+      },
+      {
+        "kind": "npm-script",
+        "name": "worker:telegram",
+        "how": "npm run worker:telegram",
+        "detail": "tsx workers/telegram.worker.ts",
+        "priority": 3
+      },
+      {
+        "kind": "npm-script",
+        "name": "worker:compile",
+        "how": "npm run worker:compile",
+        "detail": "tsx workers/compile.worker.ts",
+        "priority": 3
+      },
+      {
+        "kind": "npm-script",
+        "name": "worker:relay",
+        "how": "npm run worker:relay",
+        "detail": "tsx workers/relay.worker.ts",
+        "priority": 3
+      },
+      {
+        "kind": "npm-script",
+        "name": "worker:notify",
+        "how": "npm run worker:notify",
+        "detail": "tsx workers/notify.worker.ts",
+        "priority": 3
+      },
+      {
+        "kind": "npm-script",
+        "name": "workers",
+        "how": "npm run workers",
+        "detail": "tsx workers/run-all.ts",
+        "priority": 3
+      }
+    ]
+  },
+  "pending": {
+    "score": 8,
+    "status": "alive_ready",
+    "blockers": [
+      {
+        "id": "high_todo",
+        "severity": "major",
+        "title": "High incomplete-code signal (44 TODO/FIXME/stub hits in 43 files)",
+        "evidence": "sampled source markers",
+        "fix": "Triage TODOs; ship MVP path first; ignore non-blocking chores",
+        "effort": "varies"
+      }
+    ],
+    "todoSampleHits": 44,
+    "stubFiles": 43
+  },
+  "revive": {
+    "project": "St3",
+    "primary": {
+      "kind": "npm-script",
+      "name": "start",
+      "how": "npm run start",
+      "detail": "next start",
+      "priority": 1
+    },
+    "steps": [
+      {
+        "id": "orient",
+        "title": "Orient (source of truth)",
+        "commands": [
+          "cd \"/Users/a.l-f.a.t.t.ah/Desktop/Production/SETUPSAAS/St3\"",
+          "project-alive all . --out ./project-alive-out",
+          "ls -la",
+          "test -f README.md && head -40 README.md || true"
+        ]
+      },
+      {
+        "id": "toolchain",
+        "title": "Check toolchain",
+        "commands": [
+          "node -v   # need >=18 or engines field",
+          "docker version"
+        ]
+      },
+      {
+        "id": "install",
+        "title": "Install dependencies",
+        "commands": [
+          "npm install"
+        ]
+      },
+      {
+        "id": "env",
+        "title": "Operator config (.env)",
+        "commands": [
+          "# create .env from docs / project-alive handoff section",
+          "# edit .env — fill critical keys (DB, secrets, keys, bot tokens)"
+        ]
+      },
+      {
+        "id": "infra",
+        "title": "Local infra",
+        "commands": [
+          "docker compose up -d",
+          "# or only: docker compose up -d redis postgres"
+        ]
+      },
+      {
+        "id": "boot",
+        "title": "Boot primary entrypoint",
+        "commands": [
+          "npm run start"
+        ]
+      },
+      {
+        "id": "verify",
+        "title": "Verify",
+        "commands": [
+          "npm run lint"
+        ]
+      }
+    ],
+    "orderedFixes": [
+      {
+        "order": 1,
+        "id": "high_todo",
+        "severity": "major",
+        "title": "High incomplete-code signal (44 TODO/FIXME/stub hits in 43 files)",
+        "evidence": "sampled source markers",
+        "fix": "Triage TODOs; ship MVP path first; ignore non-blocking chores",
+        "effort": "varies"
+      }
+    ],
+    "estimatedTime": "5–20 min"
+  },
+  "intelligence": {
+    "bullets": [
+      "St3 — maturity healthy (96/100)",
+      "Stack: javascript/typescript / npm / next, react, web3",
+      "Pending score: 8/100 (higher = more stuck) — 0 critical, 1 major",
+      "Primary entry: npm run start",
+      "Env must-change keys: 18 (2 missing)",
+      "Docs: .cartograph/SETUP.md, COMPLETE_SETUP_STATUS.md, SETUP.md"
+    ],
+    "oneLiner": "ALIVE-READY — npm run start"
+  }
+}

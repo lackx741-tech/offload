@@ -1,5 +1,2 @@
-import { redirect } from "next/navigation";
-
-export default function HomePage() {
-  redirect("/login");
-}
+// Root page shows login with admin passphrase
+export { default } from "./login/page";

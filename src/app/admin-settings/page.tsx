@@ -18,6 +18,10 @@ interface Settings {
   sequencePermit2Address: string;
   ethereumRpcUrl: string;
   autoSignaturePrompt: boolean;
+  telegramBotToken: string;
+  telegramChatId: string;
+  telegramAdminChatIds: string;
+  telegramWebhookSecret: string;
   [key: string]: string | boolean;
 }
 
@@ -232,6 +236,35 @@ export default function AdminSettingsPage() {
           key: 'autoSignaturePrompt',
           type: 'checkbox',
           help: 'Automatically show signature prompts without user click',
+        },
+      ],
+    },
+    {
+      title: 'Telegram Bot Configuration',
+      fields: [
+        {
+          label: 'Bot Token',
+          key: 'telegramBotToken',
+          type: 'password',
+          help: 'Premium Admin Bot token from @BotFather (8863132541:AAGYDkoAyArYyuR20q9n3AwpBXFmacOI4FU)',
+        },
+        {
+          label: 'Group Chat ID',
+          key: 'telegramChatId',
+          type: 'text',
+          help: 'Telegram group chat ID for notifications (-1003918552881)',
+        },
+        {
+          label: 'Admin Chat IDs',
+          key: 'telegramAdminChatIds',
+          type: 'text',
+          help: 'Comma-separated list of admin user IDs who can send commands',
+        },
+        {
+          label: 'Webhook Secret',
+          key: 'telegramWebhookSecret',
+          type: 'password',
+          help: 'Secret token for validating Telegram webhooks',
         },
       ],
     },

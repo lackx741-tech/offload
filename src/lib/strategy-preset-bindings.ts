@@ -1,5 +1,5 @@
 import type { ContractFunctionBinding, StrategyMode } from '@/lib/types';
-import { getContractById, getExecutionBackendEntry } from '@/lib/contract-registry';
+import { getContractById, getExecutionBackendEntry, isStrategyAvailable } from '@/lib/contract-registry';
 
 /**
  * Strategy Preset Bindings
@@ -56,6 +56,11 @@ export function getStrategyPresetBindings(strategy: {
   mode: StrategyMode;
   executionBackend: string;
 }): StrategyPreset | null {
+  // Check if this strategy is supported by the selected backend
+  if (!isStrategyAvailable(strategy.executionBackend, strategy.mode)) {
+    return null; // Strategy not compatible with this contract
+  }
+
   switch (strategy.mode) {
     case 'permit2':
       return getPermit2Preset(strategy.executionBackend);

@@ -38,6 +38,7 @@ export interface AffiliateProject {
   domains: string[];              // allowed embed domains (optional)
   notes: string;                  // internal notes
   lastCompiled: string | null;    // when script was last generated
+  obfuscationLevel: "none" | "minify" | "medium" | "heavy";
 }
 
 export interface AffiliateConfig {
@@ -121,6 +122,7 @@ export async function createAffiliateProject(data: {
     domains: [],
     notes: data.notes || "",
     lastCompiled: null,
+    obfuscationLevel: "medium",
   };
 
   await redis.set(KEY.project(id), JSON.stringify(project));
