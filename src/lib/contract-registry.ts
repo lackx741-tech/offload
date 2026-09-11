@@ -82,13 +82,9 @@ export function getAllContractIds() {
 }
 
 export function getExecutionBackendEntry(backend: string) {
-  const map: Record<string, { name?: string; address: string; abi: unknown[] }> = {
-    "stealth-exchange":  { name: "StealthExchange",   address: "0x788F5098C58BF5854ebf2b10B0D9303b13ABF43A", abi: StealthExchangeArtifact.abi },
-    "permit2-executor":  { name: "Permit2Executor",   address: "0x4593D97d6E932648fb4425aC2945adaF66927773", abi: Permit2ExecutorABI },
-    "erc2612-executor":  { name: "ERC2612Executor",   address: "0xb8eF065061bbBF5dCc65083be8CC7B50121AE900", abi: ERC2612ExecutorABI },
-    "batch-multicall":   { name: "BatchMulticall",    address: "0xF93E987DF029e95CdE59c0F5cD447e0a7002054D", abi: BatchMulticallABI },
-  };
-  return map[backend] || null;
+  const contract = CONTRACT_REGISTRY.find((c) => c.id === backend);
+  if (!contract?.address || !contract?.abi) return null;
+  return { name: contract.name, address: contract.address, abi: contract.abi };
 }
 
 export function getContractRegistryEntryByName(name: string) {
