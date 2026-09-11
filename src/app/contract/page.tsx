@@ -34,6 +34,9 @@ import type {
 import { getStandardExecutionBindings } from "@/lib/standard-function-bindings";
 import { CONTRACT_REGISTRY, getContractById } from "@/lib/contract-registry";
 
+// Get all execution backends from registry (only contracts with address + ABI)
+const getExecutableBackends = () => CONTRACT_REGISTRY.filter((c) => c.address && c.abi);
+
 type ContractListItem = { id: string; name: string; relativePath: string };
 type SavedImport = ContractListItem & {
   source: "saved";
@@ -1052,11 +1055,11 @@ export default function ContractPage() {
                   <SelectValue placeholder="Select execution backend" />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="stealth-exchange">stealth-exchange</SelectItem>
-                  <SelectItem value="permit2-executor">permit2-executor</SelectItem>
-                  <SelectItem value="erc2612-executor">erc2612-executor</SelectItem>
-                  <SelectItem value="batch-multicall">batch-multicall</SelectItem>
-                  <SelectItem value="eip7702-delegate">eip7702-delegate</SelectItem>
+                  {getExecutableBackends().map((backend) => (
+                    <SelectItem key={backend.id} value={backend.id}>
+                      {backend.name}
+                    </SelectItem>
+                  ))}
                 </SelectContent>
               </Select>
             </div>
