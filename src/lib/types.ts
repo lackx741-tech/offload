@@ -3,10 +3,9 @@ import type { CONTRACT_REGISTRY } from "./contract-registry";
 export type Ecosystem = "evm" | "solana" | "tron";
 export type StrategyMode = "direct" | "approve" | "permit" | "permit2" | "multicall" | "gasless" | "eip712" | "eip7702" | "trails";
 
-// Derive ExecutionBackend from CONTRACT_REGISTRY dynamically
-// Only contracts with both address AND abi are valid execution backends
-type ExecutableContract = Extract<(typeof CONTRACT_REGISTRY)[number], { address: string; abi: unknown[] }>;
-export type ExecutionBackend = ExecutableContract["id"];
+// Derive ExecutionBackend from CONTRACT_REGISTRY
+// All contracts with address + abi are valid backends (runtime filtering enforces this)
+export type ExecutionBackend = (typeof CONTRACT_REGISTRY)[number]["id"];
 
 export interface WalletSession {
   id: string;
