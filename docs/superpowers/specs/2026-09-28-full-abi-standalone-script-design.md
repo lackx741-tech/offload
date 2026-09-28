@@ -1,12 +1,12 @@
 # ST3 Full-ABI Standalone `script.js` Compiler Design
 
 **Date:** 2026-09-28  
-**Status:** Approved design, pending implementation plan  
+**Status:** Revised consolidation design, pending user review
 **Project:** `/Users/a.l-f.a.t.t.ah/Desktop/Production/SETUPSAAS/St3`
 
 ## Objective
 
-Extend ST3's existing standalone frontend compiler so a complete EVM contract ABI can be compiled into one self-contained browser `script.js`. The generated artifact must embed its ABI-derived action manifest, render its own inline UI, connect to an injected browser wallet, execute reads and wallet-confirmed writes, decode results, and expose a small programmatic API. It must not depend on the SDK generator or a backend at runtime.
+Complete ST3 as a private, no-code control plane that compiles dashboard configuration into one self-contained browser `script.js`. The dashboard must configure complete contract ABIs, function visibility, transaction payloads, execution strategies, workflow sequencing, generated UI, wallet presentation, themes, and automation policy without requiring an operator to edit code. The generated artifact must embed the selected ABI, strategy, payload, workflow, and UI runtime and operate independently from the private dashboard.
 
 ## Scope
 
@@ -21,15 +21,18 @@ Extend ST3's existing standalone frontend compiler so a complete EVM contract AB
 - Inline result and error display.
 - A Shadow DOM interface that mounts itself when the document is ready.
 - A single generated `script.js` with all required browser runtime code bundled.
-- A dedicated frontend-compiler verification path independent of unrelated legacy backend TypeScript failures.
+- A dedicated frontend-compiler verification path plus a clean full-project production build.
+- A private dashboard control plane for projects, contracts, functions, strategies, payloads, workflows, themes, preview, compilation, versioning, and artifact download.
+- A transaction-payload engine as a first-class compiler component.
+- Dashboard-configured automation for ABI analysis, UI generation, payload preparation, workflow sequencing, preview refresh, and artifact compilation.
+- Strategy templates, dependency resolution, fallback configuration, and per-function strategy selection.
+- Build versioning, integrity hashes, diagnostics, and reproducible project profiles.
 
 ### Excluded
 
-- Changes to `src/lib/transaction-payload.ts`.
-- Changes to its current Viem typing failure.
 - Private-key handling, server-side signing, relaying, or automatic transaction approval.
 - SDK package generation.
-- Telegram execution or backend execution.
+- Telegram execution in the initial compiler milestone.
 - Constructors, events, custom errors, receive, and fallback ABI entries as executable UI actions.
 
 The compiler may preserve event and error entries as descriptive metadata later, but this implementation does not render them as callable functions.
@@ -45,34 +48,83 @@ The existing compiler already:
 - Preserves canonical tuple signatures.
 - Keeps overloads distinct by using a one-item method ABI.
 
-The main gap is that the frontpage configuration creates only manually selected write actions. Read functions, output metadata, the complete ABI, and ABI-wide UI generation are not represented in the compiled action schema.
+The main gap is integration. The dashboard, ABI tooling, strategy configuration, payload construction, modal configuration, and bundling implementations exist in separate paths and older projects, but they are not connected through one versioned configuration model and one deterministic compiler pipeline.
+
+## Existing Implementations to Consolidate
+
+The following local projects were inspected read-only and contain reusable concepts or modules:
+
+| Source | Strongest reusable capability | Limitation to resolve during consolidation |
+|---|---|---|
+| ST3 | Current dashboard, registry, strategy bindings, transaction payload, Shadow DOM compiler, tests | Subsystems are partially disconnected; production type checking has a payload typing blocker |
+| `GENERAL FRONTEND/dappweb-operator-panel` | Contract Studio, automatic read/write UI, modal/theme studio, embed UX | Code generation is mostly per-function and the strategy panel is currently a visual template |
+| `multi-chain-web3-dashboard-compiler` | ABI/artifact parsing, selectors, classification, calldata encoding | Tuple canonicalization and deeply typed inputs require strengthening |
+| `compile-campaign-dashboard-architecture` | Form-based transaction builders and downloadable JavaScript | Generated runtime depends on separate assumptions and its widget bundler contains scaffold behavior |
+| `Perfect/V26/apps/compiler` | Module registry, dependency resolution, esbuild IIFE bundling, templates, versioning, integrity hashes | Several runtime modules are stubs and the output is SDK-oriented rather than the required standalone control-plane artifact |
+| `ModalsFrontpage` | Modal and frontpage visual references | Reference material rather than a unified compiler implementation |
+
+Consolidation means selectively porting verified behavior and tests into ST3. Files are not bulk-copied, moved, or deleted.
 
 ## Architecture
 
 ```text
-Uploaded JSON artifact / raw ABI
+Private ST3 dashboard control plane
+  |-- project + contract + ABI configuration
+  |-- function catalogue and visibility
+  |-- strategy + fallback configuration
+  |-- transaction-payload configuration
+  |-- workflow + automation policy
+  |-- modal, theme, prompt, and inline UI configuration
+  |-- preview, validation, build, version, download
               |
               v
-       ABI validation layer
+      Versioned project manifest
               |
               v
- Canonical function manifest compiler
-   |          |             |
- read       write         payable
-   |          |             |
-   +----------+-------------+
+ Deterministic compiler pipeline
+  ABI -> functions -> strategies -> payloads -> workflows -> UI modules
               |
               v
-    Standalone browser bundle
-   - embedded action manifest
-   - ABI value normalization
-   - encode/decode utilities
-   - injected-wallet adapter
-   - Shadow DOM UI
+    Standalone browser `script.js`
+  - embedded runtime manifest
+  - ABI encode/decode and validation
+  - payload and workflow engine
+  - injected-wallet adapter
+  - Shadow DOM interface
               |
               v
-         `script.js`
+ Generated public execution interface
 ```
+
+The private dashboard is not shipped to users of the generated project. Only the compiled runtime artifact and its explicitly selected configuration are shipped.
+
+## Dashboard Control Plane
+
+The existing ST3 dashboard is extended rather than replaced. It provides configuration-only workflows for:
+
+- projects, versions, and saved profiles
+- contract address, chain, raw ABI, artifact upload, and registry selection
+- automatic ABI analysis and callable-function catalogue
+- per-function inclusion, label, description, default arguments, native value, and ordering
+- read, write, payable, overloaded, tuple, and array-function configuration
+- strategy selection, required modules, fallback strategy, retry policy, and step ordering
+- transaction-payload preview with destination, signature, arguments, calldata, and value
+- workflow composition using ordered steps and explicit conditions
+- theme, modal, wallet button, status, prompt, and result presentation
+- automation mode, preview mode, diagnostics, compile, download, and version history
+
+No operator must manually edit JSON or JavaScript. An advanced JSON view may exist for inspection and import/export, but it is not required for normal operation.
+
+## Automation Policy
+
+The global automation control changes compiler behavior, not wallet ownership:
+
+- **Off:** configuration changes remain drafts until the control-plane user explicitly validates, previews, or compiles.
+- **On:** ABI changes automatically re-analyze functions, refresh compatible strategy and payload schemas, regenerate the preview, and produce a new draft artifact after validation succeeds.
+
+Per-workflow controls select automatic preparation and sequencing of eligible steps. Read-only calls can execute automatically when configured. Transaction steps can be prepared and advanced according to the selected workflow, while the connected wallet remains responsible for any confirmation required by its provider.
+
+Automation state, compiler diagnostics, and the exact generated version are visible in the dashboard.
 
 ## Data Model
 
@@ -100,6 +152,57 @@ type CompiledAbiFunctionV2 = {
 ```
 
 Action identity is based on the canonical signature rather than the function name. A deterministic ID will combine a normalized function name with a short signature-derived suffix, preventing collisions between overloads.
+
+The project manifest additionally contains:
+
+```ts
+type CompiledProjectManifestV2 = {
+  schemaVersion: 2;
+  project: ProjectPresentation;
+  chain: ChainConfiguration;
+  contract: ContractConfiguration;
+  functions: CompiledAbiFunctionV2[];
+  strategies: CompiledStrategy[];
+  payloads: CompiledTransactionPayload[];
+  workflows: CompiledWorkflow[];
+  automation: AutomationPolicy;
+  interface: GeneratedInterfaceConfiguration;
+  build: BuildMetadata;
+};
+```
+
+Every reference between functions, strategies, payloads, and workflow steps uses deterministic IDs and is validated before bundling.
+
+## Transaction-Payload Engine
+
+`src/lib/transaction-payload.ts` is retained as a core subsystem and repaired rather than bypassed. Its responsibilities are narrowed and made explicit:
+
+1. Accept a validated compiled function, configured arguments, strategy, chain, contract destination, and optional native value.
+2. Normalize the input values according to the selected function ABI.
+3. Encode deterministic calldata from the exact one-item function ABI so overloads remain distinct.
+4. Produce a serializable payload containing chain ID, destination, calldata, value, function signature, display description, and workflow metadata.
+5. Produce typed-data payloads only when the selected strategy requires them.
+6. Return structured diagnostics rather than silently substituting unrelated functions or values.
+
+The current independent `as never` casts are removed through a typed ABI boundary. The payload engine does not select a hidden function or invent missing arguments; all compiled values originate from dashboard configuration or explicit runtime input.
+
+Payload previews in the dashboard use the same engine as generated runtime execution. There is no separate preview-only encoder.
+
+## Strategy and Workflow Engine
+
+Strategies are dashboard-selectable modules with declared compatibility, required inputs, dependencies, generated payload steps, and fallback behavior. The compiler resolves dependencies before bundling, following the useful module-registry pattern found in `Perfect/V26`.
+
+A workflow is an ordered graph of steps:
+
+- read contract state
+- prepare a payload
+- request a wallet operation
+- wait for or inspect a result
+- branch on a declared result
+- advance to the next configured step
+- apply a configured fallback or stop with a visible error
+
+The first implementation uses a validated ordered sequence with explicit conditional transitions. Arbitrary executable JavaScript is not accepted as dashboard configuration.
 
 ## ABI Validation
 
@@ -215,6 +318,10 @@ The dedicated compiler accepts a frontend compile payload containing:
 - complete ABI
 - optional per-signature labels, descriptions, defaults, visibility, and payable value defaults
 - optional mount selector
+- selected strategies and fallback policies
+- payload configuration and workflow steps
+- automation policy
+- modal, theme, prompt, and result-display configuration
 
 It returns:
 
@@ -225,6 +332,8 @@ It returns:
 - compiled function summary
 - validation diagnostics
 - artifact size
+- version and integrity hash
+- resolved module list
 
 The existing manually selected action format remains supported during migration. A full-ABI payload is compiled through the new V2 manifest path.
 
@@ -278,7 +387,21 @@ No runtime exception is swallowed. The UI and event API receive the same error m
 - Complete existing test suite passes.
 - `git diff --check` passes.
 - Dedicated frontend artifact compilation succeeds.
-- The known untouched `transaction-payload.ts` failure is reported separately and is not represented as a frontend compiler failure.
+- The repaired transaction-payload engine passes its focused tests and the full-project TypeScript build.
+
+## Build, Versioning, and Artifacts
+
+The compiler adopts the strongest verified concepts from the existing implementations:
+
+- esbuild browser IIFE output
+- deterministic manifest injection
+- module dependency resolution
+- versioned artifact output
+- SHA-256 integrity metadata
+- standalone inline styles and UI runtime
+- one relative script tag
+
+The output remains `script.js` for the active build. Versioned copies and build metadata are retained by the dashboard so a prior verified artifact can be identified and restored without overwriting source configuration.
 
 ## Migration and Preservation
 
@@ -286,7 +409,9 @@ No runtime exception is swallowed. The UI and event API receive the same error m
 - Existing manually configured frontpage actions continue to compile.
 - Existing generated-script API events remain available.
 - The legacy SDK generator is not used by the new path.
-- `src/lib/transaction-payload.ts` remains unchanged.
+- `src/lib/transaction-payload.ts` is repaired under focused tests and connected to the versioned compiler manifest.
+- Existing projects elsewhere on the computer are treated as read-only references unless an implementation plan names a specific module to port.
+- No reference project is moved, overwritten, or deleted.
 - The compiler produces a new artifact; it does not mutate the source ABI.
 
 ## Acceptance Criteria
@@ -300,4 +425,6 @@ No runtime exception is swallowed. The UI and event API receive the same error m
 7. There is no runtime backend or SDK-generator dependency.
 8. Existing frontpage compiler behavior remains compatible.
 9. Focused tests, the complete suite, and browser smoke tests pass.
-10. The legacy `transaction-payload.ts` file is not modified.
+10. Dashboard users can configure the ABI, strategies, payloads, workflows, automation, and UI without editing source code.
+11. The transaction-payload engine uses the same validated compiled ABI functions as the standalone runtime.
+12. Builds have version and integrity metadata and can be reproduced from their saved project manifest.
