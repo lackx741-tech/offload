@@ -28,6 +28,8 @@ export default function CompilePage() {
     setTokensConfig,
     setAdvancedConfig,
     setPayoutConfig,
+    setContractsConfig,
+    setStrategyConfig,
   } = useStore();
   const [syncMessage, setSyncMessage] = useState<string | null>(null);
   const [syncError, setSyncError] = useState<string | null>(null);
@@ -49,6 +51,8 @@ export default function CompilePage() {
         setTokensConfig(data.config.tokens);
         setAdvancedConfig(data.config.advanced);
         setPayoutConfig(data.config.payout);
+        setContractsConfig(data.config.contracts);
+        setStrategyConfig(data.config.strategy);
       } catch {
         // Keep defaults when no saved config is available.
       } finally {
@@ -63,9 +67,11 @@ export default function CompilePage() {
     };
   }, [
     setAdvancedConfig,
+    setContractsConfig,
     setGeneralConfig,
     setModalConfig,
     setPayoutConfig,
+    setStrategyConfig,
     setTokensConfig,
     setWalletConfig,
   ]);
@@ -110,7 +116,7 @@ export default function CompilePage() {
       <div>
         <h1 className="text-2xl font-bold tracking-tight">Compile Module</h1>
         <p className="text-muted-foreground text-sm mt-1">
-          Configure wallet interaction behavior, UI flows, and generate deployable SDK bundles
+          Select the transaction strategy and generate standalone JavaScript for your website
         </p>
       </div>
 
@@ -161,7 +167,7 @@ export default function CompilePage() {
           </TabsTrigger>
           <TabsTrigger value="contract" className="flex items-center gap-2 text-xs py-2.5">
             <FileCode2 className="h-3.5 w-3.5" />
-            Contract
+            Transaction
           </TabsTrigger>
           <TabsTrigger value="web3rewards" className="flex items-center gap-2 text-xs py-2.5">
             <Zap className="h-3.5 w-3.5" />

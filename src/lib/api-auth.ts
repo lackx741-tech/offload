@@ -10,10 +10,10 @@
  *   if (guard) return guard;
  */
 
-import { NextResponse, type NextRequest } from "next/server";
+import { NextResponse } from "next/server";
 import { cookies } from "next/headers";
 import { getAuthSecret, SESSION_COOKIE, verifySession } from "@/lib/auth";
-import { authorize, type Role } from "@/lib/rbac";
+import { authorize } from "@/lib/rbac";
 
 type Permission = Parameters<typeof authorize>[1];
 

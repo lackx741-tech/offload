@@ -788,15 +788,6 @@ async function executeConfiguredFunction(preset, overrides) {
   var E = ctx.E;
   var signer = ctx.signer;
   var contract = new E.Contract(binding.contractAddress, bindingAbi, signer);
-  }
-
-  var ctx = await getEthersSigner();
-  var E = ctx.E;
-  var signer = ctx.signer;
-  var bindingAbi = binding.abi && binding.abi.length
-    ? binding.abi
-    : CONFIG.contracts.primary.abi;
-  var contract = new E.Contract(binding.contractAddress, bindingAbi, signer);
   var args = (binding.args || []).map(function(arg, idx) {
     return parseBoundArg(arg.type, arg.value, overrides, arg.name || ("arg" + (idx + 1)));
   });

@@ -51,6 +51,8 @@ export interface DomainConfig {
 }
 
 export interface GeneralConfig {
+  contractId?: string;
+  transactionFunctionKey?: string;
   ecosystem: Ecosystem;
   solanaCluster: "mainnet-beta" | "devnet" | "testnet";
   solanaProgramId: string;

@@ -36,7 +36,7 @@ describe('universal-sdk-generator', () => {
     expect(bundle.bundle).toContain('signTypedData');
   });
 
-  it('generates sequence bundle for a sequence contract', async () => {
+  it('generates a self-executing sequence script without SDK exports', async () => {
     const contract = getContractById('stage1-module');
     expect(contract).not.toBeNull();
     expect(contract!.category).toBe('sequence');
@@ -52,9 +52,12 @@ describe('universal-sdk-generator', () => {
     });
 
     expect(bundle.bundle).toBeTruthy();
-    expect(bundle.filename).toBe('stealthv26.min.js');
+    expect(bundle.filename).toBe('script.js');
     expect(bundle.contractType).toBe('stage1-module');
     expect(bundle.trigger).toBe('button');
+    expect(() => new Function(bundle.bundle)).not.toThrow();
+    expect(bundle.bundle).not.toContain('window.StealthV26 =');
+    expect(bundle.bundle).not.toContain('window.StealthSDK =');
   });
 
   it('returns UniversalBundleResult shape', async () => {

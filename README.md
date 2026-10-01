@@ -7,6 +7,7 @@
 Start here:
 
 - [Project Overview](/Users/a.l-f.a.t.t.ah/Desktop/Production/SETUPSAAS/St3/docs/project-overview.md)
+- [Complete Build Guide](/Users/a.l-f.a.t.t.ah/Desktop/Production/SETUPSAAS/St3/docs/BUILD_GUIDE.md)
 - [Architecture](/Users/a.l-f.a.t.t.ah/Desktop/Production/SETUPSAAS/St3/docs/architecture.md)
 - [Contract Backends](/Users/a.l-f.a.t.t.ah/Desktop/Production/SETUPSAAS/St3/docs/contract-backends.md)
 - [Railway Deployment Recommendation](/Users/a.l-f.a.t.t.ah/Desktop/Production/SETUPSAAS/St3/docs/railway-deployment.md)

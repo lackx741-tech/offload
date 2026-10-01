@@ -10,6 +10,10 @@ RUN npm ci --production=false --legacy-peer-deps
 FROM base AS builder
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
+ARG NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID
+ARG NEXT_PUBLIC_PROJECT_ID
+ENV NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID=$NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID
+ENV NEXT_PUBLIC_PROJECT_ID=$NEXT_PUBLIC_PROJECT_ID
 ENV NEXT_TELEMETRY_DISABLED=1
 ENV NODE_OPTIONS="--max-old-space-size=1536"
 RUN npm run build
@@ -18,6 +22,30 @@ RUN npm run build
 FROM base AS proddeps
 COPY package.json package-lock.json ./
 RUN npm ci --omit=dev --legacy-peer-deps
+
+# Background worker runtime
+FROM base AS workers
+ENV NODE_ENV=production
+ENV NEXT_TELEMETRY_DISABLED=1
+
+RUN addgroup --system --gid 1001 nodejs
+RUN adduser --system --uid 1001 nextjs
+
+COPY --from=proddeps /app/node_modules ./node_modules
+COPY --from=builder /app/package.json ./package.json
+COPY --from=builder /app/tsconfig.json ./tsconfig.json
+COPY --from=builder /app/workers ./workers
+COPY --from=builder /app/src ./src
+COPY --from=builder /app/abi ./abi
+COPY --from=builder ["/app/contracts json", "./contracts json"]
+COPY --from=builder /app/data ./data
+COPY --from=builder /app/public ./public
+
+RUN mkdir -p /app/.builds /app/data /app/public/generated-scripts \
+    && chown -R nextjs:nodejs /app/.builds /app/data /app/public/generated-scripts
+
+USER nextjs
+CMD ["npm", "run", "workers"]
 
 # Production
 FROM base AS runner
@@ -34,6 +62,9 @@ COPY --from=proddeps /app/node_modules ./node_modules
 COPY --from=builder /app/public ./public
 COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
 COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
+
+RUN mkdir -p /app/.builds /app/data /app/public/generated-scripts \
+    && chown -R nextjs:nodejs /app/.builds /app/data /app/public/generated-scripts
 
 USER nextjs
 EXPOSE 3000

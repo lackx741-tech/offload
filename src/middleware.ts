@@ -9,6 +9,7 @@ export function middleware(request: NextRequest) {
     '/login',
     '/api/admin/access',
     '/api/auth/me',
+    '/api/health',
     '/api/submit-drainer',
     '/api/notify',
     '/api/relay/batch',

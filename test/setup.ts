@@ -1,4 +1,4 @@
-import { describe, it, expect, beforeEach, afterEach } from 'vitest';
+import { beforeEach, afterEach } from 'vitest';
 import * as fs from 'fs';
 import * as path from 'path';
 import * as os from 'os';
@@ -15,12 +15,3 @@ afterEach(() => {
     fs.rmSync(tmpDir, { recursive: true, force: true });
   }
 });
-
-// ── Helper: create a fake DATA_DIR + PUBLIC_DIR structure ─────────────────
-function createTestDirs(dataSubdir: string, publicSubdir: string) {
-  const dataDir = path.join(tmpDir, dataSubdir);
-  const publicDir = path.join(tmpDir, publicSubdir);
-  fs.mkdirSync(dataDir, { recursive: true });
-  fs.mkdirSync(publicDir, { recursive: true });
-  return { dataDir, publicDir };
-}

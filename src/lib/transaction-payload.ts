@@ -7,6 +7,8 @@ import {
   getAddress,
   isAddress,
   maxUint256,
+  type Abi,
+  type AbiFunction,
   type Address,
   type Hex,
 } from "viem";
@@ -53,13 +55,6 @@ export const PERMIT2_TYPES = {
     { name: "sigDeadline", type: "uint256" },
   ],
 } as const;
-
-type AbiItem = {
-  type?: string;
-  name?: string;
-  stateMutability?: string;
-  inputs?: { name?: string; type?: string; components?: unknown[] }[];
-};
 
 export type TokenAmount = {
   token: string;
@@ -121,17 +116,20 @@ function asAddress(value: string, label: string): Address {
   return getAddress(value);
 }
 
-function extractAbi(meta: ContractMeta | undefined): AbiItem[] {
+function extractAbi(meta: ContractMeta | undefined): Abi {
   const raw = meta?.abi as unknown;
-  if (Array.isArray(raw)) return raw as AbiItem[];
+  if (Array.isArray(raw)) return raw as Abi;
   if (raw && typeof raw === "object" && Array.isArray((raw as { abi?: unknown }).abi)) {
-    return (raw as { abi: AbiItem[] }).abi;
+    return (raw as { abi: Abi }).abi;
   }
   return [];
 }
 
-function pickFn(abi: AbiItem[], requested?: string): AbiItem | null {
-  const fns = abi.filter((f) => f.type === "function" && f.stateMutability !== "view" && f.stateMutability !== "pure");
+function pickFn(abi: Abi, requested?: string): AbiFunction | null {
+  const fns = abi.filter(
+    (item): item is AbiFunction =>
+      item.type === "function" && item.stateMutability !== "view" && item.stateMutability !== "pure",
+  );
   if (requested) {
     const hit = fns.find((f) => f.name === requested);
     if (hit) return hit;
@@ -190,7 +188,7 @@ export function buildPermit2TypedData(args: {
 }
 
 function fillArgs(
-  fn: AbiItem,
+  fn: AbiFunction,
   ctx: { wallet: Address; receiver: Address; tokens: Address[]; amounts: bigint[] },
 ): unknown[] {
   const inputs = fn.inputs || [];
@@ -254,9 +252,9 @@ export function encodeContractCall(args: {
   );
 
   const data = encodeFunctionData({
-    abi: abi as never,
-    functionName: fn.name as never,
-    args: fillArgs(fn, { wallet, receiver, tokens, amounts }) as never,
+    abi,
+    functionName: fn.name,
+    args: fillArgs(fn, { wallet, receiver, tokens, amounts }),
   });
 
   return {

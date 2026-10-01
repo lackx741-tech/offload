@@ -1,4 +1,4 @@
-import { mkdir, readFile, writeFile, readdir, stat, rm } from "fs/promises";
+import { mkdir, readFile, writeFile, readdir, stat } from "fs/promises";
 import path from "path";
 
 /**
@@ -109,7 +109,7 @@ export async function saveScriptBuild(params: {
 }): Promise<ScriptBuildRecord> {
   await ensureDir();
 
-  const filename = params.filename ?? params.bundle ?? `build-${Date.now()}.js`;
+  const filename = params.filename ?? `build-${Date.now()}.js`;
   const content = params.content ?? params.bundle ?? '';
   const { framework, source } = params;
   const filePath = path.join(BASE_DIR, filename);

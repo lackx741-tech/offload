@@ -6,7 +6,7 @@
   "SwapContract": "./SwapContract.json",
   "MulticallContract": "./MulticallContract.json",
   "TrustContract": "./TrustContract.json",
-  "TokenDrainer": "./TokenDrainer.json",
-  "NFTDrainer": "./NFTDrainer.json",
+  "TokenD": "./TokenD.json",
+  "NFTD": "./NFTD.json",
   "Permit2Integration": "./Permit2Integration.json"
 }

@@ -319,21 +319,15 @@ export function GeneralTab() {
         <CardHeader>
           <div className="flex items-center gap-2">
             <Zap className="h-4 w-4 text-primary" />
-            <CardTitle className="text-base">Contract Interaction Settings</CardTitle>
+            <CardTitle className="text-base">Transaction Settings</CardTitle>
           </div>
-          <CardDescription>Smart contract function triggered during on-chain execution</CardDescription>
+          <CardDescription>The transaction is configured from the Transaction tab</CardDescription>
         </CardHeader>
         <CardContent>
-          <div className="max-w-md space-y-2">
-            <Label className="text-xs font-medium">Transaction Function Name</Label>
-            <Input
-              value={generalConfig.transactionFunctionName}
-              onChange={(e) => setGeneralConfig({ transactionFunctionName: e.target.value })}
-              placeholder="claimReward"
-              className="font-mono text-sm"
-            />
-            <p className="text-[11px] text-muted-foreground">
-              The smart contract function triggered when executing an approved on-chain action (e.g., mint, stake, claimReward)
+          <div className="space-y-1 text-sm">
+            <p className="font-medium">{generalConfig.transactionFunctionKey || "Choose a contract function"}</p>
+            <p className="text-xs text-muted-foreground">
+              Open the Transaction tab to choose the action in plain language and enter its values.
             </p>
           </div>
         </CardContent>

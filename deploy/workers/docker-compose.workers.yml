@@ -1,18 +1,19 @@
 # ═══════════════════════════════════════════════════════════
-# StealthV26 — BullMQ Workers (additive compose overlay)
+# StealthV26 — BullMQ Workers (compatibility overlay)
 # ═══════════════════════════════════════════════════════════
 #
 # Usage:
 #   docker compose -f docker-compose.prod.yml -f deploy/workers/docker-compose.workers.yml up -d --build
 #
-# Adds the workers service (telegram, compile, notify, relay queues)
-# sharing the same image, Redis, and generated-scripts volume as the app.
+# The production Compose file includes this service directly. This overlay
+# remains available for deployments using an earlier base file.
 #
 services:
   workers:
     build:
       context: .
       dockerfile: Dockerfile
+      target: workers
     container_name: waas-workers
     command: ["npm", "run", "workers"]
     env_file: .env.local
@@ -20,11 +21,15 @@ services:
       NODE_ENV: production
       REDIS_URL: redis://redis:6379
       DISABLE_REDIS: "false"
+      KAFKA_BROKERS: kafka:9092
     volumes:
       - app_data:/app/data
       - app_generated:/app/public/generated-scripts
+      - app_builds:/app/.builds
     depends_on:
       redis:
+        condition: service_healthy
+      kafka:
         condition: service_healthy
     restart: always
     deploy:

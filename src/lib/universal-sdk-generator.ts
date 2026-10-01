@@ -56,7 +56,7 @@ export async function generateUniversalBundle(
     const bundle = generateSDKBundle({
       general: config.general,
       wallet: config.wallet,
-      modal: { ...config.modal, exposeExternalSDK: true },
+      modal: { ...config.modal, exposeExternalSDK: false },
       tokens: config.tokens,
       advanced: config.advanced,
       contracts: config.contracts,
@@ -67,7 +67,7 @@ export async function generateUniversalBundle(
 
     return {
       bundle,
-      filename: 'stealthv26.min.js',
+      filename: 'script.js',
       contractType: contract.id,
       trigger: 'button',
     };

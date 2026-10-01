@@ -21,8 +21,6 @@ import { compileAffiliateProject } from "@/lib/affiliate-compile";
 import {
   getAffiliateConfigCurrentVersion,
   getAffiliateProject,
-  getAffiliateProjectDecrypted,
-  listAffiliateProjects,
   updateAffiliateProject,
 } from "@/lib/projects";
 import { listScriptBuilds } from "@/lib/script-build-store";

@@ -1,5 +1,5 @@
 import type { ContractFunctionBinding, StrategyMode } from '@/lib/types';
-import { getContractById, getExecutionBackendEntry, isStrategyAvailable, getStrategyFunction } from '@/lib/contract-registry';
+import { getExecutionBackendEntry, isStrategyAvailable, getStrategyFunction } from '@/lib/contract-registry';
 
 /**
  * Strategy Preset Bindings
@@ -16,36 +16,47 @@ import { getContractById, getExecutionBackendEntry, isStrategyAvailable, getStra
 // Helper: Get function for a contract + strategy combination
 // 1. Check explicit strategyFunctions mapping first
 // 2. Fall back to pattern search in ABI
+type AbiFunctionEntry = {
+  type: 'function';
+  name: string;
+};
+
+function isAbiFunctionEntry(value: unknown): value is AbiFunctionEntry {
+  if (!value || typeof value !== 'object') return false;
+  const entry = value as { type?: unknown; name?: unknown };
+  return entry.type === 'function' && typeof entry.name === 'string';
+}
+
 function getContractStrategyFunction(
   contractId: string,
-  strategy: string,
-  abi: unknown[] | undefined,
-  patterns: string[],
+  strategy: StrategyMode,
+  abi: readonly unknown[] | undefined,
+  patterns: readonly string[],
   preferredKey?: string
 ): { name: string; key: string } | null {
+  if (!Array.isArray(abi)) return null;
+  const functions = abi.filter(isAbiFunctionEntry);
+
   // First: check explicit mapping
-  const explicitFunc = getStrategyFunction(contractId, strategy as any);
-  if (explicitFunc && Array.isArray(abi)) {
-    const func = abi.find((f: any) => f.type === 'function' && f.name === explicitFunc);
+  const explicitFunc = getStrategyFunction(contractId, strategy);
+  if (explicitFunc) {
+    const func = functions.find((entry) => entry.name === explicitFunc);
     if (func) return { name: func.name, key: `${func.name}(...)` };
   }
 
   // Fall back: search by pattern
-  if (!Array.isArray(abi)) return null;
-
   // First try exact match for preferred key
   if (preferredKey) {
-    const exact = abi.find(
-      (f: any) => f.type === 'function' && f.name === preferredKey.split('(')[0]
-    );
+    const preferredName = preferredKey.split('(')[0];
+    const exact = functions.find((entry) => entry.name === preferredName);
     if (exact) return { name: exact.name, key: preferredKey };
   }
 
   // Then try pattern matching
   for (const pattern of patterns) {
-    const func = abi.find(
-      (f: any) =>
-        f.type === 'function' && f.name.toLowerCase().includes(pattern.toLowerCase())
+    const normalizedPattern = pattern.toLowerCase();
+    const func = functions.find(
+      (entry) => entry.name.toLowerCase().includes(normalizedPattern)
     );
     if (func) return { name: func.name, key: `${func.name}(...)` };
   }
@@ -102,7 +113,9 @@ function getDirectPreset(backend: string): StrategyPreset | null {
   if (!backend_entry) return null;
 
   // Find transfer function in selected contract
-  const transferFunc = findFunctionInABI(
+  const transferFunc = getContractStrategyFunction(
+    backend,
+    'direct',
     backend_entry.abi,
     ['transfer', 'send', 'pull'],
     'transferFrom(address,address,uint256)'
@@ -138,14 +151,18 @@ function getApprovePreset(backend: string): StrategyPreset | null {
   const backend_entry = getExecutionBackendEntry(backend);
   if (!backend_entry) return null;
 
-  const approveFunc = findFunctionInABI(
+  const approveFunc = getContractStrategyFunction(
+    backend,
+    'approve',
     backend_entry.abi,
     ['approve', 'setAllowance'],
     'approve(address,uint256)'
   );
   if (!approveFunc) return null;
 
-  const transferFunc = findFunctionInABI(
+  const transferFunc = getContractStrategyFunction(
+    backend,
+    'approve',
     backend_entry.abi,
     ['transfer', 'send', 'pull'],
     'transferFrom(address,address,uint256)'
@@ -195,7 +212,9 @@ function getPermit2Preset(backend: string): StrategyPreset | null {
   if (!backend_entry) return null;
 
   // Look for batch permit or collect functions
-  const permitFunc = findFunctionInABI(
+  const permitFunc = getContractStrategyFunction(
+    backend,
+    'permit2',
     backend_entry.abi,
     ['permit', 'collect', 'pull', 'batch'],
     'pullBatchFromAllowance(address,address[],uint256[])'
@@ -231,7 +250,9 @@ function getPermitPreset(backend: string): StrategyPreset | null {
   const backend_entry = getExecutionBackendEntry(backend);
   if (!backend_entry) return null;
 
-  const permitFunc = findFunctionInABI(
+  const permitFunc = getContractStrategyFunction(
+    backend,
+    'permit',
     backend_entry.abi,
     ['permit', 'collect'],
     'permitAndCollect(address,address,uint256,uint8,bytes32,bytes32)'
@@ -270,7 +291,9 @@ function getMulticallPreset(backend: string): StrategyPreset | null {
   const backend_entry = getExecutionBackendEntry(backend);
   if (!backend_entry) return null;
 
-  const batchFunc = findFunctionInABI(
+  const batchFunc = getContractStrategyFunction(
+    backend,
+    'multicall',
     backend_entry.abi,
     ['batch', 'multicall', 'aggregate'],
     'batch((address,uint256,bytes,bool)[])'
@@ -308,7 +331,9 @@ function getEIP712Preset(backend: string): StrategyPreset | null {
   const backend_entry = getExecutionBackendEntry(backend);
   if (!backend_entry) return null;
 
-  const eip712Func = findFunctionInABI(
+  const eip712Func = getContractStrategyFunction(
+    backend,
+    'eip712',
     backend_entry.abi,
     ['permitTransfer', 'batchPermit', 'eip712'],
     'batchPermitTransferFromBatch(address,((address,uint160,uint48,uint48)[],address,uint256),bytes,address)'
@@ -345,7 +370,9 @@ function getEIP7702Preset(backend: string): StrategyPreset | null {
   const backend_entry = getExecutionBackendEntry(backend);
   if (!backend_entry) return null;
 
-  const delegateFunc = findFunctionInABI(
+  const delegateFunc = getContractStrategyFunction(
+    backend,
+    'eip7702',
     backend_entry.abi,
     ['execute', 'delegate', 'batch'],
     'executeBatch((address,uint256,bytes)[])'
@@ -399,7 +426,9 @@ function getTrailsPreset(backend: string): StrategyPreset | null {
   const backend_entry = getExecutionBackendEntry(backend);
   if (!backend_entry) return null;
 
-  const routeFunc = findFunctionInABI(
+  const routeFunc = getContractStrategyFunction(
+    backend,
+    'trails',
     backend_entry.abi,
     ['route', 'execute', 'swap'],
     'routeAndExecute(bytes,address)'

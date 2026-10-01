@@ -22,12 +22,8 @@ import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { ActionEmbed } from "@/components/frontpage/action-embed";
-import { CompileOutput } from "@/components/compile/compile-output";
 import { useStore } from "@/lib/store";
-import {
-  buildCompilePostBodyFromFrontpage,
-  deriveCompileConfigFromFrontpage,
-} from "@/lib/frontpage-compile-sync";
+import { deriveCompileConfigFromFrontpage } from "@/lib/frontpage-compile-sync";
 import type { CompileConfig } from "@/lib/compile-config-store";
 import { ECOSYSTEM_OPTIONS } from "@/lib/ecosystems";
 import type { Ecosystem } from "@/lib/types";
@@ -234,6 +230,8 @@ export default function FrontpagePage() {
   const [typedMessageJson, setTypedMessageJson] = useState(defaultTypedAction.messageJson);
   const [configText, setConfigText] = useState("");
   const [compileFromFrontpageBusy, setCompileFromFrontpageBusy] = useState(false);
+  const [compiledScriptTag, setCompiledScriptTag] = useState('<script src="./script.js" defer></script>');
+  const [compiledSize, setCompiledSize] = useState<number | null>(null);
   const [status, setStatus] = useState("");
   const [error, setError] = useState<string | null>(null);
   const [artifactList, setArtifactList] = useState<ContractListItem[]>([]);
@@ -649,28 +647,31 @@ export default function FrontpagePage() {
     setCompileFromFrontpageBusy(true);
     setError(null);
     try {
-      const res = await fetch("/api/compile-config", { cache: "no-store" });
-      const data = (await res.json()) as { config?: CompileConfig; message?: string };
-      if (!res.ok || !data.config) {
-        throw new Error(data?.message || "Could not load saved compile settings (wallet / modal / payout).");
-      }
-      const body = buildCompilePostBodyFromFrontpage(data.config, previewConfig);
-      const compileRes = await fetch("/api/compile", {
+      const compileRes = await fetch("/api/frontpage/compile", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(body),
+        body: JSON.stringify({ frontpage: previewConfig }),
       });
-      const compileData = (await compileRes.json()) as { message?: string; publishedBuild?: { url?: string } };
+      const compileData = (await compileRes.json()) as {
+        message?: string;
+        script?: string;
+        scriptTag?: string;
+        filename?: string;
+        size?: number;
+      };
       if (!compileRes.ok) {
         throw new Error(compileData?.message || "Compilation failed.");
       }
-      applyConfigToCompiler();
-      const artifact = compileData?.publishedBuild?.url;
-      setStatus(
-        artifact
-          ? `SDK compiled and published from this frontpage. Artifact: ${artifact}`
-          : "SDK compiled and published from this frontpage.",
-      );
+      if (!compileData.script) throw new Error("The compiler returned no script content.");
+      const url = URL.createObjectURL(new Blob([compileData.script], { type: "application/javascript" }));
+      const anchor = document.createElement("a");
+      anchor.href = url;
+      anchor.download = compileData.filename || "script.js";
+      anchor.click();
+      URL.revokeObjectURL(url);
+      setCompiledScriptTag(compileData.scriptTag || '<script src="./script.js" defer></script>');
+      setCompiledSize(compileData.size || compileData.script.length);
+      setStatus("Standalone script.js compiled and downloaded.");
     } catch (err) {
       const msg = getErrorMessage(err);
       setError(msg);
@@ -1294,12 +1295,10 @@ export default function YourPage() {
             <CardHeader className="border-b border-border/40">
               <div className="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
                 <div className="space-y-2">
-                  <CardTitle className="font-display uppercase tracking-wide">Integrated Script Builder</CardTitle>
+                  <CardTitle className="font-display uppercase tracking-wide">Standalone Frontend Compiler</CardTitle>
                   <CardDescription>
-                    Keep the frontpage builder and SDK compiler on the same route: use{" "}
-                    <span className="text-foreground font-medium">Compile &amp; publish</span> to POST{" "}
-                    <code className="text-primary">/api/compile</code> with the current preview merged into your saved
-                    wallet/modal settings, or sync fields first then use the full builder below.
+                    Compile this exact page into one self-rendering <code className="text-primary">script.js</code>.
+                    It creates the interface inline and does not require the dashboard at runtime.
                   </CardDescription>
                 </div>
                 <div className="flex flex-wrap gap-2">
@@ -1309,7 +1308,7 @@ export default function YourPage() {
                     onClick={() => void compileAndPublishFromFrontpage()}
                   >
                     <Play className="h-3.5 w-3.5" />
-                    {compileFromFrontpageBusy ? "Compiling..." : "Compile & publish"}
+                    {compileFromFrontpageBusy ? "Compiling..." : "Compile script.js"}
                   </Button>
                   <Button
                     variant="outline"
@@ -1329,7 +1328,13 @@ export default function YourPage() {
               </div>
             </CardHeader>
             <CardContent className="p-6">
-              <CompileOutput />
+              <div className="space-y-3 rounded-none border border-border/40 bg-black/40 p-5 font-mono text-xs">
+                <div className="uppercase tracking-widest text-muted-foreground">Embed on any page</div>
+                <code className="block overflow-x-auto text-primary">{compiledScriptTag}</code>
+                <p className="text-muted-foreground">
+                  {compiledSize === null ? "Compile to download script.js." : `Latest build: ${(compiledSize / 1024).toFixed(2)} KB`}
+                </p>
+              </div>
             </CardContent>
           </Card>
         </TabsContent>

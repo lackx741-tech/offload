@@ -1,6 +1,8 @@
 import { POST as compilePOST } from '@/app/api/compile/route';
 import { NextRequest } from 'next/server';
-import { describe, it, expect } from 'vitest';
+import { describe, it, expect, vi } from 'vitest';
+
+vi.mock('@/lib/api-auth', () => ({ requireAuth: async () => null }));
 
 describe('/api/compile - address validation', () => {
   it('rejects invalid contract address', async () => {
@@ -9,6 +11,8 @@ describe('/api/compile - address validation', () => {
       body: JSON.stringify({
         contractAddress: '0xinvalid',
         recipient: '0x0000000000000000000000000000000000000001',
+        saveConfig: false,
+        saveBuild: false,
       }),
     });
     const res = await compilePOST(req);
@@ -23,6 +27,8 @@ describe('/api/compile - address validation', () => {
       body: JSON.stringify({
         contractAddress: '0x0000000000000000000000000000000000000000',
         recipient: '0x0000000000000000000000000000000000000001',
+        saveConfig: false,
+        saveBuild: false,
       }),
     });
     const res = await compilePOST(req);

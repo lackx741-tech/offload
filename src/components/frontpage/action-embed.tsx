@@ -1,13 +1,15 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import type { Abi, Address, TypedData, TypedDataDefinition } from "viem";
+import type { Address, TypedData, TypedDataDefinition } from "viem";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { getEcosystemLabel } from "@/lib/ecosystems";
 import { getWalletClient, connectInjected } from "@/lib/web3";
 import type { FrontpageAction, FrontpageConfig } from "@/lib/frontpage-config";
+import { toCompiledContractAction } from "@/lib/contract-actions";
+import { prepareContractTransaction } from "@/lib/execute-contract-action";
 
 function getErrorMessage(error: unknown) {
   if (error instanceof Error) {
@@ -132,14 +134,13 @@ export function ActionEmbed({ config }: ActionEmbedProps) {
         return;
       }
 
-      const methodName = getActionMethodName(action);
-      const hash = await wallet.writeContract({
-        address: action.contractAddress as Address,
-        abi: [action.methodAbi] as Abi,
-        functionName: methodName,
+      const compiledAction = toCompiledContractAction(action);
+      const prepared = prepareContractTransaction(compiledAction, walletAddress, parseParamsJson(action.paramsJson));
+      const hash = await wallet.sendTransaction({
         account: walletAddress as Address,
-        args: parseParamsJson(action.paramsJson),
-        value: action.valueWei?.trim() ? BigInt(action.valueWei) : undefined,
+        to: prepared.transaction.to,
+        data: prepared.transaction.data,
+        value: prepared.transaction.value ? BigInt(prepared.transaction.value) : undefined,
       });
 
       setResults((current) => ({

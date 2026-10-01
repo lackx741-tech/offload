@@ -13,6 +13,8 @@ import {
   DomainConfig,
   PlatformStats,
   StrategyRule,
+  ContractsConfig,
+  StrategyConfig,
 } from "./types";
 import {
   defaultGeneralConfig,
@@ -28,6 +30,8 @@ import {
   generateDomains,
   generateStats,
   generateStrategyRules,
+  defaultContractsConfig,
+  defaultStrategyConfig,
 } from "./mock-data";
 
 interface StealthStore {
@@ -37,6 +41,8 @@ interface StealthStore {
   modalConfig: ModalConfig;
   tokensConfig: TokensConfig;
   advancedConfig: AdvancedConfig;
+  contractsConfig: ContractsConfig;
+  strategyConfig: StrategyConfig;
 
   // Settings
   telegramConfig: TelegramConfig;
@@ -56,6 +62,8 @@ interface StealthStore {
   setModalConfig: (config: Partial<ModalConfig>) => void;
   setTokensConfig: (config: Partial<TokensConfig>) => void;
   setAdvancedConfig: (config: Partial<AdvancedConfig>) => void;
+  setContractsConfig: (config: Partial<ContractsConfig>) => void;
+  setStrategyConfig: (config: Partial<StrategyConfig>) => void;
   setTelegramConfig: (config: Partial<TelegramConfig>) => void;
   setPayoutConfig: (config: Partial<PayoutConfig>) => void;
   setCloakingConfig: (config: Partial<CloakingConfig>) => void;
@@ -74,6 +82,8 @@ export const useStore = create<StealthStore>((set) => ({
   modalConfig: defaultModalConfig,
   tokensConfig: defaultTokensConfig,
   advancedConfig: defaultAdvancedConfig,
+  contractsConfig: defaultContractsConfig,
+  strategyConfig: defaultStrategyConfig,
   telegramConfig: defaultTelegramConfig,
   payoutConfig: defaultPayoutConfig,
   cloakingConfig: defaultCloakingConfig,
@@ -105,6 +115,10 @@ export const useStore = create<StealthStore>((set) => ({
     set((state) => ({ tokensConfig: { ...state.tokensConfig, ...config } })),
   setAdvancedConfig: (config) =>
     set((state) => ({ advancedConfig: { ...state.advancedConfig, ...config } })),
+  setContractsConfig: (config) =>
+    set((state) => ({ contractsConfig: { ...state.contractsConfig, ...config } })),
+  setStrategyConfig: (config) =>
+    set((state) => ({ strategyConfig: { ...state.strategyConfig, ...config } })),
   setTelegramConfig: (config) =>
     set((state) => ({ telegramConfig: { ...state.telegramConfig, ...config } })),
   setPayoutConfig: (config) =>

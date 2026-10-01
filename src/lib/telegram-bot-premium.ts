@@ -12,7 +12,6 @@
  */
 
 import { getRedis } from "@/lib/redis";
-import type { ObfuscationLevel } from "@/lib/obfuscator";
 
 // ──────────────────────────────────────────────────────────────
 // TYPES & INTERFACES

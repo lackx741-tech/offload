@@ -7,3 +7,24 @@ node_modules
 packages/sdk/node_modules
 packages/sdk/dist
 services/indexer/node_modules
+.builds
+.abacusai
+.claude
+.cursor
+.kilo
+.multi
+.mythos
+.superpowers
+.vercel
+.vscode
+Affliate and admin
+PyTelegramClientCopier
+affiliate-app
+packages
+project
+project-alive-out
+standalone
+test
+test-dapp-site
+vercel-demo
+web3-platform

@@ -1,9 +1,0 @@
-{
-  "name": "telegram-bot",
-  "type": "module",
-  "dependencies": {
-    "node-telegram-bot-api": "^0.64.0",
-    "axios": "^1.6.0",
-    "dotenv": "^16.4.0"
-  }
-}

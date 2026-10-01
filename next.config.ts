@@ -1,4 +1,3 @@
-import path from "path";
 import { createRequire } from "module";
 import type { NextConfig } from "next";
 
@@ -9,7 +8,7 @@ const nextConfig: NextConfig = {
   outputFileTracingRoot: process.cwd(),
   distDir: process.env.NEXT_DIST_DIR || ".next",
   output: "standalone",
-  serverExternalPackages: ["ioredis", "kafkajs", "javascript-obfuscator"],
+  serverExternalPackages: ["ioredis", "kafkajs", "javascript-obfuscator", "esbuild"],
   webpack: (config) => {
     config.externals.push("pino-pretty", "lokijs", "encoding");
     config.resolve = config.resolve || {};
