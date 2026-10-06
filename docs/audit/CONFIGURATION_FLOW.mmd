@@ -1,0 +1,15 @@
+flowchart TD
+  UI["Compile UI / Zustand"] -->|POST config| CAPI["/api/compile or /api/compile-config"]
+  CAPI --> CS["data/compile-config.json"]
+  CS --> CREAD["compile route / live SDK / worker"]
+  OAPI["/api/operational-config; compile writes payout"] --> OS["data/operational-config.json"]
+  OS --> OREAD["compile / live SDK / relay / contract runtime"]
+  FPAPI["/api/config POST"] --> FPSTORE["data/frontpage-config.json"]
+  FPSTORE --> FPRUNTIME["frontpage runtime / frontpage compile"]
+  AffiliateAPI["affiliate config APIs"] --> REDIS["Redis project + config/version keys"]
+  REDIS --> AFF["affiliate compile / dynamic script / Telegram"]
+  Import["/api/contracts/import"] --> OS
+  Browser["frontpage + contract local drafts"] --> LS["browser localStorage"]
+  LS --> UI
+  Env["process.env + worker .env loader"] --> Runtime["Redis/BullMQ/Kafka/RPC/Telegram/auth settings"]
+  Runtime --> CREAD

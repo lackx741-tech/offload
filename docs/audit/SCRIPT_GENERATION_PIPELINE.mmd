@@ -1,0 +1,30 @@
+flowchart TD
+  UI["Compile page + panels<br/>src/app/compile/page.tsx"] --> STATE["Zustand useStore<br/>src/lib/store.ts"]
+  STATE --> OUT["CompileOutput.handleCompile()<br/>src/components/compile/compile-output.tsx"]
+  OUT -->|drainer registry category| DRAIN["generateDrainerBundle()"]
+  OUT -->|otherwise POST| API["POST /api/compile"]
+  API -->|queue true or async true| Q["enqueueCompileJob()"]
+  Q --> CW["compile worker"]
+  CW --> AFF["compileAffiliateProject() or compilePlatformBundle()"]
+  API --> CFG["mergeCompileConfig + optional config write"]
+  CFG --> REG["getContractById + binding resolution"]
+  REG --> UG["generateUniversalBundle()"]
+  UG -->|sequence| SDK["generateSDKBundle()"]
+  UG -->|drainer| DRAIN
+  CFG -->|ecosystem fallback| RB["generateSolanaBundle() / generateTronBundle() / generateSDKBundle()"]
+  SDK --> JS["JavaScript string"]
+  DRAIN --> JS
+  RB --> JS
+  AFF --> JS
+  JS --> SAVE["saveScriptBuild() → .builds/"]
+  JS --> RESP["API response / browser output"]
+
+  FP["POST /api/frontpage/compile"] --> FPS["compileFrontpagePayload()"]
+  FPS --> FPC["compileFrontpageScript() → esbuild IIFE"]
+  FPC --> FSAVE["saveScriptBuild() + response"]
+
+  SDKAPI["GET /api/sdk"] --> LIVE["generateLiveSdkBundle()"]
+  LIVE --> SDK
+  AFFAPI["Affiliate/project/Telegram compile entrypoints"] --> AFF
+  DAPI["GET/POST /api/script/generate-drainer"] --> DG["generateDrainerScript() / advanced / page"]
+  DG --> DRESP["JS or HTML response"]
