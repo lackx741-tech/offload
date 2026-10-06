@@ -1,0 +1,18 @@
+flowchart LR
+  Webhook["POST /api/telegram/webhook"] -->|enqueueTelegramInbound| QTI[("telegram-inbound<br/>Redis/BullMQ")]
+  QTI --> TW["telegram.worker<br/>processTelegramUpdate"]
+  TW --> Cmd["handleCommand / handleCallback"]
+  Cmd -->|/compile| QC[("compile")]
+  CompileAPI["POST /api/compile<br/>queue/async opt-in"] -->|enqueueCompileJob| QC
+  QC --> CW["compile.worker"]
+  CW --> Build["compileAffiliateProject / compilePlatformBundle"]
+  Build --> Output["saveScriptBuild + optional Telegram completion"]
+  NotifyAPI["POST /api/notify"] -->|enqueueNotifyJob| QN[("notify")]
+  QN --> NW["notify.worker"]
+  NW --> Telegram["sendTelegramNotification → Telegram HTTP"]
+  RelayProducer["enqueueRelayJob exists<br/>no call site found"] -.-> QR[("relay")]
+  QR -.-> RW["relay.worker<br/>logging/acceptance stub"]
+  OutboundProducer["enqueueTelegramOutbound exists<br/>no call site found"] -.-> QTO[("telegram-outbound")]
+  QTO -.-> TW2["telegram.worker<br/>sendTelegramApiMessage"]
+  RelayRoute["POST /api/relay/batch"] --> Sync["synchronous viem execution"]
+  Sync --> Kafka["Kafka event + notification"]

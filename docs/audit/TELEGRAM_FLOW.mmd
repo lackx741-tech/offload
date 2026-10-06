@@ -1,0 +1,26 @@
+flowchart TD
+  TG["Telegram platform bot"] --> Hook["POST /api/telegram/webhook"]
+  Hook --> Auth["isTelegramWebhookAuthorized()"]
+  Auth --> Gate{"isQueueEnabled()"}
+  Gate -->|yes| In["enqueueTelegramInbound()"]
+  In --> Q[("telegram-inbound / Redis")]
+  Q --> W["telegram.worker"]
+  W --> Process["processTelegramUpdate()"]
+  Gate -->|no| Process
+  Process --> Dispatch{"handleCommand() / handleCallback()"}
+  Dispatch -->|/compile| CompileCmd["handleCompileCommand()"]
+  CompileCmd --> CQ[("compile queue")]
+  CQ --> CW["compile.worker"]
+  CW --> Aff["compileAffiliateProject()"]
+  Aff --> Gen["ecosystem generator + obfuscation"]
+  Gen --> Build["saveScriptBuild() → .builds"]
+  Build --> Reply["direct Telegram completion + optional build URL"]
+  CompileCmd -->|queues disabled| Aff
+  Dispatch -->|project/config commands| Redis["projects + telegram session Redis"]
+  Dispatch -->|/notify| Direct["sendTelegramNotification()"]
+  Direct --> TGHTTP["Telegram Bot API"]
+  AffHook["POST /api/telegram/affiliate/[token]"] --> Token["resolveProjectByBotToken()"]
+  Token --> AffDispatch["affiliate handleCommand / callback"]
+  AffDispatch -->|/compile| Aff
+  AffDispatch -->|domain commands| Redis
+  AffDispatch --> TGHTTP

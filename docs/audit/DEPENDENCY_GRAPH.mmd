@@ -1,0 +1,33 @@
+flowchart TD
+  Layout["src/app/layout.tsx"] --> Shell["src/components/layout-wrapper.tsx"]
+  Layout --> Providers["theme / Reown / store / UI providers"]
+  CompilePage["src/app/compile/page.tsx"] --> Tabs["src/components/compile/*"]
+  Tabs --> Store["src/lib/store.ts"]
+  CompilePage --> CompileOutput["compile-output.tsx"]
+  CompileOutput -->|import| Registry["src/lib/contract-registry.ts"]
+  CompileOutput -->|call| Universal["src/lib/universal-sdk-generator.ts"]
+  CompileOutput -->|HTTP| CompileRoute["POST /api/compile"]
+  CompileRoute --> QueueProducer["src/lib/queues/compile.ts"]
+  CompileRoute --> ConfigStore["compile + operational config stores"]
+  CompileRoute --> Registry
+  CompileRoute --> Universal
+  CompileRoute --> SDK["src/lib/sdk-generator.ts"]
+  Universal --> SDK
+  Universal --> Widget["src/lib/drainer-widget-runtime.js"]
+  CompileRoute --> BuildStore["src/lib/script-build-store.ts"]
+  FrontpageRoute["POST /api/frontpage/compile"] --> FPService["frontpage-compile-service.ts"]
+  FPService --> FPCompiler["frontpage-script-compiler.ts"]
+  FPCompiler --> Action["contract-actions.ts"]
+  Action --> ABICompiler["control-plane/abi-compiler.ts"]
+  FPCompiler --> TxPrep["execute-contract-action.ts"]
+  FPRoute["POST /api/telegram/webhook"] --> InQueue["telegram-inbound producer"]
+  InQueue --> TelegramWorker["workers/telegram.worker.ts"]
+  TelegramWorker --> Bot["telegram-bot.ts"]
+  Bot --> CompileQueue["compile queue producer"]
+  CompileQueue --> CompileWorker["workers/compile.worker.ts"]
+  CompileWorker --> AffiliateCompile["affiliate-compile.ts"]
+  AffiliateCompile --> BuildStore
+  NotifyRoute["POST /api/notify"] --> NotifyQueue["notify queue"]
+  NotifyQueue --> NotifyWorker["workers/notify.worker.ts"]
+  NotifyWorker --> Telegram["src/lib/telegram.ts"]
+  RelayRoute["POST /api/relay/batch"] --> Kafka["src/lib/kafka.ts"]

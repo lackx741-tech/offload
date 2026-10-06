@@ -1,0 +1,18 @@
+flowchart LR
+  Page["/compile page"] -->|GET /api/compile-config| Hydrate["Zustand configuration state"]
+  Tabs["General / Wallet / Modal / Tokens / Advanced / Payout"] --> Hydrate
+  Contract["ContractTab: registry function + args + strategy"] --> Hydrate
+  Hydrate --> Output["CompileOutput.handleCompile()"]
+  Output -->|drainer category| Local["generateDrainerBundle() in browser-side UI"]
+  Output -->|other categories| Request["POST /api/compile"]
+  Request --> Merge["mergeCompileConfig() + receiver/contract resolution"]
+  Merge --> Registry["CONTRACT_REGISTRY / binding"]
+  Registry --> Generator["Universal / SDK / Solana / Tron generator"]
+  Generator --> Script["Generated JavaScript"]
+  Script --> Store["saveScriptBuild() → .builds/"]
+  Script --> Return["API JSON or UI output"]
+  FPPage["Frontpage config UI"] --> ConfigAPI["/api/config persistence"]
+  ConfigAPI --> FPCompile["POST /api/frontpage/compile"]
+  FPCompile --> Action["contractWrite action + ABI/args"]
+  Action --> Esbuild["compileFrontpageScript()"]
+  Esbuild --> FPOutput["IIFE JavaScript → .builds/ and response"]
