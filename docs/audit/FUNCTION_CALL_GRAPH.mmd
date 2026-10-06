@@ -1,0 +1,34 @@
+flowchart TD
+  UI["CompileOutput.handleCompile()"] -->|direct drainer branch| DGB["generateDrainerBundle()"]
+  UI -->|POST| Route["api/compile POST()"]
+  Route -->|queue opt-in| Producer["enqueueCompileJob()"]
+  Producer --> Job["BullMQ compile worker"]
+  Job --> Branch{"projectId aff_*?"}
+  Branch -->|yes| Aff["compileAffiliateProject()"]
+  Branch -->|no| Platform["compilePlatformBundle()"]
+  Aff --> Gen["SDK / Solana / Tron generator"]
+  Platform --> Gen
+  Route -->|sync| Merge["mergeCompileConfig()"]
+  Merge --> Select["getContractById() + buildBindingForContract()"]
+  Select --> Universal["generateUniversalBundle()"]
+  Universal --> Gen
+  Universal --> DGB
+  Gen --> Obf["obfuscateScript/domain lock (affiliate path)"]
+  Obf --> Save["saveScriptBuild()"]
+  Gen --> Save
+  Save --> Result["API response / Telegram completion"]
+
+  FP["frontpage compile route"] --> Payload["compileFrontpagePayload()"]
+  Payload --> FPCompiler["compileFrontpageScript()"]
+  FPCompiler --> Actions["deriveCompiledActionsFromFrontpage()"]
+  Actions --> Transaction["prepareContractTransaction()"]
+  FPCompiler --> Save
+  Transaction --> Wallet["browser eth_sendTransaction"]
+
+  Telegram["telegram webhook"] --> Update["processTelegramUpdate()"]
+  Update --> Command["handleCommand()"]
+  Command --> Compile["handleCompileCommand()"]
+  Compile --> Producer
+
+  Relay["POST /api/relay/batch"] --> Write["viem walletClient.writeContract()"]
+  Write --> Event["Kafka publish + Telegram notification"]

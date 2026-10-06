@@ -1,0 +1,30 @@
+# Implemented paths without proven active connection
+
+These classifications mean no in-repository caller/consumer was found for the stated connection. An API route may still be externally callable; lack of an internal UI caller does not make the endpoint nonexistent.
+
+| File / symbol | Implementation exists | Caller/consumer evidence | Runtime status |
+|---|---|---|---|
+| `src/lib/queues/relay.ts` — `enqueueRelayJob()` | Adds `relay-batch` to relay queue; `RELAY_QUEUE_ENABLED` helper. | No call site found. `/api/relay/batch` performs synchronous viem execution; relay worker is a logging/acceptance stub (`src/app/api/relay/batch/route.ts:90–129,332–371`; `workers/relay.worker.ts:12–23`). | `DISCONNECTED` producer; `OPTIONAL` queue consumer. |
+| `src/lib/queues/telegram.ts` — `enqueueTelegramOutbound()` | Adds `send-message`. | No call site found. Outbound worker exists; in-repo sends use `sendTelegramApiMessage()` or direct services (`workers/telegram.worker.ts:29–38`; `workers/compile.worker.ts:50–55`). | `DISCONNECTED` producer; consumer exists. |
+| `src/lib/web3-rewards-script-generator.ts` — `generateWeb3RewardsBundle()` | Exports wrapper returning generated script metadata. | No caller found. `generateWeb3RewardsScript()` itself is called by `src/components/compile/web3-rewards-tab.tsx`. | `DISCONNECTED` wrapper; inner generator `ACTIVE` via UI. |
+| `src/abi/drainer-abis.ts` — exported ABI constants | Defines inline ABI signature arrays. | No imports/call sites found in `src/`; registry imports JSON ABI instead. | `DISCONNECTED`. |
+| `abi/index.ts`, `contracts json/index.ts` | Each re-exports named ABI maps. | No application imports of these barrels found; direct JSON imports are used by `contract-registry.ts`. | `DISCONNECTED` barrels; JSON files may still be discovered dynamically. |
+| `contracts json/*.json` not among `StealthExchange.json`, `contract.json`, `EIP7702BatchDelegate.json` | Artifact JSON files exist. | Those other files are not statically imported by `src/lib/contract-registry.ts`; filesystem artifact API can discover/load any compatible JSON root file (`src/app/api/contracts/route.ts:63–114`; `[id]/route.ts:59–88`). | `OPTIONAL` via externally invoked artifact UI/API; per-artifact UI usage not proven. |
+| `src/lib/control-plane/project-manifest.ts` | Validates/migrates control-plane project manifest. | No production route/service caller found in current app; its tests import it. | `DISCONNECTED` application caller; `TEST` consumer. |
+| `src/lib/frontpage-compile-sync.ts` | Maps frontpage config to compile form/config body. | Compile page imports `deriveCompileConfigFromFrontpage()` and uses it (`src/app/compile/page.tsx:19,84–95`). | `ACTIVE`, not disconnected. |
+| `src/lib/frontpage-compile-sync.ts` — `buildCompilePostBodyFromFrontpage()` | Helper exported. | No call site established by search. | `DISCONNECTED` helper (other export in same file is active). |
+| `src/lib/frontpage-config-store.ts` | Persistent config store. | `/api/config` GET/POST uses it (`src/app/api/config/route.ts:3,10,69`). | `ACTIVE`. |
+| `src/lib/drainer-script-generator.ts` | JavaScript/HTML generators. | `/api/script/generate-drainer` invokes all three (`src/app/api/script/generate-drainer/route.ts:3,54–76,129–148`); no primary UI caller found. | `OPTIONAL` route path; generators are reachable by HTTP. |
+| `src/app/api/contracts/import/route.ts` custom ABI records | Saves/list/deletes in operational config. | Import UI calls POST and import page offers interface (`src/app/contracts-import/page.tsx:48–84`). | `ACTIVE` route/UI; however imported contracts are not inserted into static registry by this code. |
+| `src/lib/contract-registry.ts` custom ABI registry item | `custom-abi` category with empty capabilities/functions (`:72`). | `getContractById()` returns the placeholder; universal generator throws for category custom (`universal-sdk-generator.ts:80–82`). | `ACTIVE` placeholder metadata; dynamic generation not implemented. |
+| `src/lib/contract-registry.ts` EIP7702 batch delegate | Registry includes ABI but no address (`:52`). | `getExecutableBackends()` filters entries requiring address+ABI (`src/app/contract/page.tsx:37–38`); generator can load metadata but no address is attached. | `OPTIONAL` registry metadata; executability through that filter not established. |
+| `src/lib/queues/closeQueues()` | Closes cached queues (`src/lib/queues/index.ts:80–84`). | No shutdown caller found in worker entrypoints; runner exits after a 300ms delay (`workers/run-all.ts:24–29`). | `DISCONNECTED` close helper. |
+| `src/lib/script-build-store.ts` — cleanup | Deletes old files while preserving named builds (`:149–172`). | No scheduled/background call site found. | `DISCONNECTED` cleanup execution. |
+| `data/script-builds.json` | File exists in repository. | No active read/write found; store enumerates `.builds` (`script-build-store.ts:52–92`). | `UNKNOWN`/unproven store. |
+| `packages/sdk/` | Independently packaged SDK source. | No import from root app's `src/` generation path found. | `UNKNOWN` as independent package; not a proven root runtime dependency. |
+| `standalone/`, `project/`, `Affliate and admin/`, `affiliate-app/`, `web3-platform/`, `vercel-demo/` | Separate app/package files exist. | No process import from root Next app established. Their own package/build configs are evidence of separate project roots only. | `UNKNOWN` independently; disconnected from proven primary app runtime. |
+| `src/components/affiliate/legacy-*` | Legacy-named UI is implemented. | `affiliate-portal.tsx` imports `LegacyAffiliatePanel` and `LegacyLoginGate`; panel imports the subcomponents. | `LEGACY` implementation but reachable from affiliate portal (not dead). |
+
+## Distinguishing absence of evidence
+
+The primary source search does not inspect external deployment automation, a user’s browser, manual HTTP callers, or removed history. Accordingly, “no caller found” is not stated as universal impossibility. See `SOURCE_CLASSIFICATION.md` for backup and test distinctions.
